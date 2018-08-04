@@ -31,8 +31,10 @@ if read1($0FFFEB) == 2
 else
 	!LZ3 = 0
 	
+pushpc
 ORG $0FFFEB
 	db $01
+pullpc
 endif
 	
 macro ReadByte()
@@ -45,12 +47,11 @@ macro ReadByte()
 +
 endmacro
 
+pushpc
 org $00B8E3
-!c	JSL CodeStart		;was JML before
+	JSL CodeStart		;was JML before
 	RTS
-	
-reset bytes
-freecode
+pullpc
 	
 CodeStart:
 	PHB

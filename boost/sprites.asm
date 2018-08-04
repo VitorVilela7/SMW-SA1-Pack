@@ -2,12 +2,18 @@
 
 !Wiggers = $418800			; Don't touch!
 
+pushpc
+
+ORG $03D7AB
+	JML ReznorFix
+ReznorFix_Return:
+	RTS
 
 ORG $00BFC5
-!c	JML CheckForSA1
+	JML CheckForSA1
 
 ORG $01808C
-!c	JML SpriteMain
+	JML SpriteMain
 	NOP #2
 
 ORG $01CC28
@@ -91,16 +97,16 @@ ORG $01C804
 	LDA #$05
 	STA $2253
 	STZ $2254
-!c	JSL Continue_01C804
+	JSL Continue_01C804
 	warnpc $01C84D
 	
 ORG $03DEDF
-!c	JML Mode7Stuff
+	JML Mode7Stuff
 	NOP #2
 Mode7Continue:
 
 ORG $03DD7D
-!c	JML MoreMode7
+	JML MoreMode7
 Mode7MoreContinue:
 
 ORG $03DDE3
@@ -129,7 +135,7 @@ ORG $03995E
 	LDA #$38
 	LDY $07
 	BNE +
-!c	JML Continue_03995E
+	JML Continue_03995E
 	NOP
 Return_03995E:
 	LDA $2307
@@ -276,10 +282,40 @@ macro Switch()
 	STA $0185
 endmacro
 	
-;=======================================;
-; Freespace code			;
-;=======================================;
-freecode
+pullpc
+
+ReznorFix:
+	%Switch()
+	LDA #$D0
+	STA $2209
+	SEP #$10
+-	LDA $018A
+	BEQ -
+	STZ $018A
+	JML .Return
+ReznorFix_SNES:
+	REP #$31
+	LDA.L $7F837B             
+	TAX                       
+	LDA.W #$C05A              
+	ADC $00                   
+	STA.L $7F837D,X           
+	ORA.W #$2000              
+	STA.L $7F8383,X           
+	LDA.W #$0240              
+	STA.L $7F837F,X           
+	STA.L $7F8385,X           
+	LDA.W #$38FC              
+	STA.L $7F8381,X           
+	STA.L $7F8387,X           
+	LDA.W #$00FF              
+	STA.L $7F8389,X           
+	TXA                       
+	CLC                       
+	ADC.W #$000C              
+	STA.L $7F837B             
+	SEP #$30
+	RTL
 
 CheckForSA1:				; CPU: ???
 	PHA				; Preserve A

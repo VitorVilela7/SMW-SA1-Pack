@@ -4,7 +4,7 @@
   \___ \ / /\ \______| |   |  ___/ _` |/ __| |/ /
   ____) / ____ \     | |   | |  | (_| | (__|   < 
  |_____/_/    \_\    |_|   |_|   \__,_|\___|_|\_\
-   by Vitor Vilela                 Version 1.02
+   by Vitor Vilela                 Version 1.03
 
 The SA-1 Pack consist of a couple of patches that enable
 SA-1 and prepare your SMW ROM to use the SA-1 CPU in the
@@ -362,7 +362,7 @@ CustomCode: ;*put code here*;
 	RTL
 
 However freecode/freedata will not work with Asar when you are
-accessing the 4MB+ area, atleast until Alcaro adds "sa1rom full"
+accessing the 4MB+ area, atleast until Alcaro adds "bigsa1rom"
 to Asar (if he hasn't implemented it already).
 
 -----------------------------------------------------

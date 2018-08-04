@@ -1,3 +1,3 @@
 This version does not include Lunar Fix anymore, since if I update Lunar Fix, I would need to
 update the SA-1 Pack too. So that's why Lunar Fix is not included anymore. You can get Lunar
-Fix at SA-1 Compatible Tools or here: https://dl.dropbox.com/u/16203903/A/SA1/Tools/LunarFix101.zip
+Fix at SA-1 Compatible Tools.

@@ -1,5 +1,7 @@
 @include
 
+pushpc
+
 ORG $008494
 	LDA.B #CompressOAM
 	STA $3180
@@ -12,9 +14,7 @@ ORG $008494
 	NOP #34 ; freespace
 warnpc $0084C8
 
-!c (read1($008494+1)<<0)|(read1($008494+2+3+1)<<8)|(read1($008494+2+3+2+3+1)<<16)
-	
-freecode cleaned
+pullpc
 
 CompressOAM:
 	PHB

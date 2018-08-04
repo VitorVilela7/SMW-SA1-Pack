@@ -1,19 +1,19 @@
 @include
 
+pushpc
 ORG $0586DD
 	BEQ +
 ORG $0586E9
 +
 
 ORG $0586DF
-!c	JML KeepLoading
+	JML KeepLoading
 
 ORG $0585FF
-!c	JSL CallSA1
+	JSL CallSA1
 	RTS
+pullpc
 	
-freecode
-
 CallSA1:
 	SEP #$20
 	LDA.B #SA1Code

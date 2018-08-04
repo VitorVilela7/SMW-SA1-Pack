@@ -7,7 +7,7 @@ db $04,$05,$06,$07
 norom ; pc address mode
 
 org $7FFFFF
-db $00 ; expand ROM to 6MB
+db $00 ; expand ROM to 8MB
 
 org $407FB8
 db "S","T","A","R"
