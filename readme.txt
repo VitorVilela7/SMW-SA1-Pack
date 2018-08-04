@@ -4,7 +4,7 @@
   \___ \ / /\ \______| |   |  ___/ _` |/ __| |/ /
   ____) / ____ \     | |   | |  | (_| | (__|   < 
  |_____/_/    \_\    |_|   |_|   \__,_|\___|_|\_\
-   by Vitor Vilela                 Version 1.24
+   by Vitor Vilela                 Version 1.25
 
 The SA-1 Pack consist of a couple of patches that enable
 SA-1 and prepare your SMW ROM to use the SA-1 CPU in the
@@ -532,7 +532,101 @@ RTL					; Return.
 Using said method you can get rid of almost all SA-1
 limitations, but remember that the SNES's speed is 2 MHz,
 so if you call it too many times, you may waste some time. 
+
+Additionally, there's a special mode called Parallel/Background Mode.
+It runs a certain code periodically while the SA-1 CPU is idle.
+
+To enable it, put the code pointer to $3186-$3188 and set $318B to #$01.
+Unlike other modes, you have to threat this one differently:
+
+ 1. You must reserve a RAM area to use it, since other code can potentially
+use it at any time. In other words, you can't use the standard RAM addresses
+or your RAM writes will end up corrupted when another code gets executed by
+the chip or even by SNES CPU. For these reasons, I reserved 32 bytes at
+$31E0-$31FF just for Parallel Mode, so you can put your scratch values without
+having risk of it getting corrupted suddenly.
+
+ 2. Direct Page is set to $0100, since you usually will not access standard
+direct page area ($3000-$30FF) and with that you will have facility with
+accessing Parallel Mode reserved RAM as well other SA-1 Pack internal RAM
+addresses. Of course after running your code, you should restore it back
+to $0100 if you changed it. Oh and if you're wondering, in the **SA-1 CPU**,
+$0100 is same thing as $3100. Don't get confused.
+
+ 3. When accessing registers (or any other not thread-safe address), you must
+disable IRQ (by using SEI opcode), to stop SA-1 from listening from SNES CPU.
+With that, you can access the multiplications registers or execute a DMA
+without having the risk of it getting conflicted by another thread. Don't forget
+to use CLI to re-enable IRQ or otherwise the game will freeze.
+
+ 4. Is preferred to your code work rather as a service, which runs code on demand.
+This mode is useful for code that does, for example, graphics manipulation so it
+won't access in-game performance because it ONLY uses SA-1 idle cycles and when
+the game code is running its code gets paused.
+
+ 5. If the status flag (318B) is set to #$FF, the service MUST stop current
+operations and gets free to an another parallel service start executing. Because
+obviously only one parallel mode code can be ran at once (I may change that in the
+future but I don't think it will be ever needed).
+
+Example code (invoking parallel mode):
+
+	LDA $318B		; \ If there's no Parallel Mode running already,
+	BEQ +			; / skip.
+
+	LDA #$FF		; \ Tell previous Parallel Mode code to exit.
+	STA $318B		; / This is important or the game may crash or stop working.
+
+-	LDA $318B		; \ Wait until the previous server gets free.
+	BNE -			; /
+
++
+	LDA.b #MyCode		; \ Place Parallel Mode Service Pointer
+	STA $3186		;  |
+	LDA.b #MyCode>>8	;  |
+	STA $3187		;  |
+	LDA.b #MyCode>>16	;  |
+	STA $3188		; /
 	
+	LDA #$01		; \ Start Parallel Mode Service
+	STA $318B		; /
+
+Example code (actual parallel mode):
+	PHB			; \ Set up banks.
+	PHK			;  |
+	PLB			; /
+
+.main_loop
+	LDA $8B			; \ If the parallel mode state
+	CMP #$FF		;  | is set to #$FF (end), shutdown
+	BEQ .end		; / the service.
+
+	LDA $EF			; \ Check if there's any graphics
+	CMP $EE			;  | rotation request.
+	BEQ .main_loop		;  |
+	STA $EF			; /
+
+	JSR .rotate		; Rotate GFX (not included there)
+	BRA .main_loop		; Go to back main loop.
+	
+.end
+	PLB			; Restore bank
+	RTL			; Return.
+
+Personally this mode is extremely useful for rotating graphics, because
+it takes SA-1's unused cycles and it does not cause slowdown. If there's
+not enough time to rotate a GFX, instead of making the game get unstable
+and slowdown, it will just reduce the rotation frame rate, which most
+users will not actually notice. It can be also useful for you, for some
+reason, want to for example decompress a GFX in the background without
+freezing temporally the level or even you want to run a music engine
+here. Use it freely! Remember that it's multi-threaded and your code
+must be thread-safe with normal SA-1 operations and with the SNES CPU.
+And when SNES CPU code is running together with Parallel Mode, the code
+performance may reduce a bit to around 8 MHz, but still a very good
+performance to explore while SA-1 CPU is not doing anything. And when
+SNES is idle (i.e. finished processing a game frame), the code is
+executed normally at 10.74 MHz.
 
 There are a bunch of other useful features too, such as bit stream
 and fast DMA which are only available while on SA-1 side.

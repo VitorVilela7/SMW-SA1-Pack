@@ -6,6 +6,9 @@
 
 !ZSNES		= 1				; Put 0 if you don't want to SA-1 Pack automatically deal with ZSNES limitations.
 						; (in other words, put 0 if you don't want ZSNES 1.51 or older support)
+						
+!DSX		= 1				; Put 0 if you want to turn off legacy (Dynamic Sprites) patch support.
+						; (as anoni's Dynamic Z should obsolete it soon.)
 
 sa1rom						; \ Don't touch!
 !c		= autoclean			;  |
@@ -96,17 +99,19 @@ org $83C8
 ; Macros					;
 ;===============================================;
 
+; legacy DSX patch DMA base macro.
 ; A is 16-bit, X is 8-bit.
 macro transferslot(slot, bytes, shift)
 	LDA.W #$7C00+(<slot>*256)+<shift>	; \ VRAM address + line*slot
 	STA.W $2116				; /
 	LDA.W #(!DSX_BUFFER&65535)+(<slot>*512)+(<shift>*2) ;\ Set Buffer location
-	STA.W $4302				; /
+	STA.W $4312				; /
 	LDA.W #<bytes>				; \ Set bytes to transfer
-	STA.W $4305				; /
+	STA.W $4315				; /
 	STY.W $420B				; Run DMA.
 endmacro
 
+; Character Conversion DMA base macro.
 ; A is 16-bit, Y is 8-bit.
 ; X is remain CDMA slots.
 macro ccdmaslot(slot)
@@ -117,10 +122,10 @@ macro ccdmaslot(slot)
 						;
 	LDA.W !CCDMA_TABLE+(<slot>*8)+3		; \ Set source of bitmap in BW-RAM.
 	STA $2232				;  | (Both SA-1 and CPU Register.)
-	STA $4302				;  |
+	STA $4312				;  |
 	LDY.W !CCDMA_TABLE+(<slot>*8)+5		;  |
 	STY $2234				;  |
-	STY $4304				; /
+	STY $4314				; /
 						;
 	LDA.W #!CC_BUFFER			; \ Set I-RAM buffer.
 	STA $2235				; / (This is used as buffer in conversion, like the echo buffer.)
@@ -136,11 +141,11 @@ macro ccdmaslot(slot)
 	SEI					; /
 						;
 +	LDA.W !CCDMA_TABLE+(<slot>*8)+6		; \ Store size of conversion+transfer
-	STA $4305				; /
+	STA $4315				; /
 	LDA.W !CCDMA_TABLE+(<slot>*8)+1		; \ Store VRAM address.
 	STA $2116				; /
 						;
-	LDY #$01				; \ Run SA-1 AND CPU DMA
+	LDY #$02				; \ Run SA-1 AND CPU DMA
 	STY $420B				; /
 						;
 	DEX					; \ If there are no more remaining,
@@ -156,13 +161,13 @@ macro ccdmaslot(slot)
 	LDA.W !CCDMA_TABLE+(<slot>*8)+1		; \ Set VRAM address
 	STA $2116				; /
 	LDA.W !CCDMA_TABLE+(<slot>*8)+3		; \ Set source address
-	STA $4302				;  |
+	STA $4312				;  |
 	LDY.W !CCDMA_TABLE+(<slot>*8)+5		;  |
 	STY $2234				; /
 	LDA.W !CCDMA_TABLE+(<slot>*8)+6		; \ Store size of conversion+transfer
-	STA $4305				; /
+	STA $4315				; /
 						;
-	LDY #$01				; \ Transfer.
+	LDY #$02				; \ Transfer.
 	STY $420B				; /
 						;
 	LDY #$81				; \ Enable again Character Conversion DMA.
@@ -266,17 +271,15 @@ SNES_Reset:					; Super NES Reset
 	LDA #$1FFF				;  |
 	TCS					; /
 						;
+	LDA #$0020				; \ Set SA-1 to sleep/reset state.
+	STA $2200				; /
+						;
 	LDA #Reset				; \ Set up SA-1 Vectors
 	STA $2203				;  |
 	LDA #NMI				;  |
 	STA $2205				;  |
 	LDA #IRQ				;  |
 	STA $2207				; /
-						;
-	LDA #$816A				; \ Set IRQ and NMI Vectors
-	STA $220C				;  | (Dynamic vectors)
-	LDA #$8374				;  |
-	STA $220E				; /
 						;
 	SEP #$20				; A = 8-bit
 						;
@@ -505,14 +508,17 @@ CCDMA_END:					;
 	STZ !CCDMA_SLOTS			; Clear CCDMA Slots
 						;					
 Dynamic_Sprites:				; --------------------------------------
+if !DSX						;
 	LDA $6100				; \ Don't run Dynamic Sprites system
 	CMP #$07				;  | if the game mode isn't #$07 nor #$14
 	BEQ +					;  |
 	CMP #$14				;  |
 	BEQ +					; /
 	STZ !SLOTSUSED				; \ Reset slots used and return
+endif						; |
 	JML $008172				; /
 	
+if !DSX						;
 +	LDA !SLOTSUSED				; Load Dynamic Sprites Slots
 	BNE +					; Don't return to NMI if there are slots to transfer.
 	JML $008172				; Otherwise, return to NMI.
@@ -532,10 +538,10 @@ Dynamic_Sprites:				; --------------------------------------
 	LDY #$80				; \ Set up DMA
 	STY $2115				;  |
 	LDA #$1801				;  |
-	STA $4300				; /
+	STA $4310				; /
 	LDY.B #!DSX_BUFFER/65536		; \ Set Transfer Bank
-	STY $4304				; /
-	LDY #$01				; This value is written to $420B
+	STY $4314				; /
+	LDY #$02				; This value is written to $420B
 						;
 	%transferslot(0, $0080, $C0)		; \ Transfer Slot 1, line 1.
 	%transferslot(1, $0080, $C0)		;  | Transfer Slot 1, line 2.
@@ -552,10 +558,10 @@ Dynamic_Sprites:				; --------------------------------------
 	LDY #$80				; \ Set up DMA
 	STY $2115				;  |
 	LDA #$1801				;  |
-	STA $4300				; /
+	STA $4310				; /
 	LDY.B #!DSX_BUFFER/65536		; \ Set Transfer Bank
-	STY $4304				; /
-	LDY #$01				; This value is written to $420B
+	STY $4314				; /
+	LDY #$02				; This value is written to $420B
 						;
 	%transferslot(0, $0100, $80)		; \ Transfer Slot 1 & 2, line 1.
 	%transferslot(1, $0100, $80)		;  | Transfer Slot 1 & 2, line 2.
@@ -572,10 +578,10 @@ Dynamic_Sprites:				; --------------------------------------
 	LDY #$80				; \ Set up DMA
 	STY $2115				;  |
 	LDA #$1801				;  |
-	STA $4300				; /
+	STA $4310				; /
 	LDY.B #!DSX_BUFFER/65536		; \ Set Transfer Bank
-	STY $4304				; /
-	LDY #$01				; This value is written to $420B
+	STY $4314				; /
+	LDY #$02				; This value is written to $420B
 						;
 	%transferslot(0, $0180, $40)		; \ Transfer Slot 1, 2 & 3, line 1.
 	%transferslot(1, $0180, $40)		;  | Transfer Slot 1, 2 & 3, line 2.
@@ -594,20 +600,21 @@ Dynamic_Sprites:				; --------------------------------------
 	LDY #$80				; \ Set up DMA
 	STY $2115				;  |
 	LDA #$1801				;  |
-	STA $4300				; /
+	STA $4310				; /
 	LDA.W #!DSX_BUFFER&65535		; \ Set DMA source
-	STA $4302				;  |
+	STA $4312				;  |
 	LDY.B #!DSX_BUFFER/65536		;  |
-	STY $4304				; /
+	STY $4314				; /
 	LDA #$0800				; \ Set Length of transfer.
-	STA $4305				; /
-	LDY #$01				; \ Run DMA
+	STA $4315				; /
+	LDY #$02				; \ Run DMA
 	STY $420B				; /
 						;
 	DEY					; \ Zero slots used.
 	STY !SLOTSUSED				; /
 						;
 	JML $008172				; Return to NMI.
+endif						;
 	
 SA1_Reset:					;
 	SEI					; \ Disable IRQ and Emulation Mode
@@ -625,6 +632,8 @@ SA1_Reset:					;
 						;
 	SEP #$30				; A/X/Y 8-bit
 						;
+	STZ $2230				; Reset SA-1 DMA settings.
+						;
 	LDA #$80				; \ Enable I-RAM and BW-RAM write
 	STA $2227				;  |
 	STZ $2225				;  |
@@ -639,6 +648,13 @@ SA1_Reset:					;
 						; This will set up a 4bpp Virtual RAM at $60:0000-$63:FFFF
 						; Settings this to #$01 will make a 2bpp Virtual RAM at $60:0000-$67:FFFF.
 						;
+	REP #$20
+	LDA #$816A				; \ Set SNES IRQ and NMI Vectors
+	STA $220C				;  | (Dynamic vectors)
+	LDA #$8374				;  |
+	STA $220E				; /
+	SEP #$20
+						
 	LDA #$50				; \ Enable dynamic NMI/IRQ vector.
 	STA $2209				; /
 						;

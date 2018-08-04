@@ -3,7 +3,7 @@ WARNING: Enable word wrap!
 This is a quick guide to you get working fast with the SA-1 Pack. It's pretty simple really, but the readme may be a little confusing at start, so I created this file specially for who is starting to work with SA-1 Pack.
 
 Requirements:
-	- Asar 1.31 or newer;
+	- Asar 1.31 or newer; and
 	- Lunar Magic 2.20 or newer.
 
 Guide:
@@ -22,6 +22,9 @@ Compatible Tools: https://dl.dropbox.com/u/16203903/A/SA1/ctools.html
 Compatible Patches: https://dl.dropbox.com/u/16203903/A/SA1/cpatches.html
 Compatible Blocks: https://dl.dropbox.com/u/16203903/A/SA1/cblocks.html
 Compatible Sprites: https://dl.dropbox.com/u/16203903/A/SA1/csprites.html
+
+Most of the Sprites and Blocks however can be converted automatically with a tool called "SA-1 Convert". Please take a look in the Tools Section on SMW Central if you're interested.
+Also any resource on SMW Central with "sa-1" tag also should work with SA-1 ROMs, including Patches.
 
 Also some tools on page can have a function to automatically convert any incompatible resource to SA-1 format, so you can use them if you don't have alternative.
 

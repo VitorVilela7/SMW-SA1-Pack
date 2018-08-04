@@ -1,3 +1,11 @@
+SA-1 Pack v1.25:
+	- Fixed SNES NMI and IRQ vectors override not getting written correctly ($220C, $220E). These registers are SA-1 only write and they were being written on SNES CPU side, making real hardware crash. None of the major emulators currently emulate this register properly.
+	- Added a code on RESET routine to put the SA-1 CPU on sleep state before booting and setting up initial variables. The same procedure is done on most commercial games so I decided to include it on SA-1 Pack just to be safe in real hardware.
+	- Added a code for clearing DMA state ($2230) on SA-1 RESET routine.
+	- Made all DMAs invoked by the patch use channel 1 instead of 0. This should make the DMA remap patch work with SA-1 ROMs without requering to modify any of the SA-1 Pack code.
+	- Made DSX (Dynamic Sprites) patch code optional, requested by anonimzwx.
+	- Made some minor grammar fixes.
+
 SA-1 Pack v1.24:
 	- Fixed Character Conversion DMA randomly freezing the game when SA-1 is unable to receive IRQs.
 
