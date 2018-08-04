@@ -125,7 +125,6 @@ org $0482ED
 	NOP #22
 mulfix2v2_back:
 warnpc $048307
-print pc
 
 pullpc
 
@@ -190,6 +189,7 @@ mulfix2v2:
 	XBA				;  |
 	CMP #$37			;  |
 	;BNE .snes_code			;  |
+	; i don't know why i commented out this @ 2017
 	PLA				; /
 	LDY #$01
 	STY $2250

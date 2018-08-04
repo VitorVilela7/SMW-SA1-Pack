@@ -1,3 +1,16 @@
+SA-1 Pack v1.26:
+	- Fixed Sprite <-> Sprite interaction missing several sprite pointer changes, making certain sprite tables corrupted. One of the most notables consequences of the glitch were the blue shelless koopas not being able to hold a shell thrown from behind.
+	- Fixed Yoshi spitting fire (from a red shell or if red yoshi) slight off position (around -16 pixels from where it was supposed to), due of yet another missing sprite pointer change.
+	- Fixed one missing wait for h-blank call, which seems the responsible for generating the lag in ZSNES for mode 7 bosses.
+	- Fixed Dynamic Sprites setting !SLOTSUSED to #$01 instead of #$00 after upload. This bug happened because the channel used to DMA transfer was changed to #$02 instead of #$01 and the same value was subtracted to determine !SLOTSUSED value. Also slight optimized the code, by setting the zero store before the jump table.
+	- Updated the Quick Guide, with more recent instructions regarding resource compatibility.
+	- Rewrote part of the read me.
+	- Add a memory map summary file to the docs folder, which contains basically all memory changes the SA-1 does. Useful for converting resources.
+	- Registered SA-1 main loop address, as JML, at $008A74.
+	- Removed some unused code related to h-blank detection.
+	- Removed a leftover print pc from Overworld hijack.
+	- Removed most of the compatible tools/patches/block/etc. pages as Dropbox will be killing them soon.
+
 SA-1 Pack v1.25:
 	- Fixed SNES NMI and IRQ vectors override not getting written correctly ($220C, $220E). These registers are SA-1 only write and they were being written on SNES CPU side, making real hardware crash. None of the major emulators currently emulate this register properly.
 	- Added a code on RESET routine to put the SA-1 CPU on sleep state before booting and setting up initial variables. The same procedure is done on most commercial games so I decided to include it on SA-1 Pack just to be safe in real hardware.

@@ -129,11 +129,22 @@ org $02887D
 autoclean JML BLOCK_SPRITE_SPAWN_WRAPPER
 
 ; Sprite/sprite interaction needs fixing
-org $01A43D
-autoclean JSL SPR_SPR_INTERACT_SET
+;useless with blue koopa fix
+;org $01A43D
+;autoclean JSL SPR_SPR_INTERACT_SET
 
+;included in blue koopa fix
+;org $01A4B6
+;autoclean JML SPR_SPR_INTERACT_RESTORE
+
+;restore previous hijacks.
+org $01A43D
+	LDA (!sprite_x_low_pointer)
+	STA $00
+	
 org $01A4B6
-autoclean JML SPR_SPR_INTERACT_RESTORE
+	LDX $75E9
+	RTS
 
 ; Dropping an item from an item box needs fixing
 org $028049
@@ -330,6 +341,27 @@ JSL POKEY_RESTORE
 org $03C2EB
 JSL INVIS_1UP_SET
 
+;sprite <-> sprite interaction routine
+;now properly fixed (~Vitor Vilela)
+org $01A413
+	autoclean JML SPR_SPR_INTERACT_INIT
+	
+org $01A4B0
+	autoclean JML SPR_SPR_INTERACT_LOOP
+	
+org $01A7C2
+	autoclean JML SPR_SPR_INTERACT_3
+	
+org $01A5D3
+	autoclean JML SPR_SPR_INTERACT_4
+	
+org $01A5DA
+	autoclean JML SPR_SPR_INTERACT_5
+
+;yoshi spit fire (~Vitor Vilela)
+org $01F27D
+	autoclean JML YOSHI_SPIT
+	
 freecode
 
 SPRITE_IRAM_RESET:
@@ -681,19 +713,20 @@ DROP_ITEM_RESTORE:
     %update_pointers($75E9)
     RTL
 
-SPR_SPR_INTERACT_SET:
-    %update_pointers($7695)
-    
-    LDA !sprite_x_low,x
-    STA $00
-    RTL
+;SPR_SPR_INTERACT_SET:
+;    %update_pointers($7695)
+;    
+;    LDA !sprite_x_low,x
+;    STA $00
+;    RTL
 
-SPR_SPR_INTERACT_RESTORE:
-    LDX $75E9
-    %update_pointers($75E9)
-
-; JML to an RTS in bank 1
-    JML $01A40A
+;included in blue koopa fix.
+;SPR_SPR_INTERACT_RESTORE:
+;    LDX $75E9
+;    %update_pointers($75E9)
+;
+;; JML to an RTS in bank 1
+;    JML $01A40A
 
 BLOCK_SPRITE_SPAWN_HACK:
     STX $785E
@@ -778,5 +811,63 @@ SubSprXPosNoGrvty:
     STA $7491
     RTL
     
+SPR_SPR_INTERACT_5:
+	%update_pointers($75E9)
+	LDX $75E9
+	LDY $7695
+	JML $01A5E0
+
+SPR_SPR_INTERACT_4:
+	PHX
+	TYX
+	STX $00
+	%update_pointers($00)
+	PHK
+	PEA.w .jslrtsreturn-1
+	PEA.w $0180CA-1
+	JML $01B4E2
+.jslrtsreturn
+	PLX
+	STX $00
+	%update_pointers($00)
+	JML $01A5D9
+
+SPR_SPR_INTERACT_3:
+    %update_pointers($7695)
+	LDX $7695
+	LDY $75E9
+	JML $01A7C8
+
+SPR_SPR_INTERACT_LOOP:
+	DEX
+	BMI .end
+	STX $00
+    %update_pointers($00)
+	JML $01A417
+.end
+    %update_pointers($75e9)
+	JML $01A4B6
+
+SPR_SPR_INTERACT_INIT:
+	LSR
+	BCC .return
+	DEX
+	STX $00
+    %update_pointers($00)
+	JML $01A417
+.return
+	JML $01A40A
+	
+;note that this doesn't restore -- this might be an problem
+;however, the only good place for restoring it is a sfx
+;99% likely to be hijacked by AMK. so the only thing for now is hope
+;that the current fix won't cause any other bug.
+YOSHI_SPIT:
+	TYX
+	STX $00
+	%update_pointers($00)
+	STZ !sprite_status,x
+	JML $01F281
+	
 ; Apply no more sprite tile limits patch at the end
 incsrc NoMoreSpriteTileLimits.asm

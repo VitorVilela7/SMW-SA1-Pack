@@ -4,151 +4,169 @@
   \___ \ / /\ \______| |   |  ___/ _` |/ __| |/ /
   ____) / ____ \     | |   | |  | (_| | (__|   < 
  |_____/_/    \_\    |_|   |_|   \__,_|\___|_|\_\
-   by Vitor Vilela                 Version 1.25
+   by Vitor Vilela                 Version 1.26
 
-The SA-1 Pack consist of a couple of patches that enable
-SA-1 and prepare your SMW ROM to use the SA-1 CPU in the
-best way possible.
+The SA-1 Pack, as the name implies, is a packable of
+patches containing everything you need to activating
+the SA-1 chip and optimizes your SMW ROM for using it.
 
 ;===================================================;
 ; Features                                          ;
 ;===================================================;
 
- - Features SA-1's 10.74 MHz speed, which is four
-times faster than the SNES. Since SA-1 and SNES can
-run at the same time, the game can run 5 times faster
-than usual.
+ - Features SA-1's 10.74 MHz speed, 4x faster than
+SNES, up to 5x faster if both run in parallel.
 
- - Decreases the level loading time and almost kills
-all slowdown instances present in Super Mario World.
+ - Reduces level loading time and overall game
+slowdown.
 
- - Increases the maximum number of sprites on screen to
-20!
-
- - Increases the maximum number of sprites per level to
-255!
+ - Increases the maximum amount of sprites on screen
+to 20 and per level to 255.
  
- - 8MB Support for bsnes, ZMZ and snes9x 1.54+ (requires a
-custom build for 1.53) and 6MB support for ZSNES.
-8MB could work with ZSNES too if you use a custom
-build.
+ - 8MB Support for bsnes, ZMZ and Snes9x 1.54.
 
-Other features available to programmers:
+ - 6MB Support for ZSNES. 8MB if a custom build is
+used.
+
+Other features, more related for programmers:
  - New DMA modes (Character Conversion, ROM->I-RAM,
 ROM->BW-RAM, I-RAM->BW-RAM, BW-RAM->I-RAM).
  
- - Variable Length Bit Processing (also known as bit
- stream).
+ - Variable Length Bit Processing (ROM bit stream).
  
- - High speed multiplication and division. Both operations
- take 5 cycles. You also can do accumulative sum.
+ - Fast multiplication, division and commutative sum
+(multiply with add).
  
- - Bank Switching.
+ - Bank Switching by Super MMC.
  
- - Allows to dynamically change what part of BW-RAM
- is mapped to $6000-$7FFF.
+ - Virtual memory mapping capabilities from BW-RAM.
  
- - Allows Direct Page usage which will only affect SA-1
- (the SNES DP stays the same).
+ - Allows Direct Page usage on SA-1 CPU.
  
- - Multi-threading.
+ - Multi-threading capability between SA-1 and SNES.
  
 ;===================================================;
-; Changes                                           ;
+; Notable Changes                                   ;
 ;===================================================;
 
 When patched, the following changes will take effect:
 
- - Sprites will be processed by the SA-1 chip, killing
-almost all slowdown possible. You can put up to 20 sprites
-on screen, but on rare cases it can slowdown depending
-of what sprites are you putting.
+ - Sprites will be processed by the SA-1 CPU, reducing
+slowdown. You can put up to 20 sprites on screen, with
+rare slowdown chances due of SA-1 high clock speed.
 
- - SA-1 will load both level data and graphics, thus
-decreasing the level loading time. This should make
-the "MARIO START!" screen take much less time.
+ - Levels will load faster, with SA-1 being responsible
+for loading part of level (MARIO START screen
+for example).
 
- - Side effect: the Nintendo Presents screen may
-last for a shorter time, since Mario's graphics are
-decompressed much more quickly taking advantage of
-both SA-1 and the LZ2/3 optimized patch.
-
- - Various patches like VWF dialogues will run
-more quickly, allowing new possibilities.
+ - Special patches like RPG Hacker's VWF dialogues,
+leod's Sprite Platforms will benefit from the SA-1
+chip features, allowing optimal usage for them.
 
 ;===================================================;
-; Warning                                           ;
+; Importat                                          ;
 ;===================================================;
 
-SA-1 Pack is the most complex patch created for SMW,
-because it moves almost all RAM addresses to another
-area, which is accessible by the SA-1 chip.
+Although released in 2012, the SA-1 Pack is still one
+of the most complex patches ever created for Super
+Mario World. To the SA-1 CPU get access to the game
+logic values, the patch moves most of the WRAM tables
+to BW-RAM and I-RAM, for allowing SA-1 usage on them.
 
-Because of that, you should be very careful when you
-use anything else in your ROM. In other words, other
-tools and patches. None of them will work until a
-SA-1 compatible version is released. There are
-exceptions, but 99.99% of patches and tools will not
-work with SA-1, in their current state.
+Due of that, any external resource must obey for the
+same remapping changes, specially tools and patches.
+
+By default, any resource that involves ASM will not
+work with SA-1 Pack, unless if they're properlly
+prepared with the new RAM data. Usually any resource
+with the "sa-1" tag means it will work natively with
+the SA-1 Pack in your ROM, however resources without
+the tag may need to have a manual remap conversion,
+which might be complicated for who is new at logic
+programming.
 
 Since Lunar Magic 2.20, you can apply the SA-1 Pack and
 Lunar Magic will detect and apply the required changes
-to make your ROM editable.
-                                              
-I am converting various patches and tools to make them
-compatible with SA-1. If you're interested, check out
-at the end of this read me.
+to make your ROM editable. However, if you already
+started editing your ROM, you will have to port it over
+because all changes made into your ROM will not work with
+SA-1.
 
-Blocks and Sprites will not work either, even if you use
-a SA-1 compatible Sprite Tool/Block Tool. Unless a future
-Sprite/Block Tool will be able to convert a regular custom
-sprite/block into a SA-1 friendly sprite/block.
+Sprites and Blocks require also SA-1 RAM remapping, but
+usually they can be easily converted with a tool called
+Sprite Convert. You will also need a SA-1 compatible
+sprite and block inserter. You can download the compatible
+SA-1 Sprite Tool in the quick guide, while for blocks,
+the current block tool, GPS, offers native support over it
+and only requires you getting compatible blocks for running
+it.
 
-Converting those are easier than converting patches or
-tools, though.
+It's important to note that the ZSNES is pretty outdated,
+if the version 1.51 is still the latest one. That version
+has pretty bad SA-1 emulation (and overall SNES system),
+with lower clock speed (5 MHz vs 10 MHz), missing features
+and specially unstable emulation. Use it at your own risk
+when you're using SA-1 Pack.
 
-Also ZSNES emulates the SA-1 poorly. Instead of 10.74 MHz,
-ZSNES seems to run around 5.37 MHz plus some features doesn't
-work. Don't get suprised if your hack freeze or don't work
-on ZSNES.
+Snes9x 1.54 and higan/bsnes are recommended instead.
+Alternatively, you can use Alcaro's ZMZ, which is a edited
+version of ZSNES which allows to internally run a Snes9x
+or bsnes core, so while it's still ZSNES, the engine used
+will be properly emulating SA-1 code.
+
+In fact, none of the emulators really emulate SA-1 well.
+There's too little SA-1 research and the current
+implementations may miss one or another feature which can
+affect gameplay experience. But that is not a thing to worry,
+seeing that current emulation is stable enough for a
+decent performance.
 
 About Bowser: You must go to level 1C7 and change sprite header
-to 0x00. It's because Bowser's battle uses sprite header 0x10,
-responsible for allowing 22 sprites on screen and obviously
-doesn't work with how Bowser arena is coded.
+to 0x00, because the default sprite header (0x10) doesn't
+work with it and the player will get glitches and stuck after
+beating Bowser.
 
 ;===================================================;
 ; Usage                                             ;
 ;===================================================;
 
-Working with SA-1 may be tedious at first, but at time
-working with this chip will get simple and fun.
+As far working with SA-1 can be tedious at start, with
+the current development and available compatible
+resources, it's already doable to pretty much anyone
+who got a fair experience with SMW Hacking to use it.
 
 In order to get started, grab a new clean ROM. Japanese
 or European versions will not work.
 
-Now, open the ROM in Lunar Magic and expand it to 1, 2,
-3 or 4MB, without doing anything else.
+Now, open the ROM in Lunar Magic and expand it to at least
+2MB. DO NOT save anything with it.
 
-Now, using Asar, apply sa1.asm to your ROM.
+After expanding, apply sa1.asm to your ROM, using Asar.
 
-Then test it with an emulator of your choice. I'd
-recommend Snes9X, ZMZ, BSNES or on last case, ZSNES.
-If it works normally and Snes9X/ZSNES respectively display
-ROM+RAM+SRAM+SA-1 or Type:SA1 upon loading the game,
-then you've successfully activated SA-1 on your ROM!
+Then feel free to test it with your preferred emulator. If
+it works properly, somewhere in your emulator it should
+display SA-1, e.g. ROM+RAM+BAT+SA-1 in Snes9x. If you're
+unsure, try editing level 106, change sprite header memory
+to 0x10 and insert 20 koopas in the level. If all of them
+display, then the SA-1 Pack got successfully inserted.
 
-Now apply all other patches/tools that should run
-before Lunar Magic. Be sure that they support SA-1,
-or else, if any of these patches/tools is not compatible
-with SA-1, it will DESTROY your ROM.
+Now you can apply all other patches/tools that should run
+before Lunar Magic. Remember that they should have SA-1
+compatbility or else they will corrupt your ROM.
 
-Now you can save the first level with Lunar Magic! Note
-that you MUST use Lunar Magic 2.20+ to work with SA-1.
+After it, you can finally use Lunar Magic with your ROM.
+Remember to use at least version 2.20+.
 
-Warning: If you change the decompression option on
-Lunar Magic, you MUST reapply sa1.asm or your ROM will
-run slower on loading screens.
+To enable the double (22 sprites) system, don't forget
+to change your sprite header memory to 0x10, except in
+boss battles (they doesn't work with that header setting).
+
+Important: If you change the decompression option on
+Lunar Magic, you must reapply sa1.asm to your ROM so
+the proper GFX decompression routine is used.
+
+This is important for fast level decompression and
+compatibility with advanced resources.
 
 ;===================================================;
 ; F.A.Q                                             ;
@@ -159,6 +177,11 @@ run slower on loading screens.
 to see the benefits from using this SA-1 pack. :)
 Also once you learn how to make something SA-1
 compatible, everything will become easier to work with.
+
+ Q: Really?
+ A: The above Q/A was made in 2012. Today, 5 years after,
+I still would say it's hard, but not that anymore. There's
+much more resources available today.
 
  Q: When I edit my ROM in Lunar Magic and open it, the
 ROM glitches during the Title Screen. What's going on?
@@ -177,20 +200,18 @@ but of course all hackers would need to use too.
 find a list of SA-1 compatible patches on "Links" section.
 Also on SMWC, SA-1 compatible patches will have the "sa1" tag.
 
- Q: Whenever I use any tool, the ROM simply crashes!
- A: Make sure that the tool is SA-1 compatible. You can
-find SA-1 compatible tools on "Links" section.
-Also on SMWC, SA-1 compatible tools will have the "sa1" tag.
-If the tool isn't on list, you will need to ask the author
-for adding SA-1 support or search for another solution,
-like a manual patch or another tool.
+ Q: Whenever I use any tool, the ROM crashes too.
+ A: Make sure that the tool is SA-1 compatible. Compatible
+tools will have the "sa-1" tag on the SMW Central sections.
+If the tool you're looking for, try asking for help in the
+forums for guidance.
 
  Q: If I insert a custom block or custom sprite, the
 ROM crashes or glitches when the block/sprite is present.
  A: Blocks and sprites may need to be converted to SA-1.
-Check out the "Links" section for SA-1 compatible blocks/sprites.
-SMWC blocks/sprites may have the "sa1" tag, indicating
-SA-1 compatibility.
+If case the one you downloaded is not compatible with SA-1,
+you can use the SA-1 Convert tool to automatically those
+for you.
 
  Q: How I can make something compatible with SA-1?
  A: Check section "Programming". You will find all
@@ -208,7 +229,7 @@ and it needs a specific decompresser to work property.
 
 Unlike the first version of the SA-1 PATCH, this one
 is much more complex because of the various RAM remapping,
-not counting the different ROM mapping.
+not counting the whole new ROM mapping (SA-1 ROM).
 
 In other words, in order to making anything SA-1
 compatible, you will need to change:
@@ -218,10 +239,6 @@ and YY equals either XX or $7E)
 
 $YY:0000-$YY:00FF to $XX:3000-$XX:30FF.
 $YY:0100-$YY:1FFF to $XX:6100-$XX:7FFF.
-
-BE VERY CAREFUL WHEN HANDLING SPRITE ADDRESSES!
-ARUJUS'S PATCH MOVE ALL OF THEM TO ANOTHER AREA.
-Please check docs\sprite remap.txt for more details!
 
 Note that if you're using 16-bit addressing,
 you should to use $3000-$30FF and $6100-$7FFF for that.
@@ -234,10 +251,17 @@ $7F:9A7B-$7F:9C7A to $41:8800-$41:89FF.
 
 $70:0000-$70:07FF to $41:C000-$41:C7FF.
 
-Also, note that $70:0800-$70:27FF is now $41:A000-$41:BFFF if you
-want more SRAM, but only that much. 16 KB should be enough
-for SRAM unless you're working on something that
-really wastes space.
+Also, note that $70:0800-$70:27FF is now
+$41:A000-$41:BFFF if you want more SRAM, but only that
+much. 16 KB should be enough for SRAM unless you're working
+on something that really wastes space. Alternatively, you
+can use MarioE/LX5's BW-RAM plus patch, which makes the job
+easier.
+
+For more information, see the Memory Map Summary file
+located in docs folder. It also contains information about
+the remapped sprite tables, which will likely cause problem
+if you don't use a special remapping for them.
 
 Now, knowing all the SRAM/RAM mapping changes, you may
 ask: what is the data at $40:0000-$41:FFFF
@@ -864,7 +888,7 @@ To see all the registers, check out here: http://wiki.superfamicom.org/snes/show
 Without these people, it would have been impossible for the SA-1 Pack 
 to be created perfectly:
 
- - 33953YoShI (LC_LZ2/3 patches)
+ - 33953YoShI (LC_LZ2/3 patches, original JP patch inspiration)
  - Adam (Testing / bugs)
  - Arujus (More sprites patch)
  - Alcaro (ZSNES/SNES9X detection code)
@@ -883,12 +907,13 @@ to be created perfectly:
 ; Links                                             ;
 ;===================================================;
 
-List of compatible Tools: https://dl.dropbox.com/u/16203903/A/SA1/ctools.html
-List of compatible Patches: https://dl.dropbox.com/u/16203903/A/SA1/cpatches.html
-List of compatible Blocks: https://dl.dropbox.com/u/16203903/A/SA1/cblocks.html
-List of compatible Sprites: https://dl.dropbox.com/u/16203903/A/SA1/csprites.html
+SA-1 Converted Patches: https://dl.dropbox.com/u/16203903/A/SA1/cpatches.html
+Note the above link may expire around March. If you have
+problem with accessing it let me know.
+
+SMW Central: https://www.smwcentral.net/
 
 SNES Dev. Book: http://www.romhacking.net/docs/226/
 SA-1 Registers: http://wiki.superfamicom.org/snes/show/SA-1+Registers
 
-My Profile on SMWC: http://smwc.me/u/8251
+My Profile on SMW Central: http://smwc.me/u/8251

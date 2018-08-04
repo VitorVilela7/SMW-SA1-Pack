@@ -65,6 +65,10 @@ NMI:						;  |
 Reset2:						;  |
 !c	JML SNES_Reset				; /
 
+
+	JML SA1_Loop				; This points to SA-1 main loop.
+						; Needed so the Dual ROM system can locate SA-1 main loop easier.
+
 warnpc $8A78
 
 ORG $8069					; \ Restore old code
@@ -88,6 +92,9 @@ ORG $816A					; \ Hijack NMIStart for Dynamic Sprites and
 ORG $843B					; Restore old WaitForHBlank code
 	BIT $4212
 	BVS $F9
+	
+org $83F6
+	JSR RAMCode_WaitForHBlank
 	
 org $8391
 	JSR RAMCode_WaitForHBlank
@@ -342,26 +349,6 @@ endif						;
 						;
 	JML $008000				; Don't re-enable emulation mode to don't reset Stack and Direct Page.
 	
-WaitForHBlank:
-	BIT $318E				; \ If ZSNES, instead of
-	BPL +					;  | waiting for H-Blank, waste
-	LDY #$30				;  | some time and return.
--	DEY					;  |
-	BNE -					;  |
-	JML $008448				; /
-						;
-+	DEY #4					; \ Decrease the wait time for a bit.
-	BRA +					; /
-						;
--	LDY #$20-4				; \ Wait For H-Blank
-+	BIT $4212				;  |
-	BVS -					;  |
--	BIT $4212				;  |
-	BVC -					;  |
-- 	DEY					;  |
-	BNE -					;  |
-	JML $008448				; /
-
 RAMCode:					; RAM Code.
 base $1E80					; This will get uploaded to $7E:1E80
 .ProcessCode					;
@@ -523,7 +510,8 @@ if !DSX						;
 	BNE +					; Don't return to NMI if there are slots to transfer.
 	JML $008172				; Otherwise, return to NMI.
 	
-+	ASL					; \ Jump to fastest routine for this.
++	STZ !SLOTSUSED				; Zero out slots used.
+	ASL					; \ Jump to fastest routine for this.
 	TAX					;  |
 	JMP (.DSX_MODES-2,x)			; /
 
@@ -548,9 +536,6 @@ if !DSX						;
 	%transferslot(2, $0080, $C0)		;  | Transfer Slot 1, line 3.
 	%transferslot(3, $0080, $C0)		; / Transfer Slot 1, line 4.
 						;
-	DEY					; \ Zero slots used.
-	STY !SLOTSUSED				; /
-						;
 	JML $008172				; Return to NMI (PHK, PLB, SEP #$30, perfect.)
 	
 .TRANSFER_TWO:					; Transfer two slots.
@@ -568,9 +553,6 @@ if !DSX						;
 	%transferslot(2, $0100, $80)		;  | Transfer Slot 1 & 2, line 3.
 	%transferslot(3, $0100, $80)		; / Transfer Slot 1 & 2, line 4.
 						;
-	DEY					; \ Zero slots used.
-	STY !SLOTSUSED				; /
-						;
 	JML $008172				; Return to NMI.
 	
 .TRANSFER_THREE:				; Transfer three slots.
@@ -587,9 +569,6 @@ if !DSX						;
 	%transferslot(1, $0180, $40)		;  | Transfer Slot 1, 2 & 3, line 2.
 	%transferslot(2, $0180, $40)		;  | Transfer Slot 1, 2 & 3, line 3.
 	%transferslot(3, $0180, $40)		; / Transfer Slot 1, 2 & 3, line 4.
-						;
-	DEY					; \ Zero slots used.
-	STY !SLOTSUSED				; /
 						;
 	JML $008172				; Return to NMI.
 	
@@ -609,9 +588,6 @@ if !DSX						;
 	STA $4315				; /
 	LDY #$02				; \ Run DMA
 	STY $420B				; /
-						;
-	DEY					; \ Zero slots used.
-	STY !SLOTSUSED				; /
 						;
 	JML $008172				; Return to NMI.
 endif						;
@@ -687,8 +663,9 @@ SA1_Reset:					;
 	PEA $0100				; \ Set DP to $0100
 	PLD					; /
 						;
--	LDA $8B					; \ Loop until a Background Mode is enabled
-	BEQ -					; / (or wait for a IRQ for SNES call)
+SA1_Loop:					;				
+	LDA $8B					; \ Loop until a Background Mode is enabled
+	BEQ SA1_Loop				; / (or wait for a IRQ for SNES call)
 						;
 BackgroundMode:					;
 	PHK					; \ Jump to Background Mode Address
@@ -696,7 +673,7 @@ BackgroundMode:					;
 	JML [$3186]				; /
 .End						;
 	STZ $8B					; \ Clear Background Flag and Return to Main Loop.
-	BRA -					; /
+	BRA SA1_Loop				; /
 							
 SA1_IRQ:					; SA-1 CPU IRQ
 	;PHP					; \ Preserve P/A/X/Y/D/B
