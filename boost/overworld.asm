@@ -9,6 +9,9 @@ namespace overworld
 
 pushpc
 
+org $04827A
+	JSL continue_fix
+
 org $00A1C7
 	JSL main
 
@@ -114,6 +117,24 @@ mapview:
 	SEP #$20
 	JML .back
 
+continue_fix:
+	LDA.b #.snes
+	STA $0183
+	LDA.b #.snes>>8
+	STA $0184
+	LDA.b #.snes>>16
+	STA $0185
+	LDA #$D0
+	STA $2209
+-	LDA $018A
+	BEQ -
+	STZ $018A
+	RTL
+.snes
+	LDA $73C9
+	JML $009B80
+	
+	
 blinking_cursor:
 	LDA #$A8
 	STA $0183

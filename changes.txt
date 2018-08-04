@@ -1,3 +1,6 @@
+SA-1 Pack v1.22:
+	- Fixed a bug where the arrow used in CONTINUE/END text wasn't being rendered in bsnes and other saner emulators that blocks WRAM access from SA-1 CPU.
+
 SA-1 Pack v1.21:
 	- Fixed another bug when more than 84 sprites gets loaded. Interesting how the cause was the same as another one I fixed on version v1.20, so this time I had sure that no similar bugs will appear.
 	- Made all files have @includefrom sa1.asm to avoid possible patching problems.
