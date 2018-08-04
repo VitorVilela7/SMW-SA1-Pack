@@ -55,8 +55,8 @@ freecode
 CodeStart:
 	PHB
 	PHK
-	PLB
-	
+	PLB	
+
 	LDX.W #Decompress
 	STX $3180
 	LDA.B #Decompress>>16
@@ -95,7 +95,7 @@ Decompress:
 	PEI ($02+!S)
 if !LZ3 : PEI ($04+!S)
 	PEI ($8A)
-
+	
 	LDA #$80
 	STA $03+!S
 	STZ $02+!S
@@ -163,6 +163,7 @@ endif
 	PLX : STX.b $02+!S
 	PLX : STX.b $00+!S
 	SEP #$10
+
 	RTL
 	
 if !!LZ3

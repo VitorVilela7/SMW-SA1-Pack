@@ -155,44 +155,28 @@
 	BMI .case_20
 
 .case_00
-	PHB
-	PHK
-	PLB
-	
-	LDA #%11000100
-	STA $2230
-	
-	REP #$21
+	REP #$20
 	LDA $8D
-	INC
-	STA $8D
-	STA $2238
-	STY $2235
-	STX $2232
-	TYA
-	ADC $8D
-	TAY
-	TXA
-	ADC $8D
-	TAX
-	SEP #$20
+	STX $8D
 	
-	LDA $8C
-	STA $2234
-	LDA $02
-	STA $2237
-	
-	BIT $018E
-	STZ $2230
-	BMI +
--	LDA $018C
-	BEQ -
-	STZ $018C
-	
-+	PLB
+-	SEP #$20
 
+	INC
+	STA $02+!S
+--	PHB
+	LDA $8C
+	PHA
+	PLB
+	LDA $0000,x
+	PLB
+	STA $0000,y
+	INX
+	INY
+	DEC $02+!S
+	BNE --
 .back
-	BCC .main
+	CPX $8D
+	BCS .main
 
 	INC $8C
 	CPX #$0000
