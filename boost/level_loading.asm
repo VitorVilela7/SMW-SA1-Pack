@@ -1,4 +1,6 @@
 ; This sub-patch gives a boost on level loading at general.
+; DO NOT USE THIS PATCH!
+@includefrom sa1.asm
 
 
 pushpc

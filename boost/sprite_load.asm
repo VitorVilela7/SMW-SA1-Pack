@@ -1,3 +1,4 @@
+@includefrom sa1.asm
 namespace SpriteLoading
 pushpc
 ;CODE_02A802:        A4 55         LDY $55                   
@@ -185,8 +186,10 @@ NSprite_FixY2:
 	
 NSprite_FixY3:
 	INX
+	PHY
 	SEP #$10
 	REP #$10
+	PLY
 	PLA
 	PLA
 	JML $02A82E

@@ -1,3 +1,4 @@
+@includefrom sa1.asm
 ; This patch optimizes the SMW's circle routine.
 namespace Circle
 pushpc

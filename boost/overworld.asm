@@ -1,4 +1,4 @@
-@include
+@includefrom sa1.asm
 namespace overworld
 
 !SwitchBlocks = $418800 ; seems to use 480 bytes.

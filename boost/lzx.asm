@@ -1,4 +1,5 @@
-@include
+@includefrom sa1.asm
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; LC_LZ2/LC_LZ3 Optimization Patch v1.2
 ; SA-1 Version.

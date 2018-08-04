@@ -1,3 +1,4 @@
+@includefrom sa1.asm
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; No More Sprite Tile Limits v2.0.0
 ;; coded by Edit1754, macro'd by MathOnNapkins,

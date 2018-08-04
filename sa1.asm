@@ -1,8 +1,11 @@
 @asar 1.31
 ;===============================================;
-; SA-1 Pack v1.20				;
+; SA-1 Pack v1.21				;
 ;  by Vitor Vilela				;
 ;===============================================;
+
+!ZSNES		= 1				; Put 0 if you don't want to SA-1 Pack automatically deal with ZSNES limitations.
+						; (in other words, put 0 if you don't want ZSNES 1.51 or older support)
 
 sa1rom						; \ Don't touch!
 !c		= autoclean			;  |
@@ -312,6 +315,7 @@ SNES_Reset:					; Super NES Reset
 	TSB $318E				;  |
 +						; /
 						;
+if !ZSNES					;
 	SED					; \ Detect ZSNES
 	LDA #$FF				;  |
 	CLC					;  |	
@@ -329,7 +333,9 @@ SNES_Reset:					; Super NES Reset
 	MVN $00,RAMCode>>16			;  |
 	SEP #$30				; /			
 						;
-+	JSR $1E85				; Wait for SA-1.
++						;
+endif						;
+	JSR $1E85				; Wait for SA-1.
 						;
 	JML $008000				; Don't re-enable emulation mode to don't reset Stack and Direct Page.
 	

@@ -1,3 +1,8 @@
+SA-1 Pack v1.21:
+	- Fixed another bug when more than 84 sprites gets loaded. Interesting how the cause was the same as another one I fixed on version v1.20, so this time I had sure that no similar bugs will appear.
+	- Made all files have @includefrom sa1.asm to avoid possible patching problems.
+	- Made the ZSNES detection optional.
+
 SA-1 Pack v1.20:
 	- Moved routines $00E2BD and $00C47E to SA-1 side on level game mode, which seems to handle mario physics, mario oam, most sprites types (shooters, generators, clusters, extended, minor extended, bounce, score and smoke) plus block/map16 handling. With that, the CPU usage on levels decreased a lot, almost by half.
 	- Moved almost all overworld code to SA-1 CPU. Now the CPU usage on overworld is around 22% and the [!] blocks spreading event runs without slowdown chance.
