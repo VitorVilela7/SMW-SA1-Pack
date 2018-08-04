@@ -1,6 +1,6 @@
 @asar 1.31
 ;===============================================;
-; SA-1 Pack v1.10				;
+; SA-1 Pack v1.11				;
 ;  by Vitor Vilela				;
 ;===============================================;
 
@@ -174,7 +174,7 @@ incsrc "boost/sprites.asm"			; Sprites speed up.
 incsrc "boost/map16.asm"			; Level speed up.
 incsrc "boost/lzx.asm"				; LZ2 or LZ3 speed up.
 incsrc "boost/sprite_load.asm"			; Sprite loading speed up.
-;incsrc "boost/level_loading.asm"		; Level loading speed up.
+;incsrc "boost/level_loading.asm"		; Level loading speed up. (????????)
 incsrc "boost/circle.asm"			; Circle Handling speed up.
 
 ResetBanks:					; Reset Bank Switch to Default.

@@ -1,3 +1,6 @@
+SA-1 Pack v1.11:
+	- Fixed a bug on LZ2/LZ3 patch which on rare cases makes the GFX decompress incorrectly.
+
 SA-1 Pack v1.10:
 	- Added Arujus's Sprite Remap, allowing up to ~20 sprites to be processed on screen.
 	- Modified most of sprite loading code, allowing up to 255 sprites per level.

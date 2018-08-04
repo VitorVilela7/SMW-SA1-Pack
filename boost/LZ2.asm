@@ -65,21 +65,35 @@
 	LDA $8D
 	STX $8D
 	
--	SEP #$20
-
+-	REP #$20
+	PEI ($02+!S)
+	PEI ($00)
+	STZ $00
+	SEP #$20
 	INC
 	STA $02+!S
---	PHB
+	XBA
+	INC
+	STA $03+!S
+	PHB
 	LDA $8C
 	PHA
 	PLB
-	LDA $0000,x
-	PLB
-	STA $0000,y
+--	LDA $0000,x
+	STA [$00],y
 	INX
 	INY
 	DEC $02+!S
 	BNE --
+	DEC $03+!S
+	BNE --
+	PLB	
+	REP #$20
+	PLA
+	STA $00
+	PLA
+	STA $02+!S
+	SEP #$20
 .back
 	CPX $8D
 	BCS .main
