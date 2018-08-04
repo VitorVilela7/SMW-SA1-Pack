@@ -480,6 +480,9 @@ Character_Conversion_DMA:			; CCDMA Routine.
 	STY $2200				; /
 	DEY					; \ Increase $2116/$2117 then writing to $2119
 	STY $2115				; /
+-	LDA $318D				; \ Make sure that Character Conversion is ON. 
+	BEQ -					; |
+	STZ $318D				; /
 						;
 	%ccdmaslot(0)				; \ Unrolled loop
 	%ccdmaslot(1)				;  | to run each character conversion DMA table slot.
@@ -750,6 +753,7 @@ ProcessRequest:
 	
 EnableChvDMA:
 	LDA #$B0				; \ Enable Character Conversion DMA CC1 (BW-RAM->I-RAM)
+	STA $318D				;  |
 	STA $2230				; /
 	BRA SA1_IRQEnding			; Return
 	
