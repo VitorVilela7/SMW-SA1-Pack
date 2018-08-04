@@ -1,4 +1,11 @@
 @include
+
+; SA-1 Pack v1.20 fixes
+org $00C5D8
+	STA $7928
+org $01A799
+	STZ $33FA,x
+
 ;Fixes more bugs.
 ;For some reason some opcodes is still bytes.
 ;So all that I can do is fixing manually...

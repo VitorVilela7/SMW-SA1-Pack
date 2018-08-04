@@ -1,3 +1,17 @@
+SA-1 Pack v1.20:
+	- Moved routines $00E2BD and $00C47E to SA-1 side on level game mode, which seems to handle mario physics, mario oam, most sprites types (shooters, generators, clusters, extended, minor extended, bounce, score and smoke) plus block/map16 handling. With that, the CPU usage on levels decreased a lot, almost by half.
+	- Moved almost all overworld code to SA-1 CPU. Now the CPU usage on overworld is around 22% and the [!] blocks spreading event runs without slowdown chance.
+	- Made the sprite C6 (Light) update every frame instead of every four frames.
+	- Fixed IRQ issues with ZSNES and bsnes accuracy. Layer 3 won't glitch anymore.
+	- Fixed LZ3 making the ROM crash if "case 00" wraps a bank.
+	- Fixed stairs GFX being messed up. The cause was of wrong bank being used on two STA opcodes on clear stack routine.
+	- Fixed an issue with sprite loading code, which could crash the ROM if more than 84 sprites gets loaded when placed on specific positions.
+	- Fixed pos-Bowser's battle.
+	- Fixed fireworks.
+	- Fixed two missing addresses from The Last Remap patch.
+	- Lowercased files lzx.asm, lz2.asm and lz3.asm. It should make SA-1 Pack patchable on case-sensitible OS.
+	- Restored old and fast MVN code on LZ2/LZ3 patches, but if ZSNES runs the old (slow) code will be used.
+
 SA-1 Pack v1.12:
 	- Fixed a incompability issue with Lunar Magic's Overworld Editor. The ROM crashes if you save
 	the overworld to your ROM because the LM modifies a specific byte making a JML be JML $7Fxxxx on

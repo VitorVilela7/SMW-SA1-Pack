@@ -127,6 +127,7 @@ org $03B8BA
 pullpc
 
 LoadSprites:
+	BRA .SA1Code
 	LDA.B #.SA1Code
 	STA $3180
 	LDA.B #.SA1Code>>8

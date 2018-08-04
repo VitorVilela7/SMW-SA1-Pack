@@ -32,7 +32,11 @@
 	LDA $8D
 	SEP #$20
 	
-	LDA $02
+	BIT.b $0C+!S
+	BMI +
+	JMP.w $000C+!S
+	
++	LDA $02
 	CMP #$40
 	BNE +
 	
@@ -65,7 +69,12 @@
 	LDA $8D
 	STX $8D
 	
--	REP #$20
+-	SEP #$20
+	BIT.b $06+!S
+	BMI +
+	JMP.w $0006+!S
+
++	REP #$20
 	PEI ($02+!S)
 	PEI ($00)
 	STZ $00
@@ -99,6 +108,7 @@
 	BCS .main
 	
 	INC $8C
+	INC $08+!S
 	CPX #$0000
 	BEQ ++
 	

@@ -24,7 +24,7 @@
 ; - should have no issues with interrupts.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-!S = $D8			; 0x10 bytes in $30XX that aren't touched during interrupts (NMI or IRQ)
+!S = $9E			; 0x10 bytes in $30XX that aren't touched during interrupts (NMI or IRQ)
 
 if read1($0FFFEB) == 2
 	!LZ3 = 1
@@ -42,8 +42,9 @@ macro ReadByte()
 	LDA [$8A]
 	INX
 	BNE +
-	LDX $02+!S ;can be #$8000 or #$0000
+	LDX.b $02+!S ;can be #$8000 or #$0000
 	INC $8C
+	INC $08+!S
 +
 endmacro
 
@@ -56,7 +57,9 @@ pullpc
 CodeStart:
 	PHB
 	PHK
-	PLB	
+	PLB
+	SEP #$20
+	REP #$10
 
 	LDX.W #Decompress
 	STX $3180
@@ -67,8 +70,8 @@ CodeStart:
 	BIT $3100
 	BMI .RAM_DMA
 	
-	SEP #$10
 	PLB
+	SEP #$30
 	RTL
 	
 .RAM_DMA
@@ -87,24 +90,30 @@ CodeStart:
 	LDA #$01
 	STA $420B
 	
-	SEP #$10
 	PLB
+	SEP #$30
 	RTL
 	
 Decompress:
 	PEI ($00+!S)
 	PEI ($02+!S)
-if !LZ3 : PEI ($04+!S)
+	PEI ($04+!S)
+	PEI ($06+!S) ;mvn, byte1
+	PEI ($08+!S) ;byte 2, jmp
+	PEI ($0A+!S) ;jmp addr
+	PEI ($0C+!S) ;mvn, byte1
+	PEI ($0E+!S) ;byte 2, jmp
+	PEI ($10+!S) ;jmp addr
 	PEI ($8A)
 	
 	LDA #$80
-	STA $03+!S
-	STZ $02+!S
+	STA.b $03+!S
+	STZ.b $02+!S
 	
 	LDA $8C
 	CMP #$C0
 	BCC +
-	STZ $03+!S
+	STZ.b $03+!S
 +
 	LDA #$00
 	PHA
@@ -131,7 +140,26 @@ if !LZ3 : PEI ($04+!S)
 .Continue
 	PHB
 	REP #$10
+	
+	LDA #$54
+	BIT $318E
+	BPL +
+	LDA #$FF
++	STA.b $06+!S
+	STA.b $0C+!S
+	LDA #$4C
+	STA.b $09+!S
+	STA.b $0F+!S
+	LDX.w #.back
+	STX.b $0A+!S
+	LDX.w #.back2
+	STX.b $10+!S
+	LDA.b $8C
+	STA.b $08+!S
 	LDA $02
+	STA.b $07+!S
+	STA.b $0D+!S
+	STA.b $0E+!S
 	PHA
 	PLB
 	
@@ -140,7 +168,7 @@ if !LZ3 : PEI ($04+!S)
 	STZ $8A
 	STZ $8B
 	JMP .main
-.end
+.done
 	REP #$20
 	TYA
 	SEC
@@ -158,14 +186,18 @@ if !LZ3 : PEI ($04+!S)
 	STX $00
 	
 +	PLX : STX $8A
-if !LZ3
+	PLX : STX.b $10+!S
+	PLX : STX.b $0E+!S
+	PLX : STX.b $0C+!S
+	PLX : STX.b $0A+!S
+	PLX : STX.b $08+!S
+	PLX : STX.b $06+!S
 	PLX : STX.b $04+!S
-endif
 	PLX : STX.b $02+!S
 	PLX : STX.b $00+!S
-	SEP #$10
-
+	SEP #$30
 	RTL
+.end	JMP .done
 	
 if !!LZ3
 	incsrc LZ2.asm

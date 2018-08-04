@@ -1,6 +1,6 @@
 @asar 1.31
 ;===============================================;
-; SA-1 Pack v1.11				;
+; SA-1 Pack v1.20				;
 ;  by Vitor Vilela				;
 ;===============================================;
 
@@ -79,8 +79,15 @@ ORG $8023					; \ Set Stack Pointer to $1FFF.
 ORG $816A					; \ Hijack NMIStart for Dynamic Sprites and 
 !c	JML NMIStart				; / Character Conversion DMA Table
 
-ORG $843B					; \ Hijack WaitForHBlank for ZSNES support.
-!c	JML WaitForHBlank			; /
+ORG $843B					; Restore old WaitForHBlank code
+	BIT $4212
+	BVS $F9
+	
+org $8391
+	JSR RAMCode_WaitForHBlank
+
+org $83C8
+	JSR RAMCode_WaitForHBlank
 
 ;===============================================;
 ; Macros					;
@@ -171,11 +178,12 @@ endmacro
 freecode
 incsrc "boost/oam.asm"				; OAM speed up.
 incsrc "boost/sprites.asm"			; Sprites speed up.
-incsrc "boost/map16.asm"			; Level speed up.
-incsrc "boost/lzx.asm"				; LZ2 or LZ3 speed up.
+incsrc "boost/map16.asm"			; Level loading speed up.
+incsrc "boost/lzx.asm"				; LZ2/LZ3 speed up.
 incsrc "boost/sprite_load.asm"			; Sprite loading speed up.
-;incsrc "boost/level_loading.asm"		; Level loading speed up. (????????)
 incsrc "boost/circle.asm"			; Circle Handling speed up.
+incsrc "boost/level_mode.asm"			; Level Game Mode speed up.
+incsrc "boost/overworld.asm"			; Overworld Game Mode speed up.
 
 ResetBanks:					; Reset Bank Switch to Default.
 	BIT $318E				; Overflow = Swap bug flag.
@@ -207,8 +215,8 @@ ClearStack:					; Based from QuickROM, by Alcaro.
 	BPL -					; /
 .DoNotWasteTime					;
 	LDA #$00				; \ Set up/Init other RAM.		
-	STA $7E837B				;  |
-	STA $7E837C				;  |
+	STA $7F837B				;  |
+	STA $7F837C				;  |
 	LDA #$FF				;  |
 	STA $7F837D				; /
 	SEP #$10				; 8-bit X/Y
@@ -314,6 +322,13 @@ SNES_Reset:					; Super NES Reset
 	LDA #$80				;  |
 	TSB $318E				; /
 						;
+	REP #$30				; \ If ZSNES, transfer a
+	LDA #RAMCode_ZSNES_End-RAMCode_ZSNES-1	;  | special version of WaitForHBlank code.
+	LDX #RAMCode_ZSNES			;  |
+	LDY #RAMCode_WaitForHBlank		;  |
+	MVN $00,RAMCode>>16			;  |
+	SEP #$30				; /			
+						;
 +	JSR $1E85				; Wait for SA-1.
 						;
 	JML $008000				; Don't re-enable emulation mode to don't reset Stack and Direct Page.
@@ -352,7 +367,25 @@ base $1E80					; This will get uploaded to $7E:1E80
 .Wait	LDA $10					; \ If NMI isn't ran yet, wait for interrupt.
 	BEQ -					; /
 	JMP $806F				; Return
+
+-	LDY #$20
+.WaitForHBlank
+	BIT $4212
+	BVS -
+-	BIT $4212
+	BVC -
+-	DEY
+	BNE -
+	RTS
+
 base off
+.End
+
+RAMCode_ZSNES:
+	LDY #$70
+-	DEY
+	BNE -
+	RTS
 .End
 	
 IRQStart:					; IRQ Start

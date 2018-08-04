@@ -5,11 +5,11 @@
 	%ReadByte()
 	CMP #$00
 	BPL +
-	STY $00+!S
+	STY.b $00+!S
 	REP #$21
 	AND #$007F
 	EOR #$FFFF
-	ADC $00+!S
+	ADC.b $00+!S
 	BRA .lzcopy110
 +	XBA
 	%ReadByte()
@@ -17,7 +17,7 @@
 	ADC $00
 
 .lzcopy110
-	STX $00+!S
+	STX.b $00+!S
 	INC $8D
 	TAX
 	SEP #$20
@@ -32,7 +32,7 @@
 	JMP .back2
 
 .case_e0_or_else
-	ASL A
+	ASL
 	BPL .case_c0
 	LDA $8D
 	CMP #$1F
@@ -40,9 +40,9 @@
 	AND #$03
 	STA $8E
 	EOR $8D
-	ASL A
-	ASL A
-	ASL A
+	ASL
+	ASL
+	ASL
 	XBA
 	%ReadByte()
 	STA $8D
@@ -51,29 +51,34 @@
 
 .case_80_or_else
 	BMI .case_e0_or_else
-	ASL A
+	ASL
 	BMI .case_a0
+
 	%ReadByte()
 	CMP #$00
 	BPL +
-	STY $00+!S
+	STY.b $00+!S
 	REP #$21
 	AND #$007F
 	EOR #$FFFF
-	ADC $00+!S
-	BRA ++
-	
+	ADC.b $00+!S
+	BRA .lzcopy
 +	XBA
 	%ReadByte()
 	REP #$21
 	ADC $00
-	
-++	STX $00+!S
+
+.lzcopy	
+	STX.b $00+!S
 	TAX
 	LDA $8D
 	SEP #$20
 	
-	LDA $02
+	BIT.b $0C+!S
+	BMI +
+	JMP.w $000C+!S
+	
++	LDA $02
 	CMP #$40
 	BEQ +
 	
@@ -89,46 +94,43 @@
 	%ReadByte()
 	CMP #$00
 	BPL +
-	STY $00+!S
+	STY.b $00+!S
 	REP #$21
 	AND #$007F
 	EOR #$FFFF
-	ADC $00+!S
-	BRA .lz_copy101
-
+	ADC.b $00+!S
+	BRA .lzcopy101
 +	XBA
 	%ReadByte()
 	REP #$21
 	ADC $00
 
-.lz_copy101
-	STX $00+!S
+.lzcopy101
+	STX.b $00+!S
 	TAX
-	LDA #$0000
-	ASL $8D
+	LDA.w #$0000
+	ASL.b $8D
 	SEP #$20
---
-	LSR $8D
--
-	LDA $0000,x
-	STZ $04+!S
-	ASL A
-	ROR $04+!S
-	ASL A
-	ROR $04+!S
-	ASL A
-	ROR $04+!S
-	ASL A
-	ROR $04+!S
-	ASL A
-	ROR $04+!S
-	ASL A
-	ROR $04+!S
-	ASL A
-	ROR $04+!S
-	ASL A
-	LDA $04+!S
-	ROR A
+--	LSR.b $8D
+-	LDA $0000,x
+	STZ.b $04+!S
+	ASL
+	ROR.b $04+!S
+	ASL
+	ROR.b $04+!S
+	ASL
+	ROR.b $04+!S
+	ASL
+	ROR.b $04+!S
+	ASL
+	ROR.b $04+!S
+	ASL
+	ROR.b $04+!S
+	ASL
+	ROR.b $04+!S
+	ASL
+	LDA.b $04+!S
+	ROR
 	STA $0000,y
 	INY
 	INX
@@ -138,7 +140,7 @@
 	BPL --
 
 .back2
-	LDX $00+!S
+	LDX.b $00+!S
 
 .main
 	%ReadByte()
@@ -148,10 +150,10 @@
 	TRB $8D
 
 .type
-	ASL A
+	ASL
 	BCS .case_80_or_else_J
 	BMI .case_40_or_60_J
-	ASL A
+	ASL
 	BMI .case_20
 
 .case_00
@@ -159,16 +161,21 @@
 	LDA $8D
 	STX $8D
 	
--	REP #$20
+-	SEP #$20
+	BIT.b $06+!S
+	BMI +
+	JMP.w $0006+!S
+
++	REP #$20
 	PEI ($02+!S)
 	PEI ($00)
 	STZ $00
 	SEP #$20
 	INC
-	STA $02+!S
+	STA.b $02+!S
 	XBA
 	INC
-	STA $03+!S
+	STA.b $03+!S
 	PHB
 	LDA $8C
 	PHA
@@ -177,36 +184,38 @@
 	STA [$00],y
 	INX
 	INY
-	DEC $02+!S
+	DEC.b $02+!S
 	BNE --
-	DEC $03+!S
+	DEC.b $03+!S
 	BNE --
 	PLB	
 	REP #$20
 	PLA
 	STA $00
 	PLA
-	STA $02+!S
+	STA.b $02+!S
 	SEP #$20
 .back
 	CPX $8D
 	BCS .main
 
 	INC $8C
+	INC $08+!S
 	CPX #$0000
 	BEQ +
+
 	DEX
-	STX $00+!S
+	STX.b $00+!S
 	REP #$21
-	LDX $02+!S ;#$8000 or #$0000
+	LDX.b $02+!S ;#$8000 or #$0000
 	STX $8D
 	TYA
-	SBC $00+!S
+	SBC.b $00+!S
 	TAY
-	LDA $00+!S
-	BRA .case_00
+	LDA.b $00+!S
+	BRA -
 +
-	LDX $02+!S ;#$8000 or #$0000
+	LDX.b $02+!S ;#$8000 or #$0000
 	BRA .main
 
 .case_80_or_else_J
@@ -274,24 +283,39 @@
 
 .case_60
 	REP #$20
+
+.case_60_main
 	LDA $8D
-	BEQ +
-	INC A
-	LSR A
-	STX $00+!S
+	BEQ .case_60_single
+	INC
+	LSR
+	STX.b $00+!S
 	TYX
+
 -	STZ $0000,x
 	INX
 	INX
-	DEC A
+	DEC
 	BNE -
+
 	TXY
-	LDX $00+!S
-	BCS +
+	LDX.b $00+!S
+	BCS .case_60_single
 	SEP #$20
 	JMP .main
 
-+	SEP #$20
+.case_60_single
+	SEP #$20
 	STA $0000,y
 	INY
 	JMP .main
+
+	
+	
+	
+	
+	
+	
+	
+	
+	

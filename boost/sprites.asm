@@ -4,6 +4,63 @@
 
 pushpc
 
+org $0CAB8A
+	JSL window_stuff
+	BRA +
+	NOP #2
++	
+
+org $03C575	; Make the light windowing gets updated every frame
+	db $00
+
+org $03CA39
+	STZ $2250
+	STA $2251
+	STZ $2252
+	LDA $06                   
+	STA $2253
+	STZ $2254
+	CMP ($00)
+	LDA $2307
+	LDY $00
+	BPL +
+	EOR #$FF
+	INC
++	STA $02                   
+	LDA $01                   
+	BPL +
+	EOR #$FF                
+	INC
++	JML fireworks_fix
+fireworks_fix_back:
+	NOP
+	LDA $2307
+warnpc $03CA64+3
+
+org $03CB08
+	STZ $2250
+	STA $2251
+	STZ $2252
+	LDA $06                   
+	STA $2253
+	STZ $2254
+	CMP ($00)
+	LDA $2307
+	LDY $00
+	BPL +
+	EOR #$FF
+	INC
++	STA $02                   
+	LDA $01                   
+	BPL +
+	EOR #$FF                
+	INC
++	JML fireworks_fix2
+fireworks_fix2_back:
+	NOP
+	LDA $2307
+warnpc $03CB33+3
+
 ORG $03D7AB
 	JML ReznorFix
 ReznorFix_Return:
@@ -440,6 +497,21 @@ Continue_01C804:
 	STA $05
 	STA $09
 	RTL
+	
+fireworks_fix:
+	STA $2251
+	STZ $2252
+	LDA $06
+	STA $2253
+	STZ $2254
+	JML .back
+fireworks_fix2:
+	STA $2251
+	STZ $2252
+	LDA $06
+	STA $2253
+	STZ $2254
+	JML .back
 
 SA1_Sprites:
 	PHB
@@ -457,4 +529,28 @@ SpriteMain:
 	LDA.B #SA1_Sprites/65536
 	STA $3182
 	JSR $1E80
+	RTL
+
+window_stuff:
+	TSC
+	XBA
+	CMP #$37
+	BNE .snes
+	
+	LDA.b #.snes
+	STA $0183
+	LDA.b #.snes>>8
+	STA $0184
+	LDA.b #.snes>>16
+	STA $0185
+	LDA #$D0
+	STA $2209
+-	LDA $018A
+	BEQ -
+	STZ $018A
+	RTL
+.snes
+	LDA #$13
+	STA $212E
+	STA $212F
 	RTL

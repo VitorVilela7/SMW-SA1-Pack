@@ -55,6 +55,10 @@ Jump:
 
 SwitchCPU:
 	STA $3100
+	TSC
+	XBA
+	CMP #$37
+	BEQ SA1
 	LDA.b #SA1
 	STA $3180
 	LDA.b #SA1>>8

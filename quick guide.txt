@@ -1,0 +1,30 @@
+WARNING: Enable word wrap!
+
+This is a quick guide to you get working fast with the SA-1 Pack. It's pretty simple really, but the readme may be a little confusing at start, so I created this file specially for who is starting to work with SA-1 Pack.
+
+Requirements:
+	- Asar 1.31 or newer;
+	- Lunar Magic 2.20 or newer.
+
+Guide:
+	1. Grab a CLEAN UNMODIFIED ROM. If your ROM is not clean, there's a 99.99% chance that this guide will fail.
+	2. Open your ROM with Lunar Magic and go to File -> Expand ROM -> Expand ROM to 2MB and confirm.
+	3. Place asar.exe and your ROM on same folder as you extracted SA-1 Pack.
+	4. Double click asar.exe
+	5. Type sa1.asm on "Enter patch name" and press enter.
+	6. Type your ROM name on "Enter ROM name" and press enter. Your ROM should be patched with SA-1.
+	7. Open your ROM with Lunar Magic and save any level.
+
+That's all. Your ROM should be ready to be on "SA-1 adventure"!
+If you want to use any external tool, sprite, block or patch, please check them on these links, since they contains SA-1 compatible resources. All original resources won't work, so you must use these links unless if the author stated that the resource works with SA-1.
+
+Compatible Tools: https://dl.dropbox.com/u/16203903/A/SA1/ctools.html
+Compatible Patches: https://dl.dropbox.com/u/16203903/A/SA1/cpatches.html
+Compatible Blocks: https://dl.dropbox.com/u/16203903/A/SA1/cblocks.html
+Compatible Sprites: https://dl.dropbox.com/u/16203903/A/SA1/csprites.html
+
+Also some tools on page can have a function to automatically convert any incompatible resource to SA-1 format, so you can use them if you don't have alternative.
+
+You don't need to worry about music (.txt/.bnk/.brr) files, they will work with SA-1 normally. The only thing you have to worry is if the tool to insert them (Addmusic) is compatible.
+
+AddmusicK works natively with SA-1, so if you're using it, you don't have to worry about music.

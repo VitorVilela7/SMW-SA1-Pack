@@ -4,7 +4,7 @@
   \___ \ / /\ \______| |   |  ___/ _` |/ __| |/ /
   ____) / ____ \     | |   | |  | (_| | (__|   < 
  |_____/_/    \_\    |_|   |_|   \__,_|\___|_|\_\
-   by Vitor Vilela                 Version 1.11
+   by Vitor Vilela                 Version 1.20
 
 The SA-1 Pack consist of a couple of patches that enable
 SA-1 and prepare your SMW ROM to use the SA-1 CPU in the
@@ -26,7 +26,7 @@ all slowdown instances present in Super Mario World.
 20!
 
  - Increases the maximum number of sprites per level to
-256!
+255!
  
  - 8MB Support for bsnes, ZMZ and snes9x 1.54+ (requires a
 custom build for 1.53) and 6MB support for ZSNES.
@@ -41,7 +41,7 @@ ROM->BW-RAM, I-RAM->BW-RAM, BW-RAM->I-RAM).
  stream).
  
  - High speed multiplication and division. Both operations
- take 5 cycles. You can also do accumulative sum(?).
+ take 5 cycles. You also can do accumulative sum.
  
  - Bank Switching.
  
@@ -60,10 +60,9 @@ ROM->BW-RAM, I-RAM->BW-RAM, BW-RAM->I-RAM).
 When patched, the following changes will take effect:
 
  - Sprites will be processed by the SA-1 chip, killing
-all slowdown instances, even with 20¹ sprites on screen
-at the same time. ¹: Assuming that they're being placed
-and used correctly. If the OAM glitch, this means
-slowdown can happen.
+almost all slowdown possible. You can put up to 20 sprites
+on screen, but on rare cases it can slowdown depending
+of what sprites are you putting.
 
  - SA-1 will load both level data and graphics, thus
 decreasing the level loading time. This should make
@@ -108,9 +107,15 @@ sprite/block into a SA-1 friendly sprite/block.
 Converting those are easier than converting patches or
 tools, though.
 
-ZSNES EMULATES THE SA-1 AT 5.37 MHZ! If you get slowdown on
-ZSNES, there's no way to fix but porting into a new emulator.
-Snes9X, bsnes and ZMZ are recommended for SA-1.
+Also ZSNES emulates the SA-1 poorly. Instead of 10.74 MHz,
+ZSNES seems to run around 5.37 MHz plus some features doesn't
+work. Don't get suprised if your hack freeze or don't work
+on ZSNES.
+
+About Bowser: You must go to level 1C7 and change sprite header
+to 0x00. It's because Bowser's battle uses sprite header 0x10,
+responsible for allowing 22 sprites on screen and obviously
+doesn't work with how Bowser arena is coded.
 
 ;===================================================;
 ; Usage                                             ;
@@ -128,10 +133,10 @@ Now, open the ROM in Lunar Magic and expand it to 1, 2,
 Now, using Asar, apply sa1.asm to your ROM.
 
 Then test it with an emulator of your choice. I'd
-recommend Snes9X, BSNES or ZSNES. If it works normally
-and Snes9X/ZSNES respectively display ROM+RAM+SRAM+SA-1
-or Type:SA1 upon loading the game, then you've successfully
-activated SA-1 on your ROM!
+recommend Snes9X, ZMZ, BSNES or on last case, ZSNES.
+If it works normally and Snes9X/ZSNES respectively display
+ROM+RAM+SRAM+SA-1 or Type:SA1 upon loading the game,
+then you've successfully activated SA-1 on your ROM!
 
 Now apply all other patches/tools that should run
 before Lunar Magic. Be sure that they support SA-1,
@@ -256,7 +261,7 @@ The game will access it even when running code from the
 SNES side, because the Direct Page is now at $3000.
 
 $3100-$31FF is internally used by my patch for
-general and caching purposes.
+various purposes.
 
 $3200-$3425 is used by Arujus's more sprites patch!
 $3426-$36FF is free to use.
