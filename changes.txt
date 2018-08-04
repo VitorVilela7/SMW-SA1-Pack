@@ -1,3 +1,8 @@
+SA-1 Pack v1.12:
+	- Fixed a incompability issue with Lunar Magic's Overworld Editor. The ROM crashes if you save
+	the overworld to your ROM because the LM modifies a specific byte making a JML be JML $7Fxxxx on
+	SA-1 side, freezing the game at black screen.
+
 SA-1 Pack v1.11:
 	- Fixed a bug on LZ2/LZ3 patch which on rare cases makes the GFX decompress incorrectly.
 

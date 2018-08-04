@@ -37,7 +37,9 @@ org $02A93C
 	JML Label2
 	
 org $02A984
-	JML Label3
+;	JML Label3
+	JMP Label3_J
+	NOP
 	
 org $02A9A7
 	JML Label4
@@ -103,7 +105,9 @@ org $02D088
 	
 org $02ABF2
 	JML ClearIt
-	NOP #4
+;	NOP #4
+Label3_J:
+	JML Label3
 	
 org $02FAE9
 	JML CODE_02FAE9
