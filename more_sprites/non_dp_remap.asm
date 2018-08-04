@@ -1,0 +1,7475 @@
+org $01A799
+	STZ !sprite_misc_163e,X
+org $01B22B
+	INC !sprite_misc_1602,X
+    
+;============== REMAPPER FOR $14C8
+org $00FA13
+	dw !sprite_status
+org $00FA54
+	dw !sprite_status
+org $00FA92
+	dw !sprite_status
+org $00FAC1
+	dw !sprite_status
+org $00FACF
+	dw !sprite_status
+org $00FB6C
+	dw !sprite_status
+org $00FC1C
+	dw !sprite_status
+org $00FC26
+	dw !sprite_status
+org $00FC9B
+	dw !sprite_status
+org $00FCEF
+	dw !sprite_status
+org $0180E6
+	dw !sprite_status
+org $018128
+	dw !sprite_status
+org $018175
+	dw !sprite_status
+org $0183EC
+	dw !sprite_status
+org $018438
+	dw !sprite_status
+org $018463
+	dw !sprite_status
+org $018473
+	dw !sprite_status
+org $0184AC
+	dw !sprite_status
+org $018779
+	dw !sprite_status
+org $0188A2
+	dw !sprite_status
+org $018973
+	dw !sprite_status
+org $01899B
+	dw !sprite_status
+org $018A1E
+	dw !sprite_status
+org $018A76
+	dw !sprite_status
+org $018AA6
+	dw !sprite_status
+org $018AF2
+	dw !sprite_status
+org $018C1D
+	dw !sprite_status
+org $019021
+	dw !sprite_status
+org $019333
+	dw !sprite_status
+org $01938F
+	dw !sprite_status
+org $0193C0
+	dw !sprite_status
+org $019565
+	dw !sprite_status
+org $019643
+	dw !sprite_status
+org $019699
+	dw !sprite_status
+org $0196CE
+	dw !sprite_status
+org $0196EA
+	dw !sprite_status
+org $01976E
+	dw !sprite_status
+org $019779
+	dw !sprite_status
+org $0199DD
+	dw !sprite_status
+org $019ACE
+	dw !sprite_status
+org $019AEE
+	dw !sprite_status
+org $019FF1
+	dw !sprite_status
+org $019FF5
+	dw !sprite_status
+org $01A02B
+	dw !sprite_status
+org $01A085
+	dw !sprite_status
+org $01A16A
+	dw !sprite_status
+org $01A25E
+	dw !sprite_status
+org $01A28E
+	dw !sprite_status
+org $01A2C3
+	dw !sprite_status
+org $01A398
+	dw !sprite_status
+org $01A418
+	dw !sprite_status
+org $01A4BB
+	dw !sprite_status
+org $01A4CF
+	dw !sprite_status
+org $01A4F3
+	dw !sprite_status
+org $01A507
+	dw !sprite_status
+org $01A51B
+	dw !sprite_status
+org $01A556
+	dw !sprite_status
+org $01A5E6
+	dw !sprite_status
+org $01A66E
+	dw !sprite_status
+org $01A692
+	dw !sprite_status
+org $01A6AF
+	dw !sprite_status
+org $01A86E
+	dw !sprite_status
+org $01A88C
+	dw !sprite_status
+org $01A9D6
+	dw !sprite_status
+org $01A9EC
+	dw !sprite_status
+org $01AA02
+	dw !sprite_status
+org $01AA30
+	dw !sprite_status
+org $01AA69
+	dw !sprite_status
+org $01AAA2
+	dw !sprite_status
+org $01AC8F
+	dw !sprite_status
+org $01ACA2
+	dw !sprite_status
+org $01AEA7
+	dw !sprite_status
+org $01AFA0
+	dw !sprite_status
+org $01B034
+	dw !sprite_status
+org $01B143
+	dw !sprite_status
+org $01B265
+	dw !sprite_status
+org $01B55A
+	dw !sprite_status
+org $01BC65
+	dw !sprite_status
+org $01BC95
+	dw !sprite_status
+org $01BCDD
+	dw !sprite_status
+org $01BDC0
+	dw !sprite_status
+org $01BDCC
+	dw !sprite_status
+org $01BDF8
+	dw !sprite_status
+org $01BF20
+	dw !sprite_status
+org $01BF30
+	dw !sprite_status
+org $01C180
+	dw !sprite_status
+org $01C1F3
+	dw !sprite_status
+org $01C2BA
+	dw !sprite_status
+org $01C2D6
+	dw !sprite_status
+org $01C2E6
+	dw !sprite_status
+org $01C2F5
+	dw !sprite_status
+org $01C310
+	dw !sprite_status
+org $01C3B3
+	dw !sprite_status
+org $01C4C7
+	dw !sprite_status
+org $01C702
+	dw !sprite_status
+org $01D054
+	dw !sprite_status
+org $01D061
+	dw !sprite_status
+org $01D06C
+	dw !sprite_status
+org $01D43F
+	dw !sprite_status
+org $01D485
+	dw !sprite_status
+org $01D4FC
+	dw !sprite_status
+org $01DA0B
+	dw !sprite_status
+org $01DB60
+	dw !sprite_status
+org $01DDB2
+	dw !sprite_status
+org $01DDBA
+	dw !sprite_status
+org $01E16B
+	dw !sprite_status
+org $01E1CB
+	dw !sprite_status
+org $01E1F4
+	dw !sprite_status
+org $01E42C
+	dw !sprite_status
+org $01E6DD
+	dw !sprite_status
+org $01E769
+	dw !sprite_status
+org $01E7CE
+	dw !sprite_status
+org $01E7DE
+	dw !sprite_status
+org $01E9AE
+	dw !sprite_status
+org $01E9B6
+	dw !sprite_status
+org $01EA2A
+	dw !sprite_status
+org $01EBDD
+	dw !sprite_status
+org $01EBF7
+	dw !sprite_status
+org $01EC8E
+	dw !sprite_status
+org $01F1B8
+	dw !sprite_status
+org $01F235
+	dw !sprite_status
+org $01F27F
+	dw !sprite_status
+org $01F359
+	dw !sprite_status
+org $01F376
+	dw !sprite_status
+org $01F576
+	dw !sprite_status
+org $01F5CA
+	dw !sprite_status
+org $01F641
+	dw !sprite_status
+org $01F64B
+	dw !sprite_status
+org $01F6DA
+	dw !sprite_status
+org $01F6F6
+	dw !sprite_status
+org $01F74F
+	dw !sprite_status
+org $01F84D
+	dw !sprite_status
+org $01F891
+	dw !sprite_status
+org $01F8E5
+	dw !sprite_status
+org $01FA0A
+	dw !sprite_status
+org $01FA3E
+	dw !sprite_status
+org $01FB33
+	dw !sprite_status
+org $01FDAA
+	dw !sprite_status
+org $01FDBA
+	dw !sprite_status
+org $02801A
+	dw !sprite_status
+org $028039
+	dw !sprite_status
+org $028045
+	dw !sprite_status
+org $0280A2
+	dw !sprite_status
+org $028142
+	dw !sprite_status
+org $02816B
+	dw !sprite_status
+org $028639
+	dw !sprite_status
+org $028908
+	dw !sprite_status
+org $02892B
+	dw !sprite_status
+org $028962
+	dw !sprite_status
+org $0289B8
+	dw !sprite_status
+org $0289E2
+	dw !sprite_status
+org $028B3F
+	dw !sprite_status
+org $0293B4
+	dw !sprite_status
+org $029433
+	dw !sprite_status
+org $02945E
+	dw !sprite_status
+org $029483
+	dw !sprite_status
+org $0294CF
+	dw !sprite_status
+org $029DA4
+	dw !sprite_status
+org $02A0BE
+	dw !sprite_status
+org $02A10E
+	dw !sprite_status
+org $02A130
+	dw !sprite_status
+org $02A919
+	dw !sprite_status
+org $02A976
+	dw !sprite_status
+org $02A9B7
+	dw !sprite_status
+org $02A9FF
+	dw !sprite_status
+org $02AC06
+	dw !sprite_status
+org $02AC0D
+	dw !sprite_status
+org $02AC1B
+	dw !sprite_status
+org $02AC20
+	dw !sprite_status
+org $02AF4F
+	dw !sprite_status
+org $02AFB9
+	dw !sprite_status
+org $02B04B
+	dw !sprite_status
+org $02B091
+	dw !sprite_status
+org $02B123
+	dw !sprite_status
+org $02B16B
+	dw !sprite_status
+org $02B1CC
+	dw !sprite_status
+org $02B217
+	dw !sprite_status
+org $02B27E
+	dw !sprite_status
+org $02B28B
+	dw !sprite_status
+org $02B2E6
+	dw !sprite_status
+org $02B339
+	dw !sprite_status
+org $02B3EE
+	dw !sprite_status
+org $02B4AF
+	dw !sprite_status
+org $02B678
+	dw !sprite_status
+org $02B696
+	dw !sprite_status
+org $02B6AC
+	dw !sprite_status
+org $02B7B5
+	dw !sprite_status
+org $02B837
+	dw !sprite_status
+org $02B9C5
+	dw !sprite_status
+org $02B9E1
+	dw !sprite_status
+org $02BAB8
+	dw !sprite_status
+org $02BAC3
+	dw !sprite_status
+org $02BD30
+	dw !sprite_status
+org $02BDB1
+	dw !sprite_status
+org $02C1A3
+	dw !sprite_status
+org $02C22D
+	dw !sprite_status
+org $02C5C5
+	dw !sprite_status
+org $02C7B6
+	dw !sprite_status
+org $02D07B
+	dw !sprite_status
+org $02D08E
+	dw !sprite_status
+org $02D58B
+	dw !sprite_status
+org $02D8F7
+	dw !sprite_status
+org $02D900
+	dw !sprite_status
+org $02DA5E
+	dw !sprite_status
+org $02DB67
+	dw !sprite_status
+org $02DC00
+	dw !sprite_status
+org $02DCBF
+	dw !sprite_status
+org $02DD9D
+	dw !sprite_status
+org $02DF03
+	dw !sprite_status
+org $02E275
+	dw !sprite_status
+org $02E319
+	dw !sprite_status
+org $02E606
+	dw !sprite_status
+org $02E93E
+	dw !sprite_status
+org $02EA64
+	dw !sprite_status
+org $02EAFB
+	dw !sprite_status
+org $02EB35
+	dw !sprite_status
+org $02ED9C
+	dw !sprite_status
+org $02EDE0
+	dw !sprite_status
+org $02EDF0
+	dw !sprite_status
+org $02EE22
+	dw !sprite_status
+org $02EF71
+	dw !sprite_status
+org $02EF7E
+	dw !sprite_status
+org $02F21E
+	dw !sprite_status
+org $02F2A0
+	dw !sprite_status
+org $02F460
+	dw !sprite_status
+org $02F54B
+	dw !sprite_status
+org $02F55B
+	dw !sprite_status
+org $038090
+	dw !sprite_status
+org $0381D6
+	dw !sprite_status
+org $0381E7
+	dw !sprite_status
+org $038212
+	dw !sprite_status
+org $0384E6
+	dw !sprite_status
+org $038537
+	dw !sprite_status
+org $038718
+	dw !sprite_status
+org $038774
+	dw !sprite_status
+org $0388B7
+	dw !sprite_status
+org $03898D
+	dw !sprite_status
+org $038AE2
+	dw !sprite_status
+org $038FA5
+	dw !sprite_status
+org $039388
+	dw !sprite_status
+org $03951B
+	dw !sprite_status
+org $039531
+	dw !sprite_status
+org $0395E1
+	dw !sprite_status
+org $0395F5
+	dw !sprite_status
+org $039911
+	dw !sprite_status
+org $039ACF
+	dw !sprite_status
+org $039BD9
+	dw !sprite_status
+org $039C4F
+	dw !sprite_status
+org $03A51E
+	dw !sprite_status
+org $03A6CB
+	dw !sprite_status
+org $03A6E5
+	dw !sprite_status
+org $03A7EC
+	dw !sprite_status
+org $03A7FE
+	dw !sprite_status
+org $03A8D9
+	dw !sprite_status
+org $03A8EB
+	dw !sprite_status
+org $03B023
+	dw !sprite_status
+org $03B02E
+	dw !sprite_status
+org $03B0E0
+	dw !sprite_status
+org $03B158
+	dw !sprite_status
+org $03B2AE
+	dw !sprite_status
+org $03B8AD
+	dw !sprite_status
+org $03B8C0
+	dw !sprite_status
+org $03C035
+	dw !sprite_status
+org $03C06A
+	dw !sprite_status
+org $03C212
+	dw !sprite_status
+org $03C2DD
+	dw !sprite_status
+org $03C2E9
+	dw !sprite_status
+org $03C4E9
+	dw !sprite_status
+org $03C4F7
+	dw !sprite_status
+org $03C7C8
+	dw !sprite_status
+org $03C7D3
+	dw !sprite_status
+org $03C956
+	dw !sprite_status
+org $03CBC8
+	dw !sprite_status
+org $03CC18
+	dw !sprite_status
+org $03CCEB
+	dw !sprite_status
+org $03CDFA
+	dw !sprite_status
+org $03CE8F
+	dw !sprite_status
+;============== REMAPPER FOR $14C9
+org $03A523
+	dw !sprite_status+1
+;============== REMAPPER FOR $14CA
+;============== REMAPPER FOR $14CB
+org $02AA6F
+	dw !sprite_status+3
+;============== REMAPPER FOR $14CC
+;============== REMAPPER FOR $14CD
+;============== REMAPPER FOR $14CE
+;============== REMAPPER FOR $14CF
+;============== REMAPPER FOR $14D0
+org $03A620
+	dw !sprite_status+8
+org $03AC66
+	dw !sprite_status+8
+;============== REMAPPER FOR $14D1
+;============== REMAPPER FOR $14D2
+;============== REMAPPER FOR $14D3
+;============== REMAPPER FOR $14D4
+org $00FA71
+	dw !sprite_y_high
+org $00FC61
+	dw !sprite_y_high
+org $00FCBA
+	dw !sprite_y_high
+org $00FD05
+	dw !sprite_y_high
+org $00FF4A
+	dw !sprite_y_high
+org $00FF7B
+	dw !sprite_y_high
+org $018363
+	dw !sprite_y_high
+org $018368
+	dw !sprite_y_high
+org $0183BB
+	dw !sprite_y_high
+org $018409
+	dw !sprite_y_high
+org $018496
+	dw !sprite_y_high
+org $0184BF
+	dw !sprite_y_high
+org $0184C2
+	dw !sprite_y_high
+org $0185A9
+	dw !sprite_y_high
+org $0185AE
+	dw !sprite_y_high
+org $0185C0
+	dw !sprite_y_high
+org $0188C5
+	dw !sprite_y_high
+org $018BF8
+	dw !sprite_y_high
+org $018BFE
+	dw !sprite_y_high
+org $018C05
+	dw !sprite_y_high
+org $018F85
+	dw !sprite_y_high
+org $019176
+	dw !sprite_y_high
+org $01917B
+	dw !sprite_y_high
+org $019197
+	dw !sprite_y_high
+org $01919C
+	dw !sprite_y_high
+org $0193A5
+	dw !sprite_y_high
+org $0193AA
+	dw !sprite_y_high
+org $019462
+	dw !sprite_y_high
+org $0194CC
+	dw !sprite_y_high
+org $0195BB
+	dw !sprite_y_high
+org $01970E
+	dw !sprite_y_high
+org $019711
+	dw !sprite_y_high
+org $019791
+	dw !sprite_y_high
+org $019794
+	dw !sprite_y_high
+org $0199F4
+	dw !sprite_y_high
+org $019E9E
+	dw !sprite_y_high
+org $019EA4
+	dw !sprite_y_high
+org $019F03
+	dw !sprite_y_high
+org $01A124
+	dw !sprite_y_high
+org $01A246
+	dw !sprite_y_high
+org $01A2D1
+	dw !sprite_y_high
+org $01A2D6
+	dw !sprite_y_high
+org $01A348
+	dw !sprite_y_high
+org $01A34D
+	dw !sprite_y_high
+org $01A3B3
+	dw !sprite_y_high
+org $01A475
+	dw !sprite_y_high
+org $01A492
+	dw !sprite_y_high
+org $01AAEB
+	dw !sprite_y_high
+org $01AC00
+	dw !sprite_y_high
+org $01AC03
+	dw !sprite_y_high
+org $01AC44
+	dw !sprite_y_high
+org $01ACE7
+	dw !sprite_y_high
+org $01AD4E
+	dw !sprite_y_high
+org $01AE24
+	dw !sprite_y_high
+org $01B187
+	dw !sprite_y_high
+org $01B250
+	dw !sprite_y_high
+org $01B255
+	dw !sprite_y_high
+org $01B492
+	dw !sprite_y_high
+org $01B63C
+	dw !sprite_y_high
+org $01B642
+	dw !sprite_y_high
+org $01B649
+	dw !sprite_y_high
+org $01B7CC
+	dw !sprite_y_high
+org $01B899
+	dw !sprite_y_high
+org $01B925
+	dw !sprite_y_high
+org $01B9A7
+	dw !sprite_y_high
+org $01B9BF
+	dw !sprite_y_high
+org $01B9C4
+	dw !sprite_y_high
+org $01B9F5
+	dw !sprite_y_high
+org $01BCA9
+	dw !sprite_y_high
+org $01BE1C
+	dw !sprite_y_high
+org $01BF4B
+	dw !sprite_y_high
+org $01BF50
+	dw !sprite_y_high
+org $01C06D
+	dw !sprite_y_high
+org $01C072
+	dw !sprite_y_high
+org $01C08A
+	dw !sprite_y_high
+org $01C092
+	dw !sprite_y_high
+org $01C1C4
+	dw !sprite_y_high
+org $01C1E1
+	dw !sprite_y_high
+org $01C405
+	dw !sprite_y_high
+org $01C76B
+	dw !sprite_y_high
+org $01C770
+	dw !sprite_y_high
+org $01CAFD
+	dw !sprite_y_high
+org $01CD46
+	dw !sprite_y_high
+org $01CFEF
+	dw !sprite_y_high
+org $01D085
+	dw !sprite_y_high
+org $01D08A
+	dw !sprite_y_high
+org $01D0C5
+	dw !sprite_y_high
+org $01D396
+	dw !sprite_y_high
+org $01D39B
+	dw !sprite_y_high
+org $01D432
+	dw !sprite_y_high
+org $01D518
+	dw !sprite_y_high
+org $01D5D2
+	dw !sprite_y_high
+org $01D5D8
+	dw !sprite_y_high
+org $01D62D
+	dw !sprite_y_high
+org $01D632
+	dw !sprite_y_high
+org $01D667
+	dw !sprite_y_high
+org $01D6BE
+	dw !sprite_y_high
+org $01D812
+	dw !sprite_y_high
+org $01D8A9
+	dw !sprite_y_high
+org $01D8BD
+	dw !sprite_y_high
+org $01D93F
+	dw !sprite_y_high
+org $01DA56
+	dw !sprite_y_high
+org $01DAC7
+	dw !sprite_y_high
+org $01DACD
+	dw !sprite_y_high
+org $01DAD4
+	dw !sprite_y_high
+org $01DB19
+	dw !sprite_y_high
+org $01DB1F
+	dw !sprite_y_high
+org $01DB33
+	dw !sprite_y_high
+org $01DDD7
+	dw !sprite_y_high
+org $01E056
+	dw !sprite_y_high
+org $01E063
+	dw !sprite_y_high
+org $01E068
+	dw !sprite_y_high
+org $01E0EB
+	dw !sprite_y_high
+org $01E22B
+	dw !sprite_y_high
+org $01E337
+	dw !sprite_y_high
+org $01E674
+	dw !sprite_y_high
+org $01E827
+	dw !sprite_y_high
+org $01E87C
+	dw !sprite_y_high
+org $01E8BE
+	dw !sprite_y_high
+org $01E8C3
+	dw !sprite_y_high
+org $01EA4B
+	dw !sprite_y_high
+org $01EA4E
+	dw !sprite_y_high
+org $01EB70
+	dw !sprite_y_high
+org $01ECBC
+	dw !sprite_y_high
+org $01ECC1
+	dw !sprite_y_high
+org $01ED22
+	dw !sprite_y_high
+org $01EDD9
+	dw !sprite_y_high
+org $01EF30
+	dw !sprite_y_high
+org $01EF36
+	dw !sprite_y_high
+org $01EFA1
+	dw !sprite_y_high
+org $01EFA8
+	dw !sprite_y_high
+org $01F219
+	dw !sprite_y_high
+org $01F21C
+	dw !sprite_y_high
+org $01F2AE
+	dw !sprite_y_high
+org $01F510
+	dw !sprite_y_high
+org $01F515
+	dw !sprite_y_high
+org $01F558
+	dw !sprite_y_high
+org $01F5E3
+	dw !sprite_y_high
+org $01F7D6
+	dw !sprite_y_high
+org $01FD69
+	dw !sprite_y_high
+org $01FDEF
+	dw !sprite_y_high
+org $01FFB1
+	dw !sprite_y_high
+org $02806B
+	dw !sprite_y_high
+org $02854A
+	dw !sprite_y_high
+org $028622
+	dw !sprite_y_high
+org $028642
+	dw !sprite_y_high
+org $028982
+	dw !sprite_y_high
+org $0289A3
+	dw !sprite_y_high
+org $028B5F
+	dw !sprite_y_high
+org $028BDE
+	dw !sprite_y_high
+org $02A957
+	dw !sprite_y_high
+org $02A966
+	dw !sprite_y_high
+org $02AC35
+	dw !sprite_y_high
+org $02AC38
+	dw !sprite_y_high
+org $02AD03
+	dw !sprite_y_high
+org $02AF69
+	dw !sprite_y_high
+org $02AFDC
+	dw !sprite_y_high
+org $02B068
+	dw !sprite_y_high
+org $02B0AF
+	dw !sprite_y_high
+org $02B14A
+	dw !sprite_y_high
+org $02B181
+	dw !sprite_y_high
+org $02B1E8
+	dw !sprite_y_high
+org $02B233
+	dw !sprite_y_high
+org $02B2A6
+	dw !sprite_y_high
+org $02B301
+	dw !sprite_y_high
+org $02B35D
+	dw !sprite_y_high
+org $02B40B
+	dw !sprite_y_high
+org $02B4D1
+	dw !sprite_y_high
+org $02B858
+	dw !sprite_y_high
+org $02B85B
+	dw !sprite_y_high
+org $02B9B4
+	dw !sprite_y_high
+org $02BAE2
+	dw !sprite_y_high
+org $02C1E1
+	dw !sprite_y_high
+org $02C1E6
+	dw !sprite_y_high
+org $02C490
+	dw !sprite_y_high
+org $02C5DD
+	dw !sprite_y_high
+org $02C5E0
+	dw !sprite_y_high
+org $02CC3C
+	dw !sprite_y_high
+org $02CC3F
+	dw !sprite_y_high
+org $02CC4F
+	dw !sprite_y_high
+org $02CD75
+	dw !sprite_y_high
+org $02D03E
+	dw !sprite_y_high
+org $02D0B7
+	dw !sprite_y_high
+org $02D0F4
+	dw !sprite_y_high
+org $02D156
+	dw !sprite_y_high
+org $02D2BA
+	dw !sprite_y_high
+org $02D2BD
+	dw !sprite_y_high
+org $02D2E5
+	dw !sprite_y_high
+org $02D3BF
+	dw !sprite_y_high
+org $02D440
+	dw !sprite_y_high
+org $02D518
+	dw !sprite_y_high
+org $02D6DA
+	dw !sprite_y_high
+org $02D711
+	dw !sprite_y_high
+org $02D716
+	dw !sprite_y_high
+org $02D759
+	dw !sprite_y_high
+org $02DAD9
+	dw !sprite_y_high
+org $02DB91
+	dw !sprite_y_high
+org $02DB96
+	dw !sprite_y_high
+org $02DDB4
+	dw !sprite_y_high
+org $02DDB7
+	dw !sprite_y_high
+org $02DF6C
+	dw !sprite_y_high
+org $02E0AB
+	dw !sprite_y_high
+org $02E105
+	dw !sprite_y_high
+org $02E10B
+	dw !sprite_y_high
+org $02E11A
+	dw !sprite_y_high
+org $02E1E8
+	dw !sprite_y_high
+org $02E2D1
+	dw !sprite_y_high
+org $02E484
+	dw !sprite_y_high
+org $02E4B6
+	dw !sprite_y_high
+org $02E4BD
+	dw !sprite_y_high
+org $02E4D5
+	dw !sprite_y_high
+org $02E512
+	dw !sprite_y_high
+org $02E546
+	dw !sprite_y_high
+org $02E854
+	dw !sprite_y_high
+org $02E85A
+	dw !sprite_y_high
+org $02E863
+	dw !sprite_y_high
+org $02E8D9
+	dw !sprite_y_high
+org $02E8F9
+	dw !sprite_y_high
+org $02EB13
+	dw !sprite_y_high
+org $02EB16
+	dw !sprite_y_high
+org $02EDA9
+	dw !sprite_y_high
+org $02EDAC
+	dw !sprite_y_high
+org $02EE8A
+	dw !sprite_y_high
+org $02EEE0
+	dw !sprite_y_high
+org $02EF96
+	dw !sprite_y_high
+org $02EF99
+	dw !sprite_y_high
+org $02EFD7
+	dw !sprite_y_high
+org $02F56F
+	dw !sprite_y_high
+org $02F95D
+	dw !sprite_y_high
+org $02FC27
+	dw !sprite_y_high
+org $038222
+	dw !sprite_y_high
+org $038805
+	dw !sprite_y_high
+org $038B17
+	dw !sprite_y_high
+org $038B1C
+	dw !sprite_y_high
+org $038CC1
+	dw !sprite_y_high
+org $03904D
+	dw !sprite_y_high
+org $039119
+	dw !sprite_y_high
+org $03935F
+	dw !sprite_y_high
+org $039365
+	dw !sprite_y_high
+org $03936D
+	dw !sprite_y_high
+org $03939B
+	dw !sprite_y_high
+org $0398B7
+	dw !sprite_y_high
+org $0399E7
+	dw !sprite_y_high
+org $039AE7
+	dw !sprite_y_high
+org $039AEA
+	dw !sprite_y_high
+org $039B2C
+	dw !sprite_y_high
+org $039B35
+	dw !sprite_y_high
+org $039B3E
+	dw !sprite_y_high
+org $039DE2
+	dw !sprite_y_high
+org $039F7B
+	dw !sprite_y_high
+org $03A02C
+	dw !sprite_y_high
+org $03A04E
+	dw !sprite_y_high
+org $03A054
+	dw !sprite_y_high
+org $03A05C
+	dw !sprite_y_high
+org $03A0FF
+	dw !sprite_y_high
+org $03A63D
+	dw !sprite_y_high
+org $03A7D2
+	dw !sprite_y_high
+org $03A81D
+	dw !sprite_y_high
+org $03A90B
+	dw !sprite_y_high
+org $03A910
+	dw !sprite_y_high
+org $03AB80
+	dw !sprite_y_high
+org $03ABA3
+	dw !sprite_y_high
+org $03AC60
+	dw !sprite_y_high
+org $03AC83
+	dw !sprite_y_high
+org $03AD4C
+	dw !sprite_y_high
+org $03ADA1
+	dw !sprite_y_high
+org $03B03E
+	dw !sprite_y_high
+org $03B043
+	dw !sprite_y_high
+org $03B18F
+	dw !sprite_y_high
+org $03B6D6
+	dw !sprite_y_high
+org $03B71C
+	dw !sprite_y_high
+org $03B7A7
+	dw !sprite_y_high
+org $03B835
+	dw !sprite_y_high
+org $03B870
+	dw !sprite_y_high
+org $03B8E9
+	dw !sprite_y_high
+org $03C018
+	dw !sprite_y_high
+org $03C078
+	dw !sprite_y_high
+org $03C07D
+	dw !sprite_y_high
+org $03C2FF
+	dw !sprite_y_high
+org $03C32D
+	dw !sprite_y_high
+org $03C332
+	dw !sprite_y_high
+org $03C46F
+	dw !sprite_y_high
+org $03C7EC
+	dw !sprite_y_high
+org $03CBD0
+	dw !sprite_y_high
+org $03CBD3
+	dw !sprite_y_high
+org $03CD1B
+	dw !sprite_y_high
+org $03CD1E
+	dw !sprite_y_high
+org $03CE6A
+	dw !sprite_y_high
+org $03DEEE
+	dw !sprite_y_high
+org $07FC64
+	dw !sprite_y_high
+org $0CA010
+	dw !sprite_y_high
+org $0CA284
+	dw !sprite_y_high
+;============== REMAPPER FOR $14D5
+;============== REMAPPER FOR $14D6
+;============== REMAPPER FOR $14D7
+;============== REMAPPER FOR $14D8
+;============== REMAPPER FOR $14D9
+;============== REMAPPER FOR $14DA
+;============== REMAPPER FOR $14DB
+;============== REMAPPER FOR $14DC
+org $03A642
+	dw !sprite_y_high+8
+org $03AC88
+	dw !sprite_y_high+8
+;============== REMAPPER FOR $14DD
+;============== REMAPPER FOR $14DE
+;============== REMAPPER FOR $14DF
+;============== REMAPPER FOR $14E0
+org $00FA60
+	dw !sprite_x_high
+org $00FBC3
+	dw !sprite_x_high
+org $00FBC6
+	dw !sprite_x_high
+org $00FC57
+	dw !sprite_x_high
+org $00FCA8
+	dw !sprite_x_high
+org $00FCFC
+	dw !sprite_x_high
+org $00FF33
+	dw !sprite_x_high
+org $00FF62
+	dw !sprite_x_high
+org $0183D2
+	dw !sprite_x_high
+org $018446
+	dw !sprite_x_high
+org $01844B
+	dw !sprite_x_high
+org $0184B4
+	dw !sprite_x_high
+org $0184B7
+	dw !sprite_x_high
+org $0188B5
+	dw !sprite_x_high
+org $018F75
+	dw !sprite_x_high
+org $019167
+	dw !sprite_x_high
+org $01916C
+	dw !sprite_x_high
+org $019188
+	dw !sprite_x_high
+org $01918D
+	dw !sprite_x_high
+org $0191B9
+	dw !sprite_x_high
+org $0191BC
+	dw !sprite_x_high
+org $0191D9
+	dw !sprite_x_high
+org $0191DF
+	dw !sprite_x_high
+org $0193FD
+	dw !sprite_x_high
+org $019403
+	dw !sprite_x_high
+org $019477
+	dw !sprite_x_high
+org $0194E8
+	dw !sprite_x_high
+org $0195AE
+	dw !sprite_x_high
+org $019703
+	dw !sprite_x_high
+org $019706
+	dw !sprite_x_high
+org $019786
+	dw !sprite_x_high
+org $019789
+	dw !sprite_x_high
+org $0199EB
+	dw !sprite_x_high
+org $019E41
+	dw !sprite_x_high
+org $019EAF
+	dw !sprite_x_high
+org $019EB5
+	dw !sprite_x_high
+org $019EDC
+	dw !sprite_x_high
+org $019EE1
+	dw !sprite_x_high
+org $019EFC
+	dw !sprite_x_high
+org $01A057
+	dw !sprite_x_high
+org $01A105
+	dw !sprite_x_high
+org $01A238
+	dw !sprite_x_high
+org $01A338
+	dw !sprite_x_high
+org $01A33D
+	dw !sprite_x_high
+org $01A370
+	dw !sprite_x_high
+org $01A37A
+	dw !sprite_x_high
+org $01A442
+	dw !sprite_x_high
+org $01A44C
+	dw !sprite_x_high
+org $01A574
+	dw !sprite_x_high
+org $01A577
+	dw !sprite_x_high
+org $01A7AB
+	dw !sprite_x_high
+org $01A7B5
+	dw !sprite_x_high
+org $01AC70
+	dw !sprite_x_high
+org $01ACB6
+	dw !sprite_x_high
+org $01AD3C
+	dw !sprite_x_high
+org $01AE1B
+	dw !sprite_x_high
+org $01B16E
+	dw !sprite_x_high
+org $01B52E
+	dw !sprite_x_high
+org $01B7DA
+	dw !sprite_x_high
+org $01B8F8
+	dw !sprite_x_high
+org $01B90F
+	dw !sprite_x_high
+org $01BC9E
+	dw !sprite_x_high
+org $01BE2E
+	dw !sprite_x_high
+org $01BF3D
+	dw !sprite_x_high
+org $01BF40
+	dw !sprite_x_high
+org $01C07D
+	dw !sprite_x_high
+org $01C1D8
+	dw !sprite_x_high
+org $01C75C
+	dw !sprite_x_high
+org $01C761
+	dw !sprite_x_high
+org $01CADF
+	dw !sprite_x_high
+org $01CD84
+	dw !sprite_x_high
+org $01CEC0
+	dw !sprite_x_high
+org $01D078
+	dw !sprite_x_high
+org $01D09F
+	dw !sprite_x_high
+org $01D35A
+	dw !sprite_x_high
+org $01D360
+	dw !sprite_x_high
+org $01D373
+	dw !sprite_x_high
+org $01D413
+	dw !sprite_x_high
+org $01D473
+	dw !sprite_x_high
+org $01D611
+	dw !sprite_x_high
+org $01D618
+	dw !sprite_x_high
+org $01D6B7
+	dw !sprite_x_high
+org $01D6FE
+	dw !sprite_x_high
+org $01D703
+	dw !sprite_x_high
+org $01D802
+	dw !sprite_x_high
+org $01D8B2
+	dw !sprite_x_high
+org $01D8C6
+	dw !sprite_x_high
+org $01D948
+	dw !sprite_x_high
+org $01DAB6
+	dw !sprite_x_high
+org $01DABC
+	dw !sprite_x_high
+org $01DADB
+	dw !sprite_x_high
+org $01DB08
+	dw !sprite_x_high
+org $01DB0E
+	dw !sprite_x_high
+org $01DB3A
+	dw !sprite_x_high
+org $01DDC9
+	dw !sprite_x_high
+org $01E1C0
+	dw !sprite_x_high
+org $01E1C5
+	dw !sprite_x_high
+org $01E220
+	dw !sprite_x_high
+org $01E32E
+	dw !sprite_x_high
+org $01E830
+	dw !sprite_x_high
+org $01E86D
+	dw !sprite_x_high
+org $01E8B0
+	dw !sprite_x_high
+org $01E8B3
+	dw !sprite_x_high
+org $01EA40
+	dw !sprite_x_high
+org $01EA43
+	dw !sprite_x_high
+org $01EB5F
+	dw !sprite_x_high
+org $01ECAA
+	dw !sprite_x_high
+org $01ECB1
+	dw !sprite_x_high
+org $01ED14
+	dw !sprite_x_high
+org $01EF4C
+	dw !sprite_x_high
+org $01EF53
+	dw !sprite_x_high
+org $01EF89
+	dw !sprite_x_high
+org $01F20A
+	dw !sprite_x_high
+org $01F211
+	dw !sprite_x_high
+org $01F2A3
+	dw !sprite_x_high
+org $01F4DF
+	dw !sprite_x_high
+org $01F4E5
+	dw !sprite_x_high
+org $01F547
+	dw !sprite_x_high
+org $01F5D9
+	dw !sprite_x_high
+org $01FD59
+	dw !sprite_x_high
+org $01FDDF
+	dw !sprite_x_high
+org $01FFA1
+	dw !sprite_x_high
+org $02805D
+	dw !sprite_x_high
+org $028499
+	dw !sprite_x_high
+org $0284FE
+	dw !sprite_x_high
+org $028558
+	dw !sprite_x_high
+org $02860C
+	dw !sprite_x_high
+org $02864B
+	dw !sprite_x_high
+org $028979
+	dw !sprite_x_high
+org $028995
+	dw !sprite_x_high
+org $028B54
+	dw !sprite_x_high
+org $02A94E
+	dw !sprite_x_high
+org $02A96F
+	dw !sprite_x_high
+org $02AC2B
+	dw !sprite_x_high
+org $02AC2E
+	dw !sprite_x_high
+org $02AD28
+	dw !sprite_x_high
+org $02AF60
+	dw !sprite_x_high
+org $02AFD3
+	dw !sprite_x_high
+org $02B076
+	dw !sprite_x_high
+org $02B0C3
+	dw !sprite_x_high
+org $02B13A
+	dw !sprite_x_high
+org $02B1A0
+	dw !sprite_x_high
+org $02B200
+	dw !sprite_x_high
+org $02B247
+	dw !sprite_x_high
+org $02B2C5
+	dw !sprite_x_high
+org $02B317
+	dw !sprite_x_high
+org $02B384
+	dw !sprite_x_high
+org $02B3FF
+	dw !sprite_x_high
+org $02B4C0
+	dw !sprite_x_high
+org $02B844
+	dw !sprite_x_high
+org $02B847
+	dw !sprite_x_high
+org $02B96E
+	dw !sprite_x_high
+org $02B9AB
+	dw !sprite_x_high
+org $02BAD4
+	dw !sprite_x_high
+org $02BB2F
+	dw !sprite_x_high
+org $02C1B4
+	dw !sprite_x_high
+org $02C1CF
+	dw !sprite_x_high
+org $02C483
+	dw !sprite_x_high
+org $02C5D2
+	dw !sprite_x_high
+org $02C5D5
+	dw !sprite_x_high
+org $02CC17
+	dw !sprite_x_high
+org $02CC1C
+	dw !sprite_x_high
+org $02CC46
+	dw !sprite_x_high
+org $02CD69
+	dw !sprite_x_high
+org $02D06A
+	dw !sprite_x_high
+org $02D10E
+	dw !sprite_x_high
+org $02D172
+	dw !sprite_x_high
+org $02D2DB
+	dw !sprite_x_high
+org $02D383
+	dw !sprite_x_high
+org $02D38D
+	dw !sprite_x_high
+org $02D404
+	dw !sprite_x_high
+org $02D407
+	dw !sprite_x_high
+org $02D43B
+	dw !sprite_x_high
+org $02D4B4
+	dw !sprite_x_high
+org $02D506
+	dw !sprite_x_high
+org $02D6D3
+	dw !sprite_x_high
+org $02D6FC
+	dw !sprite_x_high
+org $02D701
+	dw !sprite_x_high
+org $02D760
+	dw !sprite_x_high
+org $02DACE
+	dw !sprite_x_high
+org $02DB83
+	dw !sprite_x_high
+org $02DB86
+	dw !sprite_x_high
+org $02DDA7
+	dw !sprite_x_high
+org $02DDAC
+	dw !sprite_x_high
+org $02DF31
+	dw !sprite_x_high
+org $02E09E
+	dw !sprite_x_high
+org $02E1DB
+	dw !sprite_x_high
+org $02E2C8
+	dw !sprite_x_high
+org $02E47B
+	dw !sprite_x_high
+org $02E4AF
+	dw !sprite_x_high
+org $02E4CC
+	dw !sprite_x_high
+org $02E4DC
+	dw !sprite_x_high
+org $02E53D
+	dw !sprite_x_high
+org $02E8D0
+	dw !sprite_x_high
+org $02E8EE
+	dw !sprite_x_high
+org $02EAC3
+	dw !sprite_x_high
+org $02EAC6
+	dw !sprite_x_high
+org $02EAEA
+	dw !sprite_x_high
+org $02EB08
+	dw !sprite_x_high
+org $02EB0B
+	dw !sprite_x_high
+org $02EDBD
+	dw !sprite_x_high
+org $02EDC2
+	dw !sprite_x_high
+org $02EF8B
+	dw !sprite_x_high
+org $02EF8E
+	dw !sprite_x_high
+org $02EFCA
+	dw !sprite_x_high
+org $02F207
+	dw !sprite_x_high
+org $02F2F2
+	dw !sprite_x_high
+org $02F56A
+	dw !sprite_x_high
+org $02F952
+	dw !sprite_x_high
+org $02FC0C
+	dw !sprite_x_high
+org $038219
+	dw !sprite_x_high
+org $038AEE
+	dw !sprite_x_high
+org $038B06
+	dw !sprite_x_high
+org $039042
+	dw !sprite_x_high
+org $039104
+	dw !sprite_x_high
+org $03934E
+	dw !sprite_x_high
+org $039354
+	dw !sprite_x_high
+org $039374
+	dw !sprite_x_high
+org $039392
+	dw !sprite_x_high
+org $0398B0
+	dw !sprite_x_high
+org $0399C3
+	dw !sprite_x_high
+org $039ADC
+	dw !sprite_x_high
+org $039ADF
+	dw !sprite_x_high
+org $039B19
+	dw !sprite_x_high
+org $039C9B
+	dw !sprite_x_high
+org $039CA1
+	dw !sprite_x_high
+org $039DCD
+	dw !sprite_x_high
+org $039F70
+	dw !sprite_x_high
+org $03A021
+	dw !sprite_x_high
+org $03A108
+	dw !sprite_x_high
+org $03A62E
+	dw !sprite_x_high
+org $03A78E
+	dw !sprite_x_high
+org $03A7B6
+	dw !sprite_x_high
+org $03A815
+	dw !sprite_x_high
+org $03A8FB
+	dw !sprite_x_high
+org $03A900
+	dw !sprite_x_high
+org $03AB37
+	dw !sprite_x_high
+org $03AC5D
+	dw !sprite_x_high
+org $03AC74
+	dw !sprite_x_high
+org $03AD8F
+	dw !sprite_x_high
+org $03B04A
+	dw !sprite_x_high
+org $03B060
+	dw !sprite_x_high
+org $03B6B9
+	dw !sprite_x_high
+org $03B6FF
+	dw !sprite_x_high
+org $03B76B
+	dw !sprite_x_high
+org $03B775
+	dw !sprite_x_high
+org $03B823
+	dw !sprite_x_high
+org $03B89C
+	dw !sprite_x_high
+org $03C00A
+	dw !sprite_x_high
+org $03C1DE
+	dw !sprite_x_high
+org $03C1E4
+	dw !sprite_x_high
+org $03C2F6
+	dw !sprite_x_high
+org $03C47C
+	dw !sprite_x_high
+org $03C7DD
+	dw !sprite_x_high
+org $03CBDA
+	dw !sprite_x_high
+org $03CBF4
+	dw !sprite_x_high
+org $03CD10
+	dw !sprite_x_high
+org $03CD13
+	dw !sprite_x_high
+org $03DEE3
+	dw !sprite_x_high
+org $07FC74
+	dw !sprite_x_high
+org $0CA009
+	dw !sprite_x_high
+org $0CA27B
+	dw !sprite_x_high
+;============== REMAPPER FOR $14E1
+;============== REMAPPER FOR $14E2
+;============== REMAPPER FOR $14E3
+;============== REMAPPER FOR $14E4
+;============== REMAPPER FOR $14E5
+;============== REMAPPER FOR $14E6
+;============== REMAPPER FOR $14E7
+;============== REMAPPER FOR $14E8
+org $03A633
+	dw !sprite_x_high+8
+org $03AC79
+	dw !sprite_x_high+8
+;============== REMAPPER FOR $14E9
+;============== REMAPPER FOR $14EA
+;============== REMAPPER FOR $14EB
+;============== REMAPPER FOR $14EC
+org $01ABE2
+	dw !sprite_speed_y_frac
+org $01ABE5
+	dw !sprite_speed_y_frac
+org $02D29C
+	dw !sprite_speed_y_frac
+org $02D29F
+	dw !sprite_speed_y_frac
+org $07F75C
+	dw !sprite_speed_y_frac
+;============== REMAPPER FOR $14ED
+;============== REMAPPER FOR $14EE
+;============== REMAPPER FOR $14EF
+;============== REMAPPER FOR $14F0
+;============== REMAPPER FOR $14F1
+;============== REMAPPER FOR $14F2
+;============== REMAPPER FOR $14F3
+;============== REMAPPER FOR $14F4
+;============== REMAPPER FOR $14F5
+;============== REMAPPER FOR $14F6
+;============== REMAPPER FOR $14F7
+;============== REMAPPER FOR $14F8
+org $07F757
+	dw !sprite_speed_x_frac
+;============== REMAPPER FOR $14F9
+;============== REMAPPER FOR $14FA
+;============== REMAPPER FOR $14FB
+;============== REMAPPER FOR $14FC
+;============== REMAPPER FOR $14FD
+;============== REMAPPER FOR $14FE
+;============== REMAPPER FOR $14FF
+;============== REMAPPER FOR $1500
+;============== REMAPPER FOR $1501
+;============== REMAPPER FOR $1502
+;============== REMAPPER FOR $1503
+;============== REMAPPER FOR $1504
+org $01C786
+	dw !sprite_misc_1504
+org $01C790
+	dw !sprite_misc_1504
+org $01C793
+	dw !sprite_misc_1504
+org $01CA8D
+	dw !sprite_misc_1504
+org $01CA99
+	dw !sprite_misc_1504
+org $01CCF1
+	dw !sprite_misc_1504
+org $01CD02
+	dw !sprite_misc_1504
+org $07F780
+	dw !sprite_misc_1504
+;============== REMAPPER FOR $1505
+;============== REMAPPER FOR $1506
+;============== REMAPPER FOR $1507
+;============== REMAPPER FOR $1508
+;============== REMAPPER FOR $1509
+;============== REMAPPER FOR $150A
+;============== REMAPPER FOR $150B
+;============== REMAPPER FOR $150C
+;============== REMAPPER FOR $150D
+;============== REMAPPER FOR $150E
+;============== REMAPPER FOR $150F
+;============== REMAPPER FOR $1510
+org $01CCF9
+	dw !sprite_misc_1510
+org $01CCFC
+	dw !sprite_misc_1510
+;============== REMAPPER FOR $1511
+;============== REMAPPER FOR $1512
+;============== REMAPPER FOR $1513
+;============== REMAPPER FOR $1514
+;============== REMAPPER FOR $1515
+;============== REMAPPER FOR $1516
+;============== REMAPPER FOR $1517
+;============== REMAPPER FOR $1518
+;============== REMAPPER FOR $1519
+;============== REMAPPER FOR $151A
+;============== REMAPPER FOR $151B
+org $02A4A2
+	dw !sprite_misc_151c-1
+;============== REMAPPER FOR $151C
+org $0183BE
+	dw !sprite_misc_151c
+org $01840F
+	dw !sprite_misc_151c
+org $018414
+	dw !sprite_misc_151c
+org $018422
+	dw !sprite_misc_151c
+org $018457
+	dw !sprite_misc_151c
+org $0184D3
+	dw !sprite_misc_151c
+org $018523
+	dw !sprite_misc_151c
+org $01855B
+	dw !sprite_misc_151c
+org $018B55
+	dw !sprite_misc_151c
+org $018B9B
+	dw !sprite_misc_151c
+org $018BAE
+	dw !sprite_misc_151c
+org $018D0B
+	dw !sprite_misc_151c
+org $018D20
+	dw !sprite_misc_151c
+org $018D51
+	dw !sprite_misc_151c
+org $018D7B
+	dw !sprite_misc_151c
+org $018D88
+	dw !sprite_misc_151c
+org $018D8D
+	dw !sprite_misc_151c
+org $018D94
+	dw !sprite_misc_151c
+org $018FB9
+	dw !sprite_misc_151c
+org $0198B4
+	dw !sprite_misc_151c
+org $01A9BB
+	dw !sprite_misc_151c
+org $01AB18
+	dw !sprite_misc_151c
+org $01AD62
+	dw !sprite_misc_151c
+org $01AE2E
+	dw !sprite_misc_151c
+org $01AE99
+	dw !sprite_misc_151c
+org $01AF2F
+	dw !sprite_misc_151c
+org $01B00F
+	dw !sprite_misc_151c
+org $01B0B7
+	dw !sprite_misc_151c
+org $01B0D0
+	dw !sprite_misc_151c
+org $01B1BC
+	dw !sprite_misc_151c
+org $01B1F1
+	dw !sprite_misc_151c
+org $01B239
+	dw !sprite_misc_151c
+org $01B244
+	dw !sprite_misc_151c
+org $01B281
+	dw !sprite_misc_151c
+org $01B296
+	dw !sprite_misc_151c
+org $01B5EB
+	dw !sprite_misc_151c
+org $01B5EE
+	dw !sprite_misc_151c
+org $01B6B8
+	dw !sprite_misc_151c
+org $01B6C7
+	dw !sprite_misc_151c
+org $01B6CE
+	dw !sprite_misc_151c
+org $01B6EA
+	dw !sprite_misc_151c
+org $01B6F9
+	dw !sprite_misc_151c
+org $01B700
+	dw !sprite_misc_151c
+org $01B721
+	dw !sprite_misc_151c
+org $01C082
+	dw !sprite_misc_151c
+org $01C0C7
+	dw !sprite_misc_151c
+org $01C224
+	dw !sprite_misc_151c
+org $01C237
+	dw !sprite_misc_151c
+org $01C31A
+	dw !sprite_misc_151c
+org $01C3CC
+	dw !sprite_misc_151c
+org $01C3DB
+	dw !sprite_misc_151c
+org $01C470
+	dw !sprite_misc_151c
+org $01C4B2
+	dw !sprite_misc_151c
+org $01C74D
+	dw !sprite_misc_151c
+org $01C796
+	dw !sprite_misc_151c
+org $01C7A1
+	dw !sprite_misc_151c
+org $01C7A4
+	dw !sprite_misc_151c
+org $01C7BF
+	dw !sprite_misc_151c
+org $01CA7F
+	dw !sprite_misc_151c
+org $01CB16
+	dw !sprite_misc_151c
+org $01CD11
+	dw !sprite_misc_151c
+org $01CD14
+	dw !sprite_misc_151c
+org $01CE0C
+	dw !sprite_misc_151c
+org $01CE31
+	dw !sprite_misc_151c
+org $01CE3B
+	dw !sprite_misc_151c
+org $01CE54
+	dw !sprite_misc_151c
+org $01CFBA
+	dw !sprite_misc_151c
+org $01CFD8
+	dw !sprite_misc_151c
+org $01D03B
+	dw !sprite_misc_151c
+org $01D2A9
+	dw !sprite_misc_151c
+org $01D3A9
+	dw !sprite_misc_151c
+org $01D3B2
+	dw !sprite_misc_151c
+org $01D51B
+	dw !sprite_misc_151c
+org $01D6A4
+	dw !sprite_misc_151c
+org $01D7B6
+	dw !sprite_misc_151c
+org $01D8D1
+	dw !sprite_misc_151c
+org $01E059
+	dw !sprite_misc_151c
+org $01E0EE
+	dw !sprite_misc_151c
+org $01E1E7
+	dw !sprite_misc_151c
+org $01E397
+	dw !sprite_misc_151c
+org $01E7FA
+	dw !sprite_misc_151c
+org $01E837
+	dw !sprite_misc_151c
+org $01EA0A
+	dw !sprite_misc_151c
+org $01EAFC
+	dw !sprite_misc_151c
+org $01EB28
+	dw !sprite_misc_151c
+org $01ECDD
+	dw !sprite_misc_151c
+org $01ED89
+	dw !sprite_misc_151c
+org $01EFCB
+	dw !sprite_misc_151c
+org $01EFE3
+	dw !sprite_misc_151c
+org $01F1D4
+	dw !sprite_misc_151c
+org $01F315
+	dw !sprite_misc_151c
+org $01F31B
+	dw !sprite_misc_151c
+org $01F338
+	dw !sprite_misc_151c
+org $01F340
+	dw !sprite_misc_151c
+org $01F345
+	dw !sprite_misc_151c
+org $01F4BF
+	dw !sprite_misc_151c
+org $01F4C4
+	dw !sprite_misc_151c
+org $01F52D
+	dw !sprite_misc_151c
+org $01F532
+	dw !sprite_misc_151c
+org $01F73B
+	dw !sprite_misc_151c
+org $01F78B
+	dw !sprite_misc_151c
+org $01F83E
+	dw !sprite_misc_151c
+org $0289FF
+	dw !sprite_misc_151c
+org $028A33
+	dw !sprite_misc_151c
+org $02AF77
+	dw !sprite_misc_151c
+org $02B2CD
+	dw !sprite_misc_151c
+org $02B737
+	dw !sprite_misc_151c
+org $02B80B
+	dw !sprite_misc_151c
+org $02BBD8
+	dw !sprite_misc_151c
+org $02C077
+	dw !sprite_misc_151c
+org $02C091
+	dw !sprite_misc_151c
+org $02C153
+	dw !sprite_misc_151c
+org $02C191
+	dw !sprite_misc_151c
+org $02C222
+	dw !sprite_misc_151c
+org $02C39F
+	dw !sprite_misc_151c
+org $02C561
+	dw !sprite_misc_151c
+org $02C698
+	dw !sprite_misc_151c
+org $02C6F3
+	dw !sprite_misc_151c
+org $02C774
+	dw !sprite_misc_151c
+org $02C8B2
+	dw !sprite_misc_151c
+org $02CDE5
+	dw !sprite_misc_151c
+org $02CE25
+	dw !sprite_misc_151c
+org $02CE30
+	dw !sprite_misc_151c
+org $02CE45
+	dw !sprite_misc_151c
+org $02CE4A
+	dw !sprite_misc_151c
+org $02CE62
+	dw !sprite_misc_151c
+org $02CE68
+	dw !sprite_misc_151c
+org $02CFF3
+	dw !sprite_misc_151c
+org $02D64C
+	dw !sprite_misc_151c
+org $02D651
+	dw !sprite_misc_151c
+org $02D654
+	dw !sprite_misc_151c
+org $02D943
+	dw !sprite_misc_151c
+org $02D956
+	dw !sprite_misc_151c
+org $02DBC2
+	dw !sprite_misc_151c
+org $02DBD5
+	dw !sprite_misc_151c
+org $02DF9B
+	dw !sprite_misc_151c
+org $02DFEC
+	dw !sprite_misc_151c
+org $02E051
+	dw !sprite_misc_151c
+org $02E0F2
+	dw !sprite_misc_151c
+org $02E178
+	dw !sprite_misc_151c
+org $02E2AE
+	dw !sprite_misc_151c
+org $02E2BF
+	dw !sprite_misc_151c
+org $02E4BA
+	dw !sprite_misc_151c
+org $02E515
+	dw !sprite_misc_151c
+org $02E578
+	dw !sprite_misc_151c
+org $02E57B
+	dw !sprite_misc_151c
+org $02E6E5
+	dw !sprite_misc_151c
+org $02EBAC
+	dw !sprite_misc_151c
+org $02EBAF
+	dw !sprite_misc_151c
+org $02F06E
+	dw !sprite_misc_151c
+org $02F08A
+	dw !sprite_misc_151c
+org $02F11E
+	dw !sprite_misc_151c
+org $02F275
+	dw !sprite_misc_151c
+org $02F290
+	dw !sprite_misc_151c
+org $02F483
+	dw !sprite_misc_151c
+org $02F486
+	dw !sprite_misc_151c
+org $038151
+	dw !sprite_misc_151c
+org $038164
+	dw !sprite_misc_151c
+org $03862D
+	dw !sprite_misc_151c
+org $0387D5
+	dw !sprite_misc_151c
+org $038843
+	dw !sprite_misc_151c
+org $03893D
+	dw !sprite_misc_151c
+org $038950
+	dw !sprite_misc_151c
+org $038C63
+	dw !sprite_misc_151c
+org $038C7E
+	dw !sprite_misc_151c
+org $0392ED
+	dw !sprite_misc_151c
+org $039476
+	dw !sprite_misc_151c
+org $0399EA
+	dw !sprite_misc_151c
+org $039AB0
+	dw !sprite_misc_151c
+org $039AC4
+	dw !sprite_misc_151c
+org $039B76
+	dw !sprite_misc_151c
+org $039D76
+	dw !sprite_misc_151c
+org $039EAA
+	dw !sprite_misc_151c
+org $039F26
+	dw !sprite_misc_151c
+org $039F73
+	dw !sprite_misc_151c
+org $03A01E
+	dw !sprite_misc_151c
+org $03A309
+	dw !sprite_misc_151c
+org $03A326
+	dw !sprite_misc_151c
+org $03A488
+	dw !sprite_misc_151c
+org $03A503
+	dw !sprite_misc_151c
+org $03A67C
+	dw !sprite_misc_151c
+org $03A68A
+	dw !sprite_misc_151c
+org $03A6C3
+	dw !sprite_misc_151c
+org $03A797
+	dw !sprite_misc_151c
+org $03A7C9
+	dw !sprite_misc_151c
+org $03A8A2
+	dw !sprite_misc_151c
+org $03ABB2
+	dw !sprite_misc_151c
+org $03ABE8
+	dw !sprite_misc_151c
+org $03ADC0
+	dw !sprite_misc_151c
+org $03ADF1
+	dw !sprite_misc_151c
+org $03B07F
+	dw !sprite_misc_151c
+org $03B124
+	dw !sprite_misc_151c
+org $03B12F
+	dw !sprite_misc_151c
+org $03C878
+	dw !sprite_misc_151c
+org $03C8B9
+	dw !sprite_misc_151c
+org $03C8C6
+	dw !sprite_misc_151c
+org $03C8D0
+	dw !sprite_misc_151c
+org $03C8D7
+	dw !sprite_misc_151c
+org $03C8E5
+	dw !sprite_misc_151c
+org $03CC23
+	dw !sprite_misc_151c
+org $03CCD7
+	dw !sprite_misc_151c
+org $03CD2C
+	dw !sprite_misc_151c
+org $03CDD7
+	dw !sprite_misc_151c
+org $03CDFE
+	dw !sprite_misc_151c
+org $03CE20
+	dw !sprite_misc_151c
+org $03CE77
+	dw !sprite_misc_151c
+org $03CEDE
+	dw !sprite_misc_151c
+org $07F72B
+	dw !sprite_misc_151c
+;============== REMAPPER FOR $151D
+;============== REMAPPER FOR $151E
+;============== REMAPPER FOR $151F
+;============== REMAPPER FOR $1520
+org $0398F7
+	dw !sprite_misc_151c+4
+org $03D70E
+	dw !sprite_misc_151c+4
+;============== REMAPPER FOR $1521
+org $0398F4
+	dw !sprite_misc_151c+5
+org $03D712
+	dw !sprite_misc_151c+5
+;============== REMAPPER FOR $1522
+org $0398F1
+	dw !sprite_misc_151c+6
+org $03D715
+	dw !sprite_misc_151c+6
+;============== REMAPPER FOR $1523
+org $0398ED
+	dw !sprite_misc_151c+7
+org $03D718
+	dw !sprite_misc_151c+7
+;============== REMAPPER FOR $1524
+;============== REMAPPER FOR $1525
+;============== REMAPPER FOR $1526
+;============== REMAPPER FOR $1527
+;============== REMAPPER FOR $1528
+org $0189B5
+	dw !sprite_misc_1528
+org $018A10
+	dw !sprite_misc_1528
+org $018A2A
+	dw !sprite_misc_1528
+org $018BA1
+	dw !sprite_misc_1528
+org $018BB1
+	dw !sprite_misc_1528
+org $019763
+	dw !sprite_misc_1528
+org $019929
+	dw !sprite_misc_1528
+org $01993A
+	dw !sprite_misc_1528
+org $01A797
+	dw !sprite_misc_1528
+org $01AD8E
+	dw !sprite_misc_1528
+org $01ADF3
+	dw !sprite_misc_1528
+org $01AE4E
+	dw !sprite_misc_1528
+org $01AED5
+	dw !sprite_misc_1528
+org $01AEE3
+	dw !sprite_misc_1528
+org $01AEF1
+	dw !sprite_misc_1528
+org $01AF2A
+	dw !sprite_misc_1528
+org $01AF58
+	dw !sprite_misc_1528
+org $01B2BA
+	dw !sprite_misc_1528
+org $01B4A1
+	dw !sprite_misc_1528
+org $01B548
+	dw !sprite_misc_1528
+org $01C087
+	dw !sprite_misc_1528
+org $01C0DA
+	dw !sprite_misc_1528
+org $01C112
+	dw !sprite_misc_1528
+org $01C398
+	dw !sprite_misc_1528
+org $01C716
+	dw !sprite_misc_1528
+org $01C729
+	dw !sprite_misc_1528
+org $01C752
+	dw !sprite_misc_1528
+org $01C79A
+	dw !sprite_misc_1528
+org $01C7A9
+	dw !sprite_misc_1528
+org $01C7AE
+	dw !sprite_misc_1528
+org $01C7BB
+	dw !sprite_misc_1528
+org $01CA85
+	dw !sprite_misc_1528
+org $01CB1B
+	dw !sprite_misc_1528
+org $01CD18
+	dw !sprite_misc_1528
+org $01CD1B
+	dw !sprite_misc_1528
+org $01CE6C
+	dw !sprite_misc_1528
+org $01CEA6
+	dw !sprite_misc_1528
+org $01CEC5
+	dw !sprite_misc_1528
+org $01CF2A
+	dw !sprite_misc_1528
+org $01D117
+	dw !sprite_misc_1528
+org $01D212
+	dw !sprite_misc_1528
+org $01D249
+	dw !sprite_misc_1528
+org $01D2B7
+	dw !sprite_misc_1528
+org $01D7BB
+	dw !sprite_misc_1528
+org $01D8D7
+	dw !sprite_misc_1528
+org $01DAEB
+	dw !sprite_misc_1528
+org $01DAF2
+	dw !sprite_misc_1528
+org $01DB41
+	dw !sprite_misc_1528
+org $01E053
+	dw !sprite_misc_1528
+org $01E0E6
+	dw !sprite_misc_1528
+org $01E587
+	dw !sprite_misc_1528
+org $01E58A
+	dw !sprite_misc_1528
+org $01E58F
+	dw !sprite_misc_1528
+org $02A0FD
+	dw !sprite_misc_1528
+org $02A100
+	dw !sprite_misc_1528
+org $02BBA5
+	dw !sprite_misc_1528
+org $02BD37
+	dw !sprite_misc_1528
+org $02BF62
+	dw !sprite_misc_1528
+org $02BF6A
+	dw !sprite_misc_1528
+org $02C0E6
+	dw !sprite_misc_1528
+org $02C0EE
+	dw !sprite_misc_1528
+org $02C7E9
+	dw !sprite_misc_1528
+org $02C7EC
+	dw !sprite_misc_1528
+org $02CDF2
+	dw !sprite_misc_1528
+org $02CE18
+	dw !sprite_misc_1528
+org $02CE89
+	dw !sprite_misc_1528
+org $02CFCF
+	dw !sprite_misc_1528
+org $02CFF8
+	dw !sprite_misc_1528
+org $02D6F4
+	dw !sprite_misc_1528
+org $02DBDE
+	dw !sprite_misc_1528
+org $02E552
+	dw !sprite_misc_1528
+org $03816D
+	dw !sprite_misc_1528
+org $038180
+	dw !sprite_misc_1528
+org $038647
+	dw !sprite_misc_1528
+org $038DE1
+	dw !sprite_misc_1528
+org $038DF8
+	dw !sprite_misc_1528
+org $038EA1
+	dw !sprite_misc_1528
+org $0392D7
+	dw !sprite_misc_1528
+org $0399CD
+	dw !sprite_misc_1528
+org $039F78
+	dw !sprite_misc_1528
+org $03A024
+	dw !sprite_misc_1528
+org $03A4A6
+	dw !sprite_misc_1528
+org $03A4B9
+	dw !sprite_misc_1528
+org $03A716
+	dw !sprite_misc_1528
+org $03A732
+	dw !sprite_misc_1528
+org $03A74D
+	dw !sprite_misc_1528
+org $03CCCD
+	dw !sprite_misc_1528
+org $03CDDF
+	dw !sprite_misc_1528
+org $07F72E
+	dw !sprite_misc_1528
+;============== REMAPPER FOR $1529
+;============== REMAPPER FOR $152A
+;============== REMAPPER FOR $152B
+;============== REMAPPER FOR $152C
+;============== REMAPPER FOR $152D
+;============== REMAPPER FOR $152E
+;============== REMAPPER FOR $152F
+;============== REMAPPER FOR $1530
+;============== REMAPPER FOR $1531
+;============== REMAPPER FOR $1532
+;============== REMAPPER FOR $1533
+;============== REMAPPER FOR $1534
+org $018384
+	dw !sprite_misc_1534
+org $0183B8
+	dw !sprite_misc_1534
+org $018548
+	dw !sprite_misc_1534
+org $01856A
+	dw !sprite_misc_1534
+org $018A16
+	dw !sprite_misc_1534
+org $018A25
+	dw !sprite_misc_1534
+org $018A71
+	dw !sprite_misc_1534
+org $018AE6
+	dw !sprite_misc_1534
+org $018BA4
+	dw !sprite_misc_1534
+org $019639
+	dw !sprite_misc_1534
+org $01A792
+	dw !sprite_misc_1534
+org $01A7BE
+	dw !sprite_misc_1534
+org $01ADCC
+	dw !sprite_misc_1534
+org $01ADDF
+	dw !sprite_misc_1534
+org $01C095
+	dw !sprite_misc_1534
+org $01C0DF
+	dw !sprite_misc_1534
+org $01C378
+	dw !sprite_misc_1534
+org $01C572
+	dw !sprite_misc_1534
+org $01CD8A
+	dw !sprite_misc_1534
+org $01D177
+	dw !sprite_misc_1534
+org $01D17D
+	dw !sprite_misc_1534
+org $01D1A8
+	dw !sprite_misc_1534
+org $01D772
+	dw !sprite_misc_1534
+org $01D778
+	dw !sprite_misc_1534
+org $01D785
+	dw !sprite_misc_1534
+org $01D788
+	dw !sprite_misc_1534
+org $01D8E1
+	dw !sprite_misc_1534
+org $01E43F
+	dw !sprite_misc_1534
+org $01E44C
+	dw !sprite_misc_1534
+org $01E5FC
+	dw !sprite_misc_1534
+org $01E9D1
+	dw !sprite_misc_1534
+org $01E9E4
+	dw !sprite_misc_1534
+org $01F5F8
+	dw !sprite_misc_1534
+org $01F879
+	dw !sprite_misc_1534
+org $01FB0C
+	dw !sprite_misc_1534
+org $01FB0F
+	dw !sprite_misc_1534
+org $02806E
+	dw !sprite_misc_1534
+org $02B673
+	dw !sprite_misc_1534
+org $02B879
+	dw !sprite_misc_1534
+org $02C14B
+	dw !sprite_misc_1534
+org $02C15C
+	dw !sprite_misc_1534
+org $02C15F
+	dw !sprite_misc_1534
+org $02C172
+	dw !sprite_misc_1534
+org $02C3CC
+	dw !sprite_misc_1534
+org $02C3E5
+	dw !sprite_misc_1534
+org $02C45D
+	dw !sprite_misc_1534
+org $02C67E
+	dw !sprite_misc_1534
+org $02C69C
+	dw !sprite_misc_1534
+org $02CDD6
+	dw !sprite_misc_1534
+org $02CDDB
+	dw !sprite_misc_1534
+org $02CDE2
+	dw !sprite_misc_1534
+org $02CFE1
+	dw !sprite_misc_1534
+org $02D6F1
+	dw !sprite_misc_1534
+org $02D6F8
+	dw !sprite_misc_1534
+org $02D8E9
+	dw !sprite_misc_1534
+org $02D90F
+	dw !sprite_misc_1534
+org $02D912
+	dw !sprite_misc_1534
+org $02D91E
+	dw !sprite_misc_1534
+org $02D96C
+	dw !sprite_misc_1534
+org $02D975
+	dw !sprite_misc_1534
+org $02D9F2
+	dw !sprite_misc_1534
+org $02DBAC
+	dw !sprite_misc_1534
+org $02DBBF
+	dw !sprite_misc_1534
+org $02E4C0
+	dw !sprite_misc_1534
+org $02E50D
+	dw !sprite_misc_1534
+org $02E571
+	dw !sprite_misc_1534
+org $02E574
+	dw !sprite_misc_1534
+org $02E846
+	dw !sprite_misc_1534
+org $02E84F
+	dw !sprite_misc_1534
+org $02E869
+	dw !sprite_misc_1534
+org $02E86F
+	dw !sprite_misc_1534
+org $02ED28
+	dw !sprite_misc_1534
+org $02F076
+	dw !sprite_misc_1534
+org $02F079
+	dw !sprite_misc_1534
+org $03819C
+	dw !sprite_misc_1534
+org $03819F
+	dw !sprite_misc_1534
+org $038603
+	dw !sprite_misc_1534
+org $038606
+	dw !sprite_misc_1534
+org $039301
+	dw !sprite_misc_1534
+org $039304
+	dw !sprite_misc_1534
+org $039F7E
+	dw !sprite_misc_1534
+org $03A029
+	dw !sprite_misc_1534
+org $03A4BC
+	dw !sprite_misc_1534
+org $03A4CF
+	dw !sprite_misc_1534
+org $03A719
+	dw !sprite_misc_1534
+org $03A750
+	dw !sprite_misc_1534
+org $03A76B
+	dw !sprite_misc_1534
+org $03C4DD
+	dw !sprite_misc_1534
+org $03C4FE
+	dw !sprite_misc_1534
+org $03C7BF
+	dw !sprite_misc_1534
+org $03C7F7
+	dw !sprite_misc_1534
+org $03C7FC
+	dw !sprite_misc_1534
+org $03C80D
+	dw !sprite_misc_1534
+org $03C829
+	dw !sprite_misc_1534
+org $03C84D
+	dw !sprite_misc_1534
+org $03C872
+	dw !sprite_misc_1534
+org $03C894
+	dw !sprite_misc_1534
+org $03C8B2
+	dw !sprite_misc_1534
+org $03C988
+	dw !sprite_misc_1534
+org $03CA04
+	dw !sprite_misc_1534
+org $03CE14
+	dw !sprite_misc_1534
+org $03CE17
+	dw !sprite_misc_1534
+org $03CED1
+	dw !sprite_misc_1534
+org $07F731
+	dw !sprite_misc_1534
+;============== REMAPPER FOR $1535
+;============== REMAPPER FOR $1536
+;============== REMAPPER FOR $1537
+;============== REMAPPER FOR $1538
+;============== REMAPPER FOR $1539
+;============== REMAPPER FOR $153A
+;============== REMAPPER FOR $153B
+;============== REMAPPER FOR $153C
+;============== REMAPPER FOR $153D
+org $00F93A
+	dw !sprite_misc_1534+9
+org $0283CF
+	dw !sprite_misc_1534+9
+;============== REMAPPER FOR $153E
+;============== REMAPPER FOR $153F
+;============== REMAPPER FOR $1540
+org $00FA7D
+	dw !sprite_misc_1540
+org $00FABC
+	dw !sprite_misc_1540
+org $00FBC9
+	dw !sprite_misc_1540
+org $00FBE0
+	dw !sprite_misc_1540
+org $0180EF
+	dw !sprite_misc_1540
+org $0180F4
+	dw !sprite_misc_1540
+org $01837A
+	dw !sprite_misc_1540
+org $0184E6
+	dw !sprite_misc_1540
+org $01850B
+	dw !sprite_misc_1540
+org $018560
+	dw !sprite_misc_1540
+org $018595
+	dw !sprite_misc_1540
+org $01899E
+	dw !sprite_misc_1540
+org $018A7E
+	dw !sprite_misc_1540
+org $018A85
+	dw !sprite_misc_1540
+org $018AEB
+	dw !sprite_misc_1540
+org $018AF7
+	dw !sprite_misc_1540
+org $018CFE
+	dw !sprite_misc_1540
+org $018D25
+	dw !sprite_misc_1540
+org $018D83
+	dw !sprite_misc_1540
+org $018D9F
+	dw !sprite_misc_1540
+org $018EB2
+	dw !sprite_misc_1540
+org $018EEA
+	dw !sprite_misc_1540
+org $018F2C
+	dw !sprite_misc_1540
+org $018F41
+	dw !sprite_misc_1540
+org $019024
+	dw !sprite_misc_1540
+org $01962B
+	dw !sprite_misc_1540
+org $01963E
+	dw !sprite_misc_1540
+org $01965D
+	dw !sprite_misc_1540
+org $01969D
+	dw !sprite_misc_1540
+org $0196DE
+	dw !sprite_misc_1540
+org $019724
+	dw !sprite_misc_1540
+org $019727
+	dw !sprite_misc_1540
+org $01983A
+	dw !sprite_misc_1540
+org $019A53
+	dw !sprite_misc_1540
+org $019A5E
+	dw !sprite_misc_1540
+org $019AD3
+	dw !sprite_misc_1540
+org $019AE9
+	dw !sprite_misc_1540
+org $01A07E
+	dw !sprite_misc_1540
+org $01A134
+	dw !sprite_misc_1540
+org $01A156
+	dw !sprite_misc_1540
+org $01A1D5
+	dw !sprite_misc_1540
+org $01A72F
+	dw !sprite_misc_1540
+org $01A984
+	dw !sprite_misc_1540
+org $01A991
+	dw !sprite_misc_1540
+org $01A9DB
+	dw !sprite_misc_1540
+org $01A9FE
+	dw !sprite_misc_1540
+org $01AA10
+	dw !sprite_misc_1540
+org $01AA2B
+	dw !sprite_misc_1540
+org $01AA9B
+	dw !sprite_misc_1540
+org $01ADC1
+	dw !sprite_misc_1540
+org $01ADE4
+	dw !sprite_misc_1540
+org $01AF1F
+	dw !sprite_misc_1540
+org $01AF25
+	dw !sprite_misc_1540
+org $01AFE2
+	dw !sprite_misc_1540
+org $01B004
+	dw !sprite_misc_1540
+org $01B0BF
+	dw !sprite_misc_1540
+org $01B0C6
+	dw !sprite_misc_1540
+org $01B1D7
+	dw !sprite_misc_1540
+org $01B1F8
+	dw !sprite_misc_1540
+org $01B274
+	dw !sprite_misc_1540
+org $01B2A3
+	dw !sprite_misc_1540
+org $01B6C0
+	dw !sprite_misc_1540
+org $01B6D5
+	dw !sprite_misc_1540
+org $01B6F2
+	dw !sprite_misc_1540
+org $01B707
+	dw !sprite_misc_1540
+org $01B980
+	dw !sprite_misc_1540
+org $01BA35
+	dw !sprite_misc_1540
+org $01BAE5
+	dw !sprite_misc_1540
+org $01BAF6
+	dw !sprite_misc_1540
+org $01BB17
+	dw !sprite_misc_1540
+org $01BB4A
+	dw !sprite_misc_1540
+org $01BE04
+	dw !sprite_misc_1540
+org $01BE7C
+	dw !sprite_misc_1540
+org $01BE9F
+	dw !sprite_misc_1540
+org $01BFE4
+	dw !sprite_misc_1540
+org $01BFEB
+	dw !sprite_misc_1540
+org $01BFFC
+	dw !sprite_misc_1540
+org $01C005
+	dw !sprite_misc_1540
+org $01C00C
+	dw !sprite_misc_1540
+org $01C025
+	dw !sprite_misc_1540
+org $01C0A8
+	dw !sprite_misc_1540
+org $01C0AF
+	dw !sprite_misc_1540
+org $01C11D
+	dw !sprite_misc_1540
+org $01C176
+	dw !sprite_misc_1540
+org $01C187
+	dw !sprite_misc_1540
+org $01C1B5
+	dw !sprite_misc_1540
+org $01C204
+	dw !sprite_misc_1540
+org $01C2C3
+	dw !sprite_misc_1540
+org $01C390
+	dw !sprite_misc_1540
+org $01C48E
+	dw !sprite_misc_1540
+org $01C4C0
+	dw !sprite_misc_1540
+org $01CD4B
+	dw !sprite_misc_1540
+org $01CE7D
+	dw !sprite_misc_1540
+org $01CE94
+	dw !sprite_misc_1540
+org $01CEAB
+	dw !sprite_misc_1540
+org $01CEB7
+	dw !sprite_misc_1540
+org $01CED0
+	dw !sprite_misc_1540
+org $01CEFE
+	dw !sprite_misc_1540
+org $01CF86
+	dw !sprite_misc_1540
+org $01CFDD
+	dw !sprite_misc_1540
+org $01CFE1
+	dw !sprite_misc_1540
+org $01D040
+	dw !sprite_misc_1540
+org $01D044
+	dw !sprite_misc_1540
+org $01D0BA
+	dw !sprite_misc_1540
+org $01D240
+	dw !sprite_misc_1540
+org $01D2A1
+	dw !sprite_misc_1540
+org $01D3A4
+	dw !sprite_misc_1540
+org $01D456
+	dw !sprite_misc_1540
+org $01D49F
+	dw !sprite_misc_1540
+org $01D50A
+	dw !sprite_misc_1540
+org $01D5B9
+	dw !sprite_misc_1540
+org $01D646
+	dw !sprite_misc_1540
+org $01D65A
+	dw !sprite_misc_1540
+org $01D66F
+	dw !sprite_misc_1540
+org $01D6B3
+	dw !sprite_misc_1540
+org $01D6E1
+	dw !sprite_misc_1540
+org $01D714
+	dw !sprite_misc_1540
+org $01D751
+	dw !sprite_misc_1540
+org $01D81A
+	dw !sprite_misc_1540
+org $01D892
+	dw !sprite_misc_1540
+org $01D8E8
+	dw !sprite_misc_1540
+org $01DA8D
+	dw !sprite_misc_1540
+org $01DB2F
+	dw !sprite_misc_1540
+org $01DB4C
+	dw !sprite_misc_1540
+org $01DE8A
+	dw !sprite_misc_1540
+org $01DF1A
+	dw !sprite_misc_1540
+org $01E078
+	dw !sprite_misc_1540
+org $01E097
+	dw !sprite_misc_1540
+org $01E0E0
+	dw !sprite_misc_1540
+org $01E303
+	dw !sprite_misc_1540
+org $01E30A
+	dw !sprite_misc_1540
+org $01E3F3
+	dw !sprite_misc_1540
+org $01E447
+	dw !sprite_misc_1540
+org $01E490
+	dw !sprite_misc_1540
+org $01E4E0
+	dw !sprite_misc_1540
+org $01E503
+	dw !sprite_misc_1540
+org $01E52E
+	dw !sprite_misc_1540
+org $01E594
+	dw !sprite_misc_1540
+org $01E5B4
+	dw !sprite_misc_1540
+org $01E5E2
+	dw !sprite_misc_1540
+org $01E601
+	dw !sprite_misc_1540
+org $01E651
+	dw !sprite_misc_1540
+org $01E684
+	dw !sprite_misc_1540
+org $01E6EE
+	dw !sprite_misc_1540
+org $01E7C3
+	dw !sprite_misc_1540
+org $01E7C6
+	dw !sprite_misc_1540
+org $01E927
+	dw !sprite_misc_1540
+org $01F754
+	dw !sprite_misc_1540
+org $01F79A
+	dw !sprite_misc_1540
+org $01F8F6
+	dw !sprite_misc_1540
+org $01F8FD
+	dw !sprite_misc_1540
+org $02809D
+	dw !sprite_misc_1540
+org $0280A6
+	dw !sprite_misc_1540
+org $0280B3
+	dw !sprite_misc_1540
+org $0280C5
+	dw !sprite_misc_1540
+org $028658
+	dw !sprite_misc_1540
+org $028A0B
+	dw !sprite_misc_1540
+org $028A14
+	dw !sprite_misc_1540
+org $02941C
+	dw !sprite_misc_1540
+org $029446
+	dw !sprite_misc_1540
+org $02B41F
+	dw !sprite_misc_1540
+org $02B73C
+	dw !sprite_misc_1540
+org $02B815
+	dw !sprite_misc_1540
+org $02B88E
+	dw !sprite_misc_1540
+org $02B8A8
+	dw !sprite_misc_1540
+org $02B932
+	dw !sprite_misc_1540
+org $02BD69
+	dw !sprite_misc_1540
+org $02BD70
+	dw !sprite_misc_1540
+org $02BD7C
+	dw !sprite_misc_1540
+org $02BDA2
+	dw !sprite_misc_1540
+org $02BDB4
+	dw !sprite_misc_1540
+org $02BDE5
+	dw !sprite_misc_1540
+org $02BDF8
+	dw !sprite_misc_1540
+org $02C146
+	dw !sprite_misc_1540
+org $02C157
+	dw !sprite_misc_1540
+org $02C16B
+	dw !sprite_misc_1540
+org $02C1F0
+	dw !sprite_misc_1540
+org $02C3E2
+	dw !sprite_misc_1540
+org $02C3EE
+	dw !sprite_misc_1540
+org $02C3F3
+	dw !sprite_misc_1540
+org $02C3FF
+	dw !sprite_misc_1540
+org $02C40A
+	dw !sprite_misc_1540
+org $02C40D
+	dw !sprite_misc_1540
+org $02C429
+	dw !sprite_misc_1540
+org $02C43B
+	dw !sprite_misc_1540
+org $02C517
+	dw !sprite_misc_1540
+org $02C51E
+	dw !sprite_misc_1540
+org $02C551
+	dw !sprite_misc_1540
+org $02C56A
+	dw !sprite_misc_1540
+org $02C586
+	dw !sprite_misc_1540
+org $02C5AC
+	dw !sprite_misc_1540
+org $02C5FA
+	dw !sprite_misc_1540
+org $02C615
+	dw !sprite_misc_1540
+org $02C644
+	dw !sprite_misc_1540
+org $02C663
+	dw !sprite_misc_1540
+org $02C669
+	dw !sprite_misc_1540
+org $02C6D2
+	dw !sprite_misc_1540
+org $02C6D8
+	dw !sprite_misc_1540
+org $02C6EA
+	dw !sprite_misc_1540
+org $02C72C
+	dw !sprite_misc_1540
+org $02C73A
+	dw !sprite_misc_1540
+org $02C74E
+	dw !sprite_misc_1540
+org $02C75E
+	dw !sprite_misc_1540
+org $02C788
+	dw !sprite_misc_1540
+org $02C802
+	dw !sprite_misc_1540
+org $02C899
+	dw !sprite_misc_1540
+org $02CD5A
+	dw !sprite_misc_1540
+org $02CE10
+	dw !sprite_misc_1540
+org $02CE37
+	dw !sprite_misc_1540
+org $02CFD8
+	dw !sprite_misc_1540
+org $02D423
+	dw !sprite_misc_1540
+org $02D42C
+	dw !sprite_misc_1540
+org $02D446
+	dw !sprite_misc_1540
+org $02D47C
+	dw !sprite_misc_1540
+org $02D482
+	dw !sprite_misc_1540
+org $02D499
+	dw !sprite_misc_1540
+org $02D997
+	dw !sprite_misc_1540
+org $02DAA4
+	dw !sprite_misc_1540
+org $02DAAB
+	dw !sprite_misc_1540
+org $02DCF0
+	dw !sprite_misc_1540
+org $02DCFA
+	dw !sprite_misc_1540
+org $02DD00
+	dw !sprite_misc_1540
+org $02DD1C
+	dw !sprite_misc_1540
+org $02DD4E
+	dw !sprite_misc_1540
+org $02DEB1
+	dw !sprite_misc_1540
+org $02DED4
+	dw !sprite_misc_1540
+org $02DFCA
+	dw !sprite_misc_1540
+org $02DFD1
+	dw !sprite_misc_1540
+org $02DFE0
+	dw !sprite_misc_1540
+org $02DFF0
+	dw !sprite_misc_1540
+org $02E13F
+	dw !sprite_misc_1540
+org $02E172
+	dw !sprite_misc_1540
+org $02E17B
+	dw !sprite_misc_1540
+org $02E1A1
+	dw !sprite_misc_1540
+org $02E221
+	dw !sprite_misc_1540
+org $02E75A
+	dw !sprite_misc_1540
+org $02E779
+	dw !sprite_misc_1540
+org $02E781
+	dw !sprite_misc_1540
+org $02E789
+	dw !sprite_misc_1540
+org $02E7B2
+	dw !sprite_misc_1540
+org $02E7C1
+	dw !sprite_misc_1540
+org $02E7D5
+	dw !sprite_misc_1540
+org $02E7EB
+	dw !sprite_misc_1540
+org $02E96E
+	dw !sprite_misc_1540
+org $02E981
+	dw !sprite_misc_1540
+org $02E987
+	dw !sprite_misc_1540
+org $02E9B5
+	dw !sprite_misc_1540
+org $02E9BE
+	dw !sprite_misc_1540
+org $02E9D6
+	dw !sprite_misc_1540
+org $02F044
+	dw !sprite_misc_1540
+org $02F28D
+	dw !sprite_misc_1540
+org $02F397
+	dw !sprite_misc_1540
+org $02F3B4
+	dw !sprite_misc_1540
+org $02F44C
+	dw !sprite_misc_1540
+org $02F578
+	dw !sprite_misc_1540
+org $038022
+	dw !sprite_misc_1540
+org $038050
+	dw !sprite_misc_1540
+org $0380D0
+	dw !sprite_misc_1540
+org $0380D6
+	dw !sprite_misc_1540
+org $0380DD
+	dw !sprite_misc_1540
+org $0380F7
+	dw !sprite_misc_1540
+org $038107
+	dw !sprite_misc_1540
+org $03818C
+	dw !sprite_misc_1540
+org $038195
+	dw !sprite_misc_1540
+org $0381BD
+	dw !sprite_misc_1540
+org $0381C4
+	dw !sprite_misc_1540
+org $0381D0
+	dw !sprite_misc_1540
+org $03820D
+	dw !sprite_misc_1540
+org $038463
+	dw !sprite_misc_1540
+org $038487
+	dw !sprite_misc_1540
+org $03870A
+	dw !sprite_misc_1540
+org $038726
+	dw !sprite_misc_1540
+org $038731
+	dw !sprite_misc_1540
+org $0387A9
+	dw !sprite_misc_1540
+org $0387AC
+	dw !sprite_misc_1540
+org $03899D
+	dw !sprite_misc_1540
+org $038AA7
+	dw !sprite_misc_1540
+org $038AC4
+	dw !sprite_misc_1540
+org $038C3A
+	dw !sprite_misc_1540
+org $038C43
+	dw !sprite_misc_1540
+org $038E81
+	dw !sprite_misc_1540
+org $038E90
+	dw !sprite_misc_1540
+org $039228
+	dw !sprite_misc_1540
+org $03925F
+	dw !sprite_misc_1540
+org $039263
+	dw !sprite_misc_1540
+org $039442
+	dw !sprite_misc_1540
+org $03944F
+	dw !sprite_misc_1540
+org $039459
+	dw !sprite_misc_1540
+org $039466
+	dw !sprite_misc_1540
+org $03946C
+	dw !sprite_misc_1540
+org $0395E6
+	dw !sprite_misc_1540
+org $03973D
+	dw !sprite_misc_1540
+org $03975B
+	dw !sprite_misc_1540
+org $039762
+	dw !sprite_misc_1540
+org $03977B
+	dw !sprite_misc_1540
+org $039CB0
+	dw !sprite_misc_1540
+org $039CBD
+	dw !sprite_misc_1540
+org $039D44
+	dw !sprite_misc_1540
+org $039D4D
+	dw !sprite_misc_1540
+org $039F5B
+	dw !sprite_misc_1540
+org $039F94
+	dw !sprite_misc_1540
+org $039FA5
+	dw !sprite_misc_1540
+org $039FAE
+	dw !sprite_misc_1540
+org $039FC9
+	dw !sprite_misc_1540
+org $039FD9
+	dw !sprite_misc_1540
+org $039FF3
+	dw !sprite_misc_1540
+org $03A036
+	dw !sprite_misc_1540
+org $03A447
+	dw !sprite_misc_1540
+org $03A462
+	dw !sprite_misc_1540
+org $03A68F
+	dw !sprite_misc_1540
+org $03A6EA
+	dw !sprite_misc_1540
+org $03A6F9
+	dw !sprite_misc_1540
+org $03A84E
+	dw !sprite_misc_1540
+org $03A86B
+	dw !sprite_misc_1540
+org $03ABB7
+	dw !sprite_misc_1540
+org $03ABC6
+	dw !sprite_misc_1540
+org $03ABE3
+	dw !sprite_misc_1540
+org $03AC23
+	dw !sprite_misc_1540
+org $03AD5F
+	dw !sprite_misc_1540
+org $03ADB4
+	dw !sprite_misc_1540
+org $03AE22
+	dw !sprite_misc_1540
+org $03AE26
+	dw !sprite_misc_1540
+org $03AE2F
+	dw !sprite_misc_1540
+org $03AE33
+	dw !sprite_misc_1540
+org $03AEB3
+	dw !sprite_misc_1540
+org $03AEC5
+	dw !sprite_misc_1540
+org $03AECD
+	dw !sprite_misc_1540
+org $03AEE9
+	dw !sprite_misc_1540
+org $03B35B
+	dw !sprite_misc_1540
+org $03B370
+	dw !sprite_misc_1540
+org $03C370
+	dw !sprite_misc_1540
+org $03C377
+	dw !sprite_misc_1540
+org $03CC05
+	dw !sprite_misc_1540
+org $03CC8B
+	dw !sprite_misc_1540
+org $03CCD4
+	dw !sprite_misc_1540
+org $03CD22
+	dw !sprite_misc_1540
+org $03CD29
+	dw !sprite_misc_1540
+org $03CDCB
+	dw !sprite_misc_1540
+org $03CDD2
+	dw !sprite_misc_1540
+org $03CDF0
+	dw !sprite_misc_1540
+org $03CE03
+	dw !sprite_misc_1540
+org $03CE0F
+	dw !sprite_misc_1540
+org $03CE7C
+	dw !sprite_misc_1540
+org $03CE8A
+	dw !sprite_misc_1540
+org $03CEEA
+	dw !sprite_misc_1540
+org $07F1CB
+	dw !sprite_misc_1540
+org $07F740
+	dw !sprite_misc_1540
+;============== REMAPPER FOR $1541
+;============== REMAPPER FOR $1542
+;============== REMAPPER FOR $1543
+;============== REMAPPER FOR $1544
+;============== REMAPPER FOR $1545
+;============== REMAPPER FOR $1546
+;============== REMAPPER FOR $1547
+;============== REMAPPER FOR $1548
+;============== REMAPPER FOR $1549
+org $029469
+	dw !sprite_misc_1540+9
+;============== REMAPPER FOR $154A
+;============== REMAPPER FOR $154B
+;============== REMAPPER FOR $154C
+org $00FB7B
+	dw !sprite_misc_154c
+org $0180F7
+	dw !sprite_misc_154c
+org $0180FC
+	dw !sprite_misc_154c
+org $019760
+	dw !sprite_misc_154c
+org $0197AA
+	dw !sprite_misc_154c
+org $01A0A9
+	dw !sprite_misc_154c
+org $01A882
+	dw !sprite_misc_154c
+org $01A889
+	dw !sprite_misc_154c
+org $01AAA7
+	dw !sprite_misc_154c
+org $01AAB8
+	dw !sprite_misc_154c
+org $01BAD1
+	dw !sprite_misc_154c
+org $01BAF9
+	dw !sprite_misc_154c
+org $01BB14
+	dw !sprite_misc_154c
+org $01C4BB
+	dw !sprite_misc_154c
+org $01C709
+	dw !sprite_misc_154c
+org $01DA1D
+	dw !sprite_misc_154c
+org $01DA3D
+	dw !sprite_misc_154c
+org $01DF3E
+	dw !sprite_misc_154c
+org $01E029
+	dw !sprite_misc_154c
+org $01E02E
+	dw !sprite_misc_154c
+org $01E033
+	dw !sprite_misc_154c
+org $01E20C
+	dw !sprite_misc_154c
+org $01E238
+	dw !sprite_misc_154c
+org $01E6B6
+	dw !sprite_misc_154c
+org $01E805
+	dw !sprite_misc_154c
+org $01E893
+	dw !sprite_misc_154c
+org $01E8C8
+	dw !sprite_misc_154c
+org $01ECD7
+	dw !sprite_misc_154c
+org $01FAF8
+	dw !sprite_misc_154c
+org $01FBB3
+	dw !sprite_misc_154c
+org $01FC0F
+	dw !sprite_misc_154c
+org $01FCFB
+	dw !sprite_misc_154c
+org $01FD02
+	dw !sprite_misc_154c
+org $01FD48
+	dw !sprite_misc_154c
+org $028A1D
+	dw !sprite_misc_154c
+org $0293C7
+	dw !sprite_misc_154c
+org $029407
+	dw !sprite_misc_154c
+org $0294E5
+	dw !sprite_misc_154c
+org $02D98E
+	dw !sprite_misc_154c
+org $02EB20
+	dw !sprite_misc_154c
+org $02F255
+	dw !sprite_misc_154c
+org $02F25E
+	dw !sprite_misc_154c
+org $02F382
+	dw !sprite_misc_154c
+org $02F38C
+	dw !sprite_misc_154c
+org $0387F2
+	dw !sprite_misc_154c
+org $03881F
+	dw !sprite_misc_154c
+org $039591
+	dw !sprite_misc_154c
+org $039598
+	dw !sprite_misc_154c
+org $039A38
+	dw !sprite_misc_154c
+org $039A45
+	dw !sprite_misc_154c
+org $03A442
+	dw !sprite_misc_154c
+org $03A47F
+	dw !sprite_misc_154c
+org $03ABDE
+	dw !sprite_misc_154c
+org $03AC07
+	dw !sprite_misc_154c
+org $03ACB6
+	dw !sprite_misc_154c
+org $03ACBC
+	dw !sprite_misc_154c
+org $03AE49
+	dw !sprite_misc_154c
+org $03B08F
+	dw !sprite_misc_154c
+org $03B0D9
+	dw !sprite_misc_154c
+org $03C308
+	dw !sprite_misc_154c
+org $03C323
+	dw !sprite_misc_154c
+org $07F743
+	dw !sprite_misc_154c
+;============== REMAPPER FOR $154D
+;============== REMAPPER FOR $154E
+;============== REMAPPER FOR $154F
+;============== REMAPPER FOR $1550
+;============== REMAPPER FOR $1551
+;============== REMAPPER FOR $1552
+;============== REMAPPER FOR $1553
+;============== REMAPPER FOR $1554
+;============== REMAPPER FOR $1555
+;============== REMAPPER FOR $1556
+;============== REMAPPER FOR $1557
+;============== REMAPPER FOR $1558
+org $0180FF
+	dw !sprite_misc_1558
+org $018104
+	dw !sprite_misc_1558
+org $018A9C
+	dw !sprite_misc_1558
+org $018AD2
+	dw !sprite_misc_1558
+org $018B9E
+	dw !sprite_misc_1558
+org $018F9A
+	dw !sprite_misc_1558
+org $018FA8
+	dw !sprite_misc_1558
+org $019338
+	dw !sprite_misc_1558
+org $019660
+	dw !sprite_misc_1558
+org $019665
+	dw !sprite_misc_1558
+org $019835
+	dw !sprite_misc_1558
+org $019A2D
+	dw !sprite_misc_1558
+org $019A3E
+	dw !sprite_misc_1558
+org $019A7C
+	dw !sprite_misc_1558
+org $01A54E
+	dw !sprite_misc_1558
+org $01A551
+	dw !sprite_misc_1558
+org $01A6EF
+	dw !sprite_misc_1558
+org $01A6F2
+	dw !sprite_misc_1558
+org $01A71C
+	dw !sprite_misc_1558
+org $01A75A
+	dw !sprite_misc_1558
+org $01A76D
+	dw !sprite_misc_1558
+org $01AE02
+	dw !sprite_misc_1558
+org $01B4F0
+	dw !sprite_misc_1558
+org $01C47F
+	dw !sprite_misc_1558
+org $01CED5
+	dw !sprite_misc_1558
+org $01CF45
+	dw !sprite_misc_1558
+org $01E13F
+	dw !sprite_misc_1558
+org $01E14D
+	dw !sprite_misc_1558
+org $01E3DB
+	dw !sprite_misc_1558
+org $01E3E2
+	dw !sprite_misc_1558
+org $01EA11
+	dw !sprite_misc_1558
+org $01F12F
+	dw !sprite_misc_1558
+org $01F252
+	dw !sprite_misc_1558
+org $01F32B
+	dw !sprite_misc_1558
+org $01F333
+	dw !sprite_misc_1558
+org $01F607
+	dw !sprite_misc_1558
+org $01F957
+	dw !sprite_misc_1558
+org $01FCC1
+	dw !sprite_misc_1558
+org $01FCC8
+	dw !sprite_misc_1558
+org $029424
+	dw !sprite_misc_1558
+org $029449
+	dw !sprite_misc_1558
+org $02B7D7
+	dw !sprite_misc_1558
+org $02B819
+	dw !sprite_misc_1558
+org $02BCEC
+	dw !sprite_misc_1558
+org $02BD3C
+	dw !sprite_misc_1558
+org $02BF0D
+	dw !sprite_misc_1558
+org $02BF80
+	dw !sprite_misc_1558
+org $02C13B
+	dw !sprite_misc_1558
+org $02C17B
+	dw !sprite_misc_1558
+org $02C437
+	dw !sprite_misc_1558
+org $02C467
+	dw !sprite_misc_1558
+org $02DBE5
+	dw !sprite_misc_1558
+org $02DC47
+	dw !sprite_misc_1558
+org $02DD0F
+	dw !sprite_misc_1558
+org $02DD2D
+	dw !sprite_misc_1558
+org $0383AF
+	dw !sprite_misc_1558
+org $038438
+	dw !sprite_misc_1558
+org $03896C
+	dw !sprite_misc_1558
+org $0389A0
+	dw !sprite_misc_1558
+org $0389E0
+	dw !sprite_misc_1558
+org $038D77
+	dw !sprite_misc_1558
+org $038D83
+	dw !sprite_misc_1558
+org $038D94
+	dw !sprite_misc_1558
+org $039526
+	dw !sprite_misc_1558
+org $0395BE
+	dw !sprite_misc_1558
+org $03967F
+	dw !sprite_misc_1558
+org $03971E
+	dw !sprite_misc_1558
+org $039794
+	dw !sprite_misc_1558
+org $039A0E
+	dw !sprite_misc_1558
+org $039A1A
+	dw !sprite_misc_1558
+org $039A96
+	dw !sprite_misc_1558
+org $039AC1
+	dw !sprite_misc_1558
+org $03A303
+	dw !sprite_misc_1558
+org $03A313
+	dw !sprite_misc_1558
+org $03ACDF
+	dw !sprite_misc_1558
+org $03AE58
+	dw !sprite_misc_1558
+org $03C201
+	dw !sprite_misc_1558
+org $03C22C
+	dw !sprite_misc_1558
+org $07F746
+	dw !sprite_misc_1558
+;============== REMAPPER FOR $1559
+;============== REMAPPER FOR $155A
+;============== REMAPPER FOR $155B
+;============== REMAPPER FOR $155C
+;============== REMAPPER FOR $155D
+;============== REMAPPER FOR $155E
+;============== REMAPPER FOR $155F
+;============== REMAPPER FOR $1560
+;============== REMAPPER FOR $1561
+;============== REMAPPER FOR $1562
+;============== REMAPPER FOR $1563
+;============== REMAPPER FOR $1564
+org $018107
+	dw !sprite_misc_1564
+org $01810C
+	dw !sprite_misc_1564
+org $0183DD
+	dw !sprite_misc_1564
+org $0189A6
+	dw !sprite_misc_1564
+org $01971B
+	dw !sprite_misc_1564
+org $01A42A
+	dw !sprite_misc_1564
+org $01A42D
+	dw !sprite_misc_1564
+org $01A721
+	dw !sprite_misc_1564
+org $01A753
+	dw !sprite_misc_1564
+org $01B4E5
+	dw !sprite_misc_1564
+org $01E0FF
+	dw !sprite_misc_1564
+org $01E116
+	dw !sprite_misc_1564
+org $01E75C
+	dw !sprite_misc_1564
+org $01EFFE
+	dw !sprite_misc_1564
+org $01F010
+	dw !sprite_misc_1564
+org $01F1C1
+	dw !sprite_misc_1564
+org $01F1DC
+	dw !sprite_misc_1564
+org $01F37B
+	dw !sprite_misc_1564
+org $01FB18
+	dw !sprite_misc_1564
+org $01FB83
+	dw !sprite_misc_1564
+org $01FC2B
+	dw !sprite_misc_1564
+org $02BCF7
+	dw !sprite_misc_1564
+org $02BDD2
+	dw !sprite_misc_1564
+org $02BE1B
+	dw !sprite_misc_1564
+org $02C79E
+	dw !sprite_misc_1564
+org $02C7D0
+	dw !sprite_misc_1564
+org $02D0D5
+	dw !sprite_misc_1564
+org $02D1DF
+	dw !sprite_misc_1564
+org $039A60
+	dw !sprite_misc_1564
+org $039AB5
+	dw !sprite_misc_1564
+org $039BF8
+	dw !sprite_misc_1564
+org $03A2AE
+	dw !sprite_misc_1564
+org $03A3E6
+	dw !sprite_misc_1564
+org $03ABF9
+	dw !sprite_misc_1564
+org $03AC00
+	dw !sprite_misc_1564
+org $03C797
+	dw !sprite_misc_1564
+org $03C813
+	dw !sprite_misc_1564
+org $03C838
+	dw !sprite_misc_1564
+org $03C846
+	dw !sprite_misc_1564
+org $07F749
+	dw !sprite_misc_1564
+;============== REMAPPER FOR $1565
+;============== REMAPPER FOR $1566
+;============== REMAPPER FOR $1567
+;============== REMAPPER FOR $1568
+;============== REMAPPER FOR $1569
+;============== REMAPPER FOR $156A
+;============== REMAPPER FOR $156B
+;============== REMAPPER FOR $156C
+;============== REMAPPER FOR $156D
+org $03C7A8
+	dw !sprite_misc_1564+9
+org $03C883
+	dw !sprite_misc_1564+9
+;============== REMAPPER FOR $156E
+;============== REMAPPER FOR $156F
+;============== REMAPPER FOR $1570
+org $00FBF1
+	dw !sprite_misc_1570
+org $018332
+	dw !sprite_misc_1570
+org $01857A
+	dw !sprite_misc_1570
+org $0189E7
+	dw !sprite_misc_1570
+org $018A63
+	dw !sprite_misc_1570
+org $018B62
+	dw !sprite_misc_1570
+org $018B91
+	dw !sprite_misc_1570
+org $018C7D
+	dw !sprite_misc_1570
+org $018CED
+	dw !sprite_misc_1570
+org $018D5A
+	dw !sprite_misc_1570
+org $018D5D
+	dw !sprite_misc_1570
+org $018D60
+	dw !sprite_misc_1570
+org $018D80
+	dw !sprite_misc_1570
+org $018DED
+	dw !sprite_misc_1570
+org $018E60
+	dw !sprite_misc_1570
+org $018E63
+	dw !sprite_misc_1570
+org $019EC9
+	dw !sprite_misc_1570
+org $01A2F5
+	dw !sprite_misc_1570
+org $01A2F8
+	dw !sprite_misc_1570
+org $01ADF6
+	dw !sprite_misc_1570
+org $01B1EB
+	dw !sprite_misc_1570
+org $01B1EE
+	dw !sprite_misc_1570
+org $01BA3C
+	dw !sprite_misc_1570
+org $01BA58
+	dw !sprite_misc_1570
+org $01BE52
+	dw !sprite_misc_1570
+org $01BFEE
+	dw !sprite_misc_1570
+org $01BFF1
+	dw !sprite_misc_1570
+org $01C00F
+	dw !sprite_misc_1570
+org $01C012
+	dw !sprite_misc_1570
+org $01C029
+	dw !sprite_misc_1570
+org $01C253
+	dw !sprite_misc_1570
+org $01C3C0
+	dw !sprite_misc_1570
+org $01D52A
+	dw !sprite_misc_1570
+org $01D531
+	dw !sprite_misc_1570
+org $01D53E
+	dw !sprite_misc_1570
+org $01D5E6
+	dw !sprite_misc_1570
+org $01D605
+	dw !sprite_misc_1570
+org $01D6A9
+	dw !sprite_misc_1570
+org $01D78B
+	dw !sprite_misc_1570
+org $01D793
+	dw !sprite_misc_1570
+org $01D79A
+	dw !sprite_misc_1570
+org $01D7A9
+	dw !sprite_misc_1570
+org $01D8DE
+	dw !sprite_misc_1570
+org $01DDEA
+	dw !sprite_misc_1570
+org $01DE4C
+	dw !sprite_misc_1570
+org $01DE4F
+	dw !sprite_misc_1570
+org $01DE56
+	dw !sprite_misc_1570
+org $01DE7F
+	dw !sprite_misc_1570
+org $01DE85
+	dw !sprite_misc_1570
+org $01DF6D
+	dw !sprite_misc_1570
+org $01E00E
+	dw !sprite_misc_1570
+org $01E558
+	dw !sprite_misc_1570
+org $01E564
+	dw !sprite_misc_1570
+org $01E5A8
+	dw !sprite_misc_1570
+org $01EABC
+	dw !sprite_misc_1570
+org $01EAC4
+	dw !sprite_misc_1570
+org $01EAE0
+	dw !sprite_misc_1570
+org $01F889
+	dw !sprite_misc_1570
+org $01F94D
+	dw !sprite_misc_1570
+org $01F950
+	dw !sprite_misc_1570
+org $01F98A
+	dw !sprite_misc_1570
+org $01FBF1
+	dw !sprite_misc_1570
+org $01FBF8
+	dw !sprite_misc_1570
+org $01FBFB
+	dw !sprite_misc_1570
+org $02809A
+	dw !sprite_misc_1570
+org $02B370
+	dw !sprite_misc_1570
+org $02B6BF
+	dw !sprite_misc_1570
+org $02B6C2
+	dw !sprite_misc_1570
+org $02C007
+	dw !sprite_misc_1570
+org $02C07E
+	dw !sprite_misc_1570
+org $02C0BE
+	dw !sprite_misc_1570
+org $02C14E
+	dw !sprite_misc_1570
+org $02C164
+	dw !sprite_misc_1570
+org $02C182
+	dw !sprite_misc_1570
+org $02C74B
+	dw !sprite_misc_1570
+org $02C753
+	dw !sprite_misc_1570
+org $02C805
+	dw !sprite_misc_1570
+org $02CC03
+	dw !sprite_misc_1570
+org $02CCF3
+	dw !sprite_misc_1570
+org $02CE3B
+	dw !sprite_misc_1570
+org $02CE3E
+	dw !sprite_misc_1570
+org $02CFFB
+	dw !sprite_misc_1570
+org $02DA87
+	dw !sprite_misc_1570
+org $02DA8A
+	dw !sprite_misc_1570
+org $02DA98
+	dw !sprite_misc_1570
+org $02DD21
+	dw !sprite_misc_1570
+org $02DD24
+	dw !sprite_misc_1570
+org $02DD30
+	dw !sprite_misc_1570
+org $02DD37
+	dw !sprite_misc_1570
+org $02DF12
+	dw !sprite_misc_1570
+org $02DF15
+	dw !sprite_misc_1570
+org $02DF1F
+	dw !sprite_misc_1570
+org $02DF4E
+	dw !sprite_misc_1570
+org $02E0D9
+	dw !sprite_misc_1570
+org $02E167
+	dw !sprite_misc_1570
+org $02E180
+	dw !sprite_misc_1570
+org $02E1AB
+	dw !sprite_misc_1570
+org $02E348
+	dw !sprite_misc_1570
+org $02E3AE
+	dw !sprite_misc_1570
+org $02E430
+	dw !sprite_misc_1570
+org $02E433
+	dw !sprite_misc_1570
+org $02E43C
+	dw !sprite_misc_1570
+org $02E5C4
+	dw !sprite_misc_1570
+org $02E5C9
+	dw !sprite_misc_1570
+org $02E75F
+	dw !sprite_misc_1570
+org $02E762
+	dw !sprite_misc_1570
+org $02E7AD
+	dw !sprite_misc_1570
+org $02E891
+	dw !sprite_misc_1570
+org $02E894
+	dw !sprite_misc_1570
+org $02E89C
+	dw !sprite_misc_1570
+org $02EEC9
+	dw !sprite_misc_1570
+org $02EED0
+	dw !sprite_misc_1570
+org $02EEFA
+	dw !sprite_misc_1570
+org $02EFAB
+	dw !sprite_misc_1570
+org $02F06B
+	dw !sprite_misc_1570
+org $02F073
+	dw !sprite_misc_1570
+org $02F114
+	dw !sprite_misc_1570
+org $02F369
+	dw !sprite_misc_1570
+org $02F36E
+	dw !sprite_misc_1570
+org $02F37E
+	dw !sprite_misc_1570
+org $02F3A4
+	dw !sprite_misc_1570
+org $02F3A9
+	dw !sprite_misc_1570
+org $02F3D8
+	dw !sprite_misc_1570
+org $02F435
+	dw !sprite_misc_1570
+org $02F43A
+	dw !sprite_misc_1570
+org $0380C4
+	dw !sprite_misc_1570
+org $0380C7
+	dw !sprite_misc_1570
+org $038110
+	dw !sprite_misc_1570
+org $038DD0
+	dw !sprite_misc_1570
+org $038DD5
+	dw !sprite_misc_1570
+org $038DD8
+	dw !sprite_misc_1570
+org $038E16
+	dw !sprite_misc_1570
+org $0392F2
+	dw !sprite_misc_1570
+org $039317
+	dw !sprite_misc_1570
+org $039538
+	dw !sprite_misc_1570
+org $03953B
+	dw !sprite_misc_1570
+org $039730
+	dw !sprite_misc_1570
+org $039733
+	dw !sprite_misc_1570
+org $039883
+	dw !sprite_misc_1570
+org $0399FF
+	dw !sprite_misc_1570
+org $039A02
+	dw !sprite_misc_1570
+org $039A09
+	dw !sprite_misc_1570
+org $039DF0
+	dw !sprite_misc_1570
+org $039DF3
+	dw !sprite_misc_1570
+org $03A286
+	dw !sprite_misc_1570
+org $03A44E
+	dw !sprite_misc_1570
+org $03A479
+	dw !sprite_misc_1570
+org $03A4E8
+	dw !sprite_misc_1570
+org $03A5C4
+	dw !sprite_misc_1570
+org $03A5E9
+	dw !sprite_misc_1570
+org $03A6B8
+	dw !sprite_misc_1570
+org $03A70F
+	dw !sprite_misc_1570
+org $03A89A
+	dw !sprite_misc_1570
+org $03B1CC
+	dw !sprite_misc_1570
+org $03B1CF
+	dw !sprite_misc_1570
+org $03B1D2
+	dw !sprite_misc_1570
+org $03B265
+	dw !sprite_misc_1570
+org $03B2FA
+	dw !sprite_misc_1570
+org $03B2FD
+	dw !sprite_misc_1570
+org $03B405
+	dw !sprite_misc_1570
+org $03C09C
+	dw !sprite_misc_1570
+org $03C09F
+	dw !sprite_misc_1570
+org $03C8B5
+	dw !sprite_misc_1570
+org $03C8BC
+	dw !sprite_misc_1570
+org $03C8DE
+	dw !sprite_misc_1570
+org $03C9EF
+	dw !sprite_misc_1570
+org $03CC90
+	dw !sprite_misc_1570
+org $03CCA1
+	dw !sprite_misc_1570
+org $03CCBD
+	dw !sprite_misc_1570
+org $03CCFD
+	dw !sprite_misc_1570
+org $03CDF5
+	dw !sprite_misc_1570
+org $03CE2B
+	dw !sprite_misc_1570
+org $03CEC7
+	dw !sprite_misc_1570
+org $03CEE3
+	dw !sprite_misc_1570
+org $07F752
+	dw !sprite_misc_1570
+;============== REMAPPER FOR $1571
+;============== REMAPPER FOR $1572
+;============== REMAPPER FOR $1573
+;============== REMAPPER FOR $1574
+;============== REMAPPER FOR $1575
+;============== REMAPPER FOR $1576
+;============== REMAPPER FOR $1577
+;============== REMAPPER FOR $1578
+;============== REMAPPER FOR $1579
+org $01DE04
+	dw !sprite_misc_1570+9
+;============== REMAPPER FOR $157A
+;============== REMAPPER FOR $157B
+org $02A497
+	dw !sprite_misc_157c-1
+;============== REMAPPER FOR $157C
+org $00FC6B
+	dw !sprite_misc_157c
+org $00FCDF
+	dw !sprite_misc_157c
+org $018315
+	dw !sprite_misc_157c
+org $0183E4
+	dw !sprite_misc_157c
+org $018516
+	dw !sprite_misc_157c
+org $018581
+	dw !sprite_misc_157c
+org $0188DD
+	dw !sprite_misc_157c
+org $0188E0
+	dw !sprite_misc_157c
+org $01898D
+	dw !sprite_misc_157c
+org $018B16
+	dw !sprite_misc_157c
+org $018B2F
+	dw !sprite_misc_157c
+org $018B69
+	dw !sprite_misc_157c
+org $018B71
+	dw !sprite_misc_157c
+org $018BC4
+	dw !sprite_misc_157c
+org $018BD9
+	dw !sprite_misc_157c
+org $018BDC
+	dw !sprite_misc_157c
+org $018C15
+	dw !sprite_misc_157c
+org $018C52
+	dw !sprite_misc_157c
+org $018CCB
+	dw !sprite_misc_157c
+org $018CD3
+	dw !sprite_misc_157c
+org $018DBE
+	dw !sprite_misc_157c
+org $018DFD
+	dw !sprite_misc_157c
+org $018FEA
+	dw !sprite_misc_157c
+org $01908A
+	dw !sprite_misc_157c
+org $0190AA
+	dw !sprite_misc_157c
+org $0190AF
+	dw !sprite_misc_157c
+org $019716
+	dw !sprite_misc_157c
+org $01973B
+	dw !sprite_misc_157c
+org $019759
+	dw !sprite_misc_157c
+org $0197A5
+	dw !sprite_misc_157c
+org $0198C0
+	dw !sprite_misc_157c
+org $019A1F
+	dw !sprite_misc_157c
+org $019D74
+	dw !sprite_misc_157c
+org $019DB2
+	dw !sprite_misc_157c
+org $019DDD
+	dw !sprite_misc_157c
+org $019E4E
+	dw !sprite_misc_157c
+org $019EC2
+	dw !sprite_misc_157c
+org $019EC6
+	dw !sprite_misc_157c
+org $019EED
+	dw !sprite_misc_157c
+org $019EF4
+	dw !sprite_misc_157c
+org $019F13
+	dw !sprite_misc_157c
+org $019F38
+	dw !sprite_misc_157c
+org $01A175
+	dw !sprite_misc_157c
+org $01A21B
+	dw !sprite_misc_157c
+org $01A325
+	dw !sprite_misc_157c
+org $01A589
+	dw !sprite_misc_157c
+org $01A58F
+	dw !sprite_misc_157c
+org $01A593
+	dw !sprite_misc_157c
+org $01A5A9
+	dw !sprite_misc_157c
+org $01A5B1
+	dw !sprite_misc_157c
+org $01A5B5
+	dw !sprite_misc_157c
+org $01A70A
+	dw !sprite_misc_157c
+org $01A788
+	dw !sprite_misc_157c
+org $01A78B
+	dw !sprite_misc_157c
+org $01A90F
+	dw !sprite_misc_157c
+org $01AD65
+	dw !sprite_misc_157c
+org $01AED2
+	dw !sprite_misc_157c
+org $01B21A
+	dw !sprite_misc_157c
+org $01BA54
+	dw !sprite_misc_157c
+org $01BA60
+	dw !sprite_misc_157c
+org $01BA7C
+	dw !sprite_misc_157c
+org $01BE5C
+	dw !sprite_misc_157c
+org $01BE79
+	dw !sprite_misc_157c
+org $01BED6
+	dw !sprite_misc_157c
+org $01BEF3
+	dw !sprite_misc_157c
+org $01C25E
+	dw !sprite_misc_157c
+org $01C351
+	dw !sprite_misc_157c
+org $01C6BE
+	dw !sprite_misc_157c
+org $01CD61
+	dw !sprite_misc_157c
+org $01CDBB
+	dw !sprite_misc_157c
+org $01CDF6
+	dw !sprite_misc_157c
+org $01CDFE
+	dw !sprite_misc_157c
+org $01CE02
+	dw !sprite_misc_157c
+org $01D08D
+	dw !sprite_misc_157c
+org $01D0AB
+	dw !sprite_misc_157c
+org $01D0AE
+	dw !sprite_misc_157c
+org $01D1B6
+	dw !sprite_misc_157c
+org $01D1FB
+	dw !sprite_misc_157c
+org $01D216
+	dw !sprite_misc_157c
+org $01D225
+	dw !sprite_misc_157c
+org $01D250
+	dw !sprite_misc_157c
+org $01D491
+	dw !sprite_misc_157c
+org $01D5F2
+	dw !sprite_misc_157c
+org $01D640
+	dw !sprite_misc_157c
+org $01D708
+	dw !sprite_misc_157c
+org $01D76D
+	dw !sprite_misc_157c
+org $01D875
+	dw !sprite_misc_157c
+org $01D8ED
+	dw !sprite_misc_157c
+org $01D90E
+	dw !sprite_misc_157c
+org $01DB7C
+	dw !sprite_misc_157c
+org $01DDE1
+	dw !sprite_misc_157c
+org $01DE8D
+	dw !sprite_misc_157c
+org $01DED8
+	dw !sprite_misc_157c
+org $01DEDF
+	dw !sprite_misc_157c
+org $01E3D3
+	dw !sprite_misc_157c
+org $01E46E
+	dw !sprite_misc_157c
+org $01E4CB
+	dw !sprite_misc_157c
+org $01E999
+	dw !sprite_misc_157c
+org $01EB4F
+	dw !sprite_misc_157c
+org $01EB91
+	dw !sprite_misc_157c
+org $01EC98
+	dw !sprite_misc_157c
+org $01ECA7
+	dw !sprite_misc_157c
+org $01ED81
+	dw !sprite_misc_157c
+org $01EE74
+	dw !sprite_misc_157c
+org $01EE7B
+	dw !sprite_misc_157c
+org $01EF3A
+	dw !sprite_misc_157c
+org $01F04D
+	dw !sprite_misc_157c
+org $01F1FA
+	dw !sprite_misc_157c
+org $01F207
+	dw !sprite_misc_157c
+org $01F239
+	dw !sprite_misc_157c
+org $01F23C
+	dw !sprite_misc_157c
+org $01F2BA
+	dw !sprite_misc_157c
+org $01F41B
+	dw !sprite_misc_157c
+org $01F434
+	dw !sprite_misc_157c
+org $01F924
+	dw !sprite_misc_157c
+org $01F977
+	dw !sprite_misc_157c
+org $01F97C
+	dw !sprite_misc_157c
+org $01FA5C
+	dw !sprite_misc_157c
+org $01FA82
+	dw !sprite_misc_157c
+org $01FB88
+	dw !sprite_misc_157c
+org $01FB90
+	dw !sprite_misc_157c
+org $01FC14
+	dw !sprite_misc_157c
+org $01FC23
+	dw !sprite_misc_157c
+org $01FC4B
+	dw !sprite_misc_157c
+org $01FDCA
+	dw !sprite_misc_157c
+org $01FDCD
+	dw !sprite_misc_157c
+org $01FEC9
+	dw !sprite_misc_157c
+org $0289CA
+	dw !sprite_misc_157c
+org $02941F
+	dw !sprite_misc_157c
+org $0294BE
+	dw !sprite_misc_157c
+org $02A141
+	dw !sprite_misc_157c
+org $02B079
+	dw !sprite_misc_157c
+org $02B204
+	dw !sprite_misc_157c
+org $02B24B
+	dw !sprite_misc_157c
+org $02B418
+	dw !sprite_misc_157c
+org $02B6CD
+	dw !sprite_misc_157c
+org $02B6D0
+	dw !sprite_misc_157c
+org $02B6FD
+	dw !sprite_misc_157c
+org $02B702
+	dw !sprite_misc_157c
+org $02B8C3
+	dw !sprite_misc_157c
+org $02B90B
+	dw !sprite_misc_157c
+org $02B974
+	dw !sprite_misc_157c
+org $02BB3B
+	dw !sprite_misc_157c
+org $02BC07
+	dw !sprite_misc_157c
+org $02C0D2
+	dw !sprite_misc_157c
+org $02C12F
+	dw !sprite_misc_157c
+org $02C18B
+	dw !sprite_misc_157c
+org $02C1AB
+	dw !sprite_misc_157c
+org $02C499
+	dw !sprite_misc_157c
+org $02C55B
+	dw !sprite_misc_157c
+org $02C607
+	dw !sprite_misc_157c
+org $02C66E
+	dw !sprite_misc_157c
+org $02C673
+	dw !sprite_misc_157c
+org $02C6CB
+	dw !sprite_misc_157c
+org $02C6ED
+	dw !sprite_misc_157c
+org $02C8B7
+	dw !sprite_misc_157c
+org $02CAFF
+	dw !sprite_misc_157c
+org $02CB57
+	dw !sprite_misc_157c
+org $02CBC7
+	dw !sprite_misc_157c
+org $02CE1D
+	dw !sprite_misc_157c
+org $02CE52
+	dw !sprite_misc_157c
+org $02CE6D
+	dw !sprite_misc_157c
+org $02CE83
+	dw !sprite_misc_157c
+org $02D103
+	dw !sprite_misc_157c
+org $02D164
+	dw !sprite_misc_157c
+org $02D935
+	dw !sprite_misc_157c
+org $02D99E
+	dw !sprite_misc_157c
+org $02DA5B
+	dw !sprite_misc_157c
+org $02DA95
+	dw !sprite_misc_157c
+org $02DAB0
+	dw !sprite_misc_157c
+org $02DB01
+	dw !sprite_misc_157c
+org $02DD14
+	dw !sprite_misc_157c
+org $02DD82
+	dw !sprite_misc_157c
+org $02DD87
+	dw !sprite_misc_157c
+org $02DE42
+	dw !sprite_misc_157c
+org $02E320
+	dw !sprite_misc_157c
+org $02E474
+	dw !sprite_misc_157c
+org $02E74F
+	dw !sprite_misc_157c
+org $02E769
+	dw !sprite_misc_157c
+org $02E76E
+	dw !sprite_misc_157c
+org $02E990
+	dw !sprite_misc_157c
+org $02E9B1
+	dw !sprite_misc_157c
+org $02EA15
+	dw !sprite_misc_157c
+org $02EABB
+	dw !sprite_misc_157c
+org $02EACB
+	dw !sprite_misc_157c
+org $02EB61
+	dw !sprite_misc_157c
+org $02EB96
+	dw !sprite_misc_157c
+org $02EBE8
+	dw !sprite_misc_157c
+org $02ECE2
+	dw !sprite_misc_157c
+org $02EFA6
+	dw !sprite_misc_157c
+org $02F00D
+	dw !sprite_misc_157c
+org $02F084
+	dw !sprite_misc_157c
+org $02F087
+	dw !sprite_misc_157c
+org $02F0B4
+	dw !sprite_misc_157c
+org $02F0B9
+	dw !sprite_misc_157c
+org $02F0D4
+	dw !sprite_misc_157c
+org $02F1A9
+	dw !sprite_misc_157c
+org $02F1CC
+	dw !sprite_misc_157c
+org $02F343
+	dw !sprite_misc_157c
+org $02F3C2
+	dw !sprite_misc_157c
+org $02F3C7
+	dw !sprite_misc_157c
+org $02F3F2
+	dw !sprite_misc_157c
+org $038129
+	dw !sprite_misc_157c
+org $038138
+	dw !sprite_misc_157c
+org $03813D
+	dw !sprite_misc_157c
+org $0383D5
+	dw !sprite_misc_157c
+org $038517
+	dw !sprite_misc_157c
+org $038549
+	dw !sprite_misc_157c
+org $0385AD
+	dw !sprite_misc_157c
+org $03861C
+	dw !sprite_misc_157c
+org $03861F
+	dw !sprite_misc_157c
+org $03877E
+	dw !sprite_misc_157c
+org $0387C6
+	dw !sprite_misc_157c
+org $0387CB
+	dw !sprite_misc_157c
+org $0387D2
+	dw !sprite_misc_157c
+org $0388F9
+	dw !sprite_misc_157c
+org $03891C
+	dw !sprite_misc_157c
+org $038962
+	dw !sprite_misc_157c
+org $038973
+	dw !sprite_misc_157c
+org $038980
+	dw !sprite_misc_157c
+org $038A92
+	dw !sprite_misc_157c
+org $038A97
+	dw !sprite_misc_157c
+org $038AB7
+	dw !sprite_misc_157c
+org $038AF4
+	dw !sprite_misc_157c
+org $038B1F
+	dw !sprite_misc_157c
+org $038B22
+	dw !sprite_misc_157c
+org $038B50
+	dw !sprite_misc_157c
+org $038EFB
+	dw !sprite_misc_157c
+org $038F1F
+	dw !sprite_misc_157c
+org $038F82
+	dw !sprite_misc_157c
+org $039084
+	dw !sprite_misc_157c
+org $0390F4
+	dw !sprite_misc_157c
+org $039189
+	dw !sprite_misc_157c
+org $0392BE
+	dw !sprite_misc_157c
+org $03931D
+	dw !sprite_misc_157c
+org $039384
+	dw !sprite_misc_157c
+org $03955C
+	dw !sprite_misc_157c
+org $03957A
+	dw !sprite_misc_157c
+org $03957F
+	dw !sprite_misc_157c
+org $0395D7
+	dw !sprite_misc_157c
+org $03969C
+	dw !sprite_misc_157c
+org $039746
+	dw !sprite_misc_157c
+org $0397A5
+	dw !sprite_misc_157c
+org $039A22
+	dw !sprite_misc_157c
+org $039A2A
+	dw !sprite_misc_157c
+org $039A2E
+	dw !sprite_misc_157c
+org $039A7F
+	dw !sprite_misc_157c
+org $039A8E
+	dw !sprite_misc_157c
+org $039AAB
+	dw !sprite_misc_157c
+org $039B85
+	dw !sprite_misc_157c
+org $039C82
+	dw !sprite_misc_157c
+org $039C87
+	dw !sprite_misc_157c
+org $039CD8
+	dw !sprite_misc_157c
+org $039CDF
+	dw !sprite_misc_157c
+org $039DBE
+	dw !sprite_misc_157c
+org $039E4D
+	dw !sprite_misc_157c
+org $039FBA
+	dw !sprite_misc_157c
+org $039FC5
+	dw !sprite_misc_157c
+org $039FDC
+	dw !sprite_misc_157c
+org $03A0A8
+	dw !sprite_misc_157c
+org $03A28C
+	dw !sprite_misc_157c
+org $03A4FA
+	dw !sprite_misc_157c
+org $03A91D
+	dw !sprite_misc_157c
+org $03A928
+	dw !sprite_misc_157c
+org $03ACC2
+	dw !sprite_misc_157c
+org $03ADC7
+	dw !sprite_misc_157c
+org $03AE0B
+	dw !sprite_misc_157c
+org $03AE19
+	dw !sprite_misc_157c
+org $03AF5D
+	dw !sprite_misc_157c
+org $03B2CD
+	dw !sprite_misc_157c
+org $03B2E1
+	dw !sprite_misc_157c
+org $03B2F2
+	dw !sprite_misc_157c
+org $03B2F7
+	dw !sprite_misc_157c
+org $03B394
+	dw !sprite_misc_157c
+org $03B40E
+	dw !sprite_misc_157c
+org $03C33C
+	dw !sprite_misc_157c
+org $03C359
+	dw !sprite_misc_157c
+org $03C394
+	dw !sprite_misc_157c
+org $03C3A3
+	dw !sprite_misc_157c
+org $03C3AA
+	dw !sprite_misc_157c
+org $03C3E9
+	dw !sprite_misc_157c
+org $03C3ED
+	dw !sprite_misc_157c
+org $03C482
+	dw !sprite_misc_157c
+org $03CBE0
+	dw !sprite_misc_157c
+org $07F734
+	dw !sprite_misc_157c
+org $0CA794
+	dw !sprite_misc_157c
+;============== REMAPPER FOR $157D
+;============== REMAPPER FOR $157E
+;============== REMAPPER FOR $157F
+;============== REMAPPER FOR $1580
+;============== REMAPPER FOR $1581
+;============== REMAPPER FOR $1582
+;============== REMAPPER FOR $1583
+;============== REMAPPER FOR $1584
+;============== REMAPPER FOR $1585
+;============== REMAPPER FOR $1586
+;============== REMAPPER FOR $1587
+;============== REMAPPER FOR $1588
+org $018009
+	dw !sprite_blocked_status
+org $01800F
+	dw !sprite_blocked_status
+org $018015
+	dw !sprite_blocked_status
+org $01804F
+	dw !sprite_blocked_status
+org $018B34
+	dw !sprite_blocked_status
+org $018C69
+	dw !sprite_blocked_status
+org $019086
+	dw !sprite_blocked_status
+org $01908E
+	dw !sprite_blocked_status
+org $019144
+	dw !sprite_blocked_status
+org $01919F
+	dw !sprite_blocked_status
+org $0191C4
+	dw !sprite_blocked_status
+org $0191E6
+	dw !sprite_blocked_status
+org $0191EB
+	dw !sprite_blocked_status
+org $0192B3
+	dw !sprite_blocked_status
+org $0192B8
+	dw !sprite_blocked_status
+org $019308
+	dw !sprite_blocked_status
+org $01930D
+	dw !sprite_blocked_status
+org $01941D
+	dw !sprite_blocked_status
+org $019422
+	dw !sprite_blocked_status
+org $019438
+	dw !sprite_blocked_status
+org $01943E
+	dw !sprite_blocked_status
+org $0195C0
+	dw !sprite_blocked_status
+org $0197FF
+	dw !sprite_blocked_status
+org $0199B8
+	dw !sprite_blocked_status
+org $019A05
+	dw !sprite_blocked_status
+org $01A4E3
+	dw !sprite_blocked_status
+org $01A6E1
+	dw !sprite_blocked_status
+org $01A73B
+	dw !sprite_blocked_status
+org $01B0B4
+	dw !sprite_blocked_status
+org $01B56B
+	dw !sprite_blocked_status
+org $01BA05
+	dw !sprite_blocked_status
+org $01C0B2
+	dw !sprite_blocked_status
+org $01C0B5
+	dw !sprite_blocked_status
+org $01C1BF
+	dw !sprite_blocked_status
+org $01C3EB
+	dw !sprite_blocked_status
+org $01C400
+	dw !sprite_blocked_status
+org $01C414
+	dw !sprite_blocked_status
+org $01C419
+	dw !sprite_blocked_status
+org $01C464
+	dw !sprite_blocked_status
+org $01C6F9
+	dw !sprite_blocked_status
+org $01E136
+	dw !sprite_blocked_status
+org $01E4E7
+	dw !sprite_blocked_status
+org $0294D6
+	dw !sprite_blocked_status
+org $02B6ED
+	dw !sprite_blocked_status
+org $02B6F6
+	dw !sprite_blocked_status
+org $02BD8B
+	dw !sprite_blocked_status
+org $02BDC9
+	dw !sprite_blocked_status
+org $02BE11
+	dw !sprite_blocked_status
+org $02C00A
+	dw !sprite_blocked_status
+org $02C013
+	dw !sprite_blocked_status
+org $02C045
+	dw !sprite_blocked_status
+org $02C23E
+	dw !sprite_blocked_status
+org $02C26A
+	dw !sprite_blocked_status
+org $02C275
+	dw !sprite_blocked_status
+org $02C295
+	dw !sprite_blocked_status
+org $02C2A7
+	dw !sprite_blocked_status
+org $02C2E5
+	dw !sprite_blocked_status
+org $02C2F8
+	dw !sprite_blocked_status
+org $02C508
+	dw !sprite_blocked_status
+org $02C542
+	dw !sprite_blocked_status
+org $02C56F
+	dw !sprite_blocked_status
+org $02C6A8
+	dw !sprite_blocked_status
+org $02C6F6
+	dw !sprite_blocked_status
+org $02D959
+	dw !sprite_blocked_status
+org $02DCD1
+	dw !sprite_blocked_status
+org $02DEC6
+	dw !sprite_blocked_status
+org $02DFB4
+	dw !sprite_blocked_status
+org $02E196
+	dw !sprite_blocked_status
+org $02E7F0
+	dw !sprite_blocked_status
+org $02E7FE
+	dw !sprite_blocked_status
+org $02E809
+	dw !sprite_blocked_status
+org $02EE2E
+	dw !sprite_blocked_status
+org $02EE4D
+	dw !sprite_blocked_status
+org $02F09C
+	dw !sprite_blocked_status
+org $02F0A3
+	dw !sprite_blocked_status
+org $02FFD2
+	dw !sprite_blocked_status
+org $038032
+	dw !sprite_blocked_status
+org $038040
+	dw !sprite_blocked_status
+org $038049
+	dw !sprite_blocked_status
+org $03878A
+	dw !sprite_blocked_status
+org $038798
+	dw !sprite_blocked_status
+org $0387B6
+	dw !sprite_blocked_status
+org $0389A9
+	dw !sprite_blocked_status
+org $038A60
+	dw !sprite_blocked_status
+org $038A84
+	dw !sprite_blocked_status
+org $038A9A
+	dw !sprite_blocked_status
+org $038FCF
+	dw !sprite_blocked_status
+org $038FDD
+	dw !sprite_blocked_status
+org $03933C
+	dw !sprite_blocked_status
+org $03937B
+	dw !sprite_blocked_status
+org $039551
+	dw !sprite_blocked_status
+org $039573
+	dw !sprite_blocked_status
+org $039C7B
+	dw !sprite_blocked_status
+org $039C8D
+	dw !sprite_blocked_status
+org $039CA9
+	dw !sprite_blocked_status
+org $039CF2
+	dw !sprite_blocked_status
+org $03B2C4
+	dw !sprite_blocked_status
+org $03B2E4
+	dw !sprite_blocked_status
+org $03B810
+	dw !sprite_blocked_status
+org $03C367
+	dw !sprite_blocked_status
+org $07F737
+	dw !sprite_blocked_status
+;============== REMAPPER FOR $1589
+;============== REMAPPER FOR $158A
+;============== REMAPPER FOR $158B
+;============== REMAPPER FOR $158C
+;============== REMAPPER FOR $158D
+;============== REMAPPER FOR $158E
+;============== REMAPPER FOR $158F
+;============== REMAPPER FOR $1590
+;============== REMAPPER FOR $1591
+;============== REMAPPER FOR $1592
+;============== REMAPPER FOR $1593
+org $02A49F
+	dw !sprite_misc_1594-1
+;============== REMAPPER FOR $1594
+org $00FB67
+	dw !sprite_misc_1594
+org $018AA3
+	dw !sprite_misc_1594
+org $018ACD
+	dw !sprite_misc_1594
+org $018E77
+	dw !sprite_misc_1594
+org $018EA5
+	dw !sprite_misc_1594
+org $018EDD
+	dw !sprite_misc_1594
+org $018EE2
+	dw !sprite_misc_1594
+org $01966E
+	dw !sprite_misc_1594
+org $01A771
+	dw !sprite_misc_1594
+org $01A775
+	dw !sprite_misc_1594
+org $01ADA2
+	dw !sprite_misc_1594
+org $01ADB5
+	dw !sprite_misc_1594
+org $01C118
+	dw !sprite_misc_1594
+org $01C602
+	dw !sprite_misc_1594
+org $01D19B
+	dw !sprite_misc_1594
+org $01D1C4
+	dw !sprite_misc_1594
+org $01D1E4
+	dw !sprite_misc_1594
+org $01D1F8
+	dw !sprite_misc_1594
+org $01D219
+	dw !sprite_misc_1594
+org $01D222
+	dw !sprite_misc_1594
+org $01D256
+	dw !sprite_misc_1594
+org $01D2ED
+	dw !sprite_misc_1594
+org $01EFDC
+	dw !sprite_misc_1594
+org $01F0C5
+	dw !sprite_misc_1594
+org $01F134
+	dw !sprite_misc_1594
+org $01F1D1
+	dw !sprite_misc_1594
+org $01F257
+	dw !sprite_misc_1594
+org $01F32E
+	dw !sprite_misc_1594
+org $01F348
+	dw !sprite_misc_1594
+org $01F602
+	dw !sprite_misc_1594
+org $01F738
+	dw !sprite_misc_1594
+org $02C684
+	dw !sprite_misc_1594
+org $02C68F
+	dw !sprite_misc_1594
+org $02C692
+	dw !sprite_misc_1594
+org $02DB62
+	dw !sprite_misc_1594
+org $02DB7B
+	dw !sprite_misc_1594
+org $02DBF9
+	dw !sprite_misc_1594
+org $039F83
+	dw !sprite_misc_1594
+org $03A02F
+	dw !sprite_misc_1594
+org $03A2B6
+	dw !sprite_misc_1594
+org $03A2D3
+	dw !sprite_misc_1594
+org $03A8BB
+	dw !sprite_misc_1594
+org $07F1D2
+	dw !sprite_misc_1594
+org $07F254
+	dw !sprite_misc_1594
+org $07F77D
+	dw !sprite_misc_1594
+;============== REMAPPER FOR $1595
+;============== REMAPPER FOR $1596
+;============== REMAPPER FOR $1597
+;============== REMAPPER FOR $1598
+;============== REMAPPER FOR $1599
+;============== REMAPPER FOR $159A
+;============== REMAPPER FOR $159B
+;============== REMAPPER FOR $159C
+;============== REMAPPER FOR $159D
+;============== REMAPPER FOR $159E
+;============== REMAPPER FOR $159F
+;============== REMAPPER FOR $15A0
+org $00FAAB
+	dw !sprite_off_screen_horz
+org $0180CC
+	dw !sprite_off_screen_horz
+org $018F08
+	dw !sprite_off_screen_horz
+org $0199A7
+	dw !sprite_off_screen_horz
+org $019DCD
+	dw !sprite_off_screen_horz
+org $019F52
+	dw !sprite_off_screen_horz
+org $01A369
+	dw !sprite_off_screen_horz
+org $01A377
+	dw !sprite_off_screen_horz
+org $01A7F1
+	dw !sprite_off_screen_horz
+org $01AEC9
+	dw !sprite_off_screen_horz
+org $01BC5B
+	dw !sprite_off_screen_horz
+org $01BDDC
+	dw !sprite_off_screen_horz
+org $01BE8E
+	dw !sprite_off_screen_horz
+org $01BF10
+	dw !sprite_off_screen_horz
+org $01D016
+	dw !sprite_off_screen_horz
+org $01DE2B
+	dw !sprite_off_screen_horz
+org $01E2ED
+	dw !sprite_off_screen_horz
+org $01E95F
+	dw !sprite_off_screen_horz
+org $01F3FF
+	dw !sprite_off_screen_horz
+org $01FB1B
+	dw !sprite_off_screen_horz
+org $01FCEE
+	dw !sprite_off_screen_horz
+org $0284A0
+	dw !sprite_off_screen_horz
+org $028954
+	dw !sprite_off_screen_horz
+org $02A9D0
+	dw !sprite_off_screen_horz
+org $02C0DD
+	dw !sprite_off_screen_horz
+org $02C27C
+	dw !sprite_off_screen_horz
+org $02CF5D
+	dw !sprite_off_screen_horz
+org $02D0CA
+	dw !sprite_off_screen_horz
+org $02D37C
+	dw !sprite_off_screen_horz
+org $02D38A
+	dw !sprite_off_screen_horz
+org $02DA9E
+	dw !sprite_off_screen_horz
+org $02DD58
+	dw !sprite_off_screen_horz
+org $02DED7
+	dw !sprite_off_screen_horz
+org $02E07A
+	dw !sprite_off_screen_horz
+org $02E1B2
+	dw !sprite_off_screen_horz
+org $02E45A
+	dw !sprite_off_screen_horz
+org $02E6C3
+	dw !sprite_off_screen_horz
+org $02E87B
+	dw !sprite_off_screen_horz
+org $0388E5
+	dw !sprite_off_screen_horz
+org $039F58
+	dw !sprite_off_screen_horz
+org $03A0F6
+	dw !sprite_off_screen_horz
+org $03B0E7
+	dw !sprite_off_screen_horz
+org $03B764
+	dw !sprite_off_screen_horz
+org $03B772
+	dw !sprite_off_screen_horz
+org $03B8FC
+	dw !sprite_off_screen_horz
+org $03C44F
+	dw !sprite_off_screen_horz
+org $07F788
+	dw !sprite_off_screen_horz
+;============== REMAPPER FOR $15A1
+;============== REMAPPER FOR $15A2
+;============== REMAPPER FOR $15A3
+;============== REMAPPER FOR $15A4
+;============== REMAPPER FOR $15A5
+;============== REMAPPER FOR $15A6
+;============== REMAPPER FOR $15A7
+;============== REMAPPER FOR $15A8
+;============== REMAPPER FOR $15A9
+;============== REMAPPER FOR $15AA
+;============== REMAPPER FOR $15AB
+;============== REMAPPER FOR $15AC
+org $018117
+	dw !sprite_misc_15ac
+org $01811C
+	dw !sprite_misc_15ac
+org $018B78
+	dw !sprite_misc_15ac
+org $018BC8
+	dw !sprite_misc_15ac
+org $018CDA
+	dw !sprite_misc_15ac
+org $019099
+	dw !sprite_misc_15ac
+org $0190A0
+	dw !sprite_misc_15ac
+org $01927A
+	dw !sprite_misc_15ac
+org $01A598
+	dw !sprite_misc_15ac
+org $01A59F
+	dw !sprite_misc_15ac
+org $01A5BA
+	dw !sprite_misc_15ac
+org $01A5C1
+	dw !sprite_misc_15ac
+org $01CDB6
+	dw !sprite_misc_15ac
+org $01CE09
+	dw !sprite_misc_15ac
+org $01CE8A
+	dw !sprite_misc_15ac
+org $01D158
+	dw !sprite_misc_15ac
+org $01D25B
+	dw !sprite_misc_15ac
+org $01EAF1
+	dw !sprite_misc_15ac
+org $01ED86
+	dw !sprite_misc_15ac
+org $01ED93
+	dw !sprite_misc_15ac
+org $01EE66
+	dw !sprite_misc_15ac
+org $01EF5A
+	dw !sprite_misc_15ac
+org $01F91E
+	dw !sprite_misc_15ac
+org $01F92B
+	dw !sprite_misc_15ac
+org $01FB97
+	dw !sprite_misc_15ac
+org $01FC18
+	dw !sprite_misc_15ac
+org $028A27
+	dw !sprite_misc_15ac
+org $02C234
+	dw !sprite_misc_15ac
+org $02C62B
+	dw !sprite_misc_15ac
+org $02F0AF
+	dw !sprite_misc_15ac
+org $02F0C1
+	dw !sprite_misc_15ac
+org $02F318
+	dw !sprite_misc_15ac
+org $02F3CC
+	dw !sprite_misc_15ac
+org $038120
+	dw !sprite_misc_15ac
+org $038130
+	dw !sprite_misc_15ac
+org $0387B3
+	dw !sprite_misc_15ac
+org $0387C3
+	dw !sprite_misc_15ac
+org $039077
+	dw !sprite_misc_15ac
+org $039090
+	dw !sprite_misc_15ac
+org $039097
+	dw !sprite_misc_15ac
+org $0399FA
+	dw !sprite_misc_15ac
+org $039A1D
+	dw !sprite_misc_15ac
+org $039A35
+	dw !sprite_misc_15ac
+org $039A83
+	dw !sprite_misc_15ac
+org $03C398
+	dw !sprite_misc_15ac
+org $03C3E4
+	dw !sprite_misc_15ac
+org $03C87E
+	dw !sprite_misc_15ac
+org $03C88E
+	dw !sprite_misc_15ac
+;============== REMAPPER FOR $15AD
+;============== REMAPPER FOR $15AE
+;============== REMAPPER FOR $15AF
+;============== REMAPPER FOR $15B0
+;============== REMAPPER FOR $15B1
+;============== REMAPPER FOR $15B2
+;============== REMAPPER FOR $15B3
+;============== REMAPPER FOR $15B4
+;============== REMAPPER FOR $15B5
+;============== REMAPPER FOR $15B6
+;============== REMAPPER FOR $15B7
+;============== REMAPPER FOR $15B8
+org $018B20
+	dw !sprite_slope
+org $018B2A
+	dw !sprite_slope
+org $018C58
+	dw !sprite_slope
+org $018C62
+	dw !sprite_slope
+org $019147
+	dw !sprite_slope
+org $01936B
+	dw !sprite_slope
+org $01994A
+	dw !sprite_slope
+org $01995B
+	dw !sprite_slope
+org $019A0C
+	dw !sprite_slope
+org $01E4D1
+	dw !sprite_slope
+org $01E4DB
+	dw !sprite_slope
+org $02E81E
+	dw !sprite_slope
+org $02FFD9
+	dw !sprite_slope
+org $038069
+	dw !sprite_slope
+org $0389C0
+	dw !sprite_slope
+org $0389D5
+	dw !sprite_slope
+org $03C1D0
+	dw !sprite_slope
+;============== REMAPPER FOR $15B9
+;============== REMAPPER FOR $15BA
+;============== REMAPPER FOR $15BB
+;============== REMAPPER FOR $15BC
+;============== REMAPPER FOR $15BD
+;============== REMAPPER FOR $15BE
+;============== REMAPPER FOR $15BF
+;============== REMAPPER FOR $15C0
+;============== REMAPPER FOR $15C1
+;============== REMAPPER FOR $15C2
+;============== REMAPPER FOR $15C3
+;============== REMAPPER FOR $15C4
+org $01A391
+	dw !sprite_off_screen
+org $01B853
+	dw !sprite_off_screen
+org $01CA07
+	dw !sprite_off_screen
+org $02D3A4
+	dw !sprite_off_screen
+org $02D78C
+	dw !sprite_off_screen
+org $03B78C
+	dw !sprite_off_screen
+org $07F73A
+	dw !sprite_off_screen
+;============== REMAPPER FOR $15C5
+;============== REMAPPER FOR $15C6
+;============== REMAPPER FOR $15C7
+;============== REMAPPER FOR $15C8
+;============== REMAPPER FOR $15C9
+;============== REMAPPER FOR $15CA
+;============== REMAPPER FOR $15CB
+;============== REMAPPER FOR $15CC
+;============== REMAPPER FOR $15CD
+;============== REMAPPER FOR $15CE
+;============== REMAPPER FOR $15CF
+;============== REMAPPER FOR $15D0
+org $018E7F
+	dw !sprite_being_eaten
+org $0191CC
+	dw !sprite_being_eaten
+org $019406
+	dw !sprite_being_eaten
+org $019671
+	dw !sprite_being_eaten
+org $01A430
+	dw !sprite_being_eaten
+org $01BDD9
+	dw !sprite_being_eaten
+org $01BE6F
+	dw !sprite_being_eaten
+org $01C31D
+	dw !sprite_being_eaten
+org $01E094
+	dw !sprite_being_eaten
+org $01E09C
+	dw !sprite_being_eaten
+org $01E30D
+	dw !sprite_being_eaten
+org $01F224
+	dw !sprite_being_eaten
+org $01F521
+	dw !sprite_being_eaten
+org $01F657
+	dw !sprite_being_eaten
+org $0293C4
+	dw !sprite_being_eaten
+org $0294E2
+	dw !sprite_being_eaten
+org $02A0CA
+	dw !sprite_being_eaten
+org $02F278
+	dw !sprite_being_eaten
+org $038822
+	dw !sprite_being_eaten
+org $03952B
+	dw !sprite_being_eaten
+org $07F762
+	dw !sprite_being_eaten
+;============== REMAPPER FOR $15D1
+;============== REMAPPER FOR $15D2
+;============== REMAPPER FOR $15D3
+;============== REMAPPER FOR $15D4
+;============== REMAPPER FOR $15D5
+;============== REMAPPER FOR $15D6
+;============== REMAPPER FOR $15D7
+;============== REMAPPER FOR $15D8
+;============== REMAPPER FOR $15D9
+;============== REMAPPER FOR $15DA
+;============== REMAPPER FOR $15DB
+;============== REMAPPER FOR $15DC
+org $01907D
+	dw !sprite_obj_interact
+org $02E60D
+	dw !sprite_obj_interact
+org $02E62A
+	dw !sprite_obj_interact
+org $02E631
+	dw !sprite_obj_interact
+org $07F75F
+	dw !sprite_obj_interact
+;============== REMAPPER FOR $15DD
+;============== REMAPPER FOR $15DE
+;============== REMAPPER FOR $15DF
+;============== REMAPPER FOR $15E0
+;============== REMAPPER FOR $15E1
+;============== REMAPPER FOR $15E2
+;============== REMAPPER FOR $15E3
+;============== REMAPPER FOR $15E4
+;============== REMAPPER FOR $15E5
+;============== REMAPPER FOR $15E6
+;============== REMAPPER FOR $15E7
+;============== REMAPPER FOR $15EA
+org $00FBE5
+	dw !sprite_oam_index
+org $0180E3
+	dw !sprite_oam_index
+org $0189F7
+	dw !sprite_oam_index
+org $018DB0
+	dw !sprite_oam_index
+org $018DB6
+	dw !sprite_oam_index
+org $018E02
+	dw !sprite_oam_index
+org $018E8B
+	dw !sprite_oam_index
+org $018FAD
+	dw !sprite_oam_index
+org $019809
+	dw !sprite_oam_index
+org $019813
+	dw !sprite_oam_index
+org $01981C
+	dw !sprite_oam_index
+org $019823
+	dw !sprite_oam_index
+org $019832
+	dw !sprite_oam_index
+org $019A45
+	dw !sprite_oam_index
+org $019A5B
+	dw !sprite_oam_index
+org $019B08
+	dw !sprite_oam_index
+org $019D18
+	dw !sprite_oam_index
+org $019E4A
+	dw !sprite_oam_index
+org $019EB8
+	dw !sprite_oam_index
+org $019EBF
+	dw !sprite_oam_index
+org $019EE4
+	dw !sprite_oam_index
+org $019EEA
+	dw !sprite_oam_index
+org $019EF8
+	dw !sprite_oam_index
+org $019F21
+	dw !sprite_oam_index
+org $019F84
+	dw !sprite_oam_index
+org $019FD8
+	dw !sprite_oam_index
+org $01A1C8
+	dw !sprite_oam_index
+org $01A20D
+	dw !sprite_oam_index
+org $01A223
+	dw !sprite_oam_index
+org $01A27F
+	dw !sprite_oam_index
+org $01A3CE
+	dw !sprite_oam_index
+org $01AD74
+	dw !sprite_oam_index
+org $01AD7E
+	dw !sprite_oam_index
+org $01AD84
+	dw !sprite_oam_index
+org $01AE66
+	dw !sprite_oam_index
+org $01B422
+	dw !sprite_oam_index
+org $01B72B
+	dw !sprite_oam_index
+org $01B7C0
+	dw !sprite_oam_index
+org $01BB36
+	dw !sprite_oam_index
+org $01BEBD
+	dw !sprite_oam_index
+org $01BEE2
+	dw !sprite_oam_index
+org $01C195
+	dw !sprite_oam_index
+org $01C35C
+	dw !sprite_oam_index
+org $01C633
+	dw !sprite_oam_index
+org $01C7CF
+	dw !sprite_oam_index
+org $01C84E
+	dw !sprite_oam_index
+org $01C928
+	dw !sprite_oam_index
+org $01C9A5
+	dw !sprite_oam_index
+org $01D49A
+	dw !sprite_oam_index
+org $01D5FC
+	dw !sprite_oam_index
+org $01D602
+	dw !sprite_oam_index
+org $01DBD8
+	dw !sprite_oam_index
+org $01DC81
+	dw !sprite_oam_index
+org $01DF24
+	dw !sprite_oam_index
+org $01E171
+	dw !sprite_oam_index
+org $01E460
+	dw !sprite_oam_index
+org $01E46A
+	dw !sprite_oam_index
+org $01E948
+	dw !sprite_oam_index
+org $01E955
+	dw !sprite_oam_index
+org $01EE9C
+	dw !sprite_oam_index
+org $01EF56
+	dw !sprite_oam_index
+org $01EF64
+	dw !sprite_oam_index
+org $01EF67
+	dw !sprite_oam_index
+org $01EF70
+	dw !sprite_oam_index
+org $01EF85
+	dw !sprite_oam_index
+org $01F091
+	dw !sprite_oam_index
+org $01F791
+	dw !sprite_oam_index
+org $01F7AE
+	dw !sprite_oam_index
+org $01FA20
+	dw !sprite_oam_index
+org $01FA64
+	dw !sprite_oam_index
+org $01FEC6
+	dw !sprite_oam_index
+org $028106
+	dw !sprite_oam_index
+org $02B686
+	dw !sprite_oam_index
+org $02B746
+	dw !sprite_oam_index
+org $02BE59
+	dw !sprite_oam_index
+org $02BEBD
+	dw !sprite_oam_index
+org $02BF16
+	dw !sprite_oam_index
+org $02BF1C
+	dw !sprite_oam_index
+org $02C8C3
+	dw !sprite_oam_index
+org $02CBBC
+	dw !sprite_oam_index
+org $02CCCC
+	dw !sprite_oam_index
+org $02CEFA
+	dw !sprite_oam_index
+org $02D3D6
+	dw !sprite_oam_index
+org $02D791
+	dw !sprite_oam_index
+org $02D8BC
+	dw !sprite_oam_index
+org $02D8C2
+	dw !sprite_oam_index
+org $02D8CC
+	dw !sprite_oam_index
+org $02D9E7
+	dw !sprite_oam_index
+org $02D9ED
+	dw !sprite_oam_index
+org $02DC51
+	dw !sprite_oam_index
+org $02DE4E
+	dw !sprite_oam_index
+org $02DEF1
+	dw !sprite_oam_index
+org $02E00F
+	dw !sprite_oam_index
+org $02E062
+	dw !sprite_oam_index
+org $02E068
+	dw !sprite_oam_index
+org $02E0E9
+	dw !sprite_oam_index
+org $02E0EF
+	dw !sprite_oam_index
+org $02E24A
+	dw !sprite_oam_index
+org $02E3C1
+	dw !sprite_oam_index
+org $02E496
+	dw !sprite_oam_index
+org $02E4A2
+	dw !sprite_oam_index
+org $02E4EC
+	dw !sprite_oam_index
+org $02E4F2
+	dw !sprite_oam_index
+org $02E682
+	dw !sprite_oam_index
+org $02E6C8
+	dw !sprite_oam_index
+org $02E6EF
+	dw !sprite_oam_index
+org $02EA26
+	dw !sprite_oam_index
+org $02EDFB
+	dw !sprite_oam_index
+org $02EE67
+	dw !sprite_oam_index
+org $02EF1D
+	dw !sprite_oam_index
+org $02EF24
+	dw !sprite_oam_index
+org $02EF2B
+	dw !sprite_oam_index
+org $02EF40
+	dw !sprite_oam_index
+org $02F1A6
+	dw !sprite_oam_index
+org $02F1C9
+	dw !sprite_oam_index
+org $02F229
+	dw !sprite_oam_index
+org $02F48E
+	dw !sprite_oam_index
+org $02F4EC
+	dw !sprite_oam_index
+org $02F947
+	dw !sprite_oam_index
+org $03843D
+	dw !sprite_oam_index
+org $0384CF
+	dw !sprite_oam_index
+org $0386AC
+	dw !sprite_oam_index
+org $0388A8
+	dw !sprite_oam_index
+org $038969
+	dw !sprite_oam_index
+org $038DAD
+	dw !sprite_oam_index
+org $038F89
+	dw !sprite_oam_index
+org $03900E
+	dw !sprite_oam_index
+org $039219
+	dw !sprite_oam_index
+org $039289
+	dw !sprite_oam_index
+org $039791
+	dw !sprite_oam_index
+org $0397B1
+	dw !sprite_oam_index
+org $0397B7
+	dw !sprite_oam_index
+org $039BEC
+	dw !sprite_oam_index
+org $039BF2
+	dw !sprite_oam_index
+org $03A072
+	dw !sprite_oam_index
+org $03A3F4
+	dw !sprite_oam_index
+org $03ACD0
+	dw !sprite_oam_index
+org $03AF6C
+	dw !sprite_oam_index
+org $03AFE1
+	dw !sprite_oam_index
+org $03B224
+	dw !sprite_oam_index
+org $03B262
+	dw !sprite_oam_index
+org $03B3F8
+	dw !sprite_oam_index
+org $03B3FE
+	dw !sprite_oam_index
+org $03B7BE
+	dw !sprite_oam_index
+org $03C245
+	dw !sprite_oam_index
+org $03C4A6
+	dw !sprite_oam_index
+org $0CA015
+	dw !sprite_oam_index
+org $0CA289
+	dw !sprite_oam_index
+;============== REMAPPER FOR $15EB
+;============== REMAPPER FOR $15EC
+;============== REMAPPER FOR $15ED
+;============== REMAPPER FOR $15EE
+;============== REMAPPER FOR $15EF
+;============== REMAPPER FOR $15F0
+;============== REMAPPER FOR $15F1
+;============== REMAPPER FOR $15F2
+;============== REMAPPER FOR $15F3
+;============== REMAPPER FOR $15F4
+;============== REMAPPER FOR $15F5
+;============== REMAPPER FOR $15F6
+org $00FBD9
+	dw !sprite_oam_properties
+org $00FC3C
+	dw !sprite_oam_properties
+org $00FC43
+	dw !sprite_oam_properties
+org $00FCC9
+	dw !sprite_oam_properties
+org $00FCD3
+	dw !sprite_oam_properties
+org $018323
+	dw !sprite_oam_properties
+org $018346
+	dw !sprite_oam_properties
+org $01845E
+	dw !sprite_oam_properties
+org $01859B
+	dw !sprite_oam_properties
+org $01859F
+	dw !sprite_oam_properties
+org $018FF6
+	dw !sprite_oam_properties
+org $019656
+	dw !sprite_oam_properties
+org $019659
+	dw !sprite_oam_properties
+org $01967D
+	dw !sprite_oam_properties
+org $019680
+	dw !sprite_oam_properties
+org $0196D1
+	dw !sprite_oam_properties
+org $0196D4
+	dw !sprite_oam_properties
+org $019859
+	dw !sprite_oam_properties
+org $019904
+	dw !sprite_oam_properties
+org $01990B
+	dw !sprite_oam_properties
+org $019B45
+	dw !sprite_oam_properties
+org $019B4A
+	dw !sprite_oam_properties
+org $019D11
+	dw !sprite_oam_properties
+org $019D68
+	dw !sprite_oam_properties
+org $019DB8
+	dw !sprite_oam_properties
+org $019F3E
+	dw !sprite_oam_properties
+org $01A17C
+	dw !sprite_oam_properties
+org $01A181
+	dw !sprite_oam_properties
+org $01A1DF
+	dw !sprite_oam_properties
+org $01A1E6
+	dw !sprite_oam_properties
+org $01A2D9
+	dw !sprite_oam_properties
+org $01A2E4
+	dw !sprite_oam_properties
+org $01A742
+	dw !sprite_oam_properties
+org $01A749
+	dw !sprite_oam_properties
+org $01A99E
+	dw !sprite_oam_properties
+org $01A9A9
+	dw !sprite_oam_properties
+org $01A9B0
+	dw !sprite_oam_properties
+org $01AB12
+	dw !sprite_oam_properties
+org $01AB15
+	dw !sprite_oam_properties
+org $01B087
+	dw !sprite_oam_properties
+org $01B08C
+	dw !sprite_oam_properties
+org $01B0AE
+	dw !sprite_oam_properties
+org $01B0B1
+	dw !sprite_oam_properties
+org $01B113
+	dw !sprite_oam_properties
+org $01B11A
+	dw !sprite_oam_properties
+org $01B123
+	dw !sprite_oam_properties
+org $01B127
+	dw !sprite_oam_properties
+org $01B35C
+	dw !sprite_oam_properties
+org $01B3E1
+	dw !sprite_oam_properties
+org $01B95E
+	dw !sprite_oam_properties
+org $01B9E2
+	dw !sprite_oam_properties
+org $01B9EA
+	dw !sprite_oam_properties
+org $01B9F1
+	dw !sprite_oam_properties
+org $01BCCB
+	dw !sprite_oam_properties
+org $01BD75
+	dw !sprite_oam_properties
+org $01BEFF
+	dw !sprite_oam_properties
+org $01C277
+	dw !sprite_oam_properties
+org $01C27A
+	dw !sprite_oam_properties
+org $01C4D4
+	dw !sprite_oam_properties
+org $01C658
+	dw !sprite_oam_properties
+org $01C6CA
+	dw !sprite_oam_properties
+org $01D5DB
+	dw !sprite_oam_properties
+org $01D5E3
+	dw !sprite_oam_properties
+org $01D5F9
+	dw !sprite_oam_properties
+org $01E0B8
+	dw !sprite_oam_properties
+org $01E0C9
+	dw !sprite_oam_properties
+org $01E36C
+	dw !sprite_oam_properties
+org $01E377
+	dw !sprite_oam_properties
+org $01E37C
+	dw !sprite_oam_properties
+org $01E433
+	dw !sprite_oam_properties
+org $01E437
+	dw !sprite_oam_properties
+org $01E744
+	dw !sprite_oam_properties
+org $01EA6B
+	dw !sprite_oam_properties
+org $01EB8B
+	dw !sprite_oam_properties
+org $01F176
+	dw !sprite_oam_properties
+org $01F186
+	dw !sprite_oam_properties
+org $01F26B
+	dw !sprite_oam_properties
+org $01F274
+	dw !sprite_oam_properties
+org $01F850
+	dw !sprite_oam_properties
+org $01F85D
+	dw !sprite_oam_properties
+org $01F864
+	dw !sprite_oam_properties
+org $028A3A
+	dw !sprite_oam_properties
+org $029486
+	dw !sprite_oam_properties
+org $02948A
+	dw !sprite_oam_properties
+org $02A9BE
+	dw !sprite_oam_properties
+org $02A9C5
+	dw !sprite_oam_properties
+org $02AC3B
+	dw !sprite_oam_properties
+org $02AC46
+	dw !sprite_oam_properties
+org $02B904
+	dw !sprite_oam_properties
+org $02B9EA
+	dw !sprite_oam_properties
+org $02B9F1
+	dw !sprite_oam_properties
+org $02BC76
+	dw !sprite_oam_properties
+org $02BD13
+	dw !sprite_oam_properties
+org $02BD1B
+	dw !sprite_oam_properties
+org $02C8BC
+	dw !sprite_oam_properties
+org $02E110
+	dw !sprite_oam_properties
+org $02E5A1
+	dw !sprite_oam_properties
+org $02E924
+	dw !sprite_oam_properties
+org $02ECE7
+	dw !sprite_oam_properties
+org $02F055
+	dw !sprite_oam_properties
+org $02F05C
+	dw !sprite_oam_properties
+org $02F119
+	dw !sprite_oam_properties
+org $038055
+	dw !sprite_oam_properties
+org $03805A
+	dw !sprite_oam_properties
+org $0381B1
+	dw !sprite_oam_properties
+org $0381B4
+	dw !sprite_oam_properties
+org $0383DA
+	dw !sprite_oam_properties
+org $038B4B
+	dw !sprite_oam_properties
+org $03B358
+	dw !sprite_oam_properties
+org $03B37D
+	dw !sprite_oam_properties
+org $03B383
+	dw !sprite_oam_properties
+org $03C080
+	dw !sprite_oam_properties
+org $03C08B
+	dw !sprite_oam_properties
+org $07F798
+	dw !sprite_oam_properties
+;============== REMAPPER FOR $15F7
+;============== REMAPPER FOR $15F8
+;============== REMAPPER FOR $15F9
+;============== REMAPPER FOR $15FA
+;============== REMAPPER FOR $15FB
+;============== REMAPPER FOR $15FC
+;============== REMAPPER FOR $15FD
+;============== REMAPPER FOR $15FE
+;============== REMAPPER FOR $15FF
+;============== REMAPPER FOR $1600
+;============== REMAPPER FOR $1601
+;============== REMAPPER FOR $1602
+org $0183D7
+	dw !sprite_misc_1602
+org $018917
+	dw !sprite_misc_1602
+org $01891D
+	dw !sprite_misc_1602
+org $018A97
+	dw !sprite_misc_1602
+org $018BCF
+	dw !sprite_misc_1602
+org $018BED
+	dw !sprite_misc_1602
+org $018D49
+	dw !sprite_misc_1602
+org $018DF5
+	dw !sprite_misc_1602
+org $018E6B
+	dw !sprite_misc_1602
+org $018F12
+	dw !sprite_misc_1602
+org $018FA2
+	dw !sprite_misc_1602
+org $018FFC
+	dw !sprite_misc_1602
+org $019810
+	dw !sprite_misc_1602
+org $01982B
+	dw !sprite_misc_1602
+org $019B1E
+	dw !sprite_misc_1602
+org $019B40
+	dw !sprite_misc_1602
+org $019B62
+	dw !sprite_misc_1602
+org $019D07
+	dw !sprite_misc_1602
+org $019D86
+	dw !sprite_misc_1602
+org $019DEA
+	dw !sprite_misc_1602
+org $019E30
+	dw !sprite_misc_1602
+org $019F1A
+	dw !sprite_misc_1602
+org $01A13E
+	dw !sprite_misc_1602
+org $01A279
+	dw !sprite_misc_1602
+org $01A2E9
+	dw !sprite_misc_1602
+org $01A315
+	dw !sprite_misc_1602
+org $01B09D
+	dw !sprite_misc_1602
+org $01B0A3
+	dw !sprite_misc_1602
+org $01B10B
+	dw !sprite_misc_1602
+org $01B25F
+	dw !sprite_misc_1602
+org $01B2E3
+	dw !sprite_misc_1602
+org $01B9DA
+	dw !sprite_misc_1602
+org $01BA69
+	dw !sprite_misc_1602
+org $01BE63
+	dw !sprite_misc_1602
+org $01BEAA
+	dw !sprite_misc_1602
+org $01BEB0
+	dw !sprite_misc_1602
+org $01BECF
+	dw !sprite_misc_1602
+org $01C0A0
+	dw !sprite_misc_1602
+org $01C102
+	dw !sprite_misc_1602
+org $01C77F
+	dw !sprite_misc_1602
+org $01CA0F
+	dw !sprite_misc_1602
+org $01CA3A
+	dw !sprite_misc_1602
+org $01CDAF
+	dw !sprite_misc_1602
+org $01CDCC
+	dw !sprite_misc_1602
+org $01CE91
+	dw !sprite_misc_1602
+org $01CEFA
+	dw !sprite_misc_1602
+org $01CF7A
+	dw !sprite_misc_1602
+org $01CF9B
+	dw !sprite_misc_1602
+org $01CFB4
+	dw !sprite_misc_1602
+org $01D15F
+	dw !sprite_misc_1602
+org $01D261
+	dw !sprite_misc_1602
+org $01D2D9
+	dw !sprite_misc_1602
+org $01D303
+	dw !sprite_misc_1602
+org $01D422
+	dw !sprite_misc_1602
+org $01D48B
+	dw !sprite_misc_1602
+org $01D5EC
+	dw !sprite_misc_1602
+org $01D635
+	dw !sprite_misc_1602
+org $01D643
+	dw !sprite_misc_1602
+org $01D64B
+	dw !sprite_misc_1602
+org $01D64E
+	dw !sprite_misc_1602
+org $01D6D9
+	dw !sprite_misc_1602
+org $01DAA5
+	dw !sprite_misc_1602
+org $01DAF7
+	dw !sprite_misc_1602
+org $01E0C1
+	dw !sprite_misc_1602
+org $01E0C4
+	dw !sprite_misc_1602
+org $01E356
+	dw !sprite_misc_1602
+org $01E371
+	dw !sprite_misc_1602
+org $01E385
+	dw !sprite_misc_1602
+org $01E3EC
+	dw !sprite_misc_1602
+org $01E51A
+	dw !sprite_misc_1602
+org $01E53D
+	dw !sprite_misc_1602
+org $01E66A
+	dw !sprite_misc_1602
+org $01E6E0
+	dw !sprite_misc_1602
+org $01E6F1
+	dw !sprite_misc_1602
+org $01EB46
+	dw !sprite_misc_1602
+org $01EB62
+	dw !sprite_misc_1602
+org $01EB7B
+	dw !sprite_misc_1602
+org $01EC49
+	dw !sprite_misc_1602
+org $01EE62
+	dw !sprite_misc_1602
+org $01EE88
+	dw !sprite_misc_1602
+org $01EEDA
+	dw !sprite_misc_1602
+org $01EF19
+	dw !sprite_misc_1602
+org $01EF22
+	dw !sprite_misc_1602
+org $01EF95
+	dw !sprite_misc_1602
+org $01F055
+	dw !sprite_misc_1602
+org $01F3D4
+	dw !sprite_misc_1602
+org $01F40A
+	dw !sprite_misc_1602
+org $01F930
+	dw !sprite_misc_1602
+org $01F939
+	dw !sprite_misc_1602
+org $01F987
+	dw !sprite_misc_1602
+org $01FA17
+	dw !sprite_misc_1602
+org $01FA1D
+	dw !sprite_misc_1602
+org $01FC06
+	dw !sprite_misc_1602
+org $01FC28
+	dw !sprite_misc_1602
+org $01FC38
+	dw !sprite_misc_1602
+org $01FC55
+	dw !sprite_misc_1602
+org $01FED5
+	dw !sprite_misc_1602
+org $02AF71
+	dw !sprite_misc_1602
+org $02BD10
+	dw !sprite_misc_1602
+org $02BF73
+	dw !sprite_misc_1602
+org $02BF7B
+	dw !sprite_misc_1602
+org $02C087
+	dw !sprite_misc_1602
+org $02C0C7
+	dw !sprite_misc_1602
+org $02C188
+	dw !sprite_misc_1602
+org $02C23B
+	dw !sprite_misc_1602
+org $02C251
+	dw !sprite_misc_1602
+org $02C359
+	dw !sprite_misc_1602
+org $02C392
+	dw !sprite_misc_1602
+org $02C416
+	dw !sprite_misc_1602
+org $02C426
+	dw !sprite_misc_1602
+org $02C451
+	dw !sprite_misc_1602
+org $02C4BE
+	dw !sprite_misc_1602
+org $02C4E0
+	dw !sprite_misc_1602
+org $02C505
+	dw !sprite_misc_1602
+org $02C514
+	dw !sprite_misc_1602
+org $02C53F
+	dw !sprite_misc_1602
+org $02C567
+	dw !sprite_misc_1602
+org $02C5FF
+	dw !sprite_misc_1602
+org $02C61B
+	dw !sprite_misc_1602
+org $02C63E
+	dw !sprite_misc_1602
+org $02C723
+	dw !sprite_misc_1602
+org $02C729
+	dw !sprite_misc_1602
+org $02C764
+	dw !sprite_misc_1602
+org $02C88F
+	dw !sprite_misc_1602
+org $02CBA8
+	dw !sprite_misc_1602
+org $02D1DA
+	dw !sprite_misc_1602
+org $02D645
+	dw !sprite_misc_1602
+org $02D648
+	dw !sprite_misc_1602
+org $02D659
+	dw !sprite_misc_1602
+org $02DCED
+	dw !sprite_misc_1602
+org $02DCF5
+	dw !sprite_misc_1602
+org $02DD05
+	dw !sprite_misc_1602
+org $02DD48
+	dw !sprite_misc_1602
+org $02DD7E
+	dw !sprite_misc_1602
+org $02DE51
+	dw !sprite_misc_1602
+org $02DFDC
+	dw !sprite_misc_1602
+org $02E005
+	dw !sprite_misc_1602
+org $02E042
+	dw !sprite_misc_1602
+org $02E0E2
+	dw !sprite_misc_1602
+org $02E0FA
+	dw !sprite_misc_1602
+org $02E156
+	dw !sprite_misc_1602
+org $02E4C9
+	dw !sprite_misc_1602
+org $02E947
+	dw !sprite_misc_1602
+org $02E954
+	dw !sprite_misc_1602
+org $02E9D2
+	dw !sprite_misc_1602
+org $02EA04
+	dw !sprite_misc_1602
+org $02EB46
+	dw !sprite_misc_1602
+org $02EBC7
+	dw !sprite_misc_1602
+org $02EBE4
+	dw !sprite_misc_1602
+org $02EC03
+	dw !sprite_misc_1602
+org $02ECEE
+	dw !sprite_misc_1602
+org $02F0BC
+	dw !sprite_misc_1602
+org $02F0C7
+	dw !sprite_misc_1602
+org $02F0CA
+	dw !sprite_misc_1602
+org $02F31F
+	dw !sprite_misc_1602
+org $02F34B
+	dw !sprite_misc_1602
+org $02F394
+	dw !sprite_misc_1602
+org $02F3A0
+	dw !sprite_misc_1602
+org $02F413
+	dw !sprite_misc_1602
+org $0380C1
+	dw !sprite_misc_1602
+org $038115
+	dw !sprite_misc_1602
+org $03811A
+	dw !sprite_misc_1602
+org $038148
+	dw !sprite_misc_1602
+org $0381B9
+	dw !sprite_misc_1602
+org $0383BB
+	dw !sprite_misc_1602
+org $0383C6
+	dw !sprite_misc_1602
+org $038431
+	dw !sprite_misc_1602
+org $03860D
+	dw !sprite_misc_1602
+org $038610
+	dw !sprite_misc_1602
+org $038619
+	dw !sprite_misc_1602
+org $03865C
+	dw !sprite_misc_1602
+org $038673
+	dw !sprite_misc_1602
+org $0388AC
+	dw !sprite_misc_1602
+org $038933
+	dw !sprite_misc_1602
+org $038A74
+	dw !sprite_misc_1602
+org $038A7D
+	dw !sprite_misc_1602
+org $038B41
+	dw !sprite_misc_1602
+org $039074
+	dw !sprite_misc_1602
+org $03907C
+	dw !sprite_misc_1602
+org $0390F8
+	dw !sprite_misc_1602
+org $039184
+	dw !sprite_misc_1602
+org $03930F
+	dw !sprite_misc_1602
+org $039325
+	dw !sprite_misc_1602
+org $03954E
+	dw !sprite_misc_1602
+org $039686
+	dw !sprite_misc_1602
+org $039690
+	dw !sprite_misc_1602
+org $039696
+	dw !sprite_misc_1602
+org $03973A
+	dw !sprite_misc_1602
+org $03975F
+	dw !sprite_misc_1602
+org $0397AB
+	dw !sprite_misc_1602
+org $039A7C
+	dw !sprite_misc_1602
+org $039A93
+	dw !sprite_misc_1602
+org $039AA4
+	dw !sprite_misc_1602
+org $039B7E
+	dw !sprite_misc_1602
+org $039C8A
+	dw !sprite_misc_1602
+org $039D6E
+	dw !sprite_misc_1602
+org $039DB7
+	dw !sprite_misc_1602
+org $039DFB
+	dw !sprite_misc_1602
+org $039E52
+	dw !sprite_misc_1602
+org $039EAF
+	dw !sprite_misc_1602
+org $039FF0
+	dw !sprite_misc_1602
+org $03A042
+	dw !sprite_misc_1602
+org $03A09E
+	dw !sprite_misc_1602
+org $03A0A3
+	dw !sprite_misc_1602
+org $03ACB9
+	dw !sprite_misc_1602
+org $03AD1F
+	dw !sprite_misc_1602
+org $03AD3A
+	dw !sprite_misc_1602
+org $03ADE6
+	dw !sprite_misc_1602
+org $03AE4E
+	dw !sprite_misc_1602
+org $03B304
+	dw !sprite_misc_1602
+org $03B36D
+	dw !sprite_misc_1602
+org $03B38D
+	dw !sprite_misc_1602
+org $03C090
+	dw !sprite_misc_1602
+org $03C38D
+	dw !sprite_misc_1602
+org $03C3F3
+	dw !sprite_misc_1602
+org $03C3F8
+	dw !sprite_misc_1602
+org $03C8EE
+	dw !sprite_misc_1602
+org $03C963
+	dw !sprite_misc_1602
+org $03C9F4
+	dw !sprite_misc_1602
+org $03CCDD
+	dw !sprite_misc_1602
+org $03CDEC
+	dw !sprite_misc_1602
+org $03CE3F
+	dw !sprite_misc_1602
+org $03CE53
+	dw !sprite_misc_1602
+org $03D488
+	dw !sprite_misc_1602
+org $03D48D
+	dw !sprite_misc_1602
+org $03D490
+	dw !sprite_misc_1602
+org $03D49C
+	dw !sprite_misc_1602
+org $03D4E1
+	dw !sprite_misc_1602
+org $07F73D
+	dw !sprite_misc_1602
+org $0CA01B
+	dw !sprite_misc_1602
+org $0CA782
+	dw !sprite_misc_1602
+org $0CA78B
+	dw !sprite_misc_1602
+org $0CA7A2
+	dw !sprite_misc_1602
+org $0CA7A6
+	dw !sprite_misc_1602
+org $0CA7AD
+	dw !sprite_misc_1602
+;============== REMAPPER FOR $1603
+;============== REMAPPER FOR $1604
+;============== REMAPPER FOR $1605
+;============== REMAPPER FOR $1606
+;============== REMAPPER FOR $1607
+;============== REMAPPER FOR $1608
+;============== REMAPPER FOR $1609
+;============== REMAPPER FOR $160A
+;============== REMAPPER FOR $160B
+;============== REMAPPER FOR $160C
+;============== REMAPPER FOR $160D
+;============== REMAPPER FOR $160E
+org $00FCE2
+	dw !sprite_misc_160e
+org $0183E1
+	dw !sprite_misc_160e
+org $018573
+	dw !sprite_misc_160e
+org $018970
+	dw !sprite_misc_160e
+org $018993
+	dw !sprite_misc_160e
+org $018A1B
+	dw !sprite_misc_160e
+org $018AD7
+	dw !sprite_misc_160e
+org $018CA6
+	dw !sprite_misc_160e
+org $019683
+	dw !sprite_misc_160e
+org $01A25B
+	dw !sprite_misc_160e
+org $01A289
+	dw !sprite_misc_160e
+org $01A296
+	dw !sprite_misc_160e
+org $01A2EC
+	dw !sprite_misc_160e
+org $01A32F
+	dw !sprite_misc_160e
+org $01A725
+	dw !sprite_misc_160e
+org $01A7B9
+	dw !sprite_misc_160e
+org $01C10F
+	dw !sprite_misc_160e
+org $01C12E
+	dw !sprite_misc_160e
+org $01C354
+	dw !sprite_misc_160e
+org $01C9DB
+	dw !sprite_misc_160e
+org $01C9E0
+	dw !sprite_misc_160e
+org $01CA16
+	dw !sprite_misc_160e
+org $01CD8F
+	dw !sprite_misc_160e
+org $01CECB
+	dw !sprite_misc_160e
+org $01CF06
+	dw !sprite_misc_160e
+org $01D17A
+	dw !sprite_misc_160e
+org $01D188
+	dw !sprite_misc_160e
+org $01D1AF
+	dw !sprite_misc_160e
+org $01D872
+	dw !sprite_misc_160e
+org $01D8A0
+	dw !sprite_misc_160e
+org $01D8E5
+	dw !sprite_misc_160e
+org $01E7ED
+	dw !sprite_misc_160e
+org $01E996
+	dw !sprite_misc_160e
+org $01E9A7
+	dw !sprite_misc_160e
+org $01EA03
+	dw !sprite_misc_160e
+org $01F15B
+	dw !sprite_misc_160e
+org $01F1B3
+	dw !sprite_misc_160e
+org $01F1BC
+	dw !sprite_misc_160e
+org $01F1D9
+	dw !sprite_misc_160e
+org $01F1F5
+	dw !sprite_misc_160e
+org $01F25C
+	dw !sprite_misc_160e
+org $01F34B
+	dw !sprite_misc_160e
+org $01F380
+	dw !sprite_misc_160e
+org $01F4B3
+	dw !sprite_misc_160e
+org $01F4D7
+	dw !sprite_misc_160e
+org $01F4E2
+	dw !sprite_misc_160e
+org $01F571
+	dw !sprite_misc_160e
+org $01F5FD
+	dw !sprite_misc_160e
+org $01F637
+	dw !sprite_misc_160e
+org $01FB42
+	dw !sprite_misc_160e
+org $01FC69
+	dw !sprite_misc_160e
+org $01FC82
+	dw !sprite_misc_160e
+org $02BAED
+	dw !sprite_misc_160e
+org $02C4EF
+	dw !sprite_misc_160e
+org $02C50F
+	dw !sprite_misc_160e
+org $02C534
+	dw !sprite_misc_160e
+org $02D0DA
+	dw !sprite_misc_160e
+org $02D727
+	dw !sprite_misc_160e
+org $02D73E
+	dw !sprite_misc_160e
+org $02D743
+	dw !sprite_misc_160e
+org $02EA52
+	dw !sprite_misc_160e
+org $02EAB8
+	dw !sprite_misc_160e
+org $03C030
+	dw !sprite_misc_160e
+org $03C03D
+	dw !sprite_misc_160e
+org $03C093
+	dw !sprite_misc_160e
+org $03CC9B
+	dw !sprite_misc_160e
+org $03CC9E
+	dw !sprite_misc_160e
+org $03CD05
+	dw !sprite_misc_160e
+org $03CD08
+	dw !sprite_misc_160e
+org $07F77A
+	dw !sprite_misc_160e
+;============== REMAPPER FOR $160F
+;============== REMAPPER FOR $1610
+;============== REMAPPER FOR $1611
+;============== REMAPPER FOR $1612
+;============== REMAPPER FOR $1613
+;============== REMAPPER FOR $1614
+;============== REMAPPER FOR $1615
+;============== REMAPPER FOR $1616
+;============== REMAPPER FOR $1617
+org $00F92D
+	dw !sprite_misc_160e+9
+org $0283D7
+	dw !sprite_misc_160e+9
+;============== REMAPPER FOR $1618
+;============== REMAPPER FOR $1619
+;============== REMAPPER FOR $161A
+org $018154
+	dw !sprite_index_in_level
+org $01AC96
+	dw !sprite_index_in_level
+org $01AE2B
+	dw !sprite_index_in_level
+org $02A99C
+	dw !sprite_index_in_level
+org $02AC03
+	dw !sprite_index_in_level
+org $02AF80
+	dw !sprite_index_in_level
+org $02AFEF
+	dw !sprite_index_in_level
+org $02D082
+	dw !sprite_index_in_level
+org $038710
+	dw !sprite_index_in_level
+org $03B8B4
+	dw !sprite_index_in_level
+;============== REMAPPER FOR $161B
+;============== REMAPPER FOR $161C
+;============== REMAPPER FOR $161D
+;============== REMAPPER FOR $161E
+;============== REMAPPER FOR $161F
+;============== REMAPPER FOR $1620
+;============== REMAPPER FOR $1621
+;============== REMAPPER FOR $1622
+;============== REMAPPER FOR $1623
+;============== REMAPPER FOR $1624
+;============== REMAPPER FOR $1625
+;============== REMAPPER FOR $1626
+org $01A016
+	dw !sprite_misc_1626
+org $01A602
+	dw !sprite_misc_1626
+org $01A605
+	dw !sprite_misc_1626
+org $01A64C
+	dw !sprite_misc_1626
+org $01A650
+	dw !sprite_misc_1626
+org $01A653
+	dw !sprite_misc_1626
+org $01AA05
+	dw !sprite_misc_1626
+org $01AB4C
+	dw !sprite_misc_1626
+org $01CFC7
+	dw !sprite_misc_1626
+org $01CFCA
+	dw !sprite_misc_1626
+org $01D14A
+	dw !sprite_misc_1626
+org $01D1D9
+	dw !sprite_misc_1626
+org $01D3F9
+	dw !sprite_misc_1626
+org $01D3FC
+	dw !sprite_misc_1626
+org $01D6EA
+	dw !sprite_misc_1626
+org $01D73F
+	dw !sprite_misc_1626
+org $01D758
+	dw !sprite_misc_1626
+org $01DA85
+	dw !sprite_misc_1626
+org $01DA8A
+	dw !sprite_misc_1626
+org $01DB27
+	dw !sprite_misc_1626
+org $01DB2C
+	dw !sprite_misc_1626
+org $01F227
+	dw !sprite_misc_1626
+org $03962E
+	dw !sprite_misc_1626
+org $07F74F
+	dw !sprite_misc_1626
+;============== REMAPPER FOR $1627
+;============== REMAPPER FOR $1628
+;============== REMAPPER FOR $1629
+;============== REMAPPER FOR $162A
+;============== REMAPPER FOR $162B
+;============== REMAPPER FOR $162C
+;============== REMAPPER FOR $162D
+;============== REMAPPER FOR $162E
+;============== REMAPPER FOR $162F
+;============== REMAPPER FOR $1630
+;============== REMAPPER FOR $1631
+;============== REMAPPER FOR $1632
+org $019AA0
+	dw !sprite_behind_scenery
+org $019B3B
+	dw !sprite_behind_scenery
+org $019B50
+	dw !sprite_behind_scenery
+org $019B72
+	dw !sprite_behind_scenery
+org $01A433
+	dw !sprite_behind_scenery
+org $01A436
+	dw !sprite_behind_scenery
+org $01A820
+	dw !sprite_behind_scenery
+org $01B95B
+	dw !sprite_behind_scenery
+org $01B993
+	dw !sprite_behind_scenery
+org $01B998
+	dw !sprite_behind_scenery
+org $01B9C7
+	dw !sprite_behind_scenery
+org $01BA66
+	dw !sprite_behind_scenery
+org $01BA6C
+	dw !sprite_behind_scenery
+org $01C49D
+	dw !sprite_behind_scenery
+org $01F57D
+	dw !sprite_behind_scenery
+org $01F65A
+	dw !sprite_behind_scenery
+org $0293CF
+	dw !sprite_behind_scenery
+org $02A0CD
+	dw !sprite_behind_scenery
+org $02EAB2
+	dw !sprite_behind_scenery
+org $07F726
+	dw !sprite_behind_scenery
+;============== REMAPPER FOR $1633
+;============== REMAPPER FOR $1634
+;============== REMAPPER FOR $1635
+;============== REMAPPER FOR $1636
+;============== REMAPPER FOR $1637
+;============== REMAPPER FOR $1638
+;============== REMAPPER FOR $1639
+;============== REMAPPER FOR $163A
+;============== REMAPPER FOR $163B
+;============== REMAPPER FOR $163C
+;============== REMAPPER FOR $163D
+org $02A47A
+	dw !sprite_misc_163e-1
+;============== REMAPPER FOR $163E
+org $01811F
+	dw !sprite_misc_163e
+org $018124
+	dw !sprite_misc_163e
+org $0188E9
+	dw !sprite_misc_163e
+org $018909
+	dw !sprite_misc_163e
+org $018953
+	dw !sprite_misc_163e
+org $018969
+	dw !sprite_misc_163e
+org $018A0D
+	dw !sprite_misc_163e
+org $01993F
+	dw !sprite_misc_163e
+org $01A1FE
+	dw !sprite_misc_163e
+org $01A255
+	dw !sprite_misc_163e
+org $01A30B
+	dw !sprite_misc_163e
+org $01A31A
+	dw !sprite_misc_163e
+org $01A719
+	dw !sprite_misc_163e
+org $01AAB3
+	dw !sprite_misc_163e
+org $01AB0F
+	dw !sprite_misc_163e
+org $01AD6F
+	dw !sprite_misc_163e
+org $01AE14
+	dw !sprite_misc_163e
+org $01CDF1
+	dw !sprite_misc_163e
+org $01CE9F
+	dw !sprite_misc_163e
+org $01D9FF
+	dw !sprite_misc_163e
+org $01DA04
+	dw !sprite_misc_163e
+org $01DA1A
+	dw !sprite_misc_163e
+org $01E4C3
+	dw !sprite_misc_163e
+org $01ED6B
+	dw !sprite_misc_163e
+org $01F623
+	dw !sprite_misc_163e
+org $01F691
+	dw !sprite_misc_163e
+org $01F716
+	dw !sprite_misc_163e
+org $01FB1E
+	dw !sprite_misc_163e
+org $01FB68
+	dw !sprite_misc_163e
+org $02BF5D
+	dw !sprite_misc_163e
+org $02BF67
+	dw !sprite_misc_163e
+org $02C208
+	dw !sprite_misc_163e
+org $02C20F
+	dw !sprite_misc_163e
+org $02C6AF
+	dw !sprite_misc_163e
+org $02C7E0
+	dw !sprite_misc_163e
+org $02EA9C
+	dw !sprite_misc_163e
+org $02EAAC
+	dw !sprite_misc_163e
+org $02EACF
+	dw !sprite_misc_163e
+org $0398D7
+	dw !sprite_misc_163e
+org $039900
+	dw !sprite_misc_163e
+org $07F765
+	dw !sprite_misc_163e
+;============== REMAPPER FOR $163F
+;============== REMAPPER FOR $1640
+;============== REMAPPER FOR $1641
+;============== REMAPPER FOR $1642
+;============== REMAPPER FOR $1643
+;============== REMAPPER FOR $1644
+;============== REMAPPER FOR $1645
+;============== REMAPPER FOR $1646
+;============== REMAPPER FOR $1647
+;============== REMAPPER FOR $1648
+;============== REMAPPER FOR $1649
+;============== REMAPPER FOR $164A
+org $018400
+	dw !sprite_in_water
+org $018432
+	dw !sprite_in_water
+org $019038
+	dw !sprite_in_water
+org $019061
+	dw !sprite_in_water
+org $01914D
+	dw !sprite_in_water
+org $019153
+	dw !sprite_in_water
+org $0191EE
+	dw !sprite_in_water
+org $01923C
+	dw !sprite_in_water
+org $019259
+	dw !sprite_in_water
+org $01971E
+	dw !sprite_in_water
+org $019721
+	dw !sprite_in_water
+org $019956
+	dw !sprite_in_water
+org $01A762
+	dw !sprite_in_water
+org $01B045
+	dw !sprite_in_water
+org $01B0F3
+	dw !sprite_in_water
+org $01B1B9
+	dw !sprite_in_water
+org $01B1C2
+	dw !sprite_in_water
+org $01B1DA
+	dw !sprite_in_water
+org $01B23F
+	dw !sprite_in_water
+org $01B589
+	dw !sprite_in_water
+org $01CFC3
+	dw !sprite_in_water
+org $01D162
+	dw !sprite_in_water
+org $01D171
+	dw !sprite_in_water
+org $01E06E
+	dw !sprite_in_water
+org $01E0CF
+	dw !sprite_in_water
+org $01F69F
+	dw !sprite_in_water
+org $02BBC6
+	dw !sprite_in_water
+org $02C01C
+	dw !sprite_in_water
+org $02C305
+	dw !sprite_in_water
+org $02C35C
+	dw !sprite_in_water
+org $03857A
+	dw !sprite_in_water
+org $03AC4E
+	dw !sprite_in_water
+org $03AC58
+	dw !sprite_in_water
+org $07F723
+	dw !sprite_in_water
+;============== REMAPPER FOR $164B
+;============== REMAPPER FOR $164C
+;============== REMAPPER FOR $164D
+;============== REMAPPER FOR $164E
+;============== REMAPPER FOR $164F
+;============== REMAPPER FOR $1650
+;============== REMAPPER FOR $1651
+;============== REMAPPER FOR $1652
+;============== REMAPPER FOR $1653
+;============== REMAPPER FOR $1654
+;============== REMAPPER FOR $1655
+;============== REMAPPER FOR $1656
+org $01853A
+	dw !sprite_tweaker_1656
+org $019444
+	dw !sprite_tweaker_1656
+org $019AC5
+	dw !sprite_tweaker_1656
+org $01A6E8
+	dw !sprite_tweaker_1656
+org $01A8CA
+	dw !sprite_tweaker_1656
+org $01A9CD
+	dw !sprite_tweaker_1656
+org $01AA4F
+	dw !sprite_tweaker_1656
+org $02808B
+	dw !sprite_tweaker_1656
+org $029473
+	dw !sprite_tweaker_1656
+org $02947A
+	dw !sprite_tweaker_1656
+org $07F768
+	dw !sprite_tweaker_1656
+org $07F7AA
+	dw !sprite_tweaker_1656
+;============== REMAPPER FOR $1657
+;============== REMAPPER FOR $1658
+;============== REMAPPER FOR $1659
+;============== REMAPPER FOR $165A
+;============== REMAPPER FOR $165B
+;============== REMAPPER FOR $165C
+;============== REMAPPER FOR $165D
+;============== REMAPPER FOR $165E
+;============== REMAPPER FOR $165F
+;============== REMAPPER FOR $1660
+;============== REMAPPER FOR $1661
+;============== REMAPPER FOR $1662
+org $01853F
+	dw !sprite_tweaker_1662
+org $019B28
+	dw !sprite_tweaker_1662
+org $01A465
+	dw !sprite_tweaker_1662
+org $01A481
+	dw !sprite_tweaker_1662
+org $01A9E3
+	dw !sprite_tweaker_1662
+org $01D6CE
+	dw !sprite_tweaker_1662
+org $01D6DE
+	dw !sprite_tweaker_1662
+org $01F4EC
+	dw !sprite_tweaker_1662
+org $01F9E3
+	dw !sprite_tweaker_1662
+org $01F9F2
+	dw !sprite_tweaker_1662
+org $01F9FD
+	dw !sprite_tweaker_1662
+org $028090
+	dw !sprite_tweaker_1662
+org $02946C
+	dw !sprite_tweaker_1662
+org $02B64F
+	dw !sprite_tweaker_1662
+org $02BAF0
+	dw !sprite_tweaker_1662
+org $02BAF7
+	dw !sprite_tweaker_1662
+org $02D3AB
+	dw !sprite_tweaker_1662
+org $0395C7
+	dw !sprite_tweaker_1662
+org $039A5B
+	dw !sprite_tweaker_1662
+org $03A830
+	dw !sprite_tweaker_1662
+org $03B096
+	dw !sprite_tweaker_1662
+org $03B0BE
+	dw !sprite_tweaker_1662
+org $03B0CA
+	dw !sprite_tweaker_1662
+org $03B0FD
+	dw !sprite_tweaker_1662
+org $03B10A
+	dw !sprite_tweaker_1662
+org $03B6A3
+	dw !sprite_tweaker_1662
+org $03B6E9
+	dw !sprite_tweaker_1662
+org $03B793
+	dw !sprite_tweaker_1662
+org $03CC0D
+	dw !sprite_tweaker_1662
+org $07F76B
+	dw !sprite_tweaker_1662
+org $07F7B1
+	dw !sprite_tweaker_1662
+;============== REMAPPER FOR $1663
+;============== REMAPPER FOR $1664
+;============== REMAPPER FOR $1665
+;============== REMAPPER FOR $1666
+;============== REMAPPER FOR $1667
+;============== REMAPPER FOR $1668
+;============== REMAPPER FOR $1669
+;============== REMAPPER FOR $166A
+;============== REMAPPER FOR $166B
+;============== REMAPPER FOR $166C
+;============== REMAPPER FOR $166D
+;============== REMAPPER FOR $166E
+org $0191F7
+	dw !sprite_tweaker_166e
+org $01926B
+	dw !sprite_tweaker_166e
+org $01968F
+	dw !sprite_tweaker_166e
+org $019694
+	dw !sprite_tweaker_166e
+org $0293BF
+	dw !sprite_tweaker_166e
+org $0294DD
+	dw !sprite_tweaker_166e
+org $02A0EF
+	dw !sprite_tweaker_166e
+org $07F76E
+	dw !sprite_tweaker_166e
+org $07F7B8
+	dw !sprite_tweaker_166e
+;============== REMAPPER FOR $166F
+;============== REMAPPER FOR $1670
+;============== REMAPPER FOR $1671
+;============== REMAPPER FOR $1672
+;============== REMAPPER FOR $1673
+;============== REMAPPER FOR $1674
+;============== REMAPPER FOR $1675
+;============== REMAPPER FOR $1676
+;============== REMAPPER FOR $1677
+;============== REMAPPER FOR $1678
+;============== REMAPPER FOR $1679
+;============== REMAPPER FOR $167A
+org $01893D
+	dw !sprite_tweaker_167a
+org $018941
+	dw !sprite_tweaker_167a
+org $01894C
+	dw !sprite_tweaker_167a
+org $01894F
+	dw !sprite_tweaker_167a
+org $0189A9
+	dw !sprite_tweaker_167a
+org $01924C
+	dw !sprite_tweaker_167a
+org $01932A
+	dw !sprite_tweaker_167a
+org $01991C
+	dw !sprite_tweaker_167a
+org $019B14
+	dw !sprite_tweaker_167a
+org $01A188
+	dw !sprite_tweaker_167a
+org $01A7E5
+	dw !sprite_tweaker_167a
+org $01A833
+	dw !sprite_tweaker_167a
+org $01A841
+	dw !sprite_tweaker_167a
+org $01AAF8
+	dw !sprite_tweaker_167a
+org $01AAFB
+	dw !sprite_tweaker_167a
+org $01AC4D
+	dw !sprite_tweaker_167a
+org $01ACA6
+	dw !sprite_tweaker_167a
+org $01C2C6
+	dw !sprite_tweaker_167a
+org $01C2CB
+	dw !sprite_tweaker_167a
+org $01F398
+	dw !sprite_tweaker_167a
+org $01F39D
+	dw !sprite_tweaker_167a
+org $01F3BE
+	dw !sprite_tweaker_167a
+org $01F652
+	dw !sprite_tweaker_167a
+org $01F9E7
+	dw !sprite_tweaker_167a
+org $01F9ED
+	dw !sprite_tweaker_167a
+org $01F9F9
+	dw !sprite_tweaker_167a
+org $028162
+	dw !sprite_tweaker_167a
+org $02942C
+	dw !sprite_tweaker_167a
+org $02A0C5
+	dw !sprite_tweaker_167a
+org $02A92B
+	dw !sprite_tweaker_167a
+org $02BAFA
+	dw !sprite_tweaker_167a
+org $02BAFF
+	dw !sprite_tweaker_167a
+org $02D047
+	dw !sprite_tweaker_167a
+org $02D092
+	dw !sprite_tweaker_167a
+org $038A6A
+	dw !sprite_tweaker_167a
+org $038A6D
+	dw !sprite_tweaker_167a
+org $03B879
+	dw !sprite_tweaker_167a
+org $03B8C4
+	dw !sprite_tweaker_167a
+org $07F771
+	dw !sprite_tweaker_167a
+org $07F7BF
+	dw !sprite_tweaker_167a
+;============== REMAPPER FOR $167B
+;============== REMAPPER FOR $167C
+;============== REMAPPER FOR $167D
+;============== REMAPPER FOR $167E
+;============== REMAPPER FOR $167F
+;============== REMAPPER FOR $1680
+;============== REMAPPER FOR $1681
+;============== REMAPPER FOR $1682
+;============== REMAPPER FOR $1683
+;============== REMAPPER FOR $1684
+;============== REMAPPER FOR $1685
+;============== REMAPPER FOR $1686
+org $00FAB3
+	dw !sprite_tweaker_1686
+org $018544
+	dw !sprite_tweaker_1686
+org $01925C
+	dw !sprite_tweaker_1686
+org $0193B9
+	dw !sprite_tweaker_1686
+org $019646
+	dw !sprite_tweaker_1686
+org $01964B
+	dw !sprite_tweaker_1686
+org $01A422
+	dw !sprite_tweaker_1686
+org $01A425
+	dw !sprite_tweaker_1686
+org $01A57F
+	dw !sprite_tweaker_1686
+org $01A5A2
+	dw !sprite_tweaker_1686
+org $01A904
+	dw !sprite_tweaker_1686
+org $01A963
+	dw !sprite_tweaker_1686
+org $01C126
+	dw !sprite_tweaker_1686
+org $01F2E5
+	dw !sprite_tweaker_1686
+org $01F350
+	dw !sprite_tweaker_1686
+org $01F59C
+	dw !sprite_tweaker_1686
+org $02948D
+	dw !sprite_tweaker_1686
+org $02EA7A
+	dw !sprite_tweaker_1686
+org $03A828
+	dw !sprite_tweaker_1686
+org $03A82B
+	dw !sprite_tweaker_1686
+org $07F774
+	dw !sprite_tweaker_1686
+org $07F7C6
+	dw !sprite_tweaker_1686
+;============== REMAPPER FOR $1687
+;============== REMAPPER FOR $1688
+;============== REMAPPER FOR $1689
+;============== REMAPPER FOR $168A
+;============== REMAPPER FOR $168B
+;============== REMAPPER FOR $168C
+;============== REMAPPER FOR $168D
+;============== REMAPPER FOR $168E
+;============== REMAPPER FOR $168F
+;============== REMAPPER FOR $1690
+;============== REMAPPER FOR $1691
+;============== REMAPPER FOR $186C
+org $00FAAE
+	dw !sprite_off_screen_vert
+org $0180CF
+	dw !sprite_off_screen_vert
+org $019E38
+	dw !sprite_off_screen_vert
+org $01A366
+	dw !sprite_off_screen_vert
+org $01A3BE
+	dw !sprite_off_screen_vert
+org $01A3C4
+	dw !sprite_off_screen_vert
+org $01A3E0
+	dw !sprite_off_screen_vert
+org $01AEC4
+	dw !sprite_off_screen_vert
+org $01B153
+	dw !sprite_off_screen_vert
+org $01E8CE
+	dw !sprite_off_screen_vert
+org $01F402
+	dw !sprite_off_screen_vert
+org $0284A3
+	dw !sprite_off_screen_vert
+org $02852C
+	dw !sprite_off_screen_vert
+org $02C0E0
+	dw !sprite_off_screen_vert
+org $02C27F
+	dw !sprite_off_screen_vert
+org $02C46A
+	dw !sprite_off_screen_vert
+org $02CF60
+	dw !sprite_off_screen_vert
+org $02D0CD
+	dw !sprite_off_screen_vert
+org $02D379
+	dw !sprite_off_screen_vert
+org $02D3CA
+	dw !sprite_off_screen_vert
+org $02D3D0
+	dw !sprite_off_screen_vert
+org $02DAA1
+	dw !sprite_off_screen_vert
+org $02DD5B
+	dw !sprite_off_screen_vert
+org $02DEDA
+	dw !sprite_off_screen_vert
+org $02E07D
+	dw !sprite_off_screen_vert
+org $02E1B5
+	dw !sprite_off_screen_vert
+org $038FB5
+	dw !sprite_off_screen_vert
+org $03B761
+	dw !sprite_off_screen_vert
+org $03B7B2
+	dw !sprite_off_screen_vert
+org $03B7B8
+	dw !sprite_off_screen_vert
+org $03B8FF
+	dw !sprite_off_screen_vert
+org $03C452
+	dw !sprite_off_screen_vert
+;============== REMAPPER FOR $186D
+;============== REMAPPER FOR $186E
+;============== REMAPPER FOR $186F
+;============== REMAPPER FOR $1870
+;============== REMAPPER FOR $1871
+;============== REMAPPER FOR $1872
+;============== REMAPPER FOR $1873
+;============== REMAPPER FOR $1874
+;============== REMAPPER FOR $1875
+;============== REMAPPER FOR $1876
+;============== REMAPPER FOR $1877
+;============== REMAPPER FOR $187B
+org $018349
+	dw !sprite_misc_187b
+org $01839D
+	dw !sprite_misc_187b
+org $0184F6
+	dw !sprite_misc_187b
+org $01968C
+	dw !sprite_misc_187b
+org $019914
+	dw !sprite_misc_187b
+org $01A783
+	dw !sprite_misc_187b
+org $01A94B
+	dw !sprite_misc_187b
+org $01C08D
+	dw !sprite_misc_187b
+org $01C0E8
+	dw !sprite_misc_187b
+org $01C322
+	dw !sprite_misc_187b
+org $01C325
+	dw !sprite_misc_187b
+org $01CD73
+	dw !sprite_misc_187b
+org $01CDEA
+	dw !sprite_misc_187b
+org $01CE1F
+	dw !sprite_misc_187b
+org $01D2B0
+	dw !sprite_misc_187b
+org $01D6EE
+	dw !sprite_misc_187b
+org $01D77B
+	dw !sprite_misc_187b
+org $01D79F
+	dw !sprite_misc_187b
+org $01F16D
+	dw !sprite_misc_187b
+org $01F266
+	dw !sprite_misc_187b
+org $01F3A7
+	dw !sprite_misc_187b
+org $01F765
+	dw !sprite_misc_187b
+org $01F77B
+	dw !sprite_misc_187b
+org $02C1F9
+	dw !sprite_misc_187b
+org $02C203
+	dw !sprite_misc_187b
+org $02C284
+	dw !sprite_misc_187b
+org $02C404
+	dw !sprite_misc_187b
+org $02C641
+	dw !sprite_misc_187b
+org $02C65A
+	dw !sprite_misc_187b
+org $02C6D5
+	dw !sprite_misc_187b
+org $02C6FD
+	dw !sprite_misc_187b
+org $02C716
+	dw !sprite_misc_187b
+org $02C78F
+	dw !sprite_misc_187b
+org $03A10D
+	dw !sprite_misc_187b
+org $03A677
+	dw !sprite_misc_187b
+org $03A685
+	dw !sprite_misc_187b
+org $03B136
+	dw !sprite_misc_187b
+org $07F777
+	dw !sprite_misc_187b
+;============== REMAPPER FOR $187C
+;============== REMAPPER FOR $187D
+;============== REMAPPER FOR $187E
+;============== REMAPPER FOR $187F
+;============== REMAPPER FOR $1880
+;============== REMAPPER FOR $1881
+;============== REMAPPER FOR $1882
+;============== REMAPPER FOR $1883
+;============== REMAPPER FOR $1884
+org $0282C7
+	dw !sprite_misc_187b+9
+org $02832D
+	dw !sprite_misc_187b+9
+org $02837C
+	dw !sprite_misc_187b+9
+;============== REMAPPER FOR $1885
+;============== REMAPPER FOR $1886
+;============== REMAPPER FOR $190F
+org $00FAC6
+	dw !sprite_tweaker_190f
+org $0191BF
+	dw !sprite_tweaker_190f
+org $019273
+	dw !sprite_tweaker_190f
+org $019A85
+	dw !sprite_tweaker_190f
+org $019A88
+	dw !sprite_tweaker_190f
+org $019B21
+	dw !sprite_tweaker_190f
+org $01A39F
+	dw !sprite_tweaker_190f
+org $01A8B5
+	dw !sprite_tweaker_190f
+org $01A8EC
+	dw !sprite_tweaker_190f
+org $01B4B5
+	dw !sprite_tweaker_190f
+org $01F4F3
+	dw !sprite_tweaker_190f
+org $028A20
+	dw !sprite_tweaker_190f
+org $02A0F6
+	dw !sprite_tweaker_190f
+org $02B9CC
+	dw !sprite_tweaker_190f
+org $07F7CD
+	dw !sprite_tweaker_190f
+;============== REMAPPER FOR $1910
+;============== REMAPPER FOR $1911
+;============== REMAPPER FOR $1912
+;============== REMAPPER FOR $1913
+;============== REMAPPER FOR $1914
+;============== REMAPPER FOR $1915
+;============== REMAPPER FOR $1916
+;============== REMAPPER FOR $1917
+;============== REMAPPER FOR $1918
+;============== REMAPPER FOR $1919
+;============== REMAPPER FOR $191A
+;============== REMAPPER FOR $1FD6
+org $07F783
+	dw !sprite_misc_1fd6
+;============== REMAPPER FOR $1FD7
+;============== REMAPPER FOR $1FD8
+;============== REMAPPER FOR $1FD9
+;============== REMAPPER FOR $1FDA
+;============== REMAPPER FOR $1FDB
+;============== REMAPPER FOR $1FDC
+;============== REMAPPER FOR $1FDD
+;============== REMAPPER FOR $1FDE
+;============== REMAPPER FOR $1FDF
+;============== REMAPPER FOR $1FE0
+;============== REMAPPER FOR $1FE1
+;============== REMAPPER FOR $1FE2
+org $00FCC3
+	dw !sprite_cape_disable_time
+org $01810F
+	dw !sprite_cape_disable_time
+org $018114
+	dw !sprite_cape_disable_time
+org $0191FC
+	dw !sprite_cape_disable_time
+org $0195D9
+	dw !sprite_cape_disable_time
+org $0199D0
+	dw !sprite_cape_disable_time
+org $01D2CB
+	dw !sprite_cape_disable_time
+org $01D2D2
+	dw !sprite_cape_disable_time
+org $01EDA1
+	dw !sprite_cape_disable_time
+org $0293CA
+	dw !sprite_cape_disable_time
+org $02A9D5
+	dw !sprite_cape_disable_time
+org $02C4F4
+	dw !sprite_cape_disable_time
+org $02C500
+	dw !sprite_cape_disable_time
+org $02DDC2
+	dw !sprite_cape_disable_time
+org $02DEBD
+	dw !sprite_cape_disable_time
+org $03956A
+	dw !sprite_cape_disable_time
+org $0395C4
+	dw !sprite_cape_disable_time
+org $039689
+	dw !sprite_cape_disable_time
+org $07F74C
+	dw !sprite_cape_disable_time
+;============== REMAPPER FOR $1FE3
+;============== REMAPPER FOR $1FE4
+;============== REMAPPER FOR $1FE5
+;============== REMAPPER FOR $1FE6
+;============== REMAPPER FOR $1FE7
+;============== REMAPPER FOR $1FE8
+;============== REMAPPER FOR $1FE9
+;============== REMAPPER FOR $1FEA
+;============== REMAPPER FOR $1FEB
+org $03AED5
+	dw !sprite_cape_disable_time+9
+org $03C7BA
+	dw !sprite_cape_disable_time+9
+org $03C803
+	dw !sprite_cape_disable_time+9
+;============== REMAPPER FOR $1FEC
+;============== REMAPPER FOR $1FED

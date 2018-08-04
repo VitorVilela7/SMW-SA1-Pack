@@ -1,0 +1,28 @@
+SA-1 Pack v1.10:
+	- Added Arujus's Sprite Remap, allowing up to ~20 sprites to be processed on screen.
+	- Modified most of sprite loading code, allowing up to 255 sprites per level.
+	- Optimized SMW's circle routine, removing all slowdown on level clear and other screens.
+	- No More Sprite Tile Limits patch is now integrated, due of a limitation on Arujus's patch.
+	- Fixed a ZSNES freeze/crash when the SA-1 CPU calls SNES CPU (fixes all sprites which edits level tiles, like monty moles).
+	- Fixed lot of grammar/spelling errors on read me, comments and documents.
+	- Fixed lot of issues on I-RAM map.
+	- Removed Lunar Fix since Lunar Magic 2.20 supports SA-1 Pack now.
+	- Added changes.txt.
+
+SA-1 Pack v1.03:
+	- Fixed some IRQ timing bug.
+	- Fixed Reznor's bridge.
+	- Optimized a bit the patch and removed two useless features.
+	- (Lunar Fix) Added a fix related with level C7 and File Select background palette.
+	- (Lunar Fix) Fixed a major bug which layer 2, vertical and vertical+layer 2 levels had the screen totally glitched.
+
+SA-1 Pack v1.02/v1.01:
+	- All features from standard and deluxe pack with ZSNES compatibility. Character Conversion DMA is included too, but it doesn't work totaly with ZSNES.
+	- Map16 remap: moves $7E:C800-$7E:FFFF and $7F:C800-$7F:FFFF to $40:C800-$40:FFFF & $41:C800-$41:FFFF.
+	- Level loading boost: Since Map16 memory has been remapped, now SA-1 handles the level loading.
+	- LZ2 now works on ZSNES
+	- Added LZ3 patch. Works on ZSNES, of course.
+	- Includes a few OAM boost patches.
+	
+SA-1 Pack v1.00:
+	- First version of patch which only included sprite boost.

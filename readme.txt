@@ -1,10 +1,10 @@
-   _____             __     _____           _    
+﻿   _____             __     _____           _    
   / ____|  /\       /_ |   |  __ \         | |   
  | (___   /  \ ______| |   | |__) |_ _  ___| | __
   \___ \ / /\ \______| |   |  ___/ _` |/ __| |/ /
   ____) / ____ \     | |   | |  | (_| | (__|   < 
  |_____/_/    \_\    |_|   |_|   \__,_|\___|_|\_\
-   by Vitor Vilela                 Version 1.03
+   by Vitor Vilela                 Version 1.10
 
 The SA-1 Pack consist of a couple of patches that enable
 SA-1 and prepare your SMW ROM to use the SA-1 CPU in the
@@ -21,9 +21,15 @@ than usual.
 
  - Decreases the level loading time and almost kills
 all slowdown instances present in Super Mario World.
+
+ - Increases the maximum number of sprites on screen to
+20!
+
+ - Increases the maximum number of sprites per level to
+256!
  
- - 8MB Support for bsnes and snes9x (requires a
-custom build right now) and 6MB support for ZSNES.
+ - 8MB Support for bsnes, ZMZ and snes9x 1.54+ (requires a
+custom build for 1.53) and 6MB support for ZSNES.
 8MB could work with ZSNES too if you use a custom
 build.
 
@@ -54,9 +60,10 @@ ROM->BW-RAM, I-RAM->BW-RAM, BW-RAM->I-RAM).
 When patched, the following changes will take effect:
 
  - Sprites will be processed by the SA-1 chip, killing
-all slowdown instances, even with 10 sprites on screen
-at the same time, in a ROM using the No More Sprite
-Tile Limits patch.
+all slowdown instances, even with 20¹ sprites on screen
+at the same time. ¹: Assuming that they're being placed
+and used correctly. If the OAM glitch, this means
+slowdown can happen.
 
  - SA-1 will load both level data and graphics, thus
 decreasing the level loading time. This should make
@@ -85,42 +92,45 @@ SA-1 compatible version is released. There are
 exceptions, but 99.99% of patches and tools will not
 work with SA-1, in their current state.
 
-Lunar Magic is not officially SA-1 compatible, but
-I created a tool called Lunar Fix that fixes all
-Lunar Magic's ASM hacks. Note that in the future, Lunar
-Magic MIGHT support SA-1, probably in 2013.
-                                               
+Since Lunar Magic 2.20, you can apply the SA-1 Pack and
+Lunar Magic will detect and apply the required changes
+to make your ROM editable.
+                                              
 I am converting various patches and tools to make them
 compatible with SA-1. If you're interested, check out
-at the end of this readme.
+at the end of this read me.
 
 Blocks and Sprites will not work either, even if you use
 a SA-1 compatible Sprite Tool/Block Tool. Unless a future
 Sprite/Block Tool will be able to convert a regular custom
 sprite/block into a SA-1 friendly sprite/block.
 
-Converting those is easier than converting patches or
+Converting those are easier than converting patches or
 tools, though.
+
+ZSNES EMULATES THE SA-1 AT 5.37 MHZ! If you get slowdown on
+ZSNES, there's no way to fix but porting into a new emulator.
+Snes9X, bsnes and ZMZ are recommended for SA-1.
 
 ;===================================================;
 ; Usage                                             ;
 ;===================================================;
 
-Working with SA-1 may be tedious at first, but working
-with this chip is simple and fun.
+Working with SA-1 may be tedious at first, but at time
+working with this chip will get simple and fun.
 
 In order to get started, grab a new clean ROM. Japanese
 or European versions will not work.
 
-Now, open the ROM in Lunar Magic and expand it to 2MB,
-without doing anything else.
+Now, open the ROM in Lunar Magic and expand it to 1, 2,
+3 or 4MB, without doing anything else.
 
 Now, using Asar, apply sa1.asm to your ROM.
 
 Then test it with an emulator of your choice. I'd
 recommend Snes9X, BSNES or ZSNES. If it works normally
 and Snes9X/ZSNES respectively display ROM+RAM+SRAM+SA-1
-or Type:SA1 upon loading the game, then you've successfuly
+or Type:SA1 upon loading the game, then you've successfully
 activated SA-1 on your ROM!
 
 Now apply all other patches/tools that should run
@@ -129,29 +139,11 @@ or else, if any of these patches/tools is not compatible
 with SA-1, it will DESTROY your ROM.
 
 Now you can save the first level with Lunar Magic! Note
-that if you use a Lunar Magic version not compatible with
-SA-1, you will need to use Lunar Fix, a small program
-that I created in order to make Lunar Magic SA-1 compatible,
-otherwise aww, why I would use SA-1 on a SMW Hack if
-it isn't compatible with Lunar Magic?!
-
-You should use Lunar Fix on your ROM after doing atleast 
-one of the following actions:
- - Saving the first level with Lunar Magic;
- - Making a major change on your ROM (like inserting
-ExGFX, enabling ExAnimation);
- - Editing the overworld;
- - Inserting a new ASM hack (Title Screen Recording,
- ExAnimation, Custom Palettes, etc.);
- 
-Using Lunar Fix is really simple: drag your ROM on
-the program window, or in the command prompt, type
-"lunarfix Your_ROM_Name.smc" without quotes.
-Lunar Fix allows both unheadered and headered ROMs.
+that you MUST use Lunar Magic 2.20+ to work with SA-1.
 
 Warning: If you change the decompression option on
 Lunar Magic, you MUST reapply sa1.asm or your ROM will
-just crash.
+run slower on loading screens.
 
 ;===================================================;
 ; F.A.Q                                             ;
@@ -159,63 +151,58 @@ just crash.
 
  Q: Is it really hard to work with SA-1?
  A: I would say yes, but after some time you'll be able
-to see the benefits from using this SA-1 pack :).
+to see the benefits from using this SA-1 pack. :)
 Also once you learn how to make something SA-1
 compatible, everything will become easier to work with.
 
  Q: When I edit my ROM in Lunar Magic and open it, the
 ROM glitches during the Title Screen. What's going on?
- A: You forgot to use Lunar Fix. See "Usage" in line 106.
+ A: Your Lunar Magic version isn't compatible with SA-1 Pack.
+ Please update to at least version 2.20.
 
  Q: When I expanded my ROM to 8MB, ZSNES can't open
 anymore.
  A: ZSNES doesn't support 8MB ROMs, only up to 6MB. Try
 restoring your ROM to a previous state using Lunar Magic
-or with a backup.
+or with a backup. You can though try FuSoYa's custom ZSNES build,
+but of course all hackers would need to use too.
 
  Q: Whenever I apply a patch to my ROM, it crashes.
  A: Make sure that the patch is SA-1 compatible. You can
-find a list of SA-1 compatible patches in the "Links"
-section, line 791. Also on SMWC, SA-1 compatible patches
-might have the [SA-1] tag, but I don't know yet.
+find a list of SA-1 compatible patches on "Links" section.
+Also on SMWC, SA-1 compatible patches will have the "sa1" tag.
 
  Q: Whenever I use any tool, the ROM simply crashes!
  A: Make sure that the tool is SA-1 compatible. You can
-find SA-1 compatible tools in the "Links" section,
-line 791. Also on SMWC, SA-1 compatible tools might have
-the [SA-1] tag, but I don't know. If the tool isn't
-on list, you will need to ask the author for adding SA-1
-support or search for another solution, like a manual
-patch or another tool.
+find SA-1 compatible tools on "Links" section.
+Also on SMWC, SA-1 compatible tools will have the "sa1" tag.
+If the tool isn't on list, you will need to ask the author
+for adding SA-1 support or search for another solution,
+like a manual patch or another tool.
 
  Q: If I insert a custom block or custom sprite, the
 ROM crashes or glitches when the block/sprite is present.
  A: Blocks and sprites may need to be converted to SA-1.
-Check out the "Links" section at line 791 for SA-1 compatible
-blocks/sprites. SMWC blocks/sprites may have the tag
-[SA-1], indicating SA-1 compatibility.
-
- Q: After editing something in Lunar Magic, the ROM glitches
-or crashes.
- A: Make sure to run Lunar Fix every time you make any
-major change on your ROM. See "Usage" at line 106.
+Check out the "Links" section for SA-1 compatible blocks/sprites.
+SMWC blocks/sprites may have the "sa1" tag, indicating
+SA-1 compatibility.
 
  Q: How I can make something compatible with SA-1?
- A: See "Programming" in line 214. You will find all
+ A: Check section "Programming". You will find all
 the informations needed for that :)
 
  Q: If I change "Compression Options for this ROM" in
-Lunar Magic, the ROM simply crashes. Why?
+Lunar Magic, the ROM gets a little slower on loading. Why?
  A: You have to reapply sa1.asm after you change the
 compression option, since SA-1 processes that specific part
-and it needs a specific decompressor to work property.
+and it needs a specific decompresser to work property.
 
 ;===================================================;
 ; Programming                                       ;
 ;===================================================;
 
-Unlike the first version of the SA-1 pack, this one
-is much complex because of the various RAM remapping,
+Unlike the first version of the SA-1 PATCH, this one
+is much more complex because of the various RAM remapping,
 not counting the different ROM mapping.
 
 In other words, in order to making anything SA-1
@@ -225,7 +212,11 @@ compatible, you will need to change:
 and YY equals either XX or $7E)
 
 $YY:0000-$YY:00FF to $XX:3000-$XX:30FF.
-$YY:0100-$YY:1FFF to $XX:0100-$XX:1FFF.
+$YY:0100-$YY:1FFF to $XX:6100-$XX:7FFF.
+
+BE VERY CAREFUL WHEN HANDLING SPRITE ADDRESSES!
+ARUJUS'S PATCH MOVE ALL OF THEM TO ANOTHER AREA.
+Please check docs\sprite remap.txt for more details!
 
 Note that if you're using 16-bit addressing,
 you should to use $3000-$30FF and $6100-$7FFF for that.
@@ -252,9 +243,9 @@ and one is deleted. In other words, I-RAM and BW-RAM
 are added while SRAM is deleted.
 
 I-RAM is SA-1 Internal RAM, which is why it's called I-RAM.
-The I-RAM runs at 10.74 MHz with no delay and is
-the 2nd fastest RAM available on SNES, only beaten by
-the Super FX 2's Cache RAM, which runs at 21 MHz.
+The I-RAM runs at 10.74 MHz with no delay and is the
+fastest RAM of SNES, with exception of Super FX's cache.
+But since cache isn't RAM, that doesn't count.
 The size of I-RAM is 2 KB (2048 bytes) and it's
 located in banks $00-$3F and $80-$BF, in the
 $3000-$37FF range.
@@ -267,11 +258,12 @@ SNES side, because the Direct Page is now at $3000.
 $3100-$31FF is internally used by my patch for
 general and caching purposes.
 
-$3200-$36FF is free to use.
+$3200-$3425 is used by Arujus's more sprites patch!
+$3426-$36FF is free to use.
 $3700-$377F is the Character Conversion DMA buffer.
 $3780-$37FF is the SA-1 stack.
 
-A detailed I-RAM map is included in iram.txt
+A detailed I-RAM map is included on docs\I-RAM.txt
 
 I-RAM is recommended to be used for RAM codes or as a place
 for storing data which is accessed many times, since it'll
@@ -290,12 +282,12 @@ SNES Dev. Manual Book II, but I only got up to 128 KB working,
 perhaps because none of the emulators implemented that, or
 no SA-1 game ever used 256 KB of BW-RAM.
 
-This patch always uses the maximium BW-RAM size possible
+This patch always uses the maximum BW-RAM size possible
 (128 KB) in banks $40-$41. $42-$FF will mirror the first two
 banks (e.g $42 and $40, $43 and $41, etc).
 
 I remapped most RAM on SMW to BW-RAM and the SRAM of course.
-For more details, see bwram.txt
+For more details, check docs\BW-RAM.txt
 
 Of course, if the BW-RAM is at bank $40+ now, where has the
 ROM been moved to?
@@ -334,7 +326,7 @@ make the first 4MB LoROM only and the last 4MB HiROM only.
 This way you can access all the 8MB at once, though some emulators
 may have some problems with it.
 
-This also means that FastROM addresing will not work, so pay
+This also means that FastROM addressing will not work, so pay
 attention to any strange jump to the $808000+ area, and subtract
 $800000 from those.
 
@@ -427,7 +419,7 @@ This operation may be really useful, but be careful that if
 you access the ROM in multi-threading mode, SA-1 may access
 it at 5.37 MHz, decreasing processing speed.
 
-To make sure that SA-1 will run at fullspeed, place the code
+To make sure that SA-1 will run at full speed, place the code
 in WRAM and run it from there instead.
 
 When you switch to SA-1 side, the system works a bit differently:
@@ -613,7 +605,7 @@ STA $2258
 
 You can keep doing this until you want to stop the reading process.
 
-Here's a simple pratical example.
+Here's a simple practical example.
 In LZ2, the syntax of the header looks like this (in bits):
 
 bits
@@ -762,7 +754,7 @@ SetTable:
 
 You will also need to learn how register $2231 and SA-1 Bitmap work though.
 Check out the SNES Dev. Book II, Super Accelerator (SA-1) -> Character Conversion.
-You may find the file in "Links", line 791.
+You may find the file on section "Links".
 
 To see all the registers, check out here: http://wiki.superfamicom.org/snes/show/SA-1+Registers
 
@@ -775,16 +767,17 @@ to be created perfectly:
 
  - 33953YoShI (LC_LZ2/3 patches)
  - Adam (Testing / bugs)
+ - Arujus (More sprites patch)
  - Alcaro (ZSNES/SNES9X detection code)
- - Austin (Creating compatible tools/patches/blocks/sprite page)
  - edit1724 (LC_LZ2/3 patches)
  - Ersanio (LC_LZ2/3 patches)
- - FuSoYa (help on implementing 6-8MB support)
+ - FuSoYa (help on implementing 6-8MB support, LZ3 patch)
+ - Koopster (Creating compatible tools/patches/blocks/sprite page)
  - Lui37 (help on minor stuff)
  - Min (LC_LZ2/3 patches)
  - smkdan (LC_LZ2/3 patches and help on fixing VRAM patch)
  - Ripperon-X (bugs report)
- - Vitor Vilela (creating the patches)
+ - Vitor Vilela (creating most patches)
  - You (for using the patches :D)
  
 ;===================================================;
