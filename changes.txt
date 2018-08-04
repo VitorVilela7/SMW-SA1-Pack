@@ -1,3 +1,6 @@
+SA-1 Pack v1.23:
+	- Made the dynamic sprite uploader only run on level and title screen game mode. This may fix some issues with dynamic sprites getting garbaged graphics on fade in/out or even unwanted uploads.
+
 SA-1 Pack v1.22:
 	- Fixed a bug where the arrow used in CONTINUE/END text wasn't being rendered in bsnes and other saner emulators that blocks WRAM access from SA-1 CPU.
 

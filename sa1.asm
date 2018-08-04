@@ -481,7 +481,7 @@ Character_Conversion_DMA:			; CCDMA Routine.
 	DEY					; \ Increase $2116/$2117 then writing to $2119
 	STY $2115				; /
 						;
-	%ccdmaslot(0)				; \ Unroll loop
+	%ccdmaslot(0)				; \ Unrolled loop
 	%ccdmaslot(1)				;  | to run each character conversion DMA table slot.
 	%ccdmaslot(2)				;  |
 	%ccdmaslot(3)				;  |
@@ -493,16 +493,24 @@ Character_Conversion_DMA:			; CCDMA Routine.
 	%ccdmaslot(9)				; /
 						;
 CCDMA_END:					;
-	LDY #$80				; \ Tell to SA-1 that Character Conversion is done.
+	LDY #$80				; \ Tell SA-1 that Character Conversion is done.
 	STY $2231				; /
-	LDY #$82				; \ Tell to SA-1 disable DMA/CCDMA
+	LDY #$82				; \ Tell SA-1 to disable DMA/CCDMA
 	STY $2200				; /
 						;
 	SEP #$20				; 8-bit A
 	STZ !CCDMA_SLOTS			; Clear CCDMA Slots
 						;					
 Dynamic_Sprites:				; --------------------------------------
-	LDA !SLOTSUSED				; Load Dynamic Sprites Slots
+	LDA $6100				; \ Don't run Dynamic Sprites system
+	CMP #$07				;  | if the game mode isn't #$07 nor #$14
+	BEQ +					;  |
+	CMP #$14				;  |
+	BEQ +					; /
+	STZ !SLOTSUSED				; \ Reset slots used and return
+	JML $008172				; /
+	
++	LDA !SLOTSUSED				; Load Dynamic Sprites Slots
 	BNE +					; Don't return to NMI if there are slots to transfer.
 	JML $008172				; Otherwise, return to NMI.
 	

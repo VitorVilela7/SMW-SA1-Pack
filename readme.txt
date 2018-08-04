@@ -4,7 +4,7 @@
   \___ \ / /\ \______| |   |  ___/ _` |/ __| |/ /
   ____) / ____ \     | |   | |  | (_| | (__|   < 
  |_____/_/    \_\    |_|   |_|   \__,_|\___|_|\_\
-   by Vitor Vilela                 Version 1.22
+   by Vitor Vilela                 Version 1.23
 
 The SA-1 Pack consist of a couple of patches that enable
 SA-1 and prepare your SMW ROM to use the SA-1 CPU in the
