@@ -5,7 +5,7 @@
   \___ \ / /\ \______| |   |  ___/ _` |/ __| |/ /
   ____) / ____ \     | |   | |  | (_| | (__|   <
  |_____/_/    \_\    |_|   |_|   \__,_|\___|_|\_\
-   by Vitor Vilela                 Version 1.26
+   by Vitor Vilela                 Version 1.27
 ```
 The SA-1 Pack, as the name implies, is a package of
 patches containing everything you need to activating
