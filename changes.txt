@@ -1,3 +1,10 @@
+SA-1 Pack v1.27:
+	- Fixed Snes9x 1.56 crashing the game on SMW ROMs without Addmusic installed. This occurs because of the increased SA-1 CPU base clock.
+	- Fixed Asar 1.60 reporting error when applying the patch, due of changes in the label preprocessor.
+	- Fixed a missing channel change (from 0 to 1) on part of the CC-DMA setup. CC-DMA should work again.
+	- Migrated SA-1 Pack source code to GitHub, now available at https://github.com/VitorVilela7/SA1-Pack
+	- Migrated README to Markdown (ExE-Boss)
+
 SA-1 Pack v1.26:
 	- Fixed Sprite <-> Sprite interaction missing several sprite pointer changes, making certain sprite tables corrupted. One of the most notables consequences of the glitch were the blue shelless koopas not being able to hold a shell thrown from behind.
 	- Fixed Yoshi spitting fire (from a red shell or if red yoshi) slight off position (around -16 pixels from where it was supposed to), due of yet another missing sprite pointer change.
