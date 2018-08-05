@@ -201,7 +201,7 @@ Decompress:
 .end	JMP .done
 	
 if !!LZ3
-	incsrc LZ2.asm
+	incsrc lz2.asm
 else
-	incsrc LZ3.asm
+	incsrc lz3.asm
 endif
