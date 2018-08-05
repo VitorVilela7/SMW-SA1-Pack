@@ -225,7 +225,7 @@ ClearStack:					; Based from QuickROM, by Alcaro.
 						;
 	LDA $6100				; \ Don't waste time if game mode isn't 00
 	BNE .DoNotWasteTime			; /
-	LDX #$0E80				; \ Wait for SPC700
+	LDX #$1180				; \ Wait for SPC700
 -	DEX					;  |
 	BPL -					; /
 .DoNotWasteTime					;
