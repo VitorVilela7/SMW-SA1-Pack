@@ -465,7 +465,7 @@ Character_Conversion_DMA:			; CCDMA Routine.
 +	TAX					; Put CCDMA slot count into X.
 	REP #$20				; 16-bit A
 	LDA #$1801				; \ Dest: $2118
-	STA $4300				; / Write twice
+	STA $4310				; / Write twice
 	LDY #$81				; \ Tell SA-1 to enable Character Conversion DMA #1
 	STY $2200				; /
 	DEY					; \ Increase $2116/$2117 then writing to $2119
