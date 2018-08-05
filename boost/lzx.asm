@@ -200,8 +200,9 @@ Decompress:
 	RTL
 .end	JMP .done
 	
-if !!LZ3
+if !LZ3 == 0
 	incsrc lz2.asm
 else
 	incsrc lz3.asm
 endif
+
