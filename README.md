@@ -83,7 +83,7 @@ the tag may need to have a manual remap conversion,
 which might be complicated for who is new at logic
 programming.
 
-Since Lunar Magic 2.20, you can apply the SA-1 Pack and
+Since [Lunar Magic](https://fusoya.eludevisibility.org/lm/index.html) 2.20, you can apply the SA-1 Pack and
 Lunar Magic will detect and apply the required changes
 to make your ROM editable. However, if you already
 started editing your ROM, you will have to port it over
