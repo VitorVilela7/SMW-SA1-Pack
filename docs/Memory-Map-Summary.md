@@ -69,7 +69,7 @@ Banks    | Access | Description
 
 From | To | Comment
 :---:|:--:|---------
-`$0000-$00FF`|`$3000-$30FF`| Note that you don't need to change direct page opcodes, like`LDA $19`. The remap only applies to 16-bit opcodes such as`JML [$0000]`or`LDX $00B6,y`.
+`$0000-$00FF`|`$3000-$30FF`| Note that you don't need to change direct page opcodes, like`LDA $19`. The remap only applies to 16-bit opcodes such as`JML [$0000]`or`STA $00B6,y`.
 `$0100-$1FFF`|`$6100-$7FFF`|You also can change data bank to `$40` and stay with the address, paying attention to the other RAM addresses outside the range.
 
 ### 24-bit (Absolute Long) Addresses
