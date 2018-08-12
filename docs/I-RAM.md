@@ -19,7 +19,7 @@ The I-RAM has unrestricted memory access. C-CPU always accesses it at 10.74 MHz 
 ##### Page 0
 Start  |  End  | Description
 :-----:|:-----:|-------------
-`$3000`|`$30FF`| SMW's $7E:0000-$7E:00FF -- the Direct Page.
+`$3000`|`$30FF`| SMW's`$7E:0000-$7E:00FF`-- the Direct Page.
 
 ##### Page 1
 Start  |  End  | Description
