@@ -6,15 +6,19 @@ Along that, there is always some issues that is from the SA-1 Pack itself and ne
 
 For consistency, only issues from latest version of each emulator will be listed, with rare exceptions.
 
+(!): Issues caused by an incorrect behavior of the SA-1 Pack, not from emulator/console.
+
 ## sd2snes
-* TO DO
+* (!) The console has some slight PPU scanline glitch below status bar during mode 7 bosses.
+* The SA-1 CPU has some speed inconsistencies. The CPU runs slight slower (~9.63 MHz) during ROM access and runs faster than normal on I-RAM access (~13.76 MHz).
 
 ## Real SA-1 cart
-* TO DO
+* (!) The console has some slight PPU scanline glitch below status bar during mode 7 bosses.
 
 ## bsnes
-bsnes refers to the SNES part of higan.
-* TO DO
+bsnes refers to the SNES emulation part of higan.
+* On the older versions of bsnes (0.7x, probably 0.8x as well), variable length bit processing does not get affected by the Super MMC registers, making impossible to access the last 4 MB of the ROM though the SA-1 ROM bit stream feature. Although fixed on the newer versions, people unfortunately still uses older versions of the emulator and can be affected by this bug.
+* 256 kB BW-RAM is not supported unless if the user writes an explicit custom mapper (BML/XML mapper).
 
 ## Snes9x
 * Since version 1.56, the SA-1 CPU is 12% faster than the nominal 10.74 MHz clock. It's clocked at ~12.01 MHz instead.
@@ -29,6 +33,7 @@ bsnes refers to the SNES part of higan.
 * Probably... more coming.
 
 ## ZSNES
+* (!) SA-1 -> SNES IRQ may cause some split second graphical glitch around status bar. This can be noted when collecting coins, hitting blocks and running special HDMA code against the level.
 * The SA-1 CPU is 42% slower than the nominal 10.74 MHz clock. It's clocked at ~6.18 MHz instead.
 * Random crashes and freezes are often common, with an unknown reason for that.
 * It's not possible to execute code on I-RAM nor BW-RAM. Applies to both SA-1 CPU and SNES CPU. To workaround, code must be placed and executed on the W-RAM.
