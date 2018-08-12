@@ -1,86 +1,94 @@
-This is a quick summary of the changes that SA-1 makes in your ROM and the procedures you should take for converting a resource for SA-1 Pack compatibility.
+# Memory Map Summary
 
-16-bit addresses:
+This is a quick summary of the memory changes made by the SAS Memory Map and by SA-1 Pack.
 
-$0000-$00FF -> $3000-$30FF (Note that you don't need to change direct page opcodes, like LDA $19. This remap only applies to 16-bit opcodes like LDA $0019).
-$0100-$1FFF -> $6100-$7FFF.
+## Hybrid Remapping
+It's possible to write code that works with both SA-1 Pack SMW ROMs and regular SMW ROMs by detecting the ROM mapper and using a couple of defines depending of the ROM type detected. Take a look at [remap.asm](/remap.asm).
 
-24-bit addresses:
+More important than making hybrid ASM code, it's understanding how the SA-1 memory map works and how you can make your code potentially much faster and with a higher compatibility on SA-1 SMW ROMs. This document contains a well-summarized information about the SA-1 memory map.
 
-$7E:0000-$7E:00FF -> $00:3000-$00:30FF.
-$7E:0100-$7E:1FFF -> $00:6100-$00:7FFF or $40:0100-$40:1FFF.
-$7E:C800-$7E:FFFF -> $40:C800-$40:FFFF.
-$7F:C700-$7F:FFFF -> $41:C800-$41:FFFF.
+## ROM Memory Map
+SA-1 features the Super MMC, a memory controller that can support ROMs larger than 4 MB. It offers bank switching support though registers`$2220-$2223`, which allows switching ROM data in blocks of 1 MB.
 
-SRAM:
+### LoROM banks
+Applies for any ROM size.
 
-$70:0000-$70:07FF to $41:C000-$41:C7FF.
-$70:0800-$70:27FF to $41:A000-$41:BFFF (extended area).
+Bank Range | Description
+-----------|-------------
+`$00-$1F`|1st Mbyte of the ROM. Super MMC register`$2220`CXB.
+`$20-$3F`|2nd Mbyte of the ROM. Super MMC register`$2221`DXB.
+`$80-$9F`|3rd Mbyte of the ROM. Super MMC register`$2222`EXB.
+`$A0-$BF`|4th Mbyte of the ROM. Super MMC register`$2223`FXB.
 
-Rare cases:
+### HiROM banks
+Applies for ROMs up to 4 MB.
 
-$7F:9A7B-$7F:9C7A to $41:8800-$41:89FF.
-$7E:1938-$7E:19B7 to $41:8A00-$41:8AFE.
+Bank Range | Description
+-----------|-------------
+`$C0-$CF`|1st Mbyte of the ROM. Super MMC register`$2220`CXB.
+`$D0-$DF`|2nd Mbyte of the ROM. Super MMC register`$2221`DXB.
+`$E0-$EF`|3rd Mbyte of the ROM. Super MMC register`$2222`EXB.
+`$F0-$FF`|4th Mbyte of the ROM. Super MMC register`$2223`FXB.
 
-Sprite tables:
+### ExHiROM banks
+Applies for ROMs larger than 4 MB and up to 8 MB. LoROM mapping is not affected for the way SA-1 Pack configures the SAS Memory Map.
 
-Because SA-1 Pack extends the maximum number of sprites on screen to 20, all its table had to be
-moved to another place that allows more RAM available.
+Bank Range | Description
+-----------|-------------
+`$C0-$CF`|5th Mbyte of the ROM. Super MMC register`$2220`CXB.
+`$D0-$DF`|6th Mbyte of the ROM. Super MMC register`$2221`DXB.
+`$E0-$EF`|7th Mbyte of the ROM. Super MMC register`$2222`EXB.
+`$F0-$FF`|8th Mbyte of the ROM. Super MMC register`$2223`FXB.
 
-	-> Each address is 22 bytes long
-	-> The first group are the addresses that are still at DP (I-RAM).
-	-> The second group are the addresses that are at I-RAM.
-	-> The third group are the addresses that are at BW-RAM.
-	-> "!" means that the RAM got moved from Direct Page ($XX) to Absolute Addressing ($XXXX).
+### Dual ROM System
+The Dual ROM system works by merging two or more ROMs in a single one and selecting which ROM image to project using the Super MMC registers. For example, two 4 MB ROMs can be merged and the first ROM can be loaded by loading values`$00-$03`to the registers`$2220-$2223` and the second ROM can be loaded by loading values`$04-$07`to the same registers.
 
-$XX:309E-$XX:30B3 -> SMW's $7E:00AA
-$XX:30B6-$XX:30CB -> SMW's $7E:00B6
-$XX:30D8-$XX:30ED -> SMW's $7E:00C2
+In practice, the Dual ROM system allows to either merge two games together or double the amount of resources available (levels, map16, music, sprites, overworlds, etc.) with the compromise of having to control two or more gamepak ROMs at the same time.
 
-$XX:3200-$XX:3215 -> SMW's $7E:009E !
-$XX:3216-$XX:322B -> SMW's $7E:00D8 !
-$XX:322C-$XX:3241 -> SMW's $7E:00E4 !
-$XX:3242-$XX:3257 -> SMW's $7E:14C8
-$XX:3258-$XX:326D -> SMW's $7E:14D4
-$XX:326E-$XX:3283 -> SMW's $7E:14E0
-$XX:3284-$XX:3299 -> SMW's $7E:151C
-$XX:329A-$XX:32AF -> SMW's $7E:1528
-$XX:32B0-$XX:32C5 -> SMW's $7E:1534
-$XX:32C6-$XX:32DB -> SMW's $7E:1540
-$XX:32DC-$XX:32F1 -> SMW's $7E:154C
-$XX:32F2-$XX:3307 -> SMW's $7E:1558
-$XX:3308-$XX:331D -> SMW's $7E:1564
-$XX:331E-$XX:3333 -> SMW's $7E:1570
-$XX:3334-$XX:3349 -> SMW's $7E:157C
-$XX:334A-$XX:335F -> SMW's $7E:1588
-$XX:3360-$XX:3375 -> SMW's $7E:1594
-$XX:3376-$XX:338B -> SMW's $7E:15A0
-$XX:338C-$XX:33A1 -> SMW's $7E:15AC
-$XX:33A2-$XX:33B7 -> SMW's $7E:15EA
-$XX:33B8-$XX:33CD -> SMW's $7E:15F6
-$XX:33CE-$XX:33E3 -> SMW's $7E:1602
-$XX:33E4-$XX:33F9 -> SMW's $7E:160E
-$XX:33FA-$XX:340F -> SMW's $7E:163E
-$XX:3410-$XX:3425 -> SMW's $7E:187B
+SA-1 Pack currently does not include a Dual ROM system controller.
 
-$XX:74C8-$XX:74DD -> SMW's $7E:14EC
-$XX:74DE-$XX:74F3 -> SMW's $7E:14F8
-$XX:74F4-$XX:7509 -> SMW's $7E:1504
-$XX:750A-$XX:751F -> SMW's $7E:1510
-$XX:7520-$XX:7535 -> SMW's $7E:15B8
-$XX:7536-$XX:754B -> SMW's $7E:15C4
-$XX:754C-$XX:7561 -> SMW's $7E:15D0
-$XX:7562-$XX:7577 -> SMW's $7E:15DC
-$XX:7578-$XX:758D -> SMW's $7E:161A
-$XX:758E-$XX:75A3 -> SMW's $7E:1626
-$XX:75A4-$XX:75B9 -> SMW's $7E:1632
-$XX:7658-$XX:766D -> SMW's $7E:190F
-$XX:766E-$XX:7683 -> SMW's $7E:1FD6
-$XX:7FD6-$XX:7FEB -> SMW's $7E:1FE2
-$XX:75BA-$XX:75CF -> SMW's $7E:164A
-$XX:75D0-$XX:75E5 -> SMW's $7E:1656
-$XX:75EA-$XX:75FF -> SMW's $7E:1662
-$XX:7600-$XX:7615 -> SMW's $7E:166E
-$XX:7616-$XX:762B -> SMW's $7E:167A
-$XX:762C-$XX:7641 -> SMW's $7E:1686
-$XX:7642-$XX:7657 -> SMW's $7E:186C
+## RAM Memory Map
+The SA-1 CPU (C-CPU) can't access the W-RAM, therefore to transfer some routine to it it's required to remap most of the game memory either to I-RAM or BW-RAM. Other than that, both S-CPU and C-CPU memory maps are fairly similar.
+
+### RAM banks
+Banks    | Access | Description
+:-------:|:------:|-------------
+`$00-$3F`| C-CPU  | I-RAM at addresses`$0000-$07FF` @ 10.74 MHz
+`$00-$3F`| S-CPU  | W-RAM at addresses`$0000-$1FFF` @ 2.68 MHz
+`$00-$3F`| Both   | I-RAM at addresses`$3000-$37FF` @ 10.74 MHz
+`$00-$3F`| Both   | BW-RAM Virtual Memory at addresses`$6000-$7FFF` @ 5.37 MHz
+`$40-$4F`| Both   | BW-RAM @ 5.37 MHz
+`$60-$6F`| C-CPU  | BW-RAM Virtual Bitmap Memory @ 5.37 MHz
+`$7E-$7F`| S-CPU  | W-RAM @ 2.68 MHz
+`$80-$BF`| C-CPU  | I-RAM at addresses`$0000-$07FF` @ 10.74 MHz
+`$80-$BF`| S-CPU  | W-RAM at addresses`$0000-$1FFF` @ 2.68 MHz
+`$80-$BF`| Both   | I-RAM at addresses`$3000-$37FF` @ 10.74 MHz
+`$80-$BF`| Both   | BW-RAM Virtual Memory at addresses`$6000-$7FFF` @ 5.37 MHz
+
+### 16-bit (Absolute) Addresses
+
+From | To | Comment
+:---:|:--:|---------
+`$0000-$00FF`|`$3000-$30FF`| Note that you don't need to change direct page opcodes, like`LDA $19`. The remap only applies to 16-bit opcodes such as`JML [$0000]`or`LDX $00B6,y`.
+`$0100-$1FFF`|`$6100-$7FFF`|You also can change data bank to `$40` and stay with the address, paying attention to the other RAM addresses outside the range.
+
+### 24-bit (Absolute Long) Addresses
+
+From               | To                | Comment
+:-----------------:|:-----------------:|---------
+`$7E:1938-$7E:19B7`|`$41:8A00-$41:8AFE`| Used to be 16-bit (absolute) addressed, now 24-bit (absolute long) to accommodate more sprite entries per level (from 128 to 255).
+`$7E:C800-$7E:FFFF`|`$40:C800-$40:FFFF`| Map16 low byte plus Overworld related data.
+`$7F:9A7B-$7F:9C7A`|`$41:8800-$41:89FF`| Wiggler's segment buffer.
+`$7F:C700-$7F:FFFF`|`$41:C800-$41:FFFF`| Map16 high byte.
+
+### S-RAM
+The S-RAM (static memory) banks used to be banks`$70-$71`, but the SAS Memory Map replaces it with BW-RAM, which is also used as work RAM and has is allocated though banks`$40-$43`. The remapped addresses are stated below.
+
+From               | To                | Comment
+:-----------------:|:-----------------:|---------
+`$70:0000-$70:07FF`|`$41:C000-$41:C7FF`| Original save memory (2 kB big). Not everything is used.
+`$70:0800-$70:27FF`|`$41:A000-$41:BFFF`| Expansion area planned for SMW hacks.
+
+
+### Sprite Tables
+Although the sprite tables are all 16-bit (absolute) addresses and therefore were remapped together to the BW-RAM, Arujus's More Sprites patch had to move them again to accommodate the expanded 22 sprites slots limits. Read more at [Sprite Remap](/Sprite-Remap.md) doc.
