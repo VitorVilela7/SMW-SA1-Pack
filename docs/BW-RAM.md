@@ -13,16 +13,16 @@ The SAS (Super Accelerator System) Memory Map also mirrors a page of the BW-RAM 
 
 ### Virtual VRAM
 
-Banks `$60-$6F` on the SA-1 CPU Memory Map are also known as **Virtual Bitmap VRAM** or **bitmap data storage area**. It is an area made for drawing 4BPP or 2BPP bitmap images. The SAS splits and projects the BW-RAM into blocks of 4 or 2 bits to these banks. See the Memory Map document for more information about this.
+Banks `$60-$6F` on the SA-1 CPU Memory Map are also known as **Virtual Bitmap VRAM** or **Bitmap Data Storage Area**. It's an area made for drawing 4BPP or 2BPP bitmap images. The SAS splits and projects the BW-RAM into blocks of four or two bits to the region. See the Memory Map document for more information about it.
 
-The region can be also mirrored to the`$6000-$7FFF`area though bit 7 of the register`$2225`.
+The region can also be mirrored to`$6000-$7FFF`though bit 7 of the register`$2225`.
 
 ### Access Time
 
 The BW-RAM has unrestricted access from both C-CPU and S-CPU. However, because it's clocked at 5.37 MHz, there's an additional memory cycle on the SA-1 CPU.
 
 For example,`STA $400000`(8-bit A) will take six 10.74 MHz cycles and not five. The "effective speed" on this case will be ~8.95 MHz.
-`STA $00`(DP =`$6000`, 16-bit A) will take six 10.74 MHz cycles compared of four. "Effective speed" will be ~7.16 MHz.
+`STA $00`(DP =`$6000`, 16-bit A) will take six 10.74 MHz cycles compared to four. "Effective speed" will be ~7.16 MHz.
 
 ## BW-RAM Memory Map
 
@@ -63,7 +63,7 @@ Start     | End      | Description
 `$41:8000`|`$41:87FF`| smkdan's dynamic sprites (dsx) buffer. If dynamic sprites are not used, empty. Not cleared.
 `$41:8800`|`$41:89FF`| SMW's`$7F:9A7B`. Wiggler's segment buffer.
 `$41:8A00`|`$41:8AFE`| SMW's`$7E:1938`. Sprite load status within the level, extended to 255 entries.
-`$41:8AFF`|`$41:9FFF`| Free. It's 5377 bytes (~5.25 KB) free in total.
+`$41:8AFF`|`$41:9FFF`| Empty. Not cleared. It's 5377 bytes (~5.25 KB) free in total.
 
 ##### Page 13
 Start     | End      | Description
