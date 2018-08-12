@@ -17,7 +17,16 @@ bsnes refers to the SNES part of higan.
 * TO DO
 
 ## Snes9x
-* TO DO
+* Since version 1.56, the SA-1 CPU is 12% faster than the nominal 10.74 MHz clock. It's clocked at ~12.01 MHz instead.
+* SA-1 CPU is affected by the W-RAM refreshes.
+* SA-1 CPU is wrongly paused during SNES DMA.
+* SA-1 CPU is wrongly paused during H-DMA.
+* Virtual Bitmap BW-RAM area (`$60-$6F`) can only access the first 64 kB of the BW-RAM.
+* Virtual BW-RAM mapping (`$6000-$7FFF`) can only map the first 64 kB of the BW-RAM.
+* For SA-1 ROMs larger than 4 MB, Snes9x may wrongly swap the upper 4 MB with the lower 4 MB.
+* Does not lock W-RAM accesses.
+* Does not support 256 kB BW-RAM.
+* Probably... more coming.
 
 ## ZSNES
 * The SA-1 CPU is 42% slower than the nominal 10.74 MHz clock. It's clocked at ~6.18 MHz instead.
