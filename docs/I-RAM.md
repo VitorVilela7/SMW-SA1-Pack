@@ -14,6 +14,8 @@ The I-RAM has unrestricted memory access. C-CPU always accesses it at 10.74 MHz 
 
 ### I-RAM Memory Map
 
+**Page** in this document refers to a block of `0x100` or 256 bytes.
+
 ##### Page 0
 Start  |  End  | Description
 :---:  |  :-:  |
