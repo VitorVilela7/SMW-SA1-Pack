@@ -18,12 +18,12 @@ The I-RAM has unrestricted memory access. C-CPU always accesses it at 10.74 MHz 
 
 ##### Page 0
 Start  |  End  | Description
-:---:  |  :-:  |
+:-----:|:-----:|-------------
 `$3000`|`$30FF`| SMW's $7E:0000-$7E:00FF -- the Direct Page.
 
 ##### Page 1
 Start  |  End  | Description
-:---:  |  :-:  |
+:-----:|:-----:|-------------
 `$3100`|`$313F`| Extended scratch memory for the SA-1. Sometimes`$00-$07`is used in part of the boost patches, for sharing information between C-CPU and S-CPU.
 `$3140`|`$317E`| Empty. Cleared on reset.
 `$317F`|`-`    | Total character conversions to be done during NMI. If non-zero, the CC-DMA is executed on the next V-Blank period.
@@ -42,7 +42,7 @@ Start  |  End  | Description
 
 ##### Page 2
 Start  |  End  | Description
-:---:  |  :-:  |
+:-----:|:-----:|-------------
 `$3200`|`$3215`| SMW's`$7E:009E` *(used to be Direct Page)*
 `$3216`|`$322B`| SMW's`$7E:00D8` *(used to be Direct Page)*
 `$322C`|`$3241`| SMW's`$7E:00E4` *(used to be Direct Page)*
@@ -58,7 +58,7 @@ Start  |  End  | Description
 
 ##### Page 3
 Start  |  End  | Description
-:---:  |  :-:  |
+:-----:|:-----:|-------------
 **`$3308`** |`$331D`| SMW's`$7E:1564`
 `$331E`|`$3333`| SMW's`$7E:1570`
 `$3334`|`$3349`| SMW's`$7E:157C`
@@ -74,22 +74,22 @@ Start  |  End  | Description
 
 ##### Page 4
 Start  |  End  | Description
-:---:  |  :-:  |
+:-----:|:-----:|-------------
  **`$3410`** |`$3425`| SMW's`$7E:187B`
 `$3426`|`$34FF`| Empty. Cleared on reset.
 
 ##### Page 5
 Start  |  End  | Description
-:---:  |  :-:  |
+:-----:|:-----:|-------------
 `$3500`|`$35FF`| Empty. Cleared on reset.
 
 ##### Page 6
 Start  |  End  | Description
-:---:  |  :-:  |
+:-----:|:-----:|-------------
 `$3600`|`$36FF`| Empty. Cleared on reset.
 
 ##### Page 7
 Start  |  End  | Description
-:---:  |  :-:  |
+:-----:|:-----:|-------------
 `$3700`|`$377F`| Character Conversion output. This memory region is used by the hardware either as a buffer during the Character Conversion 1 DMA operation or as the character output during the Character Conversion 2 operation. Uses 32 bytes for 2BPP mode, 64 bytes for 4BPP mode and 128 bytes for 8BPP mode. See the SNES development book II, Section 1, Chapter 6 for more information.
 `$3780`|`$37FF`| Reserved for the SA-1 CPU stack.
