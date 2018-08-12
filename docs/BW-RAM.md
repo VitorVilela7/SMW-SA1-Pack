@@ -13,7 +13,7 @@ The SAS (Super Accelerator System) Memory Map also mirrors a page of the BW-RAM 
 
 ### Virtual VRAM
 
-Banks `$60-$6F` on the SA-1 CPU Memory Map is also known as **Virtual Bitmap VRAM** or **bitmap data storage area**. It is an area made for drawing 4BPP or 2BPP bitmap images. The SAS splits and projects the BW-RAM into blocks of 4 or 2 bits to these banks. See the Memory Map document for more information about this.
+Banks `$60-$6F` on the SA-1 CPU Memory Map are also known as **Virtual Bitmap VRAM** or **bitmap data storage area**. It is an area made for drawing 4BPP or 2BPP bitmap images. The SAS splits and projects the BW-RAM into blocks of 4 or 2 bits to these banks. See the Memory Map document for more information about this.
 
 The region can be also mirrored to the`$6000-$7FFF`area though bit 7 of the register`$2225`.
 
