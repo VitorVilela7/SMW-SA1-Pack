@@ -12,10 +12,10 @@ DP    | Size    | Description
 `$87` | 1 byte  | Holds the current sprite number. Used when a sprite can't load `$B4` indirectly, for example when it wants to load it on the X/Y register instead of the accumulator A.
 `$B4` | 2 bytes | Points to`$3200`+ current sprite slot, which holds the current sprite number.
 `$CC` | 2 bytes | Points to`$3216`+ current sprite slot, which holds the current sprite Y position low byte.
-`$EE` | 2 bytes | Points to`$322C`+ current sprite slot, which holds the current sprite X position high byte.
+`$EE` | 2 bytes | Points to`$322C`+ current sprite slot, which holds the current sprite X position low byte.
 
 ## Sprite Tables Memory Map
-Below is the memory map of all of the sprite tables. Each table is now 22 bytes long, compared to the original SMW which was 12 bytes long.
+Below is the memory map of all sprite tables. Each table is now 22 bytes long, compared to the original SMW which was 12 bytes long.
 	
 ### Direct Page I-RAM Addresses
 Start  |  End  | Description
