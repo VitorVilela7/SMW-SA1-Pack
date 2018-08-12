@@ -2,7 +2,7 @@
 
 > The main task of the patch is to remap three sprite tables that were previously on the direct page off of the direct page, namely the sprite number table, the X position low byte table and the Y position low byte table. The main idea for doing this is to store three pointers on the direct page that point to the appropriate indices into these tables and then replace accesses to the old sprite tables indexed by x with indirect accesses to one of the pointers on the direct page, which will point to the correct address into the new sprite table.
 
-Arujus's words extracted from `more_sprites.asm`. The main challenge of the sprite expansion patch wasn't to remap the sprite tables to I-RAM, nor expand them, but move three tables in particular from direct page addressing to absolute addressing without having to reallocate half of the game code. With the reallocation done, it was fairly trivial to expand the direct page addressing sprite tables to 22 bytes long with the extra space freed from the other direct page tables.
+Arujus's words extracted from `more_sprites.asm`. The main challenge of the sprite expansion patch wasn't to remap the sprite tables to I-RAM, nor expand them, but move three tables in particular from direct page addressing to absolute addressing without having to reallocate half of the game code. With the remapping done, it was fairly trivial to expand the direct page addressing sprite tables to 22 bytes long with the extra space freed from the other direct page tables.
 
 ## 'More Sprites' Special DP Addresses
 These addresses are updated as soon as a sprite starts executing and are workarounds for when it's not possible to change a 2-byte to 3-byte opcode to accomodate`$3200+x`,`$3216+x`and`$322C+x`.
