@@ -232,8 +232,6 @@ if !DSX						;
 	JML $008172				; Return to NMI.
 endif						;
 
-print pc
-
 snes_nmi_end:
 	LDA.w snes_irq_mem+0			;
 	BPL +					;

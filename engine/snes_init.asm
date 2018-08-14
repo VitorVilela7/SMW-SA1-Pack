@@ -154,7 +154,5 @@ ram_fast_sa1_call:
 	STZ $3189				; \ Clear status and return.
 	RTS					; /
 
-print "pos ", pc
-	
 wram_copy1_end:
 base off
