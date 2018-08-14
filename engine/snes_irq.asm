@@ -14,8 +14,8 @@
 ; or not a transfer actually occurs. If a new indirect address is required, 16 master
 ; cycles are taken to load it. Then 8 cycles per byte transferred are used."
 ;
-; 7 * 
-
+; Note that the excess of HDMA channels and transfers can make even the H-DMA itself run
+; out of H-Blank time!
 
 irq_wram_copy:
 
@@ -45,7 +45,6 @@ fire_nmi_irq:
 .no_irq_as_nmi:
 	RTS
 	
-print pc
 snes_irq:					; IRQ Start
 	REP #$30				; \ Preserve A/X/Y/D/B
 	PHA					;  |
@@ -65,7 +64,7 @@ snes_irq:					; IRQ Start
 	PHA					; /
 	
 	LDA $2300
-	STA !sa1_status_cpy
+	STA.w !sa1_status_cpy
 	AND #%10100000
 	STA $2202
 	
@@ -104,7 +103,8 @@ snes_irq:					; IRQ Start
 
 .maybe_nmi:
 	AND #$7F
-	BEQ .ppu_irq	
+	BEQ .ppu_irq
+
 .yes_nmi:
 	JML snes_nmi_main			; Jump to NMI routine.
 	
@@ -125,15 +125,13 @@ snes_irq:					; IRQ Start
 	PLA
 	RTI
 	
-print "pointer ", pc
+print "IRQ main code ends at WRAM $", pc
 	
 base off
 
 irq_wram_copy_end:
 
 ; SMW's PPU IRQ code goes below.
-
-print pc
 
 wait_for_hblank:			; Terrible as the original.
 -	BIT $4212
