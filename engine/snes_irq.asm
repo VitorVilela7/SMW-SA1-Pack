@@ -32,6 +32,20 @@ snes_irq_mem:
 	dl $000000				; $1D04-$1D06: Custom timer IRQ execute pointer.
 	db $00					; $1D07: Reserved for future expansion.
 
+fire_nmi_irq:
+	LDA.w snes_irq_mem+0			; \ IRQ-as-NMI enabled?
+	BEQ .no_irq_as_nmi			;  | Set up next IRQ so it fires it.
+	ORA #$80				;  |
+	STA.w snes_irq_mem+0			; /
+	LDA.w snes_irq_mem+1			; \ Set V-Count fire position
+	STA $4209				;  |
+	STZ $420A				; /
+	LDA #$21				; \ Enable IRQ but no NMI.
+	STA $4200				; / Keep joypad.
+.no_irq_as_nmi:
+	RTS
+	
+print pc
 snes_irq:					; IRQ Start
 	REP #$30				; \ Preserve A/X/Y/D/B
 	PHA					;  |
@@ -92,8 +106,7 @@ snes_irq:					; IRQ Start
 	AND #$7F
 	BEQ .ppu_irq	
 .yes_nmi:
-	STA.w snes_irq_mem+0
-	JMP .not_sa1				; do nothing
+	JML snes_nmi_main			; Jump to NMI routine.
 	
 .return:
 	SEP #$34				; Disable interrupts and make sure A/X/Y is 8-bit
@@ -176,6 +189,8 @@ irq_ppu_main:
 	
 	PEA $3000
 	PLD
+	
+	JSR.w fire_nmi_irq
 	RTL
 	
 .mode_7:

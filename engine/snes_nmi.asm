@@ -232,7 +232,28 @@ if !DSX						;
 	JML $008172				; Return to NMI.
 endif						;
 
+print pc
+
 snes_nmi_end:
+	LDA.w snes_irq_mem+0			;
+	BPL +					;
+	AND #$7F				;
++	STA.w snes_irq_mem+0			;
+	BEQ +
+	
+	TXA
+	BIT #$20
+	BEQ ++
+	AND #$7F
+	TAX
+	BRA +++
+++	JSR.w fire_nmi_irq
+	BRA ++
+	
++++
++	STX $4200				;
+
+++
 	PLA
 	STA $2224
 	STA.w snes_irq_mem+3
