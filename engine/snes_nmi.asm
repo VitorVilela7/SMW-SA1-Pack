@@ -79,15 +79,22 @@ macro ccdmaslot(slot)
 endmacro
 
 NMIStart:
-	PHP					; \ Preserve (almost) everything.
-	REP #$30				;  |
+	REP #$30				; \ Preserve A/X/Y/D/B
 	PHA					;  |
 	PHX					;  |
 	PHY					;  |
+	PHD					;  |
 	PHB					;  |
 	PHK					;  |
 	PLB					;  |
-	SEP #$30				; /
+	LDA.w #$3000				;  |
+	TCD					; /
+	SEP #$30				; 8-bit A/X/Y
+						;
+	LDA.w snes_irq_mem+3			; \ Preserve BW-RAM Mapping and
+	STZ.w snes_irq_mem+3			;  | reset to default value.
+	STZ $2224				;  |
+	PHA					; /
 						;
 Character_Conversion_DMA:			; CCDMA Routine.
 	LDA !CCDMA_SLOTS			; \ If there are no slots to transfer,
@@ -223,4 +230,18 @@ if !DSX						;
 						;
 	JML $008172				; Return to NMI.
 endif						;
+
+NMIEnd:
+	PLA
+	STA $2224
+	STA.w snes_irq_mem+3
+	
+	REP #$30
+	PLB
+	PLD
+	PLY
+	PLX
+	PLA
+	RTI
+
 	
