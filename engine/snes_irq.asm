@@ -19,9 +19,18 @@
 
 irq_wram_copy:
 
-base $1200
+base $1D00
 
 !sa1_status_cpy = snes_irq_not_ppu+1
+
+snes_irq_mem:
+	db $00					; $1D00: Bit 7 -- next IRQ is NMI-on-IRQ V-Blank (clears on V-Blank end).
+						; $1D00: Bit 0 -- enable NMI-on-IRQ V-Blank.
+	db $00					; $1D01: Which scanline to run NMI-on-IRQ execute ptr.
+	db $00					; $1D02: Flag to enable Custom Timer IRQ ptr.
+	db $00					; $1D03: SA-1 reg $2224 mirror.
+	dl $000000				; $1D04-$1D06: Custom timer IRQ execute pointer.
+	db $00					; $1D07: Reserved for future expansion.
 
 snes_irq:					; IRQ Start
 	REP #$30				; \ Preserve A/X/Y/D/B
@@ -36,8 +45,8 @@ snes_irq:					; IRQ Start
 	TCD					; /
 	SEP #$30				; 8-bit A/X/Y
 						;
-	LDA $1024				; \ Preserve BW-RAM Mapping and
-	STZ $1024				;  | reset to default value.
+	LDA.w snes_irq_mem+3			; \ Preserve BW-RAM Mapping and
+	STZ.w snes_irq_mem+3			;  | reset to default value.
 	STZ $2224				;  |
 	PHA					; /
 	
@@ -49,6 +58,19 @@ snes_irq:					; IRQ Start
 	LDA $4211
 	BPL .not_ppu
 	
+	LDA.w snes_irq_mem+0
+	BMI .maybe_nmi
+	
+.ppu_irq:
+	LDA.w snes_irq_mem+2
+	BEQ .regular_ppu
+	
+.custom_ppu:
+	PHK
+	PEA.w .not_ppu-1
+	JML.w [snes_irq_mem+4]
+	
+.regular_ppu:
 	JSL irq_ppu_main
 
 .not_ppu:
@@ -66,6 +88,13 @@ snes_irq:					; IRQ Start
 	PEA.w .return-1				;  |
 	JML [$3183]				; /
 
+.maybe_nmi:
+	AND #$7F
+	BEQ .ppu_irq	
+.yes_nmi:
+	STA.w snes_irq_mem+0
+	JMP .not_sa1				; do nothing
+	
 .return:
 	SEP #$34				; Disable interrupts and make sure A/X/Y is 8-bit
 	INC $318A				; Set ready flag.
@@ -73,7 +102,7 @@ snes_irq:					; IRQ Start
 .not_sa1:
 	PLA
 	STA $2224
-	STA $1024
+	STA.w snes_irq_mem+3
 	
 	REP #$30
 	PLB
@@ -82,6 +111,8 @@ snes_irq:					; IRQ Start
 	PLX
 	PLA
 	RTI
+	
+print "pointer ", pc
 	
 base off
 

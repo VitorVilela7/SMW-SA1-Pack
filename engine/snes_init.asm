@@ -53,7 +53,7 @@ snes_init:					; SNES reset vector
 	STA $2226				; /
 						;
 	STZ $2224				; \ Map $6000-$7FFF to $40:0000-$40:1FFF (S-CPU)
-	STZ $1024				; /
+	;STZ.w snes_irq_mem+3			; / <-- no initialization required because of the block copy.
 						;
 	STZ $2228				; Disable BW-RAM write protection area.
 						;
@@ -77,7 +77,7 @@ snes_init:					; SNES reset vector
 	;LDY #$1000				; Copy new WRAM content starting $1000.
 	;%init_block_ram_copy(wram_copy1)	;
 	
-	LDY #$1200				; \ Copy IRQ
+	LDY #$1D00				; \ Copy IRQ
 	%init_block_ram_copy(irq_wram_copy)	; /
 	
 	SEP #$30				;
