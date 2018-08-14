@@ -93,7 +93,7 @@ ORG $8023					; \ Set Stack Pointer to $1FFF.
 	LDA #$1FFF				; /
 	
 ORG $816A					; \ Hijack NMIStart for Dynamic Sprites and 
-!c	JML NMIStart				; / Character Conversion DMA Table
+!c	JML snes_nmi				; / Character Conversion DMA Table
 
 ORG $843B					; Restore old WaitForHBlank code
 	BIT $4212
@@ -112,7 +112,7 @@ org $83C8
 	;JSR RAMCode_WaitForHBlank
 
 org $82BC
-	JML NMIEnd
+	JML snes_nmi_end
 	
 ;===============================================;
 ; Main Code					;

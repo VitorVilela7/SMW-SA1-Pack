@@ -1,6 +1,6 @@
 ; legacy DSX patch DMA base macro.
 ; A is 16-bit, X is 8-bit.
-macro transferslot(slot, bytes, shift)
+macro transfer_slot(slot, bytes, shift)
 	LDA.W #$7C00+(<slot>*256)+<shift>	; \ VRAM address + line*slot
 	STA.W $2116				; /
 	LDA.W #(!DSX_BUFFER&65535)+(<slot>*512)+(<shift>*2) ;\ Set Buffer location
@@ -13,9 +13,9 @@ endmacro
 ; Character Conversion DMA base macro.
 ; A is 16-bit, Y is 8-bit.
 ; X is remain CDMA slots.
-macro ccdmaslot(slot)
+macro cc1_dma_slot(slot)
 	LDY.W !CCDMA_TABLE+(<slot>*8)+0		; Load CDMA value
-	BMI ?NormalDMA				; If is >= #$80, it's normal DMA
+	BMI ?normal_dma				; If is >= #$80, it's normal DMA
 	STY $2231				; Otherwise store the CDMA register value.
 						;
 						;
@@ -49,9 +49,9 @@ macro ccdmaslot(slot)
 						;
 	DEX					; \ If there are no more remaining,
 	BNE +					;  | jump to CCDMA_END routine, otherwise,
-	JMP CCDMA_END				; / continue.
+	JMP .cc1_end				; / continue.
 
-?NormalDMA:
+?normal_dma:
 	LDY #$80				; \ Make sure that CCDMA is turned off.
 	STY $2231				;  |
 	LDY #$82				;  |
@@ -71,14 +71,15 @@ macro ccdmaslot(slot)
 						;
 	LDY #$81				; \ Enable again Character Conversion DMA.
 	STY $2200				; /
-?End:						;
+						;
+;?end:						;
 	DEX					; \ If there are no more remaining,
 	BNE +					;  | jump to CCDMA End routine, otherwise,
-	JMP CCDMA_END				; / continue.
+	JMP .cc1_end				; / continue.
 +
 endmacro
 
-NMIStart:
+snes_nmi:
 	REP #$30				; \ Preserve A/X/Y/D/B
 	PHA					;  |
 	PHX					;  |
@@ -96,10 +97,10 @@ NMIStart:
 	STZ $2224				;  |
 	PHA					; /
 						;
-Character_Conversion_DMA:			; CCDMA Routine.
+.main:						;
 	LDA !CCDMA_SLOTS			; \ If there are no slots to transfer,
 	BNE +					;  | jump to Dynamic_Sprites.
-	JMP Dynamic_Sprites			; /
+	JMP .dsx_sprites			; /
 						;
 +	TAX					; Put CCDMA slot count into X.
 	REP #$20				; 16-bit A
@@ -113,18 +114,18 @@ Character_Conversion_DMA:			; CCDMA Routine.
 	BEQ -					; |
 	STZ $318D				; /
 						;
-	%ccdmaslot(0)				; \ Unrolled loop
-	%ccdmaslot(1)				;  | to run each character conversion DMA table slot.
-	%ccdmaslot(2)				;  |
-	%ccdmaslot(3)				;  |
-	%ccdmaslot(4)				;  |
-	%ccdmaslot(5)				;  |
-	%ccdmaslot(6)				;  |
-	%ccdmaslot(7)				;  |
-	%ccdmaslot(8)				;  |
-	%ccdmaslot(9)				; /
+	%cc1_dma_slot(0)			; \ Unrolled loop
+	%cc1_dma_slot(1)			;  | to run each character conversion DMA table slot.
+	%cc1_dma_slot(2)			;  |
+	%cc1_dma_slot(3)			;  |
+	%cc1_dma_slot(4)			;  |
+	%cc1_dma_slot(5)			;  |
+	%cc1_dma_slot(6)			;  |
+	%cc1_dma_slot(7)			;  |
+	%cc1_dma_slot(8)			;  |
+	%cc1_dma_slot(9)			; /
 						;
-CCDMA_END:					;
+.cc1_end:					;
 	LDY #$80				; \ Tell SA-1 that Character Conversion is done.
 	STY $2231				; /
 	LDY #$82				; \ Tell SA-1 to disable DMA/CCDMA
@@ -133,7 +134,7 @@ CCDMA_END:					;
 	SEP #$20				; 8-bit A
 	STZ !CCDMA_SLOTS			; Clear CCDMA Slots
 						;					
-Dynamic_Sprites:				; --------------------------------------
+.dsx_sprites:					; --------------------------------------
 if !DSX						;
 	LDA $6100				; \ Don't run Dynamic Sprites system
 	CMP #$07				;  | if the game mode isn't #$07 nor #$14
@@ -152,15 +153,15 @@ if !DSX						;
 +	STZ !SLOTSUSED				; Zero out slots used.
 	ASL					; \ Jump to fastest routine for this.
 	TAX					;  |
-	JMP (.DSX_MODES-2,x)			; /
+	JMP (.dsx_modes-2,x)			; /
 
-.DSX_MODES:					; Dynamic Sprites Slot.
-	dw .TRANSFER_ONE			; 01 - One slot transfer.
-	dw .TRANSFER_TWO			; 02 - Two slots transfer.
-	dw .TRANSFER_THREE			; 03 - Three slots transfer.
-	dw .TRANSFER_FOUR			; 04 - Transfer four slots.
+.dsx_modes:					; Dynamic Sprites Slot.
+	dw .transfer_one			; 01 - One slot transfer.
+	dw .transfer_two			; 02 - Two slots transfer.
+	dw .transfer_three			; 03 - Three slots transfer.
+	dw .transfer_four			; 04 - Transfer four slots.
 
-.TRANSFER_ONE:					; Transfer one slot.
+.transfer_one:					; Transfer one slot.
 	REP #$20				; 16-bit A
 	LDY #$80				; \ Set up DMA
 	STY $2115				;  |
@@ -170,14 +171,14 @@ if !DSX						;
 	STY $4314				; /
 	LDY #$02				; This value is written to $420B
 						;
-	%transferslot(0, $0080, $C0)		; \ Transfer Slot 1, line 1.
-	%transferslot(1, $0080, $C0)		;  | Transfer Slot 1, line 2.
-	%transferslot(2, $0080, $C0)		;  | Transfer Slot 1, line 3.
-	%transferslot(3, $0080, $C0)		; / Transfer Slot 1, line 4.
+	%transfer_slot(0, $0080, $C0)		; \ Transfer Slot 1, line 1.
+	%transfer_slot(1, $0080, $C0)		;  | Transfer Slot 1, line 2.
+	%transfer_slot(2, $0080, $C0)		;  | Transfer Slot 1, line 3.
+	%transfer_slot(3, $0080, $C0)		; / Transfer Slot 1, line 4.
 						;
 	JML $008172				; Return to NMI (PHK, PLB, SEP #$30, perfect.)
 	
-.TRANSFER_TWO:					; Transfer two slots.
+.transfer_two:					; Transfer two slots.
 	REP #$20				; 16-bit A
 	LDY #$80				; \ Set up DMA
 	STY $2115				;  |
@@ -187,14 +188,14 @@ if !DSX						;
 	STY $4314				; /
 	LDY #$02				; This value is written to $420B
 						;
-	%transferslot(0, $0100, $80)		; \ Transfer Slot 1 & 2, line 1.
-	%transferslot(1, $0100, $80)		;  | Transfer Slot 1 & 2, line 2.
-	%transferslot(2, $0100, $80)		;  | Transfer Slot 1 & 2, line 3.
-	%transferslot(3, $0100, $80)		; / Transfer Slot 1 & 2, line 4.
+	%transfer_slot(0, $0100, $80)		; \ Transfer Slot 1 & 2, line 1.
+	%transfer_slot(1, $0100, $80)		;  | Transfer Slot 1 & 2, line 2.
+	%transfer_slot(2, $0100, $80)		;  | Transfer Slot 1 & 2, line 3.
+	%transfer_slot(3, $0100, $80)		; / Transfer Slot 1 & 2, line 4.
 						;
 	JML $008172				; Return to NMI.
 	
-.TRANSFER_THREE:				; Transfer three slots.
+.transfer_three:				; Transfer three slots.
 	REP #$20				; 16-bit A
 	LDY #$80				; \ Set up DMA
 	STY $2115				;  |
@@ -204,14 +205,14 @@ if !DSX						;
 	STY $4314				; /
 	LDY #$02				; This value is written to $420B
 						;
-	%transferslot(0, $0180, $40)		; \ Transfer Slot 1, 2 & 3, line 1.
-	%transferslot(1, $0180, $40)		;  | Transfer Slot 1, 2 & 3, line 2.
-	%transferslot(2, $0180, $40)		;  | Transfer Slot 1, 2 & 3, line 3.
-	%transferslot(3, $0180, $40)		; / Transfer Slot 1, 2 & 3, line 4.
+	%transfer_slot(0, $0180, $40)		; \ Transfer Slot 1, 2 & 3, line 1.
+	%transfer_slot(1, $0180, $40)		;  | Transfer Slot 1, 2 & 3, line 2.
+	%transfer_slot(2, $0180, $40)		;  | Transfer Slot 1, 2 & 3, line 3.
+	%transfer_slot(3, $0180, $40)		; / Transfer Slot 1, 2 & 3, line 4.
 						;
 	JML $008172				; Return to NMI.
 	
-.TRANSFER_FOUR:					; Transfer all slots.
+.transfer_four:					; Transfer all slots.
 	REP #$20				; 16-bit A
 	LDA #$7C00				; \ Destination: SP4, line 5.
 	STA $2116				; /
@@ -231,7 +232,7 @@ if !DSX						;
 	JML $008172				; Return to NMI.
 endif						;
 
-NMIEnd:
+snes_nmi_end:
 	PLA
 	STA $2224
 	STA.w snes_irq_mem+3
