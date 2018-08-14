@@ -2,9 +2,20 @@
 ; S-CPU IRQ System                              ;
 ;===============================================;
 
-; Note:
 ; H-Blank is not just short, but you also need to take in account that seven HDMA channels
 ; may be hunting for H-blank time as well.
+;
+;
+; "The actual HDMA transfer begins at dot 278 of the scanline (or just after, the current
+; CPU cycle is completed before pausing), for every visible scanline (0-224 or 0-239,
+; depending on $2133 bit 3). For each scanline during which HDMA is active (i.e. at least
+; one channel has not yet terminated for the frame), there are ~18 master cycles overhead.
+; Each active channel incurs another 8 master cycles overhead for every scanline, whether
+; or not a transfer actually occurs. If a new indirect address is required, 16 master
+; cycles are taken to load it. Then 8 cycles per byte transferred are used."
+;
+; 7 * 
+
 
 irq_wram_copy:
 
@@ -38,7 +49,7 @@ snes_irq:					; IRQ Start
 	LDA $4211
 	BPL .not_ppu
 	
-	JSL $008380
+	JSL irq_ppu_main
 
 .not_ppu:
 	LDA #$00
@@ -76,3 +87,150 @@ base off
 
 irq_wram_copy_end:
 
+; SMW's PPU IRQ code goes below.
+
+print pc
+
+wait_for_hblank:			; Terrible as the original.
+-	BIT $4212
+	BVC -
+-	BIT $4212
+	BVS -
+	
+	; dot counter will be ~12
+	; each dot is 14 master cycles.
+	; we want to each somewhere ~256 dots - a few to discount the RTS.
+	; so we go with one around that is a multiple of 14 (minus 40) to leave everything nice.
+	; 12 + (x * 14 + 40) / 4 = 256
+	; 22 + (x * 14) / 4 = 256
+	; (x * 14) / 4 = 234. Let's go with 224, a nice multiplier.
+	; x = 224 * 4 / 14 = 64
+	
+	NOP #64
+	; At this spot, H should be 246 dots.
+	; It's okay to have some minor difference, but the
+	; key is in the first PPU store is to the H counter be larger
+	; than 256 dots.
+	
+	RTS
+
+irq_ppu_main:
+	LDA #$81
+
+	BIT $6D9B
+	BMI .mode_7
+	
+	STA $4200
+
+	LDA $25
+	XBA
+	LDA $22
+	LDX $23
+	LDY $24
+	
+	PEA $2100
+	PLD
+	
+	JSR wait_for_hblank
+		
+	STA $11
+	STX $11
+	STY $12
+	XBA
+	STA $12
+	LDA $303E
+	STA $05
+	LDA $3040
+	STA $31
+	
+	PEA $3000
+	PLD
+	RTL
+	
+.mode_7:
+	BVC .platform
+	
+	LDY $11
+	BEQ .first_irq
+
+.normal:	
+	STA $4200
+	
+	LDX $1A
+	LDY $1B
+	LDA $1D
+	XBA
+	LDA $1C
+	CLC
+	ADC $7888
+	
+	PEA $2100
+	PLD
+	
+	JSR wait_for_hblank
+	
+	STX $0D
+	STY $0D
+	STA $0E
+	XBA
+	STA $0E
+	
+	LDA #$59
+	STA $07
+	LDA #$07
+	STA $0B
+	
+	LDA $303E
+	STA $05
+	LDA $3040
+	STA $31
+	
+	PEA $3000
+	PLD
+	RTL
+
+.first_irq:
+	INC $11					;$0083D0	 | Set first IRQ as triggered
+
+	LDA.b #$AE
+	SEC
+	SBC $7888
+	STA $4209
+	STZ $420A
+	
+	LDA #$A1
+	
+.platform:
+	LDY $7493
+	BEQ .apply
+	
+	LDY $7495
+	CPY #$40
+	BCC .apply
+	
+	LDA #$81
+	BRA .normal
+	
+.apply:
+	STA $4200
+	
+	LDA $3A
+	LDX $3B
+	LDY $3C
+
+	PEA $2100
+	PLD
+	
+	JSR wait_for_hblank
+	
+	STA $0D
+	STX $0D
+	STY $0E
+	LDA $303D
+	STA $0E
+	LDA #$07
+	STA $05
+	
+	PEA $3000
+	PLD
+	RTL
