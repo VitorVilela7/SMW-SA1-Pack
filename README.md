@@ -7,81 +7,68 @@
  |_____/_/    \_\    |_|   |_|   \__,_|\___|_|\_\
    by Vitor Vilela                 Version 1.27
 ```
-The SA-1 Pack, as the name implies, is a package of
-patches containing everything you need to activating
-the SA-1 chip and optimizes your SMW ROM for using it.
 
-Features
-========
+The SA-1 Pack is a package of patches for enabling and optimizing the SA-1 system
+for SMW, with emphasis on eliminating slowdown, game limitations and accelerating
+the engine to the maximum possible.
 
- - Features SA-1's 10.74 MHz speed, 4x faster than
-SNES, up to 5x faster if both run in parallel.
+What is it?
+===========
 
- - Reduces level loading time and overall game
-slowdown.
+The SA-1 is a co-processor used on some special SNES games, made to work together
+the Super NES CPU and enhance its processing speed, graphics and memory.
 
- - Increases the maximum amount of sprites on screen
-to 20 and per level to 255.
+With its 10.74 MHz clock, the SA-1 CPU is four times faster than the normal SNES
+CPU processing. The SA-1 CPU and SNES CPU runs simultaneously, which results in
+fives times faster processing over a regular game. With that much power, the
+Super Accelerator System can be used to process the SMW engine much faster than
+the normal, allowing more sprites to be processed at once, more in-game effects,
+faster level loading and much more.
 
- - 8MB Support for bsnes, ZMZ and Snes9x 1.54.
+SA-1 Pack not just activates the co-processor, but also modifies a good part of
+the game to use and explore the chip features, which gives an extreme boost to
+the overall performance of the game.
 
- - 6MB Support for ZSNES. 8MB if a custom build is
-used.
+## Game Features
+* Makes the game run up to four times faster.
+* Increase the maximum amount of sprites at once on screen to 22.
+* Increase the maximum amount of sprites on a single sub-level to 255.
+* Reduces loading time of all levels and maps.
+* Increase the maximum ROM size to 8 MB.
+* Offers enhanced bitmap and arithmetic capabilities for better graphics
+performance.
 
-Other features, more related for programmers:
- - New DMA modes (Character Conversion, ROM->I-RAM,
-ROM->BW-RAM, I-RAM->BW-RAM, BW-RAM->I-RAM).
-
- - Variable Length Bit Processing (ROM bit stream).
-
- - Fast multiplication, division and commutative sum
-(multiply with add).
-
- - Bank Switching by Super MMC.
-
- - Virtual memory mapping capabilities from BW-RAM.
-
- - Allows Direct Page usage on SA-1 CPU.
-
- - Multi-threading capability between SA-1 and SNES.
-
-Notable Changes
-===============
-
-When patched, the following changes will take effect:
-
- - Sprites will be processed by the SA-1 CPU, reducing
-slowdown. You can put up to 20 sprites on screen, with
-rare slowdown chances due of SA-1 high clock speed.
-
- - Levels will load faster, with SA-1 being responsible
-for loading part of level (MARIO START screen
-for example).
-
- - Special patches like RPG Hacker's VWF dialogues,
-leod's Sprite Platforms will benefit from the SA-1
-chip features, allowing optimal usage for them.
+## System Features
+* 16-bit 65c816 processor clocked at 10.74 MHz.
+* 2 kB fast internal work memory (I-RAM), clocked at 10.74 MHz.
+* Multi-processor processing, with parallel operating mode and memory sharing
+control.
+* Large capacity memory, with a total capability of 8 MB of ROM clocked at
+10.74 MHz and 256 kB of BW-RAM, clocked at 5.37 MHz.
+* High speed arithmetic hardware of multiplication, division and cumulative sum
+* Bitmap and Character Conversion functions for fast graphics manipulation.
+* Custom DMA circuit for fast transfers between ROM, I-RAM and BW-RAM.
+* Variable-Length Bit data processing for enhanced algorithms such as graphics
+and data compression.
+* Super MMC memory mapping capabilities for BW-RAM and bank switching for multiple
+ROM image access and mirroring.
 
 Important
 =========
 
-Although released in 2012, the SA-1 Pack is still one
-of the most complex patches ever created for Super
-Mario World. To the SA-1 CPU get access to the game
-logic values, the patch moves most of the WRAM tables
-to BW-RAM and I-RAM, for allowing SA-1 usage on them.
+Although released in 2012, the SA-1 Pack is still one of the most complex patches
+ever created for Super Mario World. To the SA-1 CPU get access to the game logic
+values, the patch moves most of the WRAM tables to BW-RAM and I-RAM, for allowing
+SA-1 usage on them.
 
-Due of that, any external resource must obey for the
-same remapping changes, specially tools and patches.
+Due of that, any external resource must obey for the same remapping changes,
+specially tools and patches.
 
-By default, any resource that involves ASM will not
-work with SA-1 Pack, unless if they're properlly
-prepared with the new RAM data. Usually any resource
-with the "sa-1" tag means it will work natively with
-the SA-1 Pack in your ROM, however resources without
-the tag may need to have a manual remap conversion,
-which might be complicated for who is new at logic
-programming.
+By default, any resource that involves ASM will not work with SA-1 Pack, unless if
+they're properly prepared with the new RAM data. Usually any resource with the
+"sa-1" tag means it will work natively with the SA-1 Pack in your ROM, however
+resources without the tag may need to have a manual remap conversion, which might
+be complicated for who is new at logic programming.
 
 Since [Lunar Magic](https://fusoya.eludevisibility.org/lm/index.html) 2.20, you can apply the SA-1 Pack and
 Lunar Magic will detect and apply the required changes
