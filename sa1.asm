@@ -4,6 +4,7 @@
 ;  by Vitor Vilela				;
 ;===============================================;
 
+
 !ZSNES		= 1				; Put 0 if you don't want to SA-1 Pack automatically deal with ZSNES limitations.
 						; (in other words, put 0 if you don't want ZSNES 1.51 or older support)
 						
@@ -624,13 +625,13 @@ SA1_Reset:					;
 						; This will set up a 4bpp Virtual RAM at $60:0000-$63:FFFF
 						; Settings this to #$01 will make a 2bpp Virtual RAM at $60:0000-$67:FFFF.
 						;
-	REP #$20
-	LDA #$816A				; \ Set SNES IRQ and NMI Vectors
-	STA $220C				;  | (Dynamic vectors)
-	LDA #$8374				;  |
-	STA $220E				; /
-	SEP #$20
-						
+	REP #$20				;
+	LDA $00FFEE				; \ Set SNES IRQ and NMI vectors
+	STA $220E				;  | Same from the cart ROM.
+	LDA $00FFEA				;  |
+	STA $220C				; /
+	SEP #$20				;
+						;
 	LDA #$50				; \ Enable dynamic NMI/IRQ vector.
 	STA $2209				; /
 						;
