@@ -233,25 +233,26 @@ if !DSX						;
 endif						;
 
 snes_nmi_end:
-	LDA.w snes_irq_mem+0			;
-	BPL +					;
-	AND #$7F				;
-+	STA.w snes_irq_mem+0			;
-	BEQ +
+	LDA.w snes_irq_mem+0
+	AND #$7F
+	STA.w snes_irq_mem+0
+	BEQ .store
 	
 	TXA
 	BIT #$20
-	BEQ ++
+	BEQ .fire
 	AND #$7F
 	TAX
-	BRA +++
-++	JSR.w fire_nmi_irq
-	BRA ++
+	BRA .store
 	
-+++
-+	STX $4200				;
+.fire:
+	JSR.w fire_nmi_irq
+	BRA .finish
+	
+.store:
+	STX $4200
 
-++
+.finish:
 	PLA
 	STA $2224
 	STA.w snes_irq_mem+3
