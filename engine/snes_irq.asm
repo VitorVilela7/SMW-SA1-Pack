@@ -102,7 +102,7 @@ snes_irq:					; IRQ Start
 	JML [$3183]				; /
 
 .maybe_nmi:
-	AND #$7F
+	ASL
 	BEQ .ppu_irq
 
 .yes_nmi:
