@@ -10,9 +10,8 @@
 ; executed by SA-1 and afterwards, if an actual V-IRQ happens, it will be executed in an
 ; an other IRQ.
 
-irq_wram_copy:
-
-base $1D00
+irq_wram_copy:					; Upload address
+base $1D00					; Base WRAM address
 
 snes_irq_mem:
 	db $00					; $1D00: Bit 7 -- next IRQ is NMI-on-IRQ V-Blank (clears on V-Blank end).
@@ -23,7 +22,7 @@ snes_irq_mem:
 	dl $000000				; $1D04-$1D06: Custom timer IRQ execute pointer.
 	db $00					; $1D07: Reserved for future expansion.
 
-fire_nmi_irq:
+fire_nmi_irq:					; Routine to fire IRQ-as-NMI.
 	LDA.w snes_irq_mem+0			; \ IRQ-as-NMI enabled?
 	BEQ .no_irq_as_nmi			;  | Set up next IRQ so it fires it.
 	ORA #$80				;  |
@@ -33,9 +32,9 @@ fire_nmi_irq:
 	STZ $420A				; /
 	LDA #$21				; \ Enable IRQ but no NMI.
 	STA $4200				; / Keep joypad.
-	
-.no_irq_as_nmi:
-	RTS
+						;
+.no_irq_as_nmi:					; \ Return
+	RTS					; /
 	
 snes_irq:					; IRQ Start
 	REP #$30				; \ Preserve A/X/Y/D/B
@@ -54,78 +53,79 @@ snes_irq:					; IRQ Start
 	STZ.w snes_irq_mem+3			;  | reset to default value.
 	STZ $2224				;  |
 	PHA					; /
+						;
+	LDA $2300				; \ Branch if it's an IRQ from SA-1 CPU
+	BMI .sa1_irq				; /
+						;
+	AND #$20				; \ Otherwise, branch if it's an IRQ from
+	BNE .sa1_cc1				; / Character Conversion 1.
+						;
+	LDA $4211				; \ If it's not a V-/H-IRQ, leave IRQ routine.
+	BPL .done				; / We have no idea what we're doing here.
+						;
+	LDA.w snes_irq_mem+0			; \ Branch if it's an IRQ-as-NMI
+	BMI .maybe_nmi				; /
 	
-	LDA $2300
-	BMI .sa1_irq
+.ppu_irq:					; Otherwise, it's a regular V-/H-IRQ.
+	LDA.w snes_irq_mem+2			; \ If no custom IRQ code enable, branch
+	BEQ .regular_ppu			; / to regular SMW IRQ.
 	
-	AND #$20
-	BNE .sa1_cc1
+.custom_ppu:					; \ Else, jump to the custom IRQ code pointer
+	PHK					;  | and return at the end of IRQ code.
+	PEA.w .done-1				;  |
+	JML.w [snes_irq_mem+4]			; /
 	
-	LDA $4211
-	BPL .done
-	
-	LDA.w snes_irq_mem+0
-	BMI .maybe_nmi
-	
-.ppu_irq:
-	LDA.w snes_irq_mem+2
-	BEQ .regular_ppu
-	
-.custom_ppu:
-	PHK
-	PEA.w .done-1
-	JML.w [snes_irq_mem+4]
-	
-.regular_ppu:
-	JSL irq_ppu_main
-	BRA .done
+.regular_ppu:					; \ If the normal SMW IRQ code is used, call it.
+	JSL irq_ppu_main			;  | and then return to the IRQ end code.
+	BRA .done				; /
 
-.maybe_nmi:
-	ASL
-	BEQ .ppu_irq
+.maybe_nmi:					; \ If IRQ-as-NMI flag is not set, run regular
+	ASL					;  | IRQ code instead.
+	BEQ .ppu_irq				; /
 
-.yes_nmi:
-	JML snes_nmi_main			; Jump to NMI routine.
+.yes_nmi:					; \ Otherwise, jump to the NMI routine.
+	JML snes_nmi_main			; /
 	
-.sa1_cc1:
-	STA $2202
-	STA $318D
-	BRA .done
+.sa1_cc1:					; \ If it's a Character Conversion IRQ,
+	STA $2202				;  | set the CC1 flag, clear CC1 IRQ register
+	STA $318D				;  | and return.
+	BRA .done				; /
 	
-.sa1_irq:
-	AND #$80
-	STA $2202
-	
+.sa1_irq:					; \ If it's a SA-1 IRQ, clear the flag from
+	AND #$80				;  | SA-1 IRQ register.
+	STA $2202				; /
+						;
 	CLI					; Enable interrupts
 						;
 	PHK					; \ Jump to the requested SA-1 pointer
 	PEA.w .return-1				;  |
 	JML [$3183]				; /
 	
-.return:
+.return:					; SA-1 IRQ return.
 	SEP #$34				; Disable interrupts and make sure A/X/Y is 8-bit
 	INC $318A				; Set ready flag.
 	
-.done:
-	PLA
-	STA $2224
-	STA.w snes_irq_mem+3
+.done:						; We're done
+	PLA					; \ Restore BW-RAM Mapping
+	STA $2224				;  |
+	STA.w snes_irq_mem+3			; /
 	
-	REP #$30
-	PLB
-	PLD
-	PLY
-	PLX
-	PLA
-	RTI
+	REP #$30				; \ Restore all internal registers and
+	PLB					;  | finish IRQ.
+	PLD					;  |
+	PLY					;  |
+	PLX					;  |
+	PLA					;  |
+	RTI					; /
 	
+warnpc $001E00					; WRAM Memory Limit
 base off
 
 irq_wram_copy_end:
 
 ; SMW's PPU IRQ code goes below.
 
-wait_for_hblank:			; Terrible as the original.
+wait_for_hblank:				; Terrible as the original.
 	REP #$20
 	PHA
 	

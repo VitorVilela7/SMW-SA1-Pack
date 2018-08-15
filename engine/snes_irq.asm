@@ -17,11 +17,10 @@
 ; Note that the excess of HDMA channels and transfers can make even the H-DMA itself run
 ; out of H-Blank time!
 
-irq_wram_copy:
+irq_wram_copy:					; Upload address
+base $1D00					; Base WRAM address
 
-base $1D00
-
-!sa1_status_cpy = snes_irq_not_ppu+1
+!sa1_status_cpy = snes_irq_not_ppu+1		; Self modifiable address.
 
 snes_irq_mem:
 	db $00					; $1D00: Bit 7 -- next IRQ is NMI-on-IRQ V-Blank (clears on V-Blank end).
@@ -32,7 +31,7 @@ snes_irq_mem:
 	dl $000000				; $1D04-$1D06: Custom timer IRQ execute pointer.
 	db $00					; $1D07: Reserved for future expansion.
 
-fire_nmi_irq:
+fire_nmi_irq:					; Routine to fire IRQ-as-NMI.
 	LDA.w snes_irq_mem+0			; \ IRQ-as-NMI enabled?
 	BEQ .no_irq_as_nmi			;  | Set up next IRQ so it fires it.
 	ORA #$80				;  |
@@ -42,9 +41,9 @@ fire_nmi_irq:
 	STZ $420A				; /
 	LDA #$21				; \ Enable IRQ but no NMI.
 	STA $4200				; / Keep joypad.
-
-.no_irq_as_nmi:
-	RTS
+						;
+.no_irq_as_nmi:					; \ Return
+	RTS					; /
 	
 snes_irq:					; IRQ Start
 	REP #$30				; \ Preserve A/X/Y/D/B
@@ -63,76 +62,84 @@ snes_irq:					; IRQ Start
 	STZ.w snes_irq_mem+3			;  | reset to default value.
 	STZ $2224				;  |
 	PHA					; /
-	
-	LDA $2300
-	STA.w !sa1_status_cpy
-	AND #%10100000
-	STA $2202
-	
-	LDA $4211
-	BPL .not_ppu
-	
-	LDA.w snes_irq_mem+0
-	BMI .maybe_nmi
-	
-.ppu_irq:
-	LDA.w snes_irq_mem+2
-	BEQ .regular_ppu
-	
-.custom_ppu:
-	PHK
-	PEA.w .not_ppu-1
-	JML.w [snes_irq_mem+4]
-	
-.regular_ppu:
-	JSL irq_ppu_main
+						;
+	LDA $2300				; \ Get SA-1 status, copy
+	STA.w !sa1_status_cpy			; / to the other variable
+	AND #%10100000				; \ Mask IRQ flags and clear all IRQ
+	STA $2202				; / from SA-1.
+						;
+						; $4211 not just tells if there's a H- or V-IRQ
+						; only, but also connects to the external /IRQ
+						; line responsible for the SA-1 IRQs. After clearing
+						; all IRQs from SA-1, we should now know with $4211
+						; if it's a timer IRQ or not.
+						;
+	LDA $4211				; \ If it's not a timer IRQ, branch.
+	BPL .not_ppu				; /
+						;
+	LDA.w snes_irq_mem+0			; \ Otherwise, check if it's a IRQ-as-NMI.
+	BMI .maybe_nmi				; / If so, branch.
 
-.not_ppu:
-	LDA #$00
-	BIT #$20
-	BEQ .not_cc1
-	STA $318D
+.ppu_irq:					; Else, it's a regular timer IRQ.
+	LDA.w snes_irq_mem+2			; \ If it's not a custom IRQ, branch
+	BEQ .regular_ppu			; / to the normal SMW IRQ code.
 	
-.not_cc1:
-	BPL .not_sa1
+.custom_ppu:					; If a custom IRQ...
+	PHK					; \ Call the custom IRQ routine.
+	PEA.w .not_ppu-1			;  |
+	JML.w [snes_irq_mem+4]			; /
 	
+.regular_ppu:					; \ If it's a normal SMW IRQ...
+	JSL irq_ppu_main			; / call the normal IRQ routine instead.
+
+.not_ppu:					; After executing the PPU IRQ,
+	LDA #$00				; This address gets stored with the SA-1 flags.
+	BIT #$20				; \ If bit 5 is not set, it's not a CC1 IRQ.
+	BEQ .not_cc1				; /
+						;
+	STA $318D				; Otherwise, set the CC1 IRQ flag.
+	
+.not_cc1:					; \ If bit 7 is not set, skip this.
+	BPL .not_sa1				; /
+						;
 	CLI					; Enable interrupts
 						;
 	PHK					; \ Jump to the requested SA-1 pointer
 	PEA.w .return-1				;  |
 	JML [$3183]				; /
 
-.maybe_nmi:
-	ASL
-	BEQ .ppu_irq
+.maybe_nmi:					;
+	ASL					; \ If bit 0-7 are unset, this is not an
+	BEQ .ppu_irq				; / IRQ-as-NMI execution.
 
-.yes_nmi:
-	JML snes_nmi_main			; Jump to NMI routine.
+.yes_nmi:					; \ Otherwise, jump
+	JML snes_nmi_main			; / to the NMI routine.
 	
-.return:
+.return:					;
 	SEP #$34				; Disable interrupts and make sure A/X/Y is 8-bit
 	INC $318A				; Set ready flag.
 	
-.not_sa1:
-	PLA
-	STA $2224
-	STA.w snes_irq_mem+3
+.not_sa1:					; We're done
+	PLA					; \ Restore BW-RAM Mapping
+	STA $2224				;  |
+	STA.w snes_irq_mem+3			; /
 	
-	REP #$30
-	PLB
-	PLD
-	PLY
-	PLX
-	PLA
-	RTI
+	REP #$30				; \ Restore all internal registers and
+	PLB					;  | finish IRQ.
+	PLD					;  |
+	PLY					;  |
+	PLX					;  |
+	PLA					;  |
+	RTI					; /
 	
+warnpc $001E00					; WRAM Memory Limit
 base off
 
 irq_wram_copy_end:
 
 ; SMW's PPU IRQ code goes below.
 
-wait_for_hblank:			; Terrible as the original.
+wait_for_hblank:				; Terrible as the original.
 -	BIT $4212
 	BVC -
 -	BIT $4212
