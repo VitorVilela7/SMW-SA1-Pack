@@ -232,6 +232,9 @@ if !DSX						;
 	JML $008172				; Return to NMI.
 endif						;
 
+snes_nmi_end2:
+	LDX #$81
+
 snes_nmi_end:
 	LDA.w snes_irq_mem+0
 	AND #$7F

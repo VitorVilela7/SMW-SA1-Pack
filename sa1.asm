@@ -114,6 +114,9 @@ org $83C8
 org $82BC
 	JML snes_nmi_end
 	
+org $83B2
+	JML snes_nmi_end2
+
 org $827A
 	LDX #$81
 	
