@@ -33,6 +33,7 @@ fire_nmi_irq:
 	STZ $420A				; /
 	LDA #$21				; \ Enable IRQ but no NMI.
 	STA $4200				; / Keep joypad.
+	
 .no_irq_as_nmi:
 	RTS
 	
@@ -118,8 +119,6 @@ snes_irq:					; IRQ Start
 	PLA
 	RTI
 	
-print "IRQ znes code ends at WRAM $", pc
-	
 base off
 
 irq_wram_copy_end:
@@ -129,6 +128,7 @@ irq_wram_copy_end:
 wait_for_hblank:			; Terrible as the original.
 	REP #$20
 	PHA
+	
 .wait:
 	SEP #$20
 	LDA $2137
@@ -224,9 +224,9 @@ irq_ppu_main:
 	RTL
 
 .first_irq:
-	INC $11					;$0083D0	 | Set first IRQ as triggered
+	INC $11
 
-	LDA.b #$AE
+	LDA #$AE
 	SEC
 	SBC $7888
 	STA $4209

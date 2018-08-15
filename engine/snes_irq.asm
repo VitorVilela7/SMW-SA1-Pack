@@ -42,6 +42,7 @@ fire_nmi_irq:
 	STZ $420A				; /
 	LDA #$21				; \ Enable IRQ but no NMI.
 	STA $4200				; / Keep joypad.
+
 .no_irq_as_nmi:
 	RTS
 	
@@ -124,8 +125,6 @@ snes_irq:					; IRQ Start
 	PLX
 	PLA
 	RTI
-	
-print "IRQ main code ends at WRAM $", pc
 	
 base off
 
@@ -234,9 +233,9 @@ irq_ppu_main:
 	RTL
 
 .first_irq:
-	INC $11					;$0083D0	 | Set first IRQ as triggered
+	INC $11
 
-	LDA.b #$AE
+	LDA #$AE
 	SEC
 	SBC $7888
 	STA $4209
