@@ -1,3 +1,6 @@
+SA-1 Pack v1.30:
+	- Change list pending.
+
 SA-1 Pack v1.27:
 	- Fixed Snes9x 1.56 crashing the game on SMW ROMs without Addmusic installed. This occurs because of the increased SA-1 CPU base clock.
 	- Fixed Asar 1.60 reporting error when applying the patch, due of changes in the label preprocessor.
