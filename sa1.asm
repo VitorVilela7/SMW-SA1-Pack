@@ -144,6 +144,10 @@ incsrc "engine/snes_init.asm"			; SNES initialization routine
 incsrc "engine/snes_irq.asm"			; SNES IRQ routine
 incsrc "engine/snes_nmi.asm"			; SNES NMI routine
 
+namespace zsnes
+	incsrc "engine/snes_irq_zsnes.asm"	; SNES IRQ routine (ZSNES)
+namespace off
+
 ClearStack:					; Based from QuickROM, by Alcaro.
 	SEP #$20				; 8-bit A
 						;
