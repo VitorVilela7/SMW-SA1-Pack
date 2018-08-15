@@ -69,19 +69,6 @@ snes_init:					; SNES reset vector
 	STZ $318E				; Clear miscellaneous flags
 	STZ $3189				; Clear initialization flag
 						;
-	REP #$30				; 16-bit A/X/Y
-	LDY #$1E80				; Set base write W-RAM address
-						;
-	%init_block_ram_copy(wram_copy)		; Copy SA-1 call routine to $1E80.
-						;
-	;LDY #$1000				; Copy new WRAM content starting $1000.
-	;%init_block_ram_copy(wram_copy1)	;
-	
-	LDY #$1D00				; \ Copy IRQ
-	%init_block_ram_copy(irq_wram_copy)	; /
-	
-	SEP #$30				;
-		
 	BVC +					; \ Set swap flag if overflow is set.
 	LDA #$40				;  |
 	TSB $318E				;  |
@@ -97,6 +84,24 @@ snes_init:					; SNES reset vector
 	LDA #$80				;  |
 	TSB $318E				;  |
 +						; /
+
+	REP #$30				; 16-bit A/X/Y
+	LDY #$1E80				; Set base write W-RAM address
+						;
+	%init_block_ram_copy(wram_copy)		; Copy SA-1 call routine to $1E80.
+						;
+	;LDY #$1000				; Copy new WRAM content starting $1000.
+	;%init_block_ram_copy(wram_copy1)	;
+	LDY #$1D00				; \ Copy IRQ
+	%init_block_ram_copy(irq_wram_copy)	; /
+	
+	LDA $318D
+	BPL +
+	LDY #$1D00
+	%init_block_ram_copy(zsnes_irq_wram_copy)
++
+	
+	SEP #$30				;
 						;
 	JSR $1E85				; Wait for SA-1.
 						;
