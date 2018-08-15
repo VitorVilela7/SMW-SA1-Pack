@@ -8,26 +8,26 @@
    by Vitor Vilela                 Version 1.27
 ```
 
-The SA-1 Pack is a package of patches for enabling and optimizing the SA-1 system
-for SMW, with emphasis on eliminating slowdown, game limitations and accelerating
-the engine to the maximum possible.
+The SA-1 Pack is a package of patches for activating and optimizing the SA-1 system for the
+SMW ROM, with emphasis on eliminating slowdown, game limitations and accelerating the engine
+to the maximum possible.
 
 What is it?
 ===========
 
-The SA-1 is a co-processor used on some special SNES games, made to work together
-the Super NES CPU and enhance its processing speed, graphics and memory.
+SA-1 is a co-processor used on some special SNES games, made to work together with the Super
+NES CPU and enhance its processing speed, graphics and memory.
 
-With its 10.74 MHz clock, the SA-1 CPU is four times faster than the normal SNES
-CPU processing. The SA-1 CPU and SNES CPU runs simultaneously, which results in
-fives times faster processing over a regular game. With that much power, the
-Super Accelerator System can be used to process the SMW engine much faster than
-the normal, allowing more sprites to be processed at once, more in-game effects,
-faster level loading and much more.
+With its base 10.74 MHz clock, the SA-1 CPU is four times faster than the normal SNES CPU
+processing. The SA-1 CPU and SNES CPU also runs simultaneously, which can result in five
+times faster processing over game with a standard cart setup. With that much power, the
+Super Accelerator System (SAS) can be used to handle the SMW engine much faster than the
+normal, allowing more sprites to be processed at once, more in-game effects, faster level
+loading and much more.
 
-SA-1 Pack not just activates the co-processor, but also modifies a good part of
-the game to use and explore the chip features, which gives an extreme boost to
-the overall performance of the game.
+SA-1 Pack not just activates the co-processor, but also modifies a good part of the game
+engine to use and explore the chip features, which gives an extreme boost to the overall
+performance of the game.
 
 ## Game Features
 * Makes the game run up to four times faster.
@@ -35,23 +35,21 @@ the overall performance of the game.
 * Increase the maximum amount of sprites on a single sub-level to 255.
 * Reduces loading time of all levels and maps.
 * Increase the maximum ROM size to 8 MB.
-* Offers enhanced bitmap and arithmetic capabilities for better graphics
-performance.
+* Offers enhanced bitmap and arithmetic capabilities for better graphics performance.
 
 ## System Features
 * 16-bit 65c816 processor clocked at 10.74 MHz.
 * 2 kB fast internal work memory (I-RAM), clocked at 10.74 MHz.
-* Multi-processor processing, with parallel operating mode and memory sharing
-control.
-* Large capacity memory, with a total capability of 8 MB of ROM clocked at
-10.74 MHz and 256 kB of BW-RAM, clocked at 5.37 MHz.
-* High speed arithmetic hardware of multiplication, division and cumulative sum
+* Multi-processor processing, with parallel operating mode and memory sharing control.
+* Large capacity memory, with a total capability of 8 MB of ROM clocked at 10.74 MHz and
+256 kB of BW-RAM, clocked at 5.37 MHz.
+* High speed arithmetic hardware of multiplication, division and cumulative sum.
 * Bitmap and Character Conversion functions for fast graphics manipulation.
 * Custom DMA circuit for fast transfers between ROM, I-RAM and BW-RAM.
-* Variable-Length Bit data processing for enhanced algorithms such as graphics
-and data compression.
-* Super MMC memory mapping capabilities for BW-RAM and bank switching for multiple
-ROM image access and mirroring.
+* Variable-Length Bit data processing for enhanced algorithms such as graphics and data
+compression.
+* Super MMC memory mapping capabilities for BW-RAM and bank switching for multiple ROM
+image access and mirroring.
 
 Important
 =========
