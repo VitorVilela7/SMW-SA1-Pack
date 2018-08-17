@@ -133,121 +133,105 @@ For more information about emulator and hardware compatibility, check out the
 Installation
 ============
 
-As far working with SA-1 can be tedious at start, with
-the current development and available compatible
-resources, it's already doable to pretty much anyone
-who got a fair experience with SMW Hacking to use it.
+As far working with SA-1 can be tedious at start (specially checking for
+resource compatibility), with the current development and available compatible
+resources, it's already doable to pretty much anyone who got a fair experience
+with SMW Hacking to use it.
 
-In order to get started, grab a new clean ROM. Japanese
-or European versions will not work.
+In order to get started, grab a new clean ROM. Japanese or European versions
+will not work.
 
-Now, open the ROM in Lunar Magic and expand it to at least
-2MB. **Don't** save any level nor do any action on the editor.
+Now, open the ROM in Lunar Magic and expand it to at least 2MB. **Don't** save
+any level nor do any action on the editor.
 
 After expanding, apply sa1.asm to your ROM, using Asar.
 
-Then feel free to test it with your preferred emulator. If
-it works properly, somewhere in your emulator it should
-display SA-1, e.g. ROM+RAM+BAT+SA-1 in Snes9x. If you're
-unsure, try editing level 106, change sprite header memory
-to 0x10 and insert 20 koopas in the level. If all of them
-display, then the SA-1 Pack got successfully inserted.
+Then feel free to test it with your preferred emulator. If it works properly,
+somewhere in your emulator it should display SA-1, e.g. ROM+RAM+BAT+SA-1 in
+Snes9x. If you're unsure, try editing level 106, change sprite header memory
+to 0x10 and insert 20 koopas in the level. If all of them display correctly,
+SA-1 Pack was successfully inserted.
 
-Now you can apply all other patches/tools that should run
-before Lunar Magic. Remember that they should have SA-1
-compatibility or else they will corrupt your ROM.
+Now you can apply all other patches/tools that should run before Lunar Magic.
+Remember that they should have SA-1 compatibility or else they will likely
+corrupt your ROM.
 
-After it, you can finally use Lunar Magic with your ROM.
-Remember to use at least version 2.20+.
+After it, you can finally use Lunar Magic with your ROM. Remember to use at
+least version 2.20+.
 
-To enable the double (22 sprites) system, don't forget
-to change your sprite header memory to 0x10, except in
-boss battles (they doesn't work with that header setting).
+To enable the double (22 sprites) system, don't forget to change your sprite
+header memory to 0x10, except in vanilla boss battles, they won't work
+correctly because of the new sprite memory system.
 
-Important: If you change the decompression option on
-Lunar Magic, you must reapply sa1.asm to your ROM so
-the proper GFX decompression routine is used.
+Important: If you change the decompression option on Lunar Magic, you must
+reapply sa1.asm to your ROM so the proper *fast* GFX decompression routine is
+used. This is important for fast level decompression and compatibility wit
+advanced resources.
 
-This is important for fast level decompression and
-compatibility with advanced resources.
-
-Bowser: You must go to level 1C7 and change sprite header
-to 0x00, because the default sprite header (0x10) doesn't
-work with it and the player will get glitches and stuck after
-beating Bowser.
+Bowser battles: You must go to level 1C7 and change sprite header to 0x00,
+because the default sprite header (0x10) doesn't work with it and the player
+will get some sprite glitches and stuck after beating the boss (fireworks
+won't work).
 
 F.A.Q
 =====
 
 <dl><dt>
- Q: Is it really hard to work with SA-1?
+ Q: Is it really hard to work with SA-1 Pack?
 </dt><dd>
- A: I would say yes, but after some time you'll be able
-to see the benefits from using this SA-1 pack. :)
-Also once you learn how to make something SA-1
-compatible, everything will become easier to work with.
+ A: The main difficulty is at converting .asm resources manually, which is only
+ required if your desired resource is not available. Other than that, today
+ it's reasonable easy to use SA-1 Pack.
 </dd>
 <dt>
- Q: Really?
+ Q: After editing my ROM on Lunar Magic, the ROM crashes or glitches before the
+ title screen. What's going on?
 </dt><dd>
- A: The above Q/A was made in 2012. Today, 5 years after,
-I still would say it's hard, but not that anymore. There's
-much more resources available today.
+ A: Your Lunar Magic version isn't compatible with SA-1 Pack. Please update to
+ at least version 2.20.
 </dd>
 <dt>
- Q: When I edit my ROM in Lunar Magic and open it, the
-ROM glitches during the Title Screen. What's going on?
+ Q: After expanding my ROM to 8MB, ZSNES won't open the ROM anymore.
 </dt><dd>
- A: Your Lunar Magic version isn't compatible with SA-1 Pack.
-</dd><dd>
- Please update to at least version 2.20.
+ A: ZSNES doesn't support 8MB ROMs, only up to 6MB. Try restoring your ROM to a
+ previous state using Lunar Magic or with a backup. You can also try FuSoYa's
+ custom ZSNES build.
 </dd>
 <dt>
- Q: When I expanded my ROM to 8MB, ZSNES can't open
-anymore.
+ Q: Whenever I apply a patch to my ROM, it starts crashing.
 </dt><dd>
- A: ZSNES doesn't support 8MB ROMs, only up to 6MB. Try
-restoring your ROM to a previous state using Lunar Magic
-or with a backup. You can though try FuSoYa's custom ZSNES build,
-but of course all hackers would need to use too.
+ A: Make sure that the patch is SA-1 compatible. Patches that are not designed
+ to work with SA-1 Pack will 99% likely crash your ROM.
 </dd>
 <dt>
- Q: Whenever I apply a patch to my ROM, it crashes.
+ Q: Whenever I use a certain tool, the ROM crashes as well...
 </dt><dd>
- A: Make sure that the patch is SA-1 compatible. You can
-find a list of SA-1 compatible patches on "Links" section.
-Also on SMWC, SA-1 compatible patches will have the "sa1" tag.
+ A: Make sure that the tool is SA-1 compatible. Compatible tools will have the
+ "sa-1" tag on the SMW Central sections. If the tool you're looking for is not
+ compatible with SA-1, try asking for help in the forums for assistance or
+ alternatives.
 </dd>
 <dt>
- Q: Whenever I use any tool, the ROM crashes too.
+ Q: If I insert a custom block or custom sprite, the ROM crashes or glitches
+ when the block/sprite is present.
 </dt><dd>
- A: Make sure that the tool is SA-1 compatible. Compatible
-tools will have the "sa-1" tag on the SMW Central sections.
-If the tool you're looking for, try asking for help in the
-forums for guidance.
-</dd>
-<dt>
- Q: If I insert a custom block or custom sprite, the
-ROM crashes or glitches when the block/sprite is present.
-</dt><dd>
- A: Blocks and sprites may need to be converted to SA-1.
-If case the one you downloaded is not compatible with SA-1,
-you can use the SA-1 Convert tool to automatically those
-for you.
+ A: Blocks and sprites may need to be converted to SA-1. If case the one you
+ downloaded is not compatible with SA-1, you can use the SA-1 Convert tool to
+ automatically convert them for you.
 </dd>
 <dt>
  Q: How I can make something compatible with SA-1?
 </dt><dd>
- A: Check section "Programming". You will find all
-the informations needed for that :)
+ A: Check out the [Programming](/docs/programming.md) section for more
+ information. You will need some ASM knowledge to edit .asm files beforehand.
 </dd>
 <dt>
- Q: If I change "Compression Options for this ROM" in
-Lunar Magic, the ROM gets a little slower on loading. Why?
+ Q: If I change "Compression Options for this ROM" on Lunar Magic, the ROM gets
+ a little slower on loading screens. Why?
 </dt><dd>
- A: You have to reapply sa1.asm after you change the
-compression option, since SA-1 processes that specific part
-and it needs a specific decompresser to work property.
+ A: You have to reapply sa1.asm after you change the compression option, since
+ SA-1 processes that specific part and it needs a specific decompresser to work
+ property.
 </dd></dl>
 
 Credits
@@ -313,8 +297,18 @@ Useful Links
 
 SMW Central: https://www.smwcentral.net/
 
+SA-1 Convert: https://www.smwcentral.net/?p=section&a=details&id=6853
+
+Official Thread: https://www.smwcentral.net/?p=viewthread&t=58895
+
+#### Technical documents
+
 SNES Dev. Book: https://www.romhacking.net/docs/226/
 
 SA-1 Registers: https://wiki.superfamicom.org/sa-1-registers
 
-My SMWC Profile: https://smwc.me/u/8251
+#### Personal
+
+My SMWC profile: https://smwc.me/u/8251
+
+My Github profile: https://github.com/VitorVilela7
