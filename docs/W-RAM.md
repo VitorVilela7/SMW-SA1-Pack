@@ -23,7 +23,7 @@ Start  |  End  | Description
 `$1D03`|`-`| Copy of the register`$2224`. When setting`$2224`, make sure to set this address as well. This address is used to restore the`$2224`register value after an IRQ is executed.
 `$1D04`|`$1D06`| Custom IRQ handler pointer. All IRQs will jump to this pointer when`$1D02`is set.
 `$1D07`|`-`| Reserved for future use.
-`$1D08`|`$1DFF`| This is where the IRQ controller is uploaded at game reset and is responsible for controlling all S-CPU IRQs received. Calling`$1D08` activates the IRQ-as-NMI system on the next IRQ call, if enabled.
+`$1D08`|`$1DFF`| This is where the IRQ controller is uploaded at game reset and is responsible for controlling all S-CPU IRQs received. Calling`$1D08`activates the IRQ-as-NMI system on the next IRQ call, if enabled.
 `$1E00`|`$1E7F`| Empty. Not cleared. **Reserved by SA-1 Pack for future expansion.**
 `$1E80`|`$1E8D`| SA-1 Execute Pointer. When called, the routine will invoke the SA-1 CPU to run a certain code and wait until the execution is finished.
 `$1E8E`|`$1E95`| The game main loop. It waits for a NMI and then resumes executing.
