@@ -5,7 +5,7 @@
   \___ \ / /\ \______| |   |  ___/ _` |/ __| |/ /
   ____) / ____ \     | |   | |  | (_| | (__|   <
  |_____/_/    \_\    |_|   |_|   \__,_|\___|_|\_\
-   by Vitor Vilela                 Version 1.27
+   by Vitor Vilela                 Version 1.XX
 ```
 
 The SA-1 Pack is a package of patches for activating and optimizing the SA-1
@@ -240,18 +240,18 @@ Credits
 SA-1 Pack wouldn't be that awesome without help from these people:
 
 * 33953YoShI (LZ2 patch, original Japanese patch inspiration)
-* Adam (Testing)
-* Arujus (More sprites patch)
+* Adam (testing)
+* Arujus (More Sprites patch)
 * Alcaro (ZSNES detection code)
 * edit1724 (LZ2/3 patches)
 * Ersanio (LZ2 patch)
 * FuSoYa (6-8MB mapping support/idea, LZ3 patch, LM support)
-* Koopster (Testing and documentation)
-* Lui37 (Testing)
+* Koopster (testing and documentation)
+* Lui37 (testing)
 * Min (LZ2 patch)
-* smkdan (LZ2 patches and fixing VRAM patch)
-* Ripperon-X (Testing)
-* Vitor Vilela (That crazy author that did most of the things)
+* smkdan (LZ2 patches and assistance for fixing VRAM patch)
+* Ripperon-X (testing)
+* Vitor Vilela (that crazy author that did most of the things)
 * You (for using it :D)
 
 Read More
