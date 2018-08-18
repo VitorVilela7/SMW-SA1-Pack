@@ -33,11 +33,11 @@ bsnes refers to the SNES emulation part of higan.
 * Probably... more coming.
 
 ## ZSNES
-* (!) SA-1 -> SNES IRQ may cause some split second graphical glitch around status bar. This can be noted when collecting coins, hitting blocks and running special HDMA code against the level.
 * The SA-1 CPU is 42% slower than the nominal 10.74 MHz clock. It's clocked at ~6.18 MHz instead.
 * Random crashes and freezes are often common, with an unknown reason for that.
 * It's not possible to execute code on I-RAM nor BW-RAM. Applies to both SA-1 CPU and SNES CPU. To workaround, code must be placed and executed on the W-RAM.
 * There is no Character Conversion support, with the exception from the one that Super Mario RPG uses.
+* Has partial SA-1 IRQ support. Often SA-1 IRQs conflicts with PPU and H-/V-IRQs.
 * Can drop frames out of sudden depending of the code executed on the SNES CPU.
 * Does not lock access to any of the SNES registers. SA-1 can even DMA to the VRAM.
 * Does not generate IRQ after SA-1 DMA execution.
