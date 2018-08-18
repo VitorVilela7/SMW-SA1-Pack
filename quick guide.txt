@@ -21,8 +21,10 @@ If you want to use any external resource (tool, sprite, block, patch, etc.), ple
 remapped to they work with SA-1. Fortunately, the SA-1 Pack is been on SMW Central for a considerable amount
 of time, so a fairly good amount of resources already works.
 
-Note that your will need this special version of Sprite Tool to insert sprites on SA-1 Pack:
-http://bin.smwcentral.net/u/8251/st140.zip
+If you still use Romi's Sprite Tool, you will need this special version of Sprite Tool to insert sprites on
+SA-1 Pack: https://bin.smwcentral.net/u/8251/st140.zip
+
+PIXI and GIEPY has native SA-1 Pack compatibility.
 
 Aside from the Sprite Tool, any other resource on the site will work on SA-1 Pack fine if the "sa-1" tag is
 present in the submission. It means the submission is either hybrid (supports both SA-1 and regular ROMs) or
@@ -31,14 +33,12 @@ they require SA-1 to work. So these work for you.
 Most of the Sprites and Blocks however can be converted automatically with a tool called "SA-1 Convert".
 Please take a look in the Tools Section on SMW Central if you're interested. It can be useful if the resource
 you're looking for is not compatible with SA-1.
-
-In case you're looking for a patch that is not available for SA-1 Pack, you can try looking here:
-https://dl.dropboxusercontent.com/u/16203903/A/SA1/cpatches.html
-
-However, Dropbox (the site that is hosting this page) will take down public links soon (around March), so
-if it gets down please let me know and I will try making a workaround or merging the patches to SMW Central.
+round or merging the patches to SMW Central.
 
 You don't need to worry about music (.txt/.bnk/.brr) files, they will work with SA-1 normally.
 The only thing you have to worry is if the tool to insert them (Addmusic) is compatible.
+
+GPS has native SA-1 support since version 1.20.
+UberASM Tool as well.
 
 AddmusicK works natively with SA-1, so if you're using it, you don't have to worry about music.
