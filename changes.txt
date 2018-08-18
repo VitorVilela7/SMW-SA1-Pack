@@ -1,11 +1,17 @@
 SA-1 Pack v1.XX:
+	- Rewrote SMW's IRQ handling system. Now it runs on RAM, gives PPU IRQ priority over SA-1 IRQ, added support for custom IRQ codes.
+	- Added support for bypassing SMW's NMI routine to run on specific scanline as an IRQ, also known as "IRQ-as-NMI". In practice this trick, used in many games including Yoshi's Island, Super Mario RPG, Star Fox and more will allow for much more DMA uploads per time, which implies into more ExAnimations, Dynamic Sprites, etc., in sacrifice of vertical screen resolution.
+	- IRQ and NMI now preserves $2224 and Direct Page. Direct Page usage and BW-RAM mapping is now allowed on SNES CPU side as well.
 	- Rewrote most of the documents, including the README, to include more information and use markdown styling, which includes the BW-RAM, I-RAM, Memory Map Summary and Sprite Remap documents.
+	- README and all other documents are now in .html format on the release .zip file.
+	- Split some of the routines in sa1.asm to separate files.
 	- Added W-RAM document.
 	- Added known issues document.
 	- Added notable changes document.
 	- Added programming document, which was part of the README originally.
 	- Updated quick guide to include updated information.
 	- Added remap.asm with hybrid SA-1 Pack/normal definitions.
+	- Made the SA-1 dynamic vectors loads value from vector info on initialization instead of static default vectors from SMW.
 
 SA-1 Pack v1.27:
 	- Fixed Snes9x 1.56 crashing the game on SMW ROMs without Addmusic installed. This occurs because of the increased SA-1 CPU base clock.
