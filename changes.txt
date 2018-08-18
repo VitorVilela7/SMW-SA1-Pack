@@ -1,3 +1,12 @@
+SA-1 Pack v1.XX:
+	- Rewrote most of the documents, including the README, to include more information and use markdown styling, which includes the BW-RAM, I-RAM, Memory Map Summary and Sprite Remap documents.
+	- Added W-RAM document.
+	- Added known issues document.
+	- Added notable changes document.
+	- Added programming document, which was part of the README originally.
+	- Updated quick guide to include updated information.
+	- Added remap.asm with hybrid SA-1 Pack/normal definitions.
+
 SA-1 Pack v1.27:
 	- Fixed Snes9x 1.56 crashing the game on SMW ROMs without Addmusic installed. This occurs because of the increased SA-1 CPU base clock.
 	- Fixed Asar 1.60 reporting error when applying the patch, due of changes in the label preprocessor.
