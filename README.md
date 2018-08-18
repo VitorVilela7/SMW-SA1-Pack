@@ -295,20 +295,24 @@ related remaps for using in patches, blocks and sprites.
 Useful Links
 ============
 
-SMW Central: https://www.smwcentral.net/
-
-SA-1 Convert: https://www.smwcentral.net/?p=section&a=details&id=6853
-
-Official Thread: https://www.smwcentral.net/?p=viewthread&t=58895
+* SMW Central: https://www.smwcentral.net/
+* SA-1 Convert: https://www.smwcentral.net/?p=section&a=details&id=6853
+* Official Thread: https://www.smwcentral.net/?p=viewthread&t=58895
+* SA-1 Pack Basic Tutorial: https://www.smwcentral.net/?p=viewthread&t=71953
+* Romi's Sprite Tool with SA-1 compatibility: https://bin.smwcentral.net/u/8251/st140.zip
 
 #### Technical documents
 
-SNES Dev. Book: https://www.romhacking.net/docs/226/
+Useful documents for understanding SA-1:
 
-SA-1 Registers: https://wiki.superfamicom.org/sa-1-registers
+* SNES Dev. Book: https://www.romhacking.net/docs/226/
+* SA-1 Registers: https://wiki.superfamicom.org/sa-1-registers
+* SA-1 Graphics Rotation Demo: https://bin.smwcentral.net/u/8251/rotate2.zip
 
 #### Personal
 
-My SMWC profile: https://smwc.me/u/8251
+You can contact make though the following links:
 
-My Github profile: https://github.com/VitorVilela7
+* My SMWC profile: https://smwc.me/u/8251
+* My Github profile: https://github.com/VitorVilela7
+* My Twitter profile: https://twitter.com/HackerVilela
