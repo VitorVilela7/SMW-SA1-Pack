@@ -21,7 +21,8 @@ org $02A802
 	LSR
 	
 org $02A82A
-	JSL ExpandSpritesPerLevel
+	LDY #$00
+	REP #$10
 	
 org $02A884
 	JSL ScrollSprite
@@ -144,12 +145,6 @@ Sprite_Load_Reset:
 	LDA.B #$02A751>>16
 	STA $3182
 	JSR $1E80
-	RTL
-	
-ExpandSpritesPerLevel:
-	REP #$10				; Make X/Y 16-bit.
-	LDX #$0000				; Number of sprites
-	LDY #$0001				; Sprite data index.
 	RTL
 	
 ScrollSprite:
