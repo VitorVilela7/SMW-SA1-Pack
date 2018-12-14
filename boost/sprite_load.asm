@@ -14,10 +14,14 @@ org $058098
 org $02A75F
 	JSL SA1_Sprites
 
-; RESTORE Original code
+;CODE_02A802:        A4 55         LDY $55                   
+;CODE_02A804:        A5 5B         LDA RAM_IsVerticalLvl     ; \ Branch if horizontal level 
+;CODE_02A806:        4A            LSR                       ;  | 
+;CODE_02A807:        90 0E         BCC CODE_02A817           ; / 
+
 org $02A802
-	LDY $55
-	LDA $5B
+	JSL LoadSprites
+	RTS
 	
 org $02A82A
 	LDY #$00
@@ -144,6 +148,36 @@ Sprite_Load_Reset:
 	LDA.B #$02A751>>16
 	STA $3182
 	JSR $1E80
+	RTL
+
+LoadSprites:
+	BRA .SA1Code
+	LDA.B #.SA1Code
+	STA $3180
+	LDA.B #.SA1Code>>8
+	STA $3181
+	LDA.B #.SA1Code>>16
+	STA $3182
+	JSR $1E80
+	RTL
+	
+.SA1Code:
+	PHP
+	PHB
+	LDA #$02
+	PHA
+	PLB
+	
+	LDY $55
+	LDA $5B
+	LSR
+	PHK
+	PEA.w .jslrtsreturn-1
+	PEA.w $02B889-1
+	JML $02A807
+.jslrtsreturn
+	PLB
+	PLP
 	RTL
 	
 ScrollSprite:
