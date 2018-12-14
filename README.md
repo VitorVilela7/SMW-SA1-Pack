@@ -104,7 +104,7 @@ support since version 2.20.
 
 For more information about converting a certain resource to SA-1 compatibility
 manually, check the docs folder and the technical files included, specially the
-[Memory Map Summary](/docs/memory-map-summary.md).
+[Memory Map Summary](docs/memory-map-summary.md).
 
 ## Emulator Compatibility
 
@@ -128,7 +128,7 @@ SA-1 Pack is fully compatible with real hardware. It works on both hacked SA-1
 carts and sd2snes, with a good performance.
 
 For more information about emulator and hardware compatibility, check out the
-[Known Issues](/docs/known-issues.md) document.
+[Known Issues](docs/known-issues.md) document.
 
 Installation
 ============
@@ -222,7 +222,7 @@ F.A.Q
 <dt>
  Q: How I can make something compatible with SA-1?
 </dt><dd>
- A: Check out the [Programming](/docs/programming.md) section for more
+ A: Check out the [Programming](docs/programming.md) section for more
  information. You will need some ASM knowledge to edit .asm files beforehand.
 </dd>
 <dt>
@@ -259,37 +259,37 @@ Read More
 
 There's more documents and information available in the docs sub-folder:
 
-[Programming](/docs/programming.md) is a full guide about the wonderland SA-1
+[Programming](docs/programming.md) is a full guide about the wonderland SA-1
 Pack programming and many special features you can use in your ROM hack.
 Additionally, how to convert any incompatible resource to SA-1 Pack compatible
 resource.
 
-[Notable Changes](/docs/notable-changes.md) is a list of notable changes
+[Notable Changes](docs/notable-changes.md) is a list of notable changes
 between a normal, SlowROM SMW ROM and a SA-1 Pack SMW ROM.
 
-[Known Issues](/docs/known-issues.md) is a list of currently known SA-1 Pack
+[Known Issues](docs/known-issues.md) is a list of currently known SA-1 Pack
 issues for each known SNES emulator and hardware. Issues varies between
 emulator bugs and SA-1 Pack bugs, which are properly marked for each case.
 
-[Memory Map Summary](/docs/memory-map-summary.md) contains a summary about all
+[Memory Map Summary](docs/memory-map-summary.md) contains a summary about all
 memory changes between the normal SMW ROM and the SA-1 SMW ROM, either because
 of the SA-1 ROM mapping or SA-1 Pack memory remaps. Worth reading for who is
 interested in converting resources to SA-1 format or is interested in
 understanding how the patch works.
 
-[BW-RAM](/docs/BW-RAM.md) contains the map of all BW-RAM related addresses and
+[BW-RAM](docs/BW-RAM.md) contains the map of all BW-RAM related addresses and
 information about its mapping capabilities.
 
-[I-RAM](/docs/I-RAM.md) contains the map of all I-RAM related addresses and
+[I-RAM](docs/I-RAM.md) contains the map of all I-RAM related addresses and
 information about its mapping capabilities.
 
-[W-RAM](/docs/W-RAM.md) contains the map of all SNES WRAM related addresses,
+[W-RAM](docs/W-RAM.md) contains the map of all SNES WRAM related addresses,
 focused in the differences between normal SMW WRAM map and SA-1 Pack WRAM map.
 
-[Sprite Remap](/docs/Sprite-Remap.md) is a summary about all the sprite table
+[Sprite Remap](docs/Sprite-Remap.md) is a summary about all the sprite table
 remaps made by More Sprites patch.
 
-[remap.asm](/docs/remap.asm) contains an .asm macro containing all SA-1 Pack
+[remap.asm](docs/remap.asm) contains an .asm macro containing all SA-1 Pack
 related remaps for using in patches, blocks and sprites.
 
 Useful Links

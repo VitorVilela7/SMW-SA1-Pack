@@ -14,7 +14,7 @@ Only modified W-RAM addresses are displayed on this document. For checking other
 #### Bank $7E
 Start  |  End  | Description
 :-----:|:-----:|-------------
-`$0000`|`$000F`| Scratch Memory. Some codes does not use the I-RAM at all for certain reasons, such as for executing code on the memory. FuSoYa's SA-1 version of LC_LZ2 and LC_LZ3 implementation are examples of that. The reason of that is ZSNES. See [Known Issues](/docs/known-issues.md) to understand why.
+`$0000`|`$000F`| Scratch Memory. Some codes does not use the I-RAM at all for certain reasons, such as for executing code on the memory. FuSoYa's SA-1 version of LC_LZ2 and LC_LZ3 implementation are examples of that. The reason of that is ZSNES. See [Known Issues](docs/known-issues.md) to understand why.
 `$0010`|`$0FFF`| Empty. Not cleared.
 `$1000`|`$1E7F`| Empty. Not cleared. **Reserved by SA-1 Pack for future expansion.**
 `$1D00`|`-`| **IRQ-as-NMI system (`x------e`)** <ul><li>Bit 0 (e): When set, the V-Blank routine is moved to an IRQ and NMI is disabled.</li><li>Bit 7 (x): When set, the next IRQ will be the V-Blank routine. Used internally when`e`is set.</li></ul>
