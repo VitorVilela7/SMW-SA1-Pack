@@ -20,11 +20,11 @@ org $02A75F
 ;CODE_02A807:        90 0E         BCC CODE_02A817           ; / 
 
 org $02A802
-	JSL LoadSprites
+	JML LoadSprites
 	RTS
 	
 org $02A82A
-	LDY #$00
+	LDY #$01
 	REP #$10
 	
 org $02A884
@@ -32,7 +32,9 @@ org $02A884
 	
 org $02A8E1
 	JML NSprite_FixY
-	NOP #2
+	NOP
+Haxor:
+	RTI
 NSprite_FixY_Back:
 	
 org $02A936
@@ -151,34 +153,18 @@ Sprite_Load_Reset:
 	RTL
 
 LoadSprites:
-	BRA .SA1Code
-	LDA.B #.SA1Code
-	STA $3180
-	LDA.B #.SA1Code>>8
-	STA $3181
-	LDA.B #.SA1Code>>16
-	STA $3182
-	JSR $1E80
-	RTL
+	LDX #$00
 	
-.SA1Code:
-	PHP
-	PHB
 	LDA #$02
 	PHA
-	PLB
+	PEA.w $02A806
+	PHP
+	PEA.w Haxor-1
 	
 	LDY $55
 	LDA $5B
 	LSR
-	PHK
-	PEA.w .jslrtsreturn-1
-	PEA.w $02B889-1
 	JML $02A807
-.jslrtsreturn
-	PLB
-	PLP
-	RTL
 	
 ScrollSprite:
 	SEP #$10
