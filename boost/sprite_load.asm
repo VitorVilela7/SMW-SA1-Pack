@@ -18,7 +18,6 @@ org $02A75F
 org $02A802
 	LDY $55
 	LDA $5B
-	LSR
 	
 org $02A82A
 	LDY #$00
