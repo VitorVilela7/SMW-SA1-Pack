@@ -1,11 +1,23 @@
 @includefrom sa1.asm
 namespace SpriteLoading
 pushpc
+
+; Make most of the sprite cleanup routine run on SA-1 CPU now.
+
+org $058098
+	JSL Sprite_Load_Reset
+	
+; Instead of jumping to a SNES -> SA-1 invoke (CODE_01808C),
+; jump directly to the code since we're already running over SA-1 CPU
+; now.
+
+org $02A75F
+	JSL SA1_Sprites
+
 ;CODE_02A802:        A4 55         LDY $55                   
 ;CODE_02A804:        A5 5B         LDA RAM_IsVerticalLvl     ; \ Branch if horizontal level 
 ;CODE_02A806:        4A            LSR                       ;  | 
 ;CODE_02A807:        90 0E         BCC CODE_02A817           ; / 
-
 
 org $02A802
 	JSL LoadSprites
@@ -126,6 +138,16 @@ org $03B8BA
 	NOP
 	
 pullpc
+
+Sprite_Load_Reset:
+	LDA.B #$02A751
+	STA $3180
+	LDA.B #$02A751>>8
+	STA $3181
+	LDA.B #$02A751>>16
+	STA $3182
+	JSR $1E80
+	RTL
 
 LoadSprites:
 	BRA .SA1Code
