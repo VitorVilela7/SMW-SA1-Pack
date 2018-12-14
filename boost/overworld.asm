@@ -9,6 +9,9 @@ namespace overworld
 
 pushpc
 
+org $04F590
+	JSL lives_exchange_fix
+
 org $04827A
 	JSL continue_fix
 
@@ -312,7 +315,35 @@ animations:
 	JML $0480E0
 .ret2	LDA $73D2
 	RTL
-
+	
+lives_exchange_fix:
+	LDA.b #.snes
+	STA $0183
+	LDA.b #.snes>>8
+	STA $0184
+	LDA.b #.snes>>16
+	STA $0185
+	LDA #$D0
+	STA $2209
+-	LDA $018A
+	BEQ -
+	STZ $018A
+	RTL
+	
+.snes
+	PHB
+	LDA #$04
+	PHA
+	PLB
+	JSL $05DBF2
+	LDY #$50
+	PHK
+	PEA.w .end-1
+	PEA.w $8574
+	JML $04F596
+.end    
+	PLB
+	RTL
 	
 main:
 	LDA #$41
@@ -323,5 +354,5 @@ main:
 	STA $3182
 	JSR $1E80
 	RTL
-
+	
 namespace off
