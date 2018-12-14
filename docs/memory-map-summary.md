@@ -3,7 +3,7 @@
 This is a quick summary of the memory changes made by the SAS Memory Map and by SA-1 Pack.
 
 ## Hybrid Remapping
-It's possible to write code that works with both SA-1 Pack SMW ROMs and regular SMW ROMs by detecting the ROM mapper and using a couple of defines depending of the ROM type detected. Take a look at [remap.asm](docs/remap.asm).
+It's possible to write code that works with both SA-1 Pack SMW ROMs and regular SMW ROMs by detecting the ROM mapper and using a couple of defines depending of the ROM type detected. Take a look at [remap.asm](remap.asm).
 
 More important than making hybrid ASM code, it's understanding how the SA-1 memory map works and how you can make your code potentially much faster and with a higher compatibility on SA-1 SMW ROMs. This document contains a well-summarized information about the SA-1 memory map.
 
@@ -91,4 +91,4 @@ From               | To                | Comment
 
 
 ### Sprite Tables
-Although the sprite tables are all 16-bit (absolute) addresses and therefore were remapped together to the BW-RAM, Arujus's More Sprites patch had to move them again to accommodate the expanded 22 sprites slots limits. Read more at [Sprite Remap](docs/Sprite-Remap.md) doc.
+Although the sprite tables are all 16-bit (absolute) addresses and therefore were remapped together to the BW-RAM, Arujus's More Sprites patch had to move them again to accommodate the expanded 22 sprites slots limits. Read more at [Sprite Remap](Sprite-Remap.md) doc.
