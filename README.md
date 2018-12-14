@@ -5,7 +5,7 @@
   \___ \ / /\ \______| |   |  ___/ _` |/ __| |/ /
   ____) / ____ \     | |   | |  | (_| | (__|   <
  |_____/_/    \_\    |_|   |_|   \__,_|\___|_|\_\
-   by Vitor Vilela                 Version 1.30
+   by Vitor Vilela                 Version 1.31
 ```
 
 The SA-1 Pack is a package of patches for activating and optimizing the SA-1

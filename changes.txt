@@ -1,3 +1,6 @@
+SA-1 Pack v1.31:
+	- Fixed live exchange not being properly updated on hardware. Patch by LX5.
+
 SA-1 Pack v1.30:
 	- Rewrote SMW's IRQ handling system. Now it runs on RAM, gives PPU IRQ priority over SA-1 IRQ, added support for custom IRQ codes.
 	- Added support for bypassing SMW's NMI routine to run on specific scanline as an IRQ, also known as "IRQ-as-NMI". In practice this trick, used in many games including Yoshi's Island, Super Mario RPG, Star Fox and more will allow for much more DMA uploads per time, which implies into more ExAnimations, Dynamic Sprites, etc., in sacrifice of vertical screen resolution.
