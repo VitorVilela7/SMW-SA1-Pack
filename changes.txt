@@ -1,5 +1,6 @@
 SA-1 Pack v1.31:
 	- Added support to Lunar Magic 2.60.
+	- Minor cleanup and rearrangements on the sprite loading routines.
 	- Sprite resetting/cleaning routine now runs on SA-1 CPU. This should make level loading a few milliseconds faster.
 	- Fixed live exchange not being properly updated on hardware. Patch by LX5.
 	- Fixed sprite loading routine not running on SA-1 CPU during initilization. Now the routine is 100% SA-1 CPU.
