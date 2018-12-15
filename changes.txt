@@ -4,6 +4,7 @@ SA-1 Pack v1.31:
 	- Sprite resetting/cleaning routine now runs on SA-1 CPU. This should make level loading a few milliseconds faster.
 	- Fixed live exchange not being properly updated on hardware. Patch by LX5.
 	- Fixed sprite loading routine not running on SA-1 CPU during initilization. Now the routine is 100% SA-1 CPU.
+	- Fixed minor grammar error on notable changes.
 
 SA-1 Pack v1.30:
 	- Rewrote SMW's IRQ handling system. Now it runs on RAM, gives PPU IRQ priority over SA-1 IRQ, added support for custom IRQ codes.

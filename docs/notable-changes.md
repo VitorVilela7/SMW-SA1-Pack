@@ -8,7 +8,7 @@ When patched, there is many notable changes in the game, mostly related to perfo
 * Yoshi's Island 4
 * Donut Plains 4
 * Forest of the Illusion 2
-* Suken Ghost Ship
+* Sunken Ghost Ship
 * Bowser's Castle -- Front/Back Door
 * more?
 
