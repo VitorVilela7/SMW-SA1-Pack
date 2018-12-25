@@ -70,10 +70,26 @@ org $039890
 STA $740F
 
 ; Powerups sometimes use their own hard-coded OAM index, we don't want this so fix it.
+;org $01C61F
+;BRA SkipStuff
+;rep 21 : NOP
+;SkipStuff:
+
+;Vitor Vilela: this screws up Roy/Morton/Ludwig, undo that.
+;the hard-coded OAM index is only for their case anyways.
 org $01C61F
-BRA SkipStuff
-rep 21 : NOP
-SkipStuff:
+	LDA.w $740F				;$01C61F	|
+	BNE CODE_01C636				;$01C622	|
+	LDA.w $6D9B				;$01C624	|
+	CMP.b #$C1				;$01C627	|
+	BEQ CODE_01C636				;$01C629	|
+	BIT.w $6D9B				;$01C62B	|
+	BVC CODE_01C636				;$01C62E	|
+	LDA.b #$D8				;$01C630	|
+	STA.w $33A2,X				;$01C632	|
+	TAY					;$01C635	|
+CODE_01C636:
+
 
 ; The hammer brother graphics routine is called by the hammer brother's platform. The OAM index for the hammer brother might not be set correctly
 ; so hijack here to set it.
