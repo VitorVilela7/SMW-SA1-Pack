@@ -1,7 +1,8 @@
 SA-1 Pack v1.31:
 	- Added support to Dynamic levels patch, built-in in Lunar Magic.
-	- Minor cleanup and rearrangements on the sprite loading routines.
+	- **Change Super No More Sprite Tile Limits setting header from 0x10 to 0x08**. This important change fixes various graphical glitches present in Bowser battle, such as Princess Toadstool appearing "in the front" of the clown car, Bowser's bowling ball having parts of its OAM tiles disappearing and additionally it fixes the softlock after beating Bowser, where the fireworks animation simply doesn't show out. However, this implies into having to you edit all levels that you used to have Sprite Header Index as 0x10 and change it to 0x08, otherwise you won't have more than 10 sprites on screen. The sprite header index 0x08 will not cause any problem on the original game because along index 0x03 and 0x05, it's unused in the original game while 0x10 was used for Bowser's battle scenes. This also now means you can play SMW normally using this patch, without having to use something else to fix Bowser.
 	- Sprite resetting/cleaning routine now runs on SA-1 CPU. This should make level loading a few milliseconds faster.
+	- Minor cleanup and rearrangements on the sprite loading routines.
 	- Fixed live exchange not being properly updated on hardware. Patch by LX5.
 	- Fixed sprite loading routine not running on SA-1 CPU during initialization. Now the routine is 100% SA-1 CPU.
 	- Fixed minor grammar error on notable changes and on this document.
