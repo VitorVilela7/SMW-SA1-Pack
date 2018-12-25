@@ -1,10 +1,10 @@
 SA-1 Pack v1.31:
-	- Added support to Lunar Magic 2.60.
+	- Added support to Dynamic levels patch, built-in in Lunar Magic.
 	- Minor cleanup and rearrangements on the sprite loading routines.
 	- Sprite resetting/cleaning routine now runs on SA-1 CPU. This should make level loading a few milliseconds faster.
 	- Fixed live exchange not being properly updated on hardware. Patch by LX5.
-	- Fixed sprite loading routine not running on SA-1 CPU during initilization. Now the routine is 100% SA-1 CPU.
-	- Fixed minor grammar error on notable changes.
+	- Fixed sprite loading routine not running on SA-1 CPU during initialization. Now the routine is 100% SA-1 CPU.
+	- Fixed minor grammar error on notable changes and on this document.
 
 SA-1 Pack v1.30:
 	- Rewrote SMW's IRQ handling system. Now it runs on RAM, gives PPU IRQ priority over SA-1 IRQ, added support for custom IRQ codes.
@@ -45,7 +45,7 @@ SA-1 Pack v1.25:
 	- Fixed SNES NMI and IRQ vectors override not getting written correctly ($220C, $220E). These registers are SA-1 only write and they were being written on SNES CPU side, making real hardware crash. None of the major emulators currently emulate this register properly.
 	- Added a code on RESET routine to put the SA-1 CPU on sleep state before booting and setting up initial variables. The same procedure is done on most commercial games so I decided to include it on SA-1 Pack just to be safe in real hardware.
 	- Added a code for clearing DMA state ($2230) on SA-1 RESET routine.
-	- Made all DMAs invoked by the patch use channel 1 instead of 0. This should make the DMA remap patch work with SA-1 ROMs without requering to modify any of the SA-1 Pack code.
+	- Made all DMAs invoked by the patch use channel 1 instead of 0. This should make the DMA remap patch work with SA-1 ROMs without requiring to modify any of the SA-1 Pack code.
 	- Made DSX (Dynamic Sprites) patch code optional, requested by anonimzwx.
 	- Made some minor grammar fixes.
 
@@ -74,11 +74,11 @@ SA-1 Pack v1.20:
 	- Fixed pos-Bowser's battle.
 	- Fixed fireworks.
 	- Fixed two missing addresses from The Last Remap patch.
-	- Lowercased files lzx.asm, lz2.asm and lz3.asm. It should make SA-1 Pack patchable on case-sensitible OS.
+	- Lowercased files lzx.asm, lz2.asm and lz3.asm. It should make SA-1 Pack patchable on case-sensitive OS.
 	- Restored old and fast MVN code on LZ2/LZ3 patches, but if ZSNES runs the old (slow) code will be used.
 
 SA-1 Pack v1.12:
-	- Fixed a incompability issue with Lunar Magic's Overworld Editor. The ROM crashes if you save
+	- Fixed a incompatibility issue with Lunar Magic's Overworld Editor. The ROM crashes if you save
 	the overworld to your ROM because the LM modifies a specific byte making a JML be JML $7Fxxxx on
 	SA-1 side, freezing the game at black screen.
 
