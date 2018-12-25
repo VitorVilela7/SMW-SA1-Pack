@@ -149,7 +149,7 @@ After expanding, apply sa1.asm to your ROM, using Asar.
 Then feel free to test it with your preferred emulator. If it works properly,
 somewhere in your emulator it should display SA-1, e.g. ROM+RAM+BAT+SA-1 in
 Snes9x. If you're unsure, try editing level 106, change sprite header memory
-to 0x10 and insert 20 koopas in the level. If all of them display correctly,
+to 0x08 and insert 20 naked koopas in the level. If all of them display correctly,
 SA-1 Pack was successfully inserted.
 
 Now you can apply all other patches/tools that should run before Lunar Magic.
@@ -160,18 +160,16 @@ After it, you can finally use Lunar Magic with your ROM. Remember to use at
 least version 2.20+.
 
 To enable the double (22 sprites) system, don't forget to change your sprite
-header memory to 0x10, except in vanilla boss battles, they won't work
+header memory to 0x08, except in vanilla boss battles, they won't work
 correctly because of the new sprite memory system.
+
+**IMPORTANT:** Since version 1.31 the sprite header index for activing the
+22 sprites mode is **0x08** and not 0x10.
 
 Important: If you change the decompression option on Lunar Magic, you must
 reapply sa1.asm to your ROM so the proper *fast* GFX decompression routine is
 used. This is important for fast level decompression and compatibility wit
 advanced resources.
-
-Bowser battles: You must go to level 1C7 and change sprite header to 0x00,
-because the default sprite header (0x10) doesn't work with it and the player
-will get some sprite glitches and stuck after beating the boss (fireworks
-won't work).
 
 F.A.Q
 =====
@@ -188,8 +186,13 @@ F.A.Q
  title screen. What's going on?
 </dt><dd>
  A: Your Lunar Magic version isn't compatible with SA-1 Pack. Please update to
- at least version 2.20.
+ at least version 3.00.
 </dd>
+<dt>
+ Q: I can't insert more than 10 sprites on my ROM, why?
+</dt><dd>
+ A: Please change open the "Change Properties in Sprite Header" dialog and change
+ the sprite memory index to <b>08</b>. 
 <dt>
  Q: After expanding my ROM to 8MB, ZSNES won't open the ROM anymore.
 </dt><dd>
