@@ -3,16 +3,12 @@
 ;; Sprite Cap Increaser, by Arujus
 ;;
 ;; This increases the maximum number of sprites that can be on screen from 12 to 22.
-;; In order for it to be enabled the sprite header setting must be set to 10.
+;; In order for it to be enabled the sprite header setting must be set to 08.
 ;; An enhanced no more sprite tile limits patch is applied automatically with this
 ;; one and is enabled at all times.
 ;;
 ;; This is not compatible with any of the koopa kid bosses or Bowser (when using
-;; sprite header setting of 10).
-;;
-;; **IMPORTANT NOTE**
-;;   you must go to levels 19B & 1C7 (Bowser Battles)
-;;   and change the sprite header setting to 00
+;; sprite header setting of 08).
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 sa1rom
