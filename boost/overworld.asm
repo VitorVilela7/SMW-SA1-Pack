@@ -2,10 +2,10 @@
 namespace overworld
 
 !SwitchBlocks = $418800 ; seems to use 480 bytes.
-			; It's used when [!] blocks gets spread
+			; It's used when the [!] blocks gets launched
 			; on screen after beating a switch palace.
-			; It's same address as wiggler's ram
-			; which obviously is unused on OW.
+			; It's same address as Wiggler segments's RAM
+			; which is unused during the OW game mode.
 
 pushpc
 
@@ -22,36 +22,11 @@ org $048267
 	JSL animations
 	NOP #2
 	
-macro old_code()
-CODE_0494B2:        8D 02 42      STA.W $4202               ; Multiplicand A
-CODE_0494B5:        A5 0C         LDA $0C                   
-CODE_0494B7:        F0 21         BEQ CODE_0494DA           
-CODE_0494B9:        8D 03 42      STA.W $4203               ; Multplier B
-CODE_0494BC:        EA            NOP                       
-CODE_0494BD:        EA            NOP                       
-CODE_0494BE:        EA            NOP                       
-CODE_0494BF:        EA            NOP                       
-CODE_0494C0:        C2 20         REP #$20                  ; Accum (16 bit) 
-CODE_0494C2:        AD 16 42      LDA.W $4216               ; Product/Remainder Result (Low Byte)
-CODE_0494C5:        8D 04 42      STA.W $4204               ; Dividend (Low Byte)
-CODE_0494C8:        E2 20         SEP #$20                  ; Accum (8 bit) 
-CODE_0494CA:        A5 0A         LDA $0A                   
-CODE_0494CC:        8D 06 42      STA.W $4206               ; Divisor B
-CODE_0494CF:        EA            NOP                       
-CODE_0494D0:        EA            NOP                       
-CODE_0494D1:        EA            NOP                       
-CODE_0494D2:        EA            NOP                       
-CODE_0494D3:        EA            NOP                       
-CODE_0494D4:        EA            NOP                       
-CODE_0494D5:        C2 20         REP #$20                  ; Accum (16 bit) 
-CODE_0494D7:        AD 14 42      LDA.W $4214               ; Quotient of Divide Result (Low Byte)
-CODE_0494DA:        C2 20         REP #$20                  ; Accum (16 bit) 
-endmacro
-	
 org $0494B2
 	JML mulfixv2
 	NOP #38
 mulfixv2_back:
+
 warnpc $0494DC
 
 org $048576
@@ -105,28 +80,11 @@ org $04F3C9
 org $04F3CD
 	STA.l !SwitchBlocks+$0000,x
 	
-macro old_code2()
-CODE_0482ED:        9C 04 42      STZ.W $4204               ; Dividend (Low Byte)
-CODE_0482F0:        B4 04         LDY $04,X                 
-CODE_0482F2:        8C 05 42      STY.W $4205               ; Dividend (High-Byte)
-CODE_0482F5:        8D 06 42      STA.W $4206               ; Divisor B
-CODE_0482F8:        EA            NOP                       ; \ 
-CODE_0482F9:        EA            NOP                       ;  | 
-CODE_0482FA:        EA            NOP                       ;  | Wait until division is done
-CODE_0482FB:        EA            NOP                       ;  | 
-CODE_0482FC:        EA            NOP                       ;  | 
-CODE_0482FD:        EA            NOP                       ; / 
-CODE_0482FE:        C2 20         REP #$20                  ; Accum (16 bit) 
-CODE_048300:        AD 14 42      LDA.W $4214               ; Quotient of Divide Result (Low Byte)
-CODE_048303:        4A            LSR                       
-CODE_048304:        4A            LSR                       
-CODE_048305:        E2 20         SEP #$20                  ; Accum (8 bit) 	
-endmacro
-
 org $0482ED
 	JML mulfix2v2
 	NOP #22
 mulfix2v2_back:
+
 warnpc $048307
 
 pullpc
@@ -137,10 +95,9 @@ mulfixv2:
 	XBA				;  |
 	CMP #$37			;  |
 	BNE .snes_code			;  |
-	LDA #$00
-	XBA
+	LDA #$00			;  |
+	XBA				;  |
 	PLA				; /
-	
 	
 	STZ $2250
 	STA $2251
@@ -163,6 +120,7 @@ mulfixv2:
 	LDA $2306
 +	REP #$20
 	JML mulfixv2_back
+	
 .snes_code
 	LDA #$00
 	XBA
@@ -187,13 +145,6 @@ CODE_0494DA:
 	JML mulfixv2_back
 	
 mulfix2v2:
-	PHA				; \ Run SNES code if anything.
-	TSC				;  |
-	XBA				;  |
-	CMP #$37			;  |
-	;BNE .snes_code			;  |
-	; i don't know why i commented out this @ 2017
-	PLA				; /
 	LDY #$01
 	STY $2250
 	TAY
@@ -207,23 +158,10 @@ mulfix2v2:
 	LDY #$00
 	STY $2254
 	NOP
-	BRA $00
+	XBA
 	LDA $2306
 	LSR
 	SEP #$20
-	JML mulfix2v2_back
-	
-.snes_code
-	PLA
-	STZ.W $4204               ; Dividend (Low Byte)
-	LDY $04,X                 
-	STY.W $4205               ; Dividend (High-Byte)
-	STA.W $4206               ; Divisor B
-	NOP #6
-	REP #$20                  ; Accum (16 bit) 
-	LDA.W $4214               ; Quotient of Divide Result (Low Byte)
-	LSR #2
-	SEP #$20                  ; Accum (8 bit) 
 	JML mulfix2v2_back
 
 continue_fix:
@@ -242,7 +180,6 @@ continue_fix:
 .snes
 	LDA $73C9
 	JML $009B80
-	
 	
 blinking_cursor:
 	LDA #$A8
