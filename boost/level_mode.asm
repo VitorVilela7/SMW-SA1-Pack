@@ -23,12 +23,12 @@ org $00C0FB
 pullpc
 
 stripe_help:
+	LDA $5B
+	STA $00
 	TSC
 	AND #$FF00
 	CMP #$3700
 	BEQ .sa1
-	LDA $5B
-	STA $00
 	RTL
 .sa1
 	SEP #$20
