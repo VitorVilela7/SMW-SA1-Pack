@@ -10,7 +10,7 @@ namespace overworld
 pushpc
 
 org $04F590
-	JSL lives_exchange_fix
+	JML lives_exchange_fix
 
 org $04827A
 	JSL continue_fix
@@ -328,7 +328,7 @@ lives_exchange_fix:
 -	LDA $018A
 	BEQ -
 	STZ $018A
-	RTL
+	JML $04F624
 	
 .snes
 	PHB
