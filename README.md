@@ -5,7 +5,7 @@
   \___ \ / /\ \______| |   |  ___/ _` |/ __| |/ /
   ____) / ____ \     | |   | |  | (_| | (__|   <
  |_____/_/    \_\    |_|   |_|   \__,_|\___|_|\_\
-   by Vitor Vilela                 Version 1.31
+   by Vitor Vilela                 Version 1.32
 ```
 
 The SA-1 Pack is a package of patches for activating and optimizing the SA-1
@@ -250,10 +250,12 @@ SA-1 Pack wouldn't be that awesome without help from these people:
 * Ersanio (LZ2 patch)
 * FuSoYa (6-8MB mapping support/idea, LZ3 patch, LM support)
 * Koopster (testing and documentation)
+* LX5 (bug fixes, testing)
 * Lui37 (testing)
 * Min (LZ2 patch)
 * smkdan (LZ2 patches and assistance for fixing VRAM patch)
 * Ripperon-X (testing)
+* Tattletale (bug fixes, testing)
 * Vitor Vilela (that crazy author that did most of the things)
 * You (for using it :D)
 
