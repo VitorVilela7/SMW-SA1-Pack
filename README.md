@@ -5,7 +5,7 @@
   \___ \ / /\ \______| |   |  ___/ _` |/ __| |/ /
   ____) / ____ \     | |   | |  | (_| | (__|   <
  |_____/_/    \_\    |_|   |_|   \__,_|\___|_|\_\
-   by Vitor Vilela                 Version 1.32
+   by Vitor Vilela                 Version 1.33
 ```
 
 The SA-1 Pack is a package of patches for activating and optimizing the SA-1
@@ -139,12 +139,12 @@ resources, it's already doable to pretty much anyone who got a fair experience
 with SMW Hacking to use it.
 
 In order to get started, grab a new clean ROM. Japanese or European versions
-will not work.
+will not work. If you already edited your ROM with Lunar Magic it won't work
+either.
 
-Now, open the ROM in Lunar Magic and expand it to at least 2MB. **Don't** save
-any level nor do any action on the editor.
-
-After expanding, apply sa1.asm to your ROM, using Asar.
+Apply the sa1.asm patxh using [Asar](https://github.com/RPGHacker/asar).
+You don't need to expand your ROM manually, the tool automatically
+does that for you.
 
 Then feel free to test it with your preferred emulator. If it works properly,
 somewhere in your emulator it should display SA-1, e.g. ROM+RAM+BAT+SA-1 in
@@ -156,7 +156,7 @@ Now you can apply all other patches/tools that should run before Lunar Magic.
 Remember that they should have SA-1 compatibility or else they will likely
 corrupt your ROM.
 
-After it, you can finally use Lunar Magic with your ROM. Remember to use at
+After it, you can now use Lunar Magic on your ROM. Remember to use at
 least version 2.20+.
 
 To enable the double (22 sprites) system, don't forget to change your sprite
@@ -164,12 +164,12 @@ header memory to 0x08, except in vanilla boss battles, they won't work
 correctly because of the new sprite memory system.
 
 **IMPORTANT:** Since version 1.31 the sprite header index for activing the
-22 sprites mode is **0x08** and not 0x10.
+22 sprites mode is now **0x08** and not 0x10 as it used to be.
 
-Important: If you change the decompression option on Lunar Magic, you must
+In addition, if you change the **GFX decompression option** on Lunar Magic, you must
 reapply sa1.asm to your ROM so the proper *fast* GFX decompression routine is
-used. This is important for fast level decompression and compatibility wit
-advanced resources.
+used. This is important for fast level decompression and compatibility with
+certain advanced resources.
 
 F.A.Q
 =====
