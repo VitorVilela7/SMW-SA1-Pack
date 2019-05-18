@@ -246,7 +246,7 @@ SA-1 Pack wouldn't be that awesome without help from these people:
 * Adam (testing)
 * Arujus (More Sprites patch)
 * Alcaro (ZSNES detection code)
-* edit1724 (LZ2/3 patches)
+* edit1754 (LZ2/3 patches)
 * Ersanio (LZ2 patch)
 * FuSoYa (6-8MB mapping support/idea, LZ3 patch, LM support)
 * Koopster (testing and documentation)
