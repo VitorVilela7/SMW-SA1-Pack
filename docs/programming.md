@@ -3,22 +3,67 @@
 Programming
 ===========
 
-Unlike the first version of the SA-1 PATCH, this one
-is much more complex because of the various RAM remapping,
-not counting the whole new ROM mapping (SA-1 ROM).
+Contrary to another SA-1 activation patches, SA-1 Pack relies on memory remapping,
+which has the absurd advantage of being able to move most of the game logic routines
+to the SA-1 CPU. It involves though some compatibility problems with ROM hacks that
+weren't prepared for using the SA-1 Pack.
 
-In other words, in order to making anything SA-1
-compatible, you will need to change:
+The main thing you need to do, regardless if you plan to your code run on SA-1 CPU or
+SNES CPU is RAM remapping your defines.
 
-(assuming that XX is in the `$00`-`$3F` or `$80`-`$BF` range
-and YY equals either XX or `$7E`)
+Direct Map addresses:
 
-`$YY:0000`-`$YY:00FF` to `$XX:3000`-`$XX:30FF`.<br/>
-`$YY:0100`-`$YY:1FFF` to `$XX:6100`-`$XX:7FFF`.
+`$7E:0000`-`$7E:00FF` -> `$00:3000`-`$00:30FF`
 
-Note that if you're using 16-bit addressing,
-you should to use `$3000`-`$30FF` and `$6100`-`$7FFF` for that.
-8-bit addresses should work fine since DP is set to `$3000`.
+If you are using `dp` addressing mode, Direct Page is set to $3000 automatically and you
+won't need to change your opcode, with the exception of addresses that use `addr` or `long`
+addressing mode. For example:
+
+LDA $00 -> LDA $00 (nothing changed)
+LDA $0000,y -> LDA $3000,y
+LDA $000000,x -> LDA $003000,x
+
+**Careful to the opcode context!** On the last example if X is 16-bit and it has a value
+like $8000, probably your code is reading ROM instead! On that case, nothing will be changed.
+
+`$7E:0100`-`$7E:1FFF` -> `$40:0100`-`$40:1FFF`
+
+Since the stack is only used by the SNES CPU (the SA-1 CPU has its own), it has been moved to
+`$7E:1FFF`. Therefore `$40:610E`-`$40:61FF` is free to be used.
+
+Banks $40 to $4F has the BW-RAM. BW-RAM is similar to SRAM, but it means "backup and work RAM"
+instead of "static RAM". On the LoROM banks, $0000-$1FFF is a mirror to the WRAM and that can't
+be changed. So for local addresses, the remap will be:
+
+`$0100`-`$1FFF` -> `$6100`-`$7FFF`.
+
+Examples:
+
+If data bank is $00-$3F or $80-$BF (LoROM banks):
+LDA $0100 -> LDA $6100
+
+Otherwise:
+LDA $7E0100 -> LDA $400100
+
+If data bank is $7E, change the data bank to $40 and don't change the opcode.
+
+```asm
+LDA #$7E
+PHA
+PLB
+LDA $0100
+```
+
+->
+
+```asm
+LDA #$40
+PHA
+PLB
+LDA $0100
+```
+
+Additionally, we have the following remaps:
 
 `$7E:C800`-`$7E:FFFF` to `$40:C800`-`$40:FFFF`.<br/>
 `$7F:C800`-`$7E:FFFF` to `$41:C800`-`$41:FFFF`.
@@ -214,7 +259,7 @@ STA $3181				;  |
 LDA.b #Label>>16			;  |
 STA $3182				; /
 LDA #$80				; \ Invoke SA-1
-STA $2100				; /
+STA $2200				; /
 ; Do stuff while SA-1 is executing Label.
 JSR $1E85				; Wait SA-1 if it didn't finished its operation.
 [...]					; *other code*
