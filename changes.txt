@@ -1,3 +1,7 @@
+SA-1 Pack v1.33:
+	- Fixed some inconsistencies on the programming guide.
+	- Minor changes on read me.
+
 SA-1 Pack v1.32:
 	- Fixed an oversight in the Lives Exchanger fix. (LX5)
 	- Fixed a rare bug involving the tile generation routine. (Tattletale)
