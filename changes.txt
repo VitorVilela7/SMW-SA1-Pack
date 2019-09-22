@@ -1,4 +1,5 @@
 SA-1 Pack v1.33:
+	- Added "finish OAM" hook, an extremely useful feature for programmers. See $40:0110-$40:0112 for more details on BW-RAM docs.
 	- Fixed some inconsistencies on the programming guide.
 	- Minor changes on read me.
 

@@ -35,7 +35,11 @@ Start     | End      | Description
 :--------:|:--------:|-------------
 `$40:0000`|`$40:00FF`| Empty. Not cleared. Strongly not recommended to use, because it's the memory region used by Sprite Tool to put additional sprite tables.
 `$40:0100`|`$40:010A`| SMW's`$7E:0100-$7E:010A`.
-`$40:010B`|`$40:01FF`| Empty. Cleared at reset and title screen load. Originally reserved for S-CPU's stack, which stayed at W-RAM and was moved to`$7E:1F00-$7E:1FFF`. **Reserved by SA-1 Pack for future expansion.**
+`$40:010B`|`$40:010C`| Stores current level number on most LevelASM/UberASM patches/tool.
+`$40:010D`|`$40:010F`| Empty. Cleared at reset and title screen load. Originally reserved for S-CPU's stack, which stayed at W-RAM and was moved to`$7E:1F00-$7E:1FFF`. **Reserved by SA-1 Pack for future expansion.**
+`$40:0110`|`$40:0112`| Finish OAM hook. This is a 24-bit pointer to execute custom code before finishing the OAM writing area. This is useful in case you want to take the remaining OAM slots or rearrange it before it's rendered to the screen. This also ensures that no other code will override the OAM table, since it's running on the end of the frame. SA-1 CPU will be used to execute the code. To activate it, store the 24-bit pointer *every frame* on $6110-$6112, since $6110-$6111 is automatically cleared as soon as it executes.
+`$40:0113`|`$40:01FF`| Empty. Cleared at reset and title screen load. Originally reserved for S-CPU's stack, which stayed at W-RAM and was moved to`$7E:1F00-$7E:1FFF`. **Reserved by SA-1 Pack for future expansion.**
+
 `$40:0200`|`$40:1FFF`| SMW's`$7E:0200-$7E:1FFF`.
 ##### Page 1
 Start     | End      | Description

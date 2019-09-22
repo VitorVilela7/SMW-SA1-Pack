@@ -21,6 +21,20 @@ CompressOAM:
 	PHA
 	PLB
 	
+	REP #$20
+	LDA $6110
+	BEQ .return
+	STA $00
+	LDY $6112
+	STY $02
+	STZ $6110
+	SEP #$20
+	PHK
+	PEA.w .return-1
+	JML [$3000]
+.return	
+	SEP #$30
+	
 	LDY #$1E
 -	LDX $8475,Y
 	LDA $6423,X
@@ -51,3 +65,4 @@ CompressOAM:
 	
 	PLB
 	RTL
+	
