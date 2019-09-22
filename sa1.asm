@@ -56,8 +56,14 @@ ORG $8A53					; Hijack ClearStack.
 	NOP #4					; $008A58 - Unused now.
 !c	JML mmc_rom_reset			; $008A5C - Reset Bank Allocation
 
+if read1($0DA691+2) != $7E			; Ensure that bank switching is only written on clean ROMs.
+
 bank_switch:					; \ $00:8A60 - Default bank switch
 	db $80,$81,$82,$83			; / values for Super MMC registers.
+
+endif
+
+org $8A64
 	
 Reset:						; \ Use the "unused" space
 !c	JML SA1_Reset				;  | to store some vectors.
