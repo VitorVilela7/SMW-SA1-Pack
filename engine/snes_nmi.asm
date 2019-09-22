@@ -4,9 +4,9 @@ macro transfer_slot(slot, bytes, shift)
 	LDA.W #$7C00+(<slot>*256)+<shift>	; \ VRAM address + line*slot
 	STA.W $2116				; /
 	LDA.W #(!DSX_BUFFER&65535)+(<slot>*512)+(<shift>*2) ;\ Set Buffer location
-	STA.W $4312				; /
+	STA.W $4322				; /
 	LDA.W #<bytes>				; \ Set bytes to transfer
-	STA.W $4315				; /
+	STA.W $4325				; /
 	STY.W $420B				; Run DMA.
 endmacro
 
@@ -21,10 +21,10 @@ macro cc1_dma_slot(slot)
 						;
 	LDA.W !CCDMA_TABLE+(<slot>*8)+3		; \ Set source of bitmap in BW-RAM.
 	STA $2232				;  | (Both SA-1 and CPU Register.)
-	STA $4312				;  |
+	STA $4322				;  |
 	LDY.W !CCDMA_TABLE+(<slot>*8)+5		;  |
 	STY $2234				;  |
-	STY $4314				; /
+	STY $4324				; /
 						;
 	LDA.W #!CC_BUFFER			; \ Set I-RAM buffer.
 	STA $2235				; / (This is used as buffer in conversion, like the echo buffer.)
@@ -40,11 +40,11 @@ macro cc1_dma_slot(slot)
 	SEI					; /
 						;
 +	LDA.W !CCDMA_TABLE+(<slot>*8)+6		; \ Store size of conversion+transfer
-	STA $4315				; /
+	STA $4325				; /
 	LDA.W !CCDMA_TABLE+(<slot>*8)+1		; \ Store VRAM address.
 	STA $2116				; /
 						;
-	LDY #$02				; \ Run SA-1 AND CPU DMA
+	LDY #$04				; \ Run SA-1 AND CPU DMA
 	STY $420B				; /
 						;
 	DEX					; \ If there are no more remaining,
@@ -60,13 +60,13 @@ macro cc1_dma_slot(slot)
 	LDA.W !CCDMA_TABLE+(<slot>*8)+1		; \ Set VRAM address
 	STA $2116				; /
 	LDA.W !CCDMA_TABLE+(<slot>*8)+3		; \ Set source address
-	STA $4312				;  |
+	STA $4322				;  |
 	LDY.W !CCDMA_TABLE+(<slot>*8)+5		;  |
 	STY $2234				; /
 	LDA.W !CCDMA_TABLE+(<slot>*8)+6		; \ Store size of conversion+transfer
-	STA $4315				; /
+	STA $4325				; /
 						;
-	LDY #$02				; \ Transfer.
+	LDY #$04				; \ Transfer.
 	STY $420B				; /
 						;
 	LDY #$81				; \ Enable again Character Conversion DMA.
@@ -105,7 +105,7 @@ snes_nmi:
 +	TAX					; Put CCDMA slot count into X.
 	REP #$20				; 16-bit A
 	LDA #$1801				; \ Dest: $2118
-	STA $4310				; / Write twice
+	STA $4320				; / Write twice
 	LDY #$81				; \ Tell SA-1 to enable Character Conversion DMA #1
 	STY $2200				; /
 	DEY					; \ Increase $2116/$2117 then writing to $2119
@@ -166,10 +166,10 @@ if !DSX						;
 	LDY #$80				; \ Set up DMA
 	STY $2115				;  |
 	LDA #$1801				;  |
-	STA $4310				; /
+	STA $4320				; /
 	LDY.B #!DSX_BUFFER/65536		; \ Set Transfer Bank
-	STY $4314				; /
-	LDY #$02				; This value is written to $420B
+	STY $4324				; /
+	LDY #$04				; This value is written to $420B
 						;
 	%transfer_slot(0, $0080, $C0)		; \ Transfer Slot 1, line 1.
 	%transfer_slot(1, $0080, $C0)		;  | Transfer Slot 1, line 2.
@@ -183,10 +183,10 @@ if !DSX						;
 	LDY #$80				; \ Set up DMA
 	STY $2115				;  |
 	LDA #$1801				;  |
-	STA $4310				; /
+	STA $4320				; /
 	LDY.B #!DSX_BUFFER/65536		; \ Set Transfer Bank
-	STY $4314				; /
-	LDY #$02				; This value is written to $420B
+	STY $4324				; /
+	LDY #$04				; This value is written to $420B
 						;
 	%transfer_slot(0, $0100, $80)		; \ Transfer Slot 1 & 2, line 1.
 	%transfer_slot(1, $0100, $80)		;  | Transfer Slot 1 & 2, line 2.
@@ -200,10 +200,10 @@ if !DSX						;
 	LDY #$80				; \ Set up DMA
 	STY $2115				;  |
 	LDA #$1801				;  |
-	STA $4310				; /
+	STA $4320				; /
 	LDY.B #!DSX_BUFFER/65536		; \ Set Transfer Bank
-	STY $4314				; /
-	LDY #$02				; This value is written to $420B
+	STY $4324				; /
+	LDY #$04				; This value is written to $420B
 						;
 	%transfer_slot(0, $0180, $40)		; \ Transfer Slot 1, 2 & 3, line 1.
 	%transfer_slot(1, $0180, $40)		;  | Transfer Slot 1, 2 & 3, line 2.
@@ -219,14 +219,14 @@ if !DSX						;
 	LDY #$80				; \ Set up DMA
 	STY $2115				;  |
 	LDA #$1801				;  |
-	STA $4310				; /
+	STA $4320				; /
 	LDA.W #!DSX_BUFFER&65535		; \ Set DMA source
-	STA $4312				;  |
+	STA $4322				;  |
 	LDY.B #!DSX_BUFFER/65536		;  |
-	STY $4314				; /
+	STY $4324				; /
 	LDA #$0800				; \ Set Length of transfer.
-	STA $4315				; /
-	LDY #$02				; \ Run DMA
+	STA $4325				; /
+	LDY #$04				; \ Run DMA
 	STY $420B				; /
 						;
 	JML $008172				; Return to NMI.
