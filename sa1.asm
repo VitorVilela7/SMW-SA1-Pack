@@ -31,6 +31,7 @@ incsrc "remap/dp.asm"				; Remaps $7E:0000-$7E:00FF
 incsrc "remap/addr.asm"				; Remaps $7E:0100-$7E:1FFF
 incsrc "remap/sram.asm"				; Remaps SRAM
 incsrc "remap/map16.asm"			; Remaps Map16
+incsrc "remap/dma.asm"				; Remaps DMA channels*
 
 org $FFFC					; \ Change Reset Vector.
 	dw Reset2				; /
