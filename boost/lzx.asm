@@ -90,9 +90,13 @@ CodeStart:
 	STX $4315
 	LDA #$02
 -	STA $420B
+	LDX $4310
+	CPX #$8000
+	BNE +
 	LDX $4315
 	BNE -
-	
++
+
 	PLB
 	SEP #$30
 	RTL
