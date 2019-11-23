@@ -125,11 +125,6 @@ NetDoorFix:
         RTL
 
 PickOAMSlot:
-	JSL FlushOAM
-	LDA #$40	; rekt
-	STA !sprite_oam_index,x
-	RTL
-
 		;LDA $7692		; \  if sprite header
 		;CMP #$10		;  | setting is not 10,
 		;BNE .default		; /  use the old code
