@@ -54,8 +54,32 @@ oam_clear_invoke:
 	RTL
 .end
 
+macro store()
+	STA.B !x
+	!x #= !x+2
+endmacro
+
+macro test_and_reset()
+	TRB.B !x
+	!x #= !x+2
+endmacro
+
 oam_clear:
-	REP #$10
+	REP #$30
+	; clear OAM attribute table
+	; $0420 - $049F
+	LDA #$6400
+	TCD
+	
+	!x = $20
+	LDA #$F0F0
+	rep 64 : %store()
+	
+	LDA #$0000
+	TCD
+	
+	SEP #$20
+	
 	LDA #$F0
 	LDX #$0000
 -	STA $6201,X
@@ -83,6 +107,22 @@ oam_compress:
 	PEA.w .return-1
 	JML [$3000]
 .return	
+	SEP #$30
+	
+	REP #$30
+	
+	; remove all bits from OAM attribute table.
+	; $0420 - $049F
+	LDA #$6400
+	TCD
+	
+	!x = $20
+	LDA #$FCFC
+	rep 64 : %test_and_reset()
+	
+	LDA #$0000
+	TCD
+	
 	SEP #$30
 	
 	LDY #$1E
