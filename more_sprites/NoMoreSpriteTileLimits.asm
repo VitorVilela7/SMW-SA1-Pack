@@ -126,33 +126,28 @@ NetDoorFix:
         RTL
 
 PickOAMSlot:
-		;LDA $7692		; \  if sprite header
-		;CMP #$10		;  | setting is not 10,
-		;BNE .default		; /  use the old code
-.notLastSpr	LDA !sprite_status,x		; \ it's not necessary to get an index
-		BEQ .return		; / if this sprite doesn't exist
-		LDA !sprite_num,x		; \  give yoshi
-		CMP #$35		;  | the first
-		BEQ .yoshi		; /  two tiles
-		BRA SearchAlgorithm	; search for a slot
-.foundSlot	PLD
-		STA !sprite_oam_index,x		; set the index
-.return		RTL			
+	LDA !sprite_status,x		; \ it's not necessary to get an index
+	BEQ .return			; / if this sprite doesn't exist
+	
+	LDA #$28
+	STA !sprite_oam_index,x
+	JML oam_flush_std_sprite
+	;LDA !sprite_num,x		; \  give yoshi
+	;CMP #$35			;  | the first
+	;BEQ .yoshi			; /  two tiles
+	
+	;BRA SearchAlgorithm		; search for a slot
+	
+.foundSlot
+	PLD
+	STA !sprite_oam_index,x		; set the index
+.return
+	RTL			
 
-.yoshi		LDA #$28		; \ Yoshi always gets
-		STA !sprite_oam_index,x		; / first 2 tiles (28,2C)
-		RTL
-
-.default	PHX			; \
-		TXA			;  | for when not using
-		LDX $7692		;  | custom OAM pointer
-		CLC			;  | routine, this is
-		ADC $07F0B4,x		;  | the original SMW
-		TAX			;  | code.
-		LDA $07F000,x		;  |
-		PLX			;  |
-		STA !sprite_oam_index,x		; /
-		RTL
+.yoshi
+	LDA #$28			; \ Yoshi always gets
+	STA !sprite_oam_index,x		; / first 2 tiles (28,2C)
+	RTL
         
 SearchAlgorithm:
 	PHD
