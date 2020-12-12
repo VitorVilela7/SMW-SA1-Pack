@@ -1,41 +1,58 @@
-; Use channel 0 for windowing HDMA.
+; DMA remap v3.0 by Vitor Vilela, based on wiiqwertyuiop's DMA remap
+
+; ch 0 -> reserved for logic DMA
+; ch 1 -> windowing HDMA
+; ch 2 -> reserved for blanking DMA
+; ch 3 to 7 -> HDMA channels
+
+; recommended to use early channels for H-blanking sensitive DMAs
+; and latter channels for other cases.
+
+; Use channel 1 for windowing HDMA.
+!window_hdma_channel 		= 1
+
+!window_hdma_offset			= (!window_hdma_channel<<4)
+!window_hdma_enable_bit		= (1<<(!window_hdma_channel))
+
+print hex(!window_hdma_offset)
+print hex(!window_hdma_enable_bit)
 
 org $0092D7
-STA $4300,x
+STA.w $4300|!window_hdma_offset,x
 
 org $0092E5
-STA $4307
+STA.w $4307|!window_hdma_offset
 
 org $009255
-STA $4300,x
+STA.w $4300|!window_hdma_offset,x
 
 org $00925D
-STA $4307
+STA.w $4307|!window_hdma_offset
 
 org $0092E8
-LDA #$61 ; use channels 5, 6 and 0 for credits!
+LDA.b #$60|!window_hdma_enable_bit ; use channels 5, 6 and 1 for credits!
 
 org $05B294
-LDA #$01
+LDA.b #$00|!window_hdma_enable_bit
 
 org $00CB0A
-LDA #$01
+LDA.b #$00|!window_hdma_enable_bit
 
 org $03C50F
-LDA #$01
+LDA.b #$00|!window_hdma_enable_bit
 
 org $04DB97
-LDA #$01
+LDA.b #$00|!window_hdma_enable_bit
 
 org $0CAB96
-LDA #$01
+LDA.b #$00|!window_hdma_enable_bit
 
 org $0092A0
-LDA #$01
+LDA.b #$00|!window_hdma_enable_bit
 
 ; NMI-DMA goes to channel 2.
 
-; Loading logic DMA does not matter if it goes to channel 1 or 2,
+; Logic DMA does not matter if it goes to channel 0 or 2,
 ; as long interrupts are disabled.
 
 org $008449
