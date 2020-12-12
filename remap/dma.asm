@@ -9,13 +9,12 @@
 ; and latter channels for other cases.
 
 ; Use channel 1 for windowing HDMA.
-!window_hdma_channel 		= 1
+!window_hdma_channel        = 1
 
-!window_hdma_offset			= (!window_hdma_channel<<4)
-!window_hdma_enable_bit		= (1<<(!window_hdma_channel))
+!window_hdma_offset         = (!window_hdma_channel<<4)
+!window_hdma_enable_bit     = (1<<(!window_hdma_channel))
 
-print hex(!window_hdma_offset)
-print hex(!window_hdma_enable_bit)
+if read1($0C958C+1) == $13
 
 org $0092D7
 STA.w $4300|!window_hdma_offset,x
@@ -29,8 +28,9 @@ STA.w $4300|!window_hdma_offset,x
 org $00925D
 STA.w $4307|!window_hdma_offset
 
+; This will use HDMA channels 1, 5 and 6 for credits.
 org $0092E8
-LDA.b #$60|!window_hdma_enable_bit ; use channels 5, 6 and 1 for credits!
+LDA.b #$60|!window_hdma_enable_bit
 
 org $05B294
 LDA.b #$00|!window_hdma_enable_bit
@@ -543,3 +543,4 @@ org $04D767
 STA $4323               
 
 
+endif
