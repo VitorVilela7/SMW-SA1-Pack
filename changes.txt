@@ -1,6 +1,7 @@
 SA-1 Pack v1.35:
 	- Added the "finish OAM" hook, an extremely useful feature for programmers. See $40:0110-$40:0112 for more details on BW-RAM docs.
 	- Added DMA remap which moves all game DMA logic to channel 2 and Windowing HDMA to channel 1, freeing up channel 7 for custom HDMA. In addition, DMA channel 0 is now reserved for transfers during game play (outside interrupts), fixing a rare bug on the LZ2/LZ3 decompressor when you decompress a GFX file while the game is running and *just* when the DMA executes, a NMI occurs and the DMA settings end up reseted. For the effectiveness of this solution, please change all patches to use DMA channel 2 instead of 0 or 1. This fixes issue #14 on GitHub.
+	- Made all levels by default use Sprite Memory Header 0x08, allowing to all original levels have up to 22 sprites on screen. Note that I have included some logic to not take in account boss fight levels and levels that has wigglers (Forest of Illusion and Outrageous), since they are not compatible with.
 	- Fixed bank switching getting incorrectly reset to original values after reapplying SA-1 Pack, which makes ROMs larger than 4 MB completely unplayable. This fixes issue #15 on GitHub
 	- Fixed an issue where the Layer 3 tilemap would glitch if a custom game over screen was used. Caused by a remap error. Thanks MFG for figuring out and providing the fix. Merges pull request #18 on GitHub.
 	- Fixed some inconsistencies on the programming guide.
