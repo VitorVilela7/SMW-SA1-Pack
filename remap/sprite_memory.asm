@@ -6,14 +6,12 @@ macro remap_memory()
     !spr_mask = !spr_bit&$E0
     !spr_mem = !spr_bit&$1F
     
-    ;if !spr_mem != 0 && !spr_mem != $0E
-    ;print "Level ",hex(!count)," Config ",hex(!spr_bit), " Mem ",hex(!spr_mem)
-    ;endif
+    !level_mode #= read1(read3(!count*3+$05E000)+1)&$1F
     
     ; Sprite memory $12 and $10 is used on bosses battles and cannot be changed due of hardcoded-specific code.
     ; Sprite memory $0A is used on wigglers and cannot be changed to avoid memory corruption.
     
-    if !spr_mem != $12 && !spr_mem != $10 && !spr_mem != $0A
+    if !spr_mem != $12 && !spr_mem != $10 && !spr_mem != $0A && !level_mode != $10 && !level_mode != $0B && !level_mode != $09
         org !ptr
             db !spr_mask|$08
     ; else
