@@ -11,7 +11,7 @@ macro remap_memory()
     ; Sprite memory $12 and $10 is used on bosses battles and cannot be changed due of hardcoded-specific code.
     ; Sprite memory $0A is used on wigglers and cannot be changed to avoid memory corruption.
     
-    if !spr_mem != $12 && !spr_mem != $10 && !spr_mem != $0A && !level_mode != $10 && !level_mode != $0B && !level_mode != $09
+    if !spr_mem != $12 && !spr_mem != $10 && !spr_mem != $0A && !level_mode != $10 && !level_mode != $0B && !level_mode != $09 && !count != 0 && !count != $0100
         org !ptr
             db !spr_mask|$08
     ; else

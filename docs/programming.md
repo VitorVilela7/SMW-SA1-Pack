@@ -8,6 +8,8 @@ which has the absurd advantage of being able to move most of the game logic rout
 to the SA-1 CPU. It involves though some compatibility problems with ROM hacks that
 weren't prepared for using the SA-1 Pack.
 
+## Memory remap
+
 The main thing you need to do, regardless if you plan to your code run on SA-1 CPU or
 SNES CPU is RAM remapping your defines.
 
@@ -24,7 +26,8 @@ LDA $0000,y -> LDA $3000,y
 LDA $000000,x -> LDA $003000,x
 
 **Careful to the opcode context!** On the last example if X is 16-bit and it has a value
-like $8000, probably your code is reading ROM instead! On that case, nothing will be changed.
+like $8000, probably your code is reading ROM instead! On that case, nothing should be
+changed at all.
 
 `$7E:0100`-`$7E:1FFF` -> `$40:0100`-`$40:1FFF`
 
@@ -84,6 +87,8 @@ located in docs folder. It also contains information about
 the remapped sprite tables, which will likely cause problem
 if you don't use a special remapping for them.
 
+## The SA-1 memory map
+
 Now, knowing all the SRAM/RAM mapping changes, you may
 ask: what is the data at `$40:0000`-`$41:FFFF`
 and `$XX:3000`+ for?
@@ -91,6 +96,8 @@ and `$XX:3000`+ for?
 When you activate SA-1, two types of RAM are added
 and one is deleted. In other words, I-RAM and BW-RAM
 are added while SRAM is deleted.
+
+### I-RAM
 
 I-RAM is SA-1 Internal RAM, which is why it's called I-RAM.
 The I-RAM runs at 10.74 MHz with no delay and is the
@@ -113,11 +120,13 @@ various purposes.
 `$3700`-`$377F` is the Character Conversion DMA buffer.<br/>
 `$3780`-`$37FF` is the SA-1 stack.
 
-A detailed I-RAM map is included on docs\I-RAM.txt
+A detailed I-RAM map is available [here](I-RAM.md).
 
 I-RAM is recommended to be used for RAM codes or as a place
 for storing data which is accessed many times, since it'll
 be accessed much faster than other type of RAM.
+
+### BW-RAM
 
 BW-RAM is SA-1's SRAM. As simple as that. But unlike the
 SRAM (which means Static or Saveable RAM), BW-RAM means
@@ -137,10 +146,12 @@ This patch always uses the maximum BW-RAM size possible
 banks (e.g `$42` and `$40`, `$43` and `$41`, etc).
 
 I remapped most RAM on SMW to BW-RAM and the SRAM of course.
-For more details, check docs\BW-RAM.txt
+For more details, check [this](BW-RAM.md).
 
 Of course, if the BW-RAM is at bank `$40`+ now, where has the
 ROM been moved to?
+
+### ROM
 
 The ROM map changed in rather complex way. Look:
 
@@ -207,12 +218,14 @@ CustomCode: ;*put code here*;
 
 However freecode/freedata will not work with Asar when you are
 accessing the 4MB+ area, atleast until Alcaro adds "bigsa1rom"
-to Asar (if he hasn't implemented it already).
+to Asar (if it wasn't implemented it already).
 
------------------------------------------------------
+## Using the SA-1 CPU
 
 Now that you know how the memory (ROM/RAM) works,
 you may ask: How can I invoke SA-1?
+
+### Invoking SA-1
 
 Going into SA-1 mode is really easy.
 Store the 24-bit address to jump to into `$3180`-`$3182` and
@@ -249,6 +262,8 @@ STA $3182 				; /
 JSR $1E80				; Invoke SA-1
 ```
 
+### Simple paralellism
+
 You can do multi-threaded operation too:
 
 ```asm
@@ -280,6 +295,8 @@ it at 5.37 MHz, decreasing processing speed.
 To make sure that SA-1 will run at full speed, place the code
 in WRAM and run it from there instead.
 
+### SA-1 memory access caveats
+
 When you switch to SA-1 side, the system works a bit differently:
 
  - You can't access the PPU and CPU registers,
@@ -304,6 +321,8 @@ are much faster than the SNES ones. But you can't DMA to VRAM or
 any other PPU register, since while on SA-1 side, you can only access
 the cart contents (ROM, BW-RAM, I-RAM and SA-1 Registers).
 
+### Multiplication on SA-1 CPU
+
 To execute a multiplication, do this:
 
 ```asm
@@ -326,6 +345,8 @@ BRA $00 				; /
 ; which is ~62% of a NOP in SNES!
 ```
 
+### Division on SA-1 CPU
+
 To execute a division, do this:
 
 ```asm
@@ -345,6 +366,42 @@ BRA $00 				; /
 ; and the remainder from $2308 & $2309
 ```
 
+### CPU context
+SA-1 Pack already uses the SA-1 CPU extensively and enables it on certain
+portions.
+
+When coding and using some CPU specific operations like SNES registers or
+SA-1 multiplication, you should be aware if you are executing on the correct
+CPU. Sometimes your code will already be running on the SA-1 CPU or vice-versa.
+
+SA-1 Pack sets the processor to SA-1 on the following situations:
+- sprite main and init codes;
+- generators;
+- shooters;
+- sprite level loading;
+- most of the layer level loading;
+- player physics;
+- status bar;
+- blocks;
+- misc. sprites: cluster, run-once, extended, minor, etc.;
+- pretty much the entire overworld; and
+- windowing effects.
+
+SA-1 Pack DOES NOT set the processor to SA-1:
+- levelASM/uberASM code points: init, main, load, nmi, global code, etc.;
+- nmi
+- message boxes;
+- anything stripe image related; and
+- animations;
+
+Note: not all of the information is accurate. It's always good to test the
+processor when you are developing and are not sure which processor runs there.
+
+You can do that by checking if the stack pointer high byte is greater or equal #$37.
+If you found any mistake, please let me know and I'll correct this document.
+
+### Process flow
+
 Other enhancement chips may work like a slave, because the
 SNES sends a command to the chip, which then sends back the
 result. But with SA-1 is different story, since both chips
@@ -356,6 +413,8 @@ from SNES side, then come back with the value. Example: SA-1 wants to
 read from an APU port, but it can't access it. To make it accessible,
 call the the SNES so you can read from the APU port and then send
 the value to SA-1. See below:
+
+#### Invoking the SNES from SA-1 CPU
 
 ```asm
 LDA.B #.SNES				; \ Put the SNES pointer to run
@@ -389,8 +448,10 @@ RTL					; Return.
 ```
 
 Using said method you can get rid of almost all SA-1
-limitations, but remember that the SNES's speed is 2 MHz,
+limitations, but remember that the SNES's core speed is 2.68 MHz,
 so if you call it too many times, you may waste some time.
+
+## Using the Parallel Mode
 
 Additionally, there's a special mode called Parallel/Background Mode.
 It runs a certain code periodically while the SA-1 CPU is idle.
@@ -492,6 +553,8 @@ performance to explore while SA-1 CPU is not doing anything. And when
 SNES is idle (i.e. finished processing a game frame), the code is
 executed normally at 10.74 MHz.
 
+## SA-1 DMA
+
 There are a bunch of other useful features too, such as bit stream
 and fast DMA which are only available while on SA-1 side.
 
@@ -530,6 +593,8 @@ STX $2230				; Disable SA-1 DMA
 
 SEP #$20 				; 8-bit Accum
 ```
+
+## Variable Length Processing
 
 Although I only used the Variable Length Bit Processing (bit stream)
 feature once, here is an example how to use it (In Fixed Mode):
@@ -614,6 +679,8 @@ WARNING: bsnes 0.7x appears to have a bug with the bit stream, as the bank
 switching doesn't work while using the Variable Length Bit feature,
 thus making it impossible to access the 5-8MB area. Be careful!
 
+## Virtual BW-RAM
+
 Now, there's still one feature that I haven't explained yet, so it's time to
 explain it, I guess. I said earlier that SA-1 can access banks `$60`-`$6F`,
 aka the "Virtual" BW-RAM, right?
@@ -666,6 +733,8 @@ but with `$60:0000`-`$60:0003` and using 2 bits from each address.
 Of course, making use of this VRAM will speed up the process of storing
 a few bits to a RAM address, but why would we use this?
 For the one and only reason: Character Conversion DMA.
+
+## Character Conversion DMA
 
 But what is Character Conversion DMA?
 You know, some games managed to use get some pretty nice effects such as rotating, scaling...
