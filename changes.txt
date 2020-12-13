@@ -1,3 +1,7 @@
+SA-1 Pack v1.36:
+	- Fixed a visual glitch in the bonus game, where one of the boxes (and its item) is floating on screen, a bit higher than the ground and scrolling vertically. Thanks goes to RaspberryAlpine for finding out this.
+	- Updated programming guide to include details about common routines on SMW and on which processor SA-1 Pack uses (either SNES or SA-1). Also organized the documentation a bit.
+
 SA-1 Pack v1.35:
 	- Added the "finish OAM" hook, an extremely useful feature for programmers. See $40:0110-$40:0112 for more details on BW-RAM docs.
 	- Added DMA remap which moves all game DMA logic to channel 2 and Windowing HDMA to channel 1, freeing up channel 7 for custom HDMA. In addition, DMA channel 0 is now reserved for transfers during game play (outside interrupts), fixing a rare bug on the LZ2/LZ3 decompressor when you decompress a GFX file while the game is running and *just* when the DMA executes, a NMI occurs and the DMA settings end up reseted. For the effectiveness of this solution, please change all patches to use DMA channel 2 instead of 0 or 1. This fixes issue #14 on GitHub.
