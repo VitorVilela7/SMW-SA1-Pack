@@ -2,9 +2,16 @@
 ; DP Remapper
 ; Changes all $00-$FF to $3000-$30FF.
 
+if read1($00977C) == $9D
+
+org $00977C
+    STZ $3006,X
+
+endif
+
 if read1($05C42A) != $30
 
-ORG $05C428
+org $05C428
 	LDY $309D
 
 endif
@@ -66,7 +73,7 @@ ORG $0CAE21
 ORG $0CAE26
 	STA $3002
 org $00977C
-	STA $3006,X
+	STZ $3006,X
 org $05C393
 	STA $3045,X
 org $05C399
