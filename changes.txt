@@ -1,5 +1,6 @@
 SA-1 Pack v1.36:
 	- Fixed a visual glitch in the bonus game, where one of the boxes (and its item) is floating on screen, a bit higher than the ground and scrolling vertically. Thanks goes to RaspberryAlpine for finding out this.
+	- Made the DMA transfer on the LZ2/LZ3 decompression retry if it gets interrupted. Although NMI/IRQ does not interrupt DMA, HDMAs can actually will DMA get interrupted. Thanks goes to p4plus2 for revealing that detail for me.
 	- Updated programming guide to include details about common routines on SMW and on which processor SA-1 Pack uses (either SNES or SA-1). Also organized the documentation a bit.
 
 SA-1 Pack v1.35:
