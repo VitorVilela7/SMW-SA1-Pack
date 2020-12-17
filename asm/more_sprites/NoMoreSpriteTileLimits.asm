@@ -8,23 +8,6 @@
 header
 sa1rom
 
-!foundSlot = PickOAMSlot_foundSlot
-
-macro speedup(offset)
-	CMP.b $FD+<offset>	; get Y position of PREVIOUS tile in OAM
-	BEQ ?notFound		; \  if last isn't free
-	LDA.b #<offset>		;  | (and this is), then
-	JMP !foundSlot		; /  this is the index
-?notFound:
-endmacro
-
-macro bulkSpeedup(arg)
-	%speedup(<arg>+12)
-	%speedup(<arg>+8)
-	%speedup(<arg>+4)
-	%speedup(<arg>)
-endmacro
-
 org $0180D2
 
 SpriteOAMHook:            
@@ -102,109 +85,52 @@ org $02DB82
 freecode
 
 HammerBroFix:
-        LDA !sprite_x_high,x
-        STA !sprite_x_high,y
-        LDA !sprite_oam_index,x
-        CLC
-        ADC #$10        ; Add #$10 because the platform wrote 4 tiles (#$10 bytes) to OAM.
-        STA !sprite_oam_index,y
-        RTL
+    LDA !sprite_x_high,x
+    STA !sprite_x_high,y
+    
+    ; Add #$10 because the platform wrote 4 tiles (#$10 bytes) to OAM.
+    LDA !sprite_oam_index,x
+    CLC
+    ADC #$10
+    STA !sprite_oam_index,y
+    RTL
 
 FishingLineFix:
-        LDA !sprite_oam_index,x
-        CLC
-        ADC #$08
-        STA !sprite_oam_index,x
-        RTL
+    LDA !sprite_oam_index,x
+    CLC
+    ADC #$08
+    STA !sprite_oam_index,x
+    RTL
 
 NetDoorFix:
-        LDA !sprite_oam_index,x
-        LSR
-        LSR
-        STA $0F
-        LDA !sprite_oam_index,x
-        RTL
+    LDA !sprite_oam_index,x
+    LSR
+    LSR
+    STA $0F
+    
+    LDA !sprite_oam_index,x
+    RTL
 
 PickOAMSlot:
-	LDA !sprite_status,x		; \ it's not necessary to get an index
-	BEQ .return			; / if this sprite doesn't exist
+    ; It's not necessary to get an index if the sprite doesn't exist.
+    LDA !sprite_status,x
+    BEQ .return
 	
-	LDA #$28
-	STA !sprite_oam_index,x
-	JML oam_flush_std_sprite
-	;LDA !sprite_num,x		; \  give yoshi
-	;CMP #$35			;  | the first
-	;BEQ .yoshi			; /  two tiles
-	
-	;BRA SearchAlgorithm		; search for a slot
-	
-.foundSlot
-	PLD
-	STA !sprite_oam_index,x		; set the index
-.return
-	RTL			
+    LDA !sprite_num,x
+    CMP #$35
+    BEQ .yoshi
+    
+    LDA #$38
+    STA !sprite_oam_index,x
+    JML oam_flush_std_sprite
 
 .yoshi
-	LDA #$28			; \ Yoshi always gets
-	STA !sprite_oam_index,x		; / first 2 tiles (28,2C)
-	RTL
-        
-SearchAlgorithm:
-	PHD
-	PEA $6300
-	PLD
-	
-        LDA $73F9
-        BEQ .DontJump
-        JMP .BehindScenery
-	
-.DontJump
-        LDA $6D9B
-        CMP #$80
-        BNE .DontJump2
-        JMP .IggyLarryBowser
-        ; $F8 and $FC reserved for lakitu's cloud
-	
-.DontJump2
-        CMP #$C1
-        BNE .DontJump3
-        JMP .IggyLarryBowser
-.DontJump3
-	LDA #$F0
-	%speedup($F4)
-	%speedup($F0)
-	%bulkSpeedup($E0)	;  | pre-defined
-	%bulkSpeedup($D0)	;  | macros with
-	
-.BehindScenery
-	LDA #$F0
-	%bulkSpeedup($C0)
-	%bulkSpeedup($B0)	;  | code for each
-	
-.IggyLarryBowser
-	LDA #$F0
-	%bulkSpeedup($A0)	; \ individual
-	%bulkSpeedup($90)	;  | slot check
-	%bulkSpeedup($80)	;  |
-	%bulkSpeedup($70)	;  |
-	%bulkSpeedup($60)	;  |
-	%bulkSpeedup($50)	;  |
-	%bulkSpeedup($40)	;  |
-	%speedup($3C)		; /
-	
-	LDA.w $78E2		; \ Yoshi?
-	BRA .yoshiExists	; /
-	
-	; $30 and $34 are reserved for lakitu's cloud
-	LDA #$F0		; \ checks
-	%speedup($2C)		; /
-	LDA.b #$28		; \ if none of the above yield which slot
-	JMP !foundSlot		; / then use the slot at the beginning
+    ; Yoshi will get a hardcoded slot because the game likes
+    ; redrawing him multiple times.
+    LDA #$28
+    STA !sprite_oam_index,x
+    JML oam_flush_std_sprite
+    
+.return
+    RTL
 
-; If none of the above yield which slot, then use the slot at the beginning (after Yoshi). Normally we would be able to use slot $30 as a minimum but
-; unfortunately smw has a bug where sometimes Yoshi can be rendered twice on one frame, in which the 2nd rendering uses slot $2C and $30 instead of
-; $28 and $2C, this will cause whatever other sprite is using slot $30 to flicker which isn't good, so don't use slot $30.
-
-.yoshiExists
-	LDA.b #$38
-	JMP !foundSlot
