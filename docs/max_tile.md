@@ -7,6 +7,22 @@ MaxTile is a new feature developed for SA-1 Pack v1.40 designed to effectively u
 - Provides four preconfigured OAM tables for different priorities;
 - Leaves the standard OAM table untouched till the end of the frame;
 
+## The priority structures
+
+MaxTile provides four different priorities, from order #0 to #3, where #0 is the highest priority (appears in front of all other OAM tiles) and #3 is the lowest priority (appears behind all OAM tiles).
+
+When assembled, the OAM table ($0200-$03FF) will be built in the following order:
+
+* MaxTile buffer #0
+* OAM table $0200-$02FF
+* MaxTile buffer #1
+* OAM table $0300-$0327
+* MaxTile buffer #2
+* OAM table $0328-$03FF
+* MaxTile buffer #3
+
+(note: scheme not final, benchmarks required)
+
 ## Memory map
 
 | BW-RAM address | VBW-RAM mirror | Size      | Description              |
