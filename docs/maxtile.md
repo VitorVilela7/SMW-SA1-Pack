@@ -4,8 +4,8 @@ MaxTile
 MaxTile is a new feature developed for SA-1 Pack v1.40 designed to effectively use all available OAM slots on Super Mario World regardless of the sprite type or game mode and keeping the maximum possible compatibility with the vanilla sprites and custom sprites designed before the system.
 
 ## Features
-- Provides four preconfigured OAM tables for different priorities;
-- Leaves the standard OAM table untouched till the end of the frame;
+* Provides four preconfigured OAM tables for different priorities;
+* Leaves the standard OAM table untouched till the end of the frame (with exceptions of regular sprites);
 
 ## The priority structures
 
@@ -25,7 +25,11 @@ When assembled, the OAM table ($0200-$03FF) will be built in the following order
 
 They are copied to $0200-$03FF backwards, the copy will go to $03FC, then $03F8, $03F4, etc.
 
-### SMW and NMSTL compatibility
+> :warning: **IMPORTANT**
+> * Although the four buffers combined allows up to 512 sprite tiles, the SNES PPU has the limit of 128 sprite tiles. If MaxTile notices that the 128 tile limit was exceeded, it will stop copying further tiles.
+> * Even if the buffer copy order is reversed (buffer #3 is copied to end of OAM table then buffer #2, buffer #1 and buffer #0), earlier buffers will always have priority over latter buffers. MaxTile always calculates how many tiles each buffer has before copying the lowest priority and will **always** priorize buffers with higher priority.
+
+## SMW and NMSTL compatibility
 
 Of course if nobody uses the MaxTile API directly, no tile from the original game nor from old sprites will ever appear because the buffers are completely empty. Because of that, MaxTile will automatically move OAM tiles from $0200-$03FF to the MaxTile buffers though the frame to keep compatibility with all existing resources. The copy works as the following:
 
@@ -53,16 +57,16 @@ In practice, we end up with the following priorities (from highest to lowest):
 4. $0300-$032C (player and yoshi)
 5. maxtile buffer #2
 6. $0338-$03FC (each regular sprite previously pushed to buffer #3)
-7. maxtile buffer #3 (appears behind everything, as long you draw before the first sprite)
+7. maxtile buffer #3 (appears behind everything, as long you draw before the first regular sprite)
 
-**IMPORTANT**
-* Above configuration is only valid for regular levels.
-* Like NMSTL, Yoshi is hardcoded to slot $0328 and therefore will stay in front of all sprites. Original game yoshi normally stays *behind* other sprites.
-* NMSTL makes sprites with lower table index has higher priority than sprites with higher table index. MaxTile restores the original game behavior of lower table indexed sprites having lower priority, with the exception of Yoshi.
-* Tiles $0330 and $0334 are discarded (duplicate yoshi tiles)
-* You must draw to buffer #3 before *any* regular sprite if you wanna make it stay behind everything (UberASM main label is the best choice)
-* If the player is behind scenery, $03D0-$03F4 is only flushed to buffer #3 at the end of the frame.
-* Sprites that doesn't use MaxTile are limited to slots $0338-$03F8
+> :warning: **IMPORTANT**
+> * Above configuration is only valid for regular levels.
+> * Like NMSTL, Yoshi is hardcoded to slot $0328 and therefore will stay in front of all sprites. Original game yoshi normally stays *behind* other sprites.
+> * NMSTL makes sprites with lower table index has higher priority than sprites with higher table index. MaxTile restores the original game behavior of lower table indexed sprites having lower priority, with the exception of Yoshi.
+> * Tiles $0330 and $0334 are discarded (duplicate yoshi tiles)
+> * You must draw to buffer #3 before *any* regular sprite if you wanna make it stay behind everything (UberASM main label is the best choice)
+> * If the player is behind scenery, $03D0-$03F4 is only flushed to buffer #3 at the end of the frame.
+> * Sprites that doesn't use MaxTile are limited to slots $0338-$03F8
 
 ## Memory map
 
