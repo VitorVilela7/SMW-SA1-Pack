@@ -37,18 +37,21 @@ Of course if nobody uses the MaxTile API directly, no tile from the original gam
 2. $0200-$03FF is cleared;
 3. every time a sprite is executed NMSTL will select slot #$38;
 4. before leaving, NMSTL calls a MaxTile routine that flushes the used OAM slots from range $0338-$03F8 to buffer #3;
-5. if the player is behind scenery, MaxTile will flush slots $0338-$03CC, otherwise $0338-$03F8;
-6. do the same procedure for every regular sprite;
-7. at the end of the frame, copy $0200-$02FC to maxtile buffer #1 ($0200 >> B#1);
-8. then copy $0300-$032C to maxtile buffer #2 ($0300 >> B#2);
-9. then copy $03F8-$03FC to maxtile buffer #3 ($03F8 >> B#3);
-10. then copy $0338-$03F4 at once to maxtile buffer #3 ($0338 >> $03F8 >> B#3);
-11. copy maxtile buffer #3 to OAM table ($0338 >> $03F8 >> B#3);
-12. copy maxtile buffer #2 to OAM table ($0300 >> B#2 >> $0338 >> $03F8 >> B#3);
-13. copy maxtile buffer #1 to OAM table ($0200 >> B#1 >> $0300 >> B#2 >> $0338 >> $03F8 >> B#3); and
-14. copy maxtile buffer #0 to OAM table (B#0 >> $0200 >> B#1 >> $0300 >> B#2 >> $0338 >> $03F8 >> B#3).
+5. if the player is behind scenery, MaxTile will flush slots $0338-$03CC;
+6. if the player is on a boss battle, MaxTile will flush slots $0338-$03AC;
+7. otherwise, MaxTile will flush $0338-$03F8;
+8. do the same procedure for every regular sprite;
+9. at the end of the frame, if $3F is not zero, copy ``$0200+2*(value&$FE)``-``$03FC`` to maxtile buffer #0 ([$3F] >> B#0)
+10. copy $0200-$02FC to maxtile buffer #1 ($0200 >> B#1);
+11. then copy $0300-$032C to maxtile buffer #2 ($0300 >> B#2);
+12. then copy $03F8-$03FC to maxtile buffer #3 ($03F8 >> B#3);
+13. then copy $0338-$03F4 at once to maxtile buffer #3 ($0338 >> $03F8 >> B#3);
+14. copy maxtile buffer #3 to OAM table ($0338 >> $03F8 >> B#3);
+15. copy maxtile buffer #2 to OAM table ($0300 >> B#2 >> $0338 >> $03F8 >> B#3);
+16. copy maxtile buffer #1 to OAM table ($0200 >> B#1 >> $0300 >> B#2 >> $0338 >> $03F8 >> B#3); and
+17. copy maxtile buffer #0 to OAM table ([$3F] >> B#0 >> $0200 >> B#1 >> $0300 >> B#2 >> $0338 >> $03F8 >> B#3).
 
-Priority will be: B#0 (always appear in front) >> $0200 >> B#1 >> $0300 >> B#2 >> $0338 >> $03F8 >> B#3 (always appear behind).
+Priority will be: [$3F] (always appear in front) B#0 >> $0200 >> B#1 >> $0300 >> B#2 >> $0338 >> $03F8 >> B#3 (always appear behind).
 
 In practice, we end up with the following priorities (from highest to lowest):
 1. maxtile buffer #0 (appears in front of everything)
@@ -67,6 +70,7 @@ In practice, we end up with the following priorities (from highest to lowest):
 > * You must draw to buffer #3 before *any* regular sprite if you wanna make it stay behind everything (UberASM main label is the best choice)
 > * If the player is behind scenery, $03D0-$03F4 is only flushed to buffer #3 at the end of the frame.
 > * Sprites that doesn't use MaxTile are limited to slots $0338-$03F8
+> * If $3F is not zero, MaxTile will assume the tiles starting at address ``$0200+2*(value&$FE)`` and ending at $03FC as maximum possible priority and will copy to maxtile buffer #0. This special behavior is only present on overworld and mode 7 bosses and it is not recommended to use.
 
 ## Memory map
 
