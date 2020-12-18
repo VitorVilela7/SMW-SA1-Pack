@@ -31,18 +31,20 @@ pushpc
 ; $40:B000-$40:C7FF.
 
 ; MaxTile pointer buffers (highest -> lowest)
-; Each group is made of 8 bytes:
+; Each group is made of 16 bytes:
 ; - tile buffer pointer (16-bit): normally pointer + $01FC
 ; - tile prop buffer pointer (16-bit): normally pointer + $01FC
 ; - tile buffer initial pointer (16-bit): normally pointer + $7F
 ; - tile prop initial pointer (16-bit): normally pointer + $7F
+; - tile buffer last pointer (16-bit): normally pointer + $00; used to check if it ran out of slots.
+; - 4 bytes currently unused.
 
 ; During the tile copy procedure, both tile buffer and prop pointers turn into length.
 
-!maxtile_pointer_max		= $40B5E0		; 8 bytes
-!maxtile_pointer_high		= $40B5E8		; 8 bytes
-!maxtile_pointer_normal		= $40B5F0		; 8 bytes
-!maxtile_pointer_low		= $40B5F8		; 8 bytes
+!maxtile_pointer_max		= $40B5C0		; 16 bytes
+!maxtile_pointer_high		= $40B5D0		; 16 bytes
+!maxtile_pointer_normal		= $40B5E0		; 16 bytes
+!maxtile_pointer_low		= $40B5F0		; 16 bytes
 
 ; If no hook is defined, the following pointers are used:
 ; $40:B600 -> priority #1 prop buffer
@@ -197,15 +199,26 @@ macro oam_flush_buffer(priority, first, last)
 endmacro
 
 oam_init_tables:
+    LDA.w #$B800
+    STA.w !maxtile_pointer_max+8
 	LDA.w #$B800+$01FC
 	STA.w !maxtile_pointer_max+0
 	STA.w !maxtile_pointer_max+4
+    
+    LDA.w #$BA00
+    STA.w !maxtile_pointer_high+8
 	LDA.w #$BA00+$01FC
 	STA.w !maxtile_pointer_high+0
 	STA.w !maxtile_pointer_high+4
+    
+    LDA.w #$BC00
+    STA.w !maxtile_pointer_normal+8
 	LDA.w #$BC00+$01FC
 	STA.w !maxtile_pointer_normal+0
 	STA.w !maxtile_pointer_normal+4
+    
+    LDA.w #$BE00
+    STA.w !maxtile_pointer_low+8
 	LDA.w #$BE00+$01FC
 	STA.w !maxtile_pointer_low+0
 	STA.w !maxtile_pointer_low+4
