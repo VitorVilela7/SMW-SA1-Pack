@@ -18,8 +18,9 @@ When assembled, the OAM table ($0200-$03FF) will be built in the following order
 * MaxTile buffer #1
 * OAM table $0300-$0323 (tiles $0334 and $0338 are trashed)
 * MaxTile buffer #2
-* OAM table $0338-$03F4 (copied every time a sprite runs)
-* OAM table $03F8-$03FC (hardcoded)
+* OAM table $0338-$03CC (copied every time a sprite runs)
+* OAM table $03D0-$03F4 (copied every time a sprite runs on normal situations or at the end of the frame if it's behind scenery)
+* OAM table $03F8-$03FC (copied at the end of the frame)
 * MaxTile buffer #3
 
 (note: scheme not final, benchmarks required)

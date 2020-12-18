@@ -244,10 +244,10 @@ print pc
 	LDA #$40
 	PHA
 	PLB
-	JSR oam_flush_southern
+	JSR oam_flush_south
 	JSR oam_flush_player
-	JSR oam_flush_northern
     JSR oam_flush_lakitu
+	JSR oam_flush_behind_and_north
 	PLB
 	
 	STZ $318F ; Map $40:0000-$40:1FFF to $6000-$7FFF
@@ -396,6 +396,7 @@ macro oam_check_slot(slot)
 ?skip:
 endmacro
 
+; first and last slot are included.
 macro oam_flush_buffer(priority, first, last)
 	REP #$31
 	LDA.w <priority>+2
@@ -449,7 +450,18 @@ nmstl_mockup_flush:
 	PHA
 	PLB
 	PHX
-	JSR oam_flush_northern
+    
+    ; Bank is $40
+    LDA $13F9
+    BNE .behind_scenery
+    
+	JSR oam_flush_north
+    BRA .skip
+    
+.behind_scenery
+    JSR oam_flush_north_except_behind
+.skip
+
 	PLX
 	PLB
 	
@@ -457,16 +469,9 @@ nmstl_mockup_flush:
 	STZ $2225
 	RTL
 
-; Priority: standard.
-; Flush $0328 is 74th OAM tile (0 based).
-; $03F8 and $03FC are lakitu cloud tiles.
-oam_flush_northern:
-	%oam_flush_buffer(!maxtile_pointer_normal, 74, 127-2)
-	RTS
-
 ; Priority: maximum.
 ; Flush $0200-$02FC
-oam_flush_southern:
+oam_flush_south:
 	%oam_flush_buffer(!maxtile_pointer_max, 0, 63)
 	RTS
 
@@ -474,14 +479,38 @@ oam_flush_southern:
 ; Flush $0300-$0324 (player) + $0328-$032C (yoshi)
 ; $0330-$0334 are likelly trashed (yoshi clone tiles).
 oam_flush_player:
-	%oam_flush_buffer(!maxtile_pointer_high, 63, 73+2)
+	%oam_flush_buffer(!maxtile_pointer_high, 64, 75)
 	RTS
     
-; Priority: low
+; Priority: standard.
+; Flush $0328 is 74th OAM tile (0 based).
+; $03F8 and $03FC are lakitu cloud tiles.
+oam_flush_north:
+	%oam_flush_buffer(!maxtile_pointer_normal, 76, 127-2)
+	RTS
+    
+oam_flush_behind_and_north:
+    JSR oam_flush_behind_scenery
+    JMP oam_flush_north_except_behind
+    
+; Priority: standard.
+; Flush $0328 is 74th OAM tile (0 based).
+; $03F8 and $03FC are lakitu cloud tiles.
+; $03D0 - $03F4 are behind scenery special tiles.
+oam_flush_north_except_behind:
+	%oam_flush_buffer(!maxtile_pointer_normal, 76, 127-10-2)
+	RTS
+    
+oam_flush_behind_scenery:
+	%oam_flush_buffer(!maxtile_pointer_normal, 127-10-2+1, 127-2)
+    RTS
+
+; Priority: normal.
 ; Flush $03F8 and $03FC
 oam_flush_lakitu:
-    %oam_flush_buffer(!maxtile_pointer_low, 126, 127)
+    %oam_flush_buffer(!maxtile_pointer_normal, 126, 127)
     RTS
+
 
 	
 
