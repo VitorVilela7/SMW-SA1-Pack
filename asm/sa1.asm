@@ -190,7 +190,7 @@ ClearStack:					; Based from QuickROM, by Alcaro.
 	STZ $30FF				;  |
 	STZ $3200				; /
 	REP #$30				; 16-bit A/X/Y
-	LDA #$1EF3				; \ Clear $610B-$7FFF
+	LDA #$1DFE				; \ Clear $610B-$7FFF
 	LDX #$7FFF				;  |
 	LDY #$7FFE				;  |
 	MVP $00,$00				; /

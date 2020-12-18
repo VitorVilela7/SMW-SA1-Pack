@@ -1,50 +1,25 @@
 @includefrom sa1.asm
 pushpc
 
-; MaxTile API:
-; 1) Flush Northern OAM ($0328-$03FC), mark them as standard priority.
-; - use the SA-1 CPU
-; - call with A/X/Y 8-bit. All registers are destroyed.
-; - $0328-$03FC's Y position is cleared to #$F0.
-;
-; Note: called before a new sprite is executed, freeing the region for it.
-
-; 2) Flush Custom OAM range ($0200 - $03FC)
-; - use the SA-1 CPU
-; - call with A 8-bit, X/Y 16-bit. All registers are destroyed.
-; - specify the initial range on X ($0200-$03FC)
-; - specify the final range on Y ($0200-$03FC).
-; - Y must be greater than X.
-; - specify priority on A (#$00 - low, #$01 - normal, #$02 - high, #$03 - max)
-;
-; Note: This routine is slow and is only recommended to use for keeping compatibility with older structures.
-; It's recommended to use MaxTile native methods for faster speed.
-
-; 3) Clear OAM ($0200 - $03FC)
-; - use the SA-1 CPU
-; - call with A 8-bit, X/Y 16-bit. A is destroyed.
-; - $0200-$03FC's Y position is cleared to #$F0.
-;
-; Note: This routine is called from $7F:8000, invoking the SA-1 CPU.
-
 ; MaxTile work memory:
-; $40:B000-$40:C7FF.
+; $40:A000-$40:BFFF.
 
 ; MaxTile pointer buffers (highest -> lowest)
+;
 ; Each group is made of 16 bytes:
 ; - tile buffer pointer (16-bit): normally pointer + $01FC
-; - tile prop buffer pointer (16-bit): normally pointer + $01FC
-; - tile buffer initial pointer (16-bit): normally pointer + $7F
+; - tile prop buffer pointer (16-bit): normally pointer + $7F
+; - tile buffer initial pointer (16-bit): normally pointer + $01FC
 ; - tile prop initial pointer (16-bit): normally pointer + $7F
 ; - tile buffer last pointer (16-bit): normally pointer + $00; used to check if it ran out of slots.
 ; - 4 bytes currently unused.
 
 ; During the tile copy procedure, both tile buffer and prop pointers turn into length.
 
-!maxtile_pointer_max		= $40B5C0		; 16 bytes
-!maxtile_pointer_high		= $40B5D0		; 16 bytes
-!maxtile_pointer_normal		= $40B5E0		; 16 bytes
-!maxtile_pointer_low		= $40B5F0		; 16 bytes
+!maxtile_pointer_max		= $4001C0		; 16 bytes
+!maxtile_pointer_high		= $4001D0		; 16 bytes
+!maxtile_pointer_normal		= $4001E0		; 16 bytes
+!maxtile_pointer_low		= $4001F0		; 16 bytes
 
 ; If no hook is defined, the following pointers are used:
 ; $40:B600 -> priority #1 prop buffer
@@ -64,8 +39,11 @@ ORG $008494
 	LDA.B #oam_compress>>16
 	STA $3182
 	JMP $1E80
+    
+    ; $0084A6 - JSL to flush $0338+ to max buffer #3
+    JML nmstl_mockup_flush
 
-	NOP #34 ; freespace
+	NOP #30 ; freespace
 warnpc $0084C8
 
 ; This is one of favorite hijacks that many patches
@@ -199,25 +177,25 @@ macro oam_flush_buffer(priority, first, last)
 endmacro
 
 oam_init_tables:
-    LDA.w #$B800
+    LDA.w #$B800-4
     STA.w !maxtile_pointer_max+8
 	LDA.w #$B800+$01FC
 	STA.w !maxtile_pointer_max+0
 	STA.w !maxtile_pointer_max+4
     
-    LDA.w #$BA00
+    LDA.w #$BA00-4
     STA.w !maxtile_pointer_high+8
 	LDA.w #$BA00+$01FC
 	STA.w !maxtile_pointer_high+0
 	STA.w !maxtile_pointer_high+4
     
-    LDA.w #$BC00
+    LDA.w #$BC00-4
     STA.w !maxtile_pointer_normal+8
 	LDA.w #$BC00+$01FC
 	STA.w !maxtile_pointer_normal+0
 	STA.w !maxtile_pointer_normal+4
     
-    LDA.w #$BE00
+    LDA.w #$BE00-4
     STA.w !maxtile_pointer_low+8
 	LDA.w #$BE00+$01FC
 	STA.w !maxtile_pointer_low+0
@@ -479,22 +457,6 @@ do_the_copy:
 	SEP #$30
 	PLB
 	RTS
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; MaxTile pointer buffers (highest -> lowest)
-; Each group is made of 8 bytes:
-; - tile buffer pointer (16-bit)
-; - tile prop buffer pointer (16-bit)
-; - tile buffer initial pointer (16-bit)
-; - tile prop initial pointer (16-bit)
-
-; During the tile copy procedure, both tile buffer and prop pointers turn into length.
-
-;!maxtile_pointer_max		= $40B000		; 8 bytes
-;!maxtile_pointer_high		= $40B008		; 8 bytes
-;!maxtile_pointer_normal		= $40B010		; 8 bytes
-;!maxtile_pointer_low		= $40B018		; 8 bytes
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 nmstl_mockup_flush:
 	LDA #$05 ; Map $40:A000-$40:BFFF to $6000-$7FFF
