@@ -247,7 +247,7 @@ print pc
 	JSR oam_flush_south
 	JSR oam_flush_player
     JSR oam_flush_lakitu
-	JSR oam_flush_behind_and_north
+	JSR oam_flush_north
 	PLB
 	
 	STZ $318F ; Map $40:0000-$40:1FFF to $6000-$7FFF
@@ -472,43 +472,35 @@ nmstl_mockup_flush:
 ; Priority: maximum.
 ; Flush $0200-$02FC
 oam_flush_south:
-	%oam_flush_buffer(!maxtile_pointer_max, 0, 63)
+	%oam_flush_buffer(!maxtile_pointer_high, 0, 63)
 	RTS
 
 ; Priority: high.
 ; Flush $0300-$0324 (player) + $0328-$032C (yoshi)
 ; $0330-$0334 are likelly trashed (yoshi clone tiles).
 oam_flush_player:
-	%oam_flush_buffer(!maxtile_pointer_high, 64, 75)
+	%oam_flush_buffer(!maxtile_pointer_normal, 64, 75)
 	RTS
     
 ; Priority: standard.
 ; Flush $0328 is 74th OAM tile (0 based).
 ; $03F8 and $03FC are lakitu cloud tiles.
 oam_flush_north:
-	%oam_flush_buffer(!maxtile_pointer_normal, 76, 127-2)
+	%oam_flush_buffer(!maxtile_pointer_low, 76, 127-2)
 	RTS
-    
-oam_flush_behind_and_north:
-    JSR oam_flush_behind_scenery
-    JMP oam_flush_north_except_behind
     
 ; Priority: standard.
 ; Flush $0328 is 74th OAM tile (0 based).
 ; $03F8 and $03FC are lakitu cloud tiles.
 ; $03D0 - $03F4 are behind scenery special tiles.
 oam_flush_north_except_behind:
-	%oam_flush_buffer(!maxtile_pointer_normal, 76, 127-10-2)
+	%oam_flush_buffer(!maxtile_pointer_low, 76, 127-10-2)
 	RTS
     
-oam_flush_behind_scenery:
-	%oam_flush_buffer(!maxtile_pointer_normal, 127-10-2+1, 127-2)
-    RTS
-
 ; Priority: normal.
 ; Flush $03F8 and $03FC
 oam_flush_lakitu:
-    %oam_flush_buffer(!maxtile_pointer_normal, 126, 127)
+    %oam_flush_buffer(!maxtile_pointer_low, 126, 127)
     RTS
 
 
