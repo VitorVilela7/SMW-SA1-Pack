@@ -247,6 +247,7 @@ print pc
 	JSR oam_flush_southern
 	JSR oam_flush_player
 	JSR oam_flush_northern
+    JSR oam_flush_lakitu
 	PLB
 	
 	STZ $318F ; Map $40:0000-$40:1FFF to $6000-$7FFF
@@ -438,7 +439,7 @@ endmacro
 ;!maxtile_pointer_low		= $40B018		; 8 bytes
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-oam_flush_std_sprite:
+nmstl_mockup_flush:
 	LDA #$05 ; Map $40:A000-$40:BFFF to $6000-$7FFF
 	STA $318F
 	STA $2225
@@ -458,8 +459,9 @@ oam_flush_std_sprite:
 
 ; Priority: standard.
 ; Flush $0328 is 74th OAM tile (0 based).
+; $03F8 and $03FC are lakitu cloud tiles.
 oam_flush_northern:
-	%oam_flush_buffer(!maxtile_pointer_normal, 74, 127)
+	%oam_flush_buffer(!maxtile_pointer_normal, 74, 127-2)
 	RTS
 
 ; Priority: maximum.
@@ -469,9 +471,17 @@ oam_flush_southern:
 	RTS
 
 ; Priority: high.
-; Flush $0300-$0324
+; Flush $0300-$0324 (player) + $0328-$032C (yoshi)
+; $0330-$0334 are likelly trashed (yoshi clone tiles).
 oam_flush_player:
-	%oam_flush_buffer(!maxtile_pointer_high, 63, 73)
+	%oam_flush_buffer(!maxtile_pointer_high, 63, 73+2)
 	RTS
+    
+; Priority: low
+; Flush $03F8 and $03FC
+oam_flush_lakitu:
+    %oam_flush_buffer(!maxtile_pointer_low, 126, 127)
+    RTS
+
 	
 
