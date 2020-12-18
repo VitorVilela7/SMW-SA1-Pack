@@ -4,26 +4,26 @@ MaxTile
 MaxTile is a new feature developed for SA-1 Pack v1.40 designed to effectively use all available OAM slots on Super Mario World regardless of the sprite type or game mode and keeping the maximum possible compatibility with the vanilla sprites and custom sprites designed before the system.
 
 ## Features
-* Provides four preconfigured OAM tables for different priorities;
+* Provides four OAM tables for different sprite<->sprite priorities;
 * Leaves the standard OAM table untouched till the end of the frame (with exceptions of regular sprites);
 
-## The priority structures
+## The priority structure
 
-MaxTile provides four different priorities, from order #0 to #3, where #0 is the highest priority (appears in front of all other OAM tiles) and #3 is the lowest priority (appears behind all OAM tiles).
+MaxTile provides four different priorities, from #0 to #3, where #0 is the highest priority (appears in front of all other OAM tiles) and #3 is the lowest priority (appears behind all OAM tiles).
 
 The buffers also have names. #0 is called max buffer, #1 is called high buffer, #2 normal buffer and #3 low buffer.
 
-You write to each buffer in backwards order, which means that your first tile will have the lowest priority and your last tile will have the highest priority. This means that *if always use the same maxtile buffer*, tiles drawn at the beginning of the frame will have lowest priority and tiles drawn at end of the frame will have the highest priority.
+You write to each buffer in backwards order, which means that your first tile will have the lowest priority and your last tile will have the highest priority. This means that *if you always use the same maxtile buffer*, tiles drawn at the beginning of the frame will have lowest priority and tiles drawn at end of the frame will have the highest priority.
 If preferred, you can take one of the maxtile pointers, subtract by the amount of tiles you will draw and run your graphics routine normally incrementing Y without having to reorder your drawing priority.
 
-When assembled, the OAM table ($0200-$03FF) will be built in the following order:
+When the four priority buffers are assembled into a single buffer, the OAM table ($0200-$03FF) will be built in the following way:
 
 * maxtile buffer #0 (highest priority)
 * maxtile buffer #1
 * maxtile buffer #2
 * maxtile buffer #3 (lowest priority)
 
-They are copied to $0200-$03FF backwards, the copy will go to $03FC, then $03F8, $03F4, etc.
+They are copied to $0200-$03FF backwards, the copy will start at $03FC, then $03F8, $03F4, etc., until it reaches $0200.
 
 > :warning: **IMPORTANT**
 > * Although the four buffers combined allows up to 512 sprite tiles, the SNES PPU has the limit of 128 sprite tiles. If MaxTile notices that the 128 tile limit was exceeded, it will stop copying further tiles.
