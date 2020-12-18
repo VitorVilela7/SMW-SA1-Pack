@@ -103,7 +103,98 @@ warnpc $00804A
 org $0086DA
 	JSL oam_clear_invoke_special
 
+; Ignore the $3F behavior on OAM upload.
+org $00846A
+    RTS
+
 pullpc
+
+macro oam_check_slot(slot, callback)
+    <callback>
+    
+	CMP.w $0201+(<slot>*4)
+	BEQ ?skip
+    	
+	LDY.w $0200+(<slot>*4)
+	STY.b $00,x
+	LDY.w $0202+(<slot>*4)
+	STY.b $02,x
+	
+	LDA.w $0420+<slot>
+	STA.b ($00)
+	
+	DEC.b $00
+	DEX #4
+	
+	LDA.b #$F0
+	STA.w $0201+(<slot>*4)
+?skip:
+endmacro
+
+; first and last slot are included.
+macro oam_check_range(first, last, callback)
+	!x = <last>
+	
+	while !x >= <first>
+		%oam_check_slot(!x, "<callback>")
+		!x #= !x-1
+	endif
+endmacro
+
+;; first and last slot are included
+macro oam_flush_rotation_priority(priority)
+    LDA $3F
+    BNE +
+    JMP .skip
++   LSR
+    CLC
+    ADC #$7F
+    STA $02
+
+	REP #$31
+	LDA.w <priority>+2
+	STA $00
+	LDA.w <priority>
+	ADC.w #-$A000+$6000
+	TAX    
+	SEP #$20    
+	
+	LDA #$F0    
+    %oam_check_range(0, 127, "INC $02 : BNE + : JMP .stop : +")
+
+.stop	
+	REP #$21
+	TXA
+	ADC.w #$A000-$6000
+	STA.w <priority>
+	LDA $00
+	STA.w <priority>+2
+	SEP #$30
+
+.skip
+endmacro
+
+; first and last slot are included.
+macro oam_flush_buffer(priority, first, last)
+	REP #$31
+	LDA.w <priority>+2
+	STA $00
+	LDA.w <priority>
+	ADC.w #-$A000+$6000
+	TAX
+	SEP #$20
+	
+	LDA #$F0    
+    %oam_check_range(<first>, <last>, "")
+	
+	REP #$21
+	TXA
+	ADC.w #$A000-$6000
+	STA.w <priority>
+	LDA $00
+	STA.w <priority>+2
+	SEP #$30
+endmacro
 
 oam_init_tables:
 	LDA.w #$B800+$01FC
@@ -231,10 +322,8 @@ oam_clear_special:
 	PLD
 	LDA.b #$F0
 	JMP oam_clear_boss
-
+    
 oam_compress:
-print pc
-
 	; Flush the rest of OAM.
 	LDA #$05 ; Map $40:A000-$40:BFFF to $6000-$7FFF
 	STA $318F
@@ -244,6 +333,8 @@ print pc
 	LDA #$40
 	PHA
 	PLB
+    %oam_flush_rotation_priority(!maxtile_pointer_max)
+    
 	JSR oam_flush_south
 	JSR oam_flush_player
     JSR oam_flush_lakitu
@@ -376,54 +467,6 @@ do_the_copy:
 	PLB
 	RTS
 
-macro oam_check_slot(slot)
-	CMP.w $0201+(<slot>*4)
-	BEQ ?skip
-	
-	LDY.w $0200+(<slot>*4)
-	STY.b $00,x
-	LDY.w $0202+(<slot>*4)
-	STY.b $02,x
-	STA.w $0201+(<slot>*4)
-	
-	LDA.w $0420+<slot>
-	STA.b ($00)
-	
-	DEC.b $00
-	DEX #4
-	
-	LDA.b #$F0
-?skip:
-endmacro
-
-; first and last slot are included.
-macro oam_flush_buffer(priority, first, last)
-	REP #$31
-	LDA.w <priority>+2
-	STA $00
-	LDA.w <priority>
-	ADC.w #-$A000+$6000
-	TAX
-	SEP #$20
-	
-	LDA #$F0
-
-	!x = <last>
-	
-	while !x >= <first>
-		%oam_check_slot(!x)
-		!x #= !x-1
-	endif
-	
-	REP #$21
-	TXA
-	ADC.w #$A000-$6000
-	STA.w <priority>
-	LDA $00
-	STA.w <priority>+2
-	SEP #$30
-endmacro
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; MaxTile pointer buffers (highest -> lowest)
 ; Each group is made of 8 bytes:
@@ -455,11 +498,22 @@ nmstl_mockup_flush:
     LDA $13F9
     BNE .behind_scenery
     
+    LDA $0D9B
+    CMP #$80
+    BEQ .bosses
+    CMP #$C1
+    BEQ .bosses
+    
 	JSR oam_flush_north
     BRA .skip
     
 .behind_scenery
     JSR oam_flush_north_except_behind
+    BRA .skip
+    
+.bosses
+    JSR oam_flush_north_except_bosses_background
+    
 .skip
 
 	PLX
@@ -495,6 +549,10 @@ oam_flush_north:
 ; $03D0 - $03F4 are behind scenery special tiles.
 oam_flush_north_except_behind:
 	%oam_flush_buffer(!maxtile_pointer_low, 76, 127-10-2)
+	RTS
+    
+oam_flush_north_except_bosses_background:
+	%oam_flush_buffer(!maxtile_pointer_low, 76, 127-8-10-2)
 	RTS
     
 ; Priority: normal.
