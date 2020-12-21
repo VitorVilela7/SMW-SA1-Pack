@@ -86,6 +86,56 @@ org $0086DA
 ; Ignore the $3F behavior on OAM upload.
 org $00846A
     RTS
+    
+; CODE_028376:        A9 01         LDA.B #$01                
+; CODE_028378:        8D 8C 18      STA.W $188C               
+
+org $028376
+    BRA +
+    NOP #3
++
+
+org $028380
+    BNE candles_refresh
+    
+org $028398
+candles:
+    SEP #$20
+    LDA #$09
+    STA $620F,y
+    LSR $788C
+    BCC +
+    LDA #$EA
+    STA $620E,y
++   
+    REP #$20
+    JMP .back
+    
+.refresh
+    LDA $14
+    AND #$03
+    BNE +
+    JSL $01ACF9
+    BRA ++
++
+    LDA $788C
+++  ASL #4
+    TSB $788C
+
+warnpc $0283C4
+
+org $028307
+    NOP
+    LDA #$0D
+    STA $620F,y
+    LDA.L $028226,x
+    CMP #$E8
+    STA $620E,y
+    REP #$20
+    BEQ candles
+candles_back:
+
+warnpc $02831A
 
 pullpc
 
