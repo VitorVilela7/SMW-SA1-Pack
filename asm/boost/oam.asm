@@ -43,7 +43,16 @@ ORG $008494
     ; $0084A6 - JSL to flush $0338+ to max buffer #3
     JML nmstl_mockup_flush
 
-	NOP #30 ; freespace
+	NOP #22 ; freespace    
+    
+    ; $0084C0 - SA-1 Pack signature
+    dl $5A123
+    
+    ; $0084C3 - SA-1 Pack version
+    db 140
+
+    ; Unused
+    NOP #4
 warnpc $0084C8
 
 ; This is one of favorite hijacks that many patches
