@@ -281,7 +281,7 @@ oam_start_frame:
 	RTL
 	
 oam_start_frame_special:
-	JSR oam_clear_special
+	JSR oam_clear;_special
 	JMP oam_start_frame_reset_tables
 
 macro oam_reset_y()
