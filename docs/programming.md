@@ -811,3 +811,56 @@ SetTable:
 You will also need to learn how register `$2231` and SA-1 Bitmap work though.
 Check out the SNES Dev. Book II, Super Accelerator (SA-1) -> Character Conversion.
 You may find the file on section "Links".
+
+## Detecting SA-1
+There are a few methods of detecting if the SA-1 is present.
+
+### Detecting SA-1 chip
+
+You can detect if the SA-1 chip is present by checking if ROM address $00FFD5 is $23 and $00FFD6 is $35
+
+It's a common practice of testing the presence of the chip by adding the following header:
+
+```
+!sa1 = 0
+
+if read1($00ffd5) == $23
+	!sa1 = 1
+endif
+```
+
+### Detecting SA-1 Pack
+
+Since SA-1 Pack v1.40 it's possible to check if SA-1 Pack is present and which version is installed on ROM.
+
+Address $0084C0 will contain $5A123 (or $05A123) if SA-1 Pack v1.40 or newer is present.
+Address $0084C3 will contain the currently installed version.
+
+> **Note**:
+> 5A123 references the 5F5A123 name marking of the chip.
+
+This is useful for ensuring your patch can only be installed on specific SA-1 Pack versions.
+
+You can detect if SA-1 Pack v1.40 is present by doing the following:
+
+```
+assert read3($0084C0) == $5A123, "SA-1 Pack is required"
+assert read1($0084C3) >= 140, "SA-1 Pack v1.40 or newer is required"
+```
+
+Another example is checking if a determined version is installed, e.g. the hypothetical version 1.55:
+
+```
+assert read3($0084C0) == $5A123, "SA-1 Pack is required"
+assert read1($0084C3) == 155, "This code only works with SA-1 Pack v1.55"
+```
+
+You can even check if a specific major version is being used:
+
+```
+assert read3($0084C0) == $5A123, "SA-1 Pack is required"
+assert read1($0084C3)/10 == 16, "This code only works with SA-1 Pack 1.6x versions"
+```
+
+> **Note**:
+> As a workaround for SA-1 versions older (or earlier) than 1.40, you can check if $FFD5 is $23 and $84C0 is $EAEAEA
