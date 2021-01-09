@@ -8,7 +8,7 @@ MaxTile is a new feature developed for SA-1 Pack v1.40 designed to effectively u
 * Shared MaxTile routines for easier integration;
 * Leaves the standard OAM table untouched till the end of the frame (with exceptions of regular sprites);
 * Allows up to 128 sprites *tiles* on screen;
-* High compatibility with already deisgned sprites, including vanilla sprites, mode 7 bosses, overworld, behind scenery behavior, Yoshi and Lakitu;1
+* High compatibility with already deisgned sprites, including vanilla sprites, mode 7 bosses, overworld, behind scenery behavior, Yoshi and Lakitu;
 * Restores the original priority behavior of Super Mario World, which was incorrectly reserved on NMSTL; and
 * Compatible with NMSTL sprites.
 
@@ -100,10 +100,10 @@ VBW-RAM is the BW-RAM mirror basically combo'ed with $318F and $2225, an alterna
 
 ```
 ; MaxTile shared routines
-maxtile_flush_nmstl			= $0084A8
-maxtile_get_sprite_slot		= $0084AC
-maxtile_get_slot			= $0084B0
-maxtile_finish_oam			= $0084B4
+maxtile_flush_nmstl         = $0084A8
+maxtile_get_sprite_slot     = $0084AC
+maxtile_get_slot            = $0084B0
+maxtile_finish_oam          = $0084B4
 ```
 
 ### maxtile_flush_nmstl
@@ -184,7 +184,8 @@ Disadvantages:
 * You can't specify a priority, it will either be the one relative to the hardcoded slot or just before or after a standard sprite.
 * You are limited to drawing 50 tiles at once, pretty much limited to a 112x112 sprite.
 
-To use and draw in the $6338-$63FC area, make a call to $0084A8 (maxtile_flush_nmstl)
+If you are *outside a regular sprite*, to use and draw in the $6338-$63FC area,
+make a call to $0084A8 (maxtile_flush_nmstl).
 
 ### Direct mode
 
@@ -236,45 +237,45 @@ Example UberASM file:
 !maxtile_pointer_max = $61C0
 
 main:
-	REP #$10
-	
-	; Retrieve MaxTile pointer and check if it's free
-	LDX !maxtile_pointer_max+0
-	CPX !maxtile_pointer_max+8
-	BEQ .no_slot
-	
-	; Draw at position ($78, $68)
-	LDA #$78
-	STA $400000,x
-	LDA #$68
-	STA $400001,x
-	
-	; Draw a star tile
-	LDA #$48
-	STA $400002,x
-	
-	; Use palette A and maximum priority
-	LDA.b #%00110100
-	STA $400003,x
-	
-	; Decrement slot and store back to pointer
+    REP #$10
+    
+    ; Retrieve MaxTile pointer and check if it's free
+    LDX !maxtile_pointer_max+0
+    CPX !maxtile_pointer_max+8
+    BEQ .no_slot
+    
+    ; Draw at position ($78, $68)
+    LDA #$78
+    STA $400000,x
+    LDA #$68
+    STA $400001,x
+    
+    ; Draw a star tile
+    LDA #$48
+    STA $400002,x
+    
+    ; Use palette A and maximum priority
+    LDA.b #%00110100
+    STA $400003,x
+    
+    ; Decrement slot and store back to pointer
     DEX #4
     STX !maxtile_pointer_max+0
     
     LDX !maxtile_pointer_max+2
     
-	; Now store the properties of our new sprite
-	LDA #$02
-	STA $400000,x
+    ; Now store the properties of our new sprite
+    LDA #$02
+    STA $400000,x
     
     ; Decrement and store back to pointer
     DEX
     STX !maxtile_pointer_max+2
-	
-	; End of the routine.
+    
+    ; End of the routine.
 .no_slot
-	SEP #$30
-	RTL
+    SEP #$30
+    RTL
 ```
 
 This code should draw a 16x16 star on the center of the screen and it should have
@@ -300,19 +301,19 @@ Disadvantages:
 Example:
 
 ```
-	rep #$30
-	; The amount of tiles to request (4 tiles)
-	ldy.w #$0004
-	; The priority (buffer 1 - high priority)
-	lda.w #$0001
-	jsl maxtile_get_slot
-	sep #$20
-	
-	ldx $3100
-	; draw your tiles here via sta $400000,x 
-	
-	ldx $3102
-	; draw your tiles properties here via sta $400000,x
+    rep #$30
+    ; The amount of tiles to request (4 tiles)
+    ldy.w #$0004
+    ; The priority (buffer 1 - high priority)
+    lda.w #$0001
+    jsl maxtile_get_slot
+    sep #$20
+    
+    ldx $3100
+    ; draw your tiles here via sta $400000,x 
+    
+    ldx $3102
+    ; draw your tiles properties here via sta $400000,x
 ```
 
 Alternatively, you can set the databank to #$40 and you can use the Y index for writing.
