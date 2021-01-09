@@ -129,14 +129,14 @@ pick_oam_slot:
 
     LDA #$38
     STA !sprite_oam_index,x
-    JML nmstl_mockup_flush
+    JML call_nmstl_mockup_flush
 
 .yoshi
     ; Yoshi will get a hardcoded slot because the game likes
     ; redrawing him multiple times.
     LDA #$28
     STA !sprite_oam_index,x
-    JML nmstl_mockup_flush
+    JML call_nmstl_mockup_flush
 
 .return
     RTL

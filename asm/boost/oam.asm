@@ -21,6 +21,11 @@ pushpc
 !maxtile_pointer_normal		= $4001E0		; 16 bytes
 !maxtile_pointer_low		= $4001F0		; 16 bytes
 
+!maxtile_mirror_max			= $61C0			; 16 bytes
+!maxtile_mirror_high		= $61D0			; 16 bytes
+!maxtile_mirror_normal		= $61E0			; 16 bytes
+!maxtile_mirror_low			= $61F0			; 16 bytes
+
 ; If no hook is defined, the following pointers are used:
 ; $40:B600 -> priority #1 prop buffer
 ; $40:B680 -> priority #2 prop buffer
@@ -39,20 +44,37 @@ ORG $008494
 	LDA.B #oam_compress>>16
 	STA $3182
 	JMP $1E80
+	
+	; Ensure alignment by 4 bytes
+	NOP #2
     
-    ; $0084A6 - JSL to flush $0338+ to max buffer #3
-    JML nmstl_mockup_flush
-
-	NOP #22 ; freespace    
-    
+    ; $0084A8 - JSL to flush $0338+ to max buffer #3
+    JML call_nmstl_mockup_flush
+	
+	; $0084AC - (get_slot.asm) JSL to allocate MaxTile slots, for custom sprites.
+	JML call_oam_get_slot_sprite
+	
+	; $0084B0 - (get_slot.asm) JSL to allocate MaxTile slots, for general purpose.
+	JML call_oam_get_slot_general
+	
+	; $0084B4 - (get_slot.asm) JSL to allocate MaxTile slots, for general purpose.
+	JML call_finish_oam_write
+	
+	; $0084B8 - reserved for future expansion
+	NOP #4
+	
+	; $0084BC - reserved for future expansion
+	NOP #4
+	
     ; $0084C0 - SA-1 Pack signature
     dl $5A123
     
     ; $0084C3 - SA-1 Pack version
     db 140
 
-    ; Unused
+    ; $0084C4 - Unused
     NOP #4
+
 warnpc $0084C8
 
 ; This is one of favorite hijacks that many patches
@@ -514,7 +536,7 @@ do_the_copy:
 	
 ; Shared routines
 
-nmstl_mockup_flush:
+call_nmstl_mockup_flush:
 	LDA #$05 ; Map $40:A000-$40:BFFF to $6000-$7FFF
 	STA $318F
 	STA $2225
@@ -593,5 +615,6 @@ oam_flush_lakitu:
     RTS
 
 
-	
+incsrc "maxtile/get_slot.asm"
+incsrc "maxtile/finish_write.asm"
 
