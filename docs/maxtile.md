@@ -8,7 +8,7 @@ MaxTile is a new feature developed for SA-1 Pack v1.40 designed to effectively u
 * Shared MaxTile routines for easier integration;
 * Leaves the standard OAM table untouched till the end of the frame (with exceptions of regular sprites);
 * Allows up to 128 sprites *tiles* on screen;
-* High compatibility with already deisgned sprites, including vanilla sprites, mode 7 bosses, overworld, behind scenery behavior, Yoshi and Lakitu;
+* High compatibility with already designed sprites, including vanilla sprites, mode 7 bosses, overworld, behind scenery behavior, Yoshi and Lakitu;
 * Restores the original priority behavior of Super Mario World, which was incorrectly reserved on NMSTL; and
 * Compatible with NMSTL sprites.
 
