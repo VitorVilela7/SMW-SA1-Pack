@@ -89,8 +89,9 @@ warnpc $00804A
 
 ; CODE_0086DA:        22 2E 81 7F   JSL.L RAM_7F812E    
 
+; Ludwig/Roy/Morton no longer needs this.
 org $0086DA
-	JSL oam_clear_invoke_special
+	JSL oam_clear_invoke
 
 ; Ignore the $3F behavior on OAM upload.
 org $00846A
@@ -297,20 +298,12 @@ oam_clear_invoke:
 	RTL
 .end
 
-oam_clear_invoke_special:
-	LDA.b #oam_start_frame_special
-	STA $3180
-	LDA.b #oam_start_frame_special>>8
-	STA $3181
-	LDA.b #oam_start_frame_special>>16
-	STA $3182
-	JSR $1E80
-	RTL
-
 oam_start_frame:
 	JSR oam_clear
+	JSR oam_reset_tables
+	RTL
 	
-.reset_tables
+oam_reset_tables:
 	PHB
 	LDA #$40
 	PHA
@@ -337,12 +330,8 @@ oam_start_frame:
 	SEP #$20
 	
 	PLB
-	RTL
+	RTS
 	
-oam_start_frame_special:
-	JSR oam_clear;_special
-	JMP oam_start_frame_reset_tables
-
 macro oam_reset_y()
 	STA.b $01+!x
 	!x #= !x+4
@@ -396,6 +385,12 @@ oam_compress:
 	
 	; Copy MaxTile buffers to $0200-$03FC...
 	JSR do_the_copy
+	
+	; Reset the pointers
+	; This is needed to avoid a memory corruption in case OAM clear
+	; table routine is not called on the next frame and a routine
+	; attempts allocating OAM.
+	JSR oam_reset_tables
 	
 
 	PHB
@@ -516,6 +511,8 @@ do_the_copy:
 	SEP #$30
 	PLB
 	RTS
+	
+; Shared routines
 
 nmstl_mockup_flush:
 	LDA #$05 ; Map $40:A000-$40:BFFF to $6000-$7FFF
