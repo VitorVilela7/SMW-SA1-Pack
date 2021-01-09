@@ -5,10 +5,12 @@ MaxTile is a new feature developed for SA-1 Pack v1.40 designed to effectively u
 
 ## Features
 * Provides four OAM tables for different sprite<->sprite priorities;
+* Shared MaxTile routines for easier integration;
 * Leaves the standard OAM table untouched till the end of the frame (with exceptions of regular sprites);
 * Allows up to 128 sprites *tiles* on screen;
-* High compatibility with already deisgned sprites, including vanilla sprites, mode 7 bosses, overworld, behind scenery behavior, yoshi and lakitu;
-* Compatible with NMSTL sprites
+* High compatibility with already deisgned sprites, including vanilla sprites, mode 7 bosses, overworld, behind scenery behavior, Yoshi and Lakitu;1
+* Restores the original priority behavior of Super Mario World, which was incorrectly reserved on NMSTL; and
+* Compatible with NMSTL sprites.
 
 ## The priority structure
 
@@ -94,13 +96,111 @@ In practice, we end up with the following priorities (from highest to lowest):
 
 VBW-RAM is the BW-RAM mirror basically combo'ed with $318F and $2225, an alternative for accessing the buffer using the Direct Page or RAM data banks.
 
+## API
+
+```
+; MaxTile shared routines
+maxtile_flush_nmstl			= $0084A8
+maxtile_get_sprite_slot		= $0084AC
+maxtile_get_slot			= $0084B0
+maxtile_finish_oam			= $0084B4
+```
+
+### maxtile_flush_nmstl
+JSL $0084A8
+
+Flushes $0338-$03FC to the MaxTile internal buffer (priority #3).
+
+Input params:
+> * AXY 8-bit
+
+### maxtile_get_sprite_slot
+JSL $0084AC
+
+Allocate and get OAM pointer from MaxTile.
+Difference between get_oam_slot_general is:
+> * Amount of slots is passed via "A"
+> * No 16-bit AXY required.
+> * Slot is also copied to $0C ($3100) and $0E ($3102).
+
+### maxtile_get_slot
+JSL $0084B0
+
+Allocate and get OAM pointer from MaxTile
+The routine automatically adjusts internal MaxTile pointers for you.
+
+Input params:
+> * AXY 16-bit
+> * Y = how many slots to be allocated (min: #$0001 - 1 slot, max: #$0080 - 128 slots)
+> * A = priority (0: highest, 3: lowest)
+
+Output params:
+> * Carry set if the OAM allocation was success, carry clear otherwise.
+> * $3100-$3101 will contain the pointer to the OAM general buffer.
+> * $3102-$3103 will contain the pointer to the OAM attribute buffer.
+> * The pointer returned is intended to be incremented, just like normal OAM drawing routines.
+> * $3100-$3103 will be used by FinishOAMWrite routine version MaxTile.
+
+### maxtile_finish_oam
+JSL $0084B4
+
+Input params:
+> * AXY 8-bit
+> * Y = the tile size (#$00 or #$02) or #$FF to keep the tilesize unchanged.
+> * A = how many slots minus 1
+
+Same as FinishOAMWrite ($01B7B3), but it's made to use MaxTile pointers.
+It will use the pointers placed on $3100 and $3102.
+
 ## How to use
 
-> :warning: **WORK IN PROGRESS**
-> The official MaxTile API is still work in progress and there might be notable changes that would break other sprites. For now, please code sprites using the classic SMW/NMSTL method and let MaxTile do the inner workings for you.
->
->
-> Reason: although the internal memory structure if great for moving memory from SMW's OAM table, it does not seem to be very user-friendly to coders. Because of that, I decided to not release the API officially until I make a model that is easy enough to work. Use this documentation section for experiment and feedback.
+There are three basic ways of working with MaxTile:
+1. Legacy mode
+2. Direct mode
+3. Allocation mode
+
+Each way provides advantagens and disadvantages and you should pick the one that is the most comfortable for you.
+
+When using the modes, MaxTile provides you a few shared routines that you can use. For details, see the API section.
+
+### Legacy mode
+
+Legacy mode is the easiest and the slowest way to work with MaxTile.
+With legacy mode, you continue writing to $6200-$63FF normally (the OAM table) and MaxTile
+will take the tiles for you at the end of the frame.
+
+When you are on the NMSTL working area, $6338-$63FC, MaxTile includes a "flush" routine that
+cleans up previously used slots on the region, so after calling it you can start writing at $6338
+without having to worry about overwriting any tile.
+
+Advantages:
+* Compatible with all previous resources.
+* Works with shared SMW routines that manipulates OAM tile buffer.
+* You can override or change the priority directly against a SMW tile.
+* You don't have to rewrite your routine for MaxTile suport.
+
+Disadvantages:
+* Slow, every time MaxTile has to scan for used slots and move to the internal buffers.
+* You can't specify a priority, it will either be the one relative to the hardcoded slot or just before or after a standard sprite.
+* You are limited to drawing 50 tiles at once, pretty much limited to a 112x112 sprite.
+
+To use and draw in the $6338-$63FC area, make a call to $0084A8 (maxtile_flush_nmstl)
+
+### Direct mode
+
+With direct mode, you write directly to one of the MaxTile buffers.
+Being simple, this method is recommended for drawing a few, simple tiles per time.
+
+Advantages:
+* You can use the priority system (0-3)
+* Fast, you write directly to the buffer.
+
+Disadvantages:
+* The buffer must be written backwards (DEX/DEY #4), which can screw up individual tile priority if not paid attention. It also makes harder to port routines that used to increment the buffer (INY #4) instead.
+* You must check every time the pointer to see if you can continue writing to the buffer or if you ran out of slots.
+* You must manipulate all the MaxTile pointers yourself. If you miss something, undefined behavior will happen.
+
+Example:
 
 First you must pick which buffer you want to work with. It's preferred to work on a single buffer per time, since the 65c816 architecture only has three registers.
 
@@ -177,4 +277,46 @@ main:
 	RTL
 ```
 
-This code should draw a 16x16 star on the center of the screen and it should have priority over absolutely all other sprites!
+This code should draw a 16x16 star on the center of the screen and it should have
+priority over absolutely all other sprites!
+
+### Allocation mode
+
+Allocation mode works by calling a MaxTile shared routine asking how many slots you want
+and what priority you will use. Then MaxTile will give you an answer if the allocation was
+successful (or if it ran out of slots) and the OAM main buffer pointer and the OAM attribute
+pointer at $3100 and $3102.
+
+Advantages:
+* You can use the priority system (0-3).
+* Fast, you write directly to the buffer.
+* You know ahead of time if the game has sufficient slots before drawing.
+* You don't need to know nor have to manipulate any of the control pointers of MaxTile. The only thing you have is to load the index given and write to $400000+index.
+* You can write to the buffer in the forward direction (INX/INY #4), since the shared routines allocates at once the required values.
+
+Disadvantages:
+* You need to allocate a bunch of tiles at once, so you have to count how many tiles you will draw from the beginning.
+
+Example:
+
+```
+	rep #$30
+	; The amount of tiles to request (4 tiles)
+	ldy.w #$0004
+	; The priority (buffer 1 - high priority)
+	lda.w #$0001
+	jsl maxtile_get_slot
+	sep #$20
+	
+	ldx $3100
+	; draw your tiles here via sta $400000,x 
+	
+	ldx $3102
+	; draw your tiles properties here via sta $400000,x
+```
+
+Alternatively, you can set the databank to #$40 and you can use the Y index for writing.
+Keeping in mind that $3100 and $3102 are absolute addresses and requires the databank to be 00-3f/80-bf.
+
+It's recommended to copy them to $0C and $0E (Direct Page) since you can access them regardless of the
+Data Bank current value.
