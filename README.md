@@ -5,7 +5,7 @@
   \___ \ / /\ \______| |   |  ___/ _` |/ __| |/ /
   ____) / ____ \     | |   | |  | (_| | (__|   <
  |_____/_/    \_\    |_|   |_|   \__,_|\___|_|\_\
-   by Vitor Vilela                 Version 1.36
+   by Vitor Vilela                 Version 1.40
 ```
 
 The SA-1 Pack is a package of patches for activating and optimizing the SA-1
@@ -19,21 +19,25 @@ SA-1 is a co-processor used on some special SNES games, made to work together
 with the Super NES CPU and enhance its processing speed, graphics and memory.
 
 With its base 10.74 MHz clock, the SA-1 CPU is four times faster than the
-normal SNES CPU processing. The SA-1 CPU and SNES CPU also runs
-simultaneously, which can result in five times faster processing over game with
-a standard cart setup. With that much power, the Super Accelerator System (SAS)
-can be used to handle the SMW engine much faster than the normal, allowing more
-sprites to be processed at once, more in-game effects, faster level loading and
-much more.
+normal SNES CPU processing. The SA-1 CPU and SNES CPU also runs simultaneously,
+which can result in five times faster processing over game with a standard cart
+setup. With that much power, the Super Accelerator System (SAS) can be used to
+handle the SMW engine much faster than the normal, allowing more sprites to be
+processed at once, more in-game effects, faster level loading and much more.
+
+The CPU also benefits from a better memory map controller, so it's does not get
+paused by WRAM refreshes and by HDMA updates, making the effective speed up to
+7x faster than normal.
 
 SA-1 Pack not just activates the co-processor, but also modifies a good part of
 the game engine to use and explore the chip features, which gives an extreme
 boost to the overall performance of the game.
 
 ## Game Features
-* Makes the game run up to four times faster.
+* Makes the game run from 3x to 7x faster than normal.
 * Increase the maximum amount of sprites at once on screen to 22.
 * Increase the maximum amount of sprites on a single sub-level to 255.
+* Adds MaxTile, a system that allows to place much more large sprites on levels.
 * Reduces loading time of all levels and maps.
 * Increase the maximum ROM size to 8 MB.
 * Offers enhanced bitmap and arithmetic capabilities for better graphics
@@ -44,8 +48,9 @@ performance.
 * 2 kB fast internal work memory (I-RAM), clocked at 10.74 MHz.
 * Multi-processor processing, with parallel operating mode and memory sharing
 control.
-* Large capacity memory, with a total capability of 8 MB of ROM clocked at
-10.74 MHz and 256 kB of BW-RAM, clocked at 5.37 MHz.
+* Large capacity memory, with a total capability of 8 MB of ROM and 256 kB of
+BW-RAM, both clocked at 5.37 MHz (with effective ROM speed being 10.74 MHz due
+of the 16-bit data bus).
 * High speed arithmetic hardware of multiplication, division and cumulative
 sum.
 * Bitmap and Character Conversion functions for fast graphics manipulation.
@@ -115,8 +120,8 @@ the chip features implemented or may have unstable, slow emulation which can
 make the game slower, unstable or even completely unplayable. It's extremely
 important to use an accurate and updated emulator when playing not just
 regular SA-1 games, but any SMW hack with SA-1 Pack applied. Currently it's
-strongly recommended to play SA-1 games with Snes9x 1.56 and bsnes/higan.
-Older or different emulators may not work properly.
+strongly recommended to play SA-1 games with Snes9x 1.56 or newer and
+bsnes/higan/ares. Older or different emulators may not work properly.
 
 ZSNES in particular, while an extremely popular emulator (specially on the
 last decade), it lacks many SA-1 features and support, which makes it strongly
@@ -242,7 +247,7 @@ Credits
 
 SA-1 Pack wouldn't be that awesome without help from these people:
 
-* 33953YoShI (LZ2 patch, original Japanese patch inspiration)
+* 33953YoShI (LZ2 patch, optimized FinishOAMWrite, original Japanese patch inspiration)
 * Adam (testing)
 * Arujus (More Sprites patch)
 * Alcaro (ZSNES detection code)
@@ -250,7 +255,7 @@ SA-1 Pack wouldn't be that awesome without help from these people:
 * Ersanio (LZ2 patch)
 * FuSoYa (6-8MB mapping support/idea, LZ3 patch, LM support)
 * Koopster (testing and documentation)
-* LX5 (bug fixes, testing)
+* LX5 (bug fixes, testing, support with maxtile)
 * Lui37 (testing)
 * Min (LZ2 patch)
 * smkdan (LZ2 patches and assistance for fixing VRAM patch)
@@ -258,6 +263,11 @@ SA-1 Pack wouldn't be that awesome without help from these people:
 * Tattletale (bug fixes, testing)
 * Vitor Vilela (that crazy author that did most of the things)
 * You (for using it :D)
+
+Special thanks also for all my patrons that supports my work, specially:
+* kccheng
+* hyp36rmax
+* Jake Mauer
 
 Read More
 =========
@@ -293,6 +303,10 @@ focused in the differences between normal SMW WRAM map and SA-1 Pack WRAM map.
 
 [Sprite Remap](docs/Sprite-Remap.md) is a summary about all the sprite table
 remaps made by More Sprites patch.
+
+[MaxTile](docs/maxtile.md) contains the complete documentation how to use and
+explore the MaxTile system to the maximum power. It also contains explanation
+on how it works behind scenes.
 
 [remap.asm](docs/remap.asm) contains an .asm macro containing all SA-1 Pack
 related remaps for using in patches, blocks and sprites.

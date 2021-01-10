@@ -1,3 +1,8 @@
+SA-1 Pack v1.40:
+	- Adds MaxTile, a system responsible for managing OAM slots across the entire game. Via dynamic allocation, the system allows to you use ALL OAM slots for anything, including standard sprites with pretty high compatibility with previous resources. See MaxTile documentation for more information.
+	- The addition of MaxTile also fixes a few priority issues caused by NoMoreSpriteTileLimits.
+	- Now it's possible to detect SA-1 Pack and its version. See Programming guide for more information.
+
 SA-1 Pack v1.36:
 	- Fixed a visual glitch in the bonus game, where one of the boxes (and its item) is floating on screen, a bit higher than the ground and scrolling vertically. Thanks goes to RaspberryAlpine for finding out this.
 	- Made the DMA transfer on the LZ2/LZ3 decompression retry if it gets interrupted. Although NMI/IRQ does not interrupt DMA, HDMAs can actually will DMA get interrupted. Thanks goes to p4plus2 for revealing that detail for me.
