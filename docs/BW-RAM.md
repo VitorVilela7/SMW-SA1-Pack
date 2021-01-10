@@ -36,9 +36,14 @@ Start     | End      | Description
 `$40:0000`|`$40:00FF`| Empty. Not cleared. Strongly not recommended to use, because it's the memory region used by Sprite Tool to put additional sprite tables.
 `$40:0100`|`$40:010A`| SMW's`$7E:0100-$7E:010A`.
 `$40:010B`|`$40:010C`| Stores current level number on most LevelASM/UberASM patches/tool.
-`$40:010D`|`$40:010F`| Empty. Cleared at reset and title screen load. Originally reserved for S-CPU's stack, which stayed at W-RAM and was moved to`$7E:1F00-$7E:1FFF`. **Reserved by SA-1 Pack for future expansion.**
+`$40:010D`|`$40:010F`| **Reserved by SA-1 Pack for future expansion.**
 `$40:0110`|`$40:0112`| Finish OAM hook. This is a 24-bit pointer to execute custom code before finishing the OAM writing area. This is useful in case you want to take the remaining OAM slots or rearrange it before it's rendered to the screen. This also ensures that no other code will override the OAM table, since it's running on the end of the frame. SA-1 CPU will be used to execute the code. To activate it, store the 24-bit pointer *every frame* on $6110-$6112, since $6110-$6111 is automatically cleared before it jumps to the pointer you specified.
-`$40:0113`|`$40:01FF`| Empty. Cleared at reset and title screen load. Originally reserved for S-CPU's stack, which stayed at W-RAM and was moved to`$7E:1F00-$7E:1FFF`. **Reserved by SA-1 Pack for future expansion.**
+`$40:0113`|`$40:017F`| **Reserved by SA-1 Pack for future expansion.**
+`$40:0180`|`$40:018F`| MaxTile pointer #0
+`$40:0190`|`$40:019F`| MaxTile pointer #1
+`$40:01A0`|`$40:01AF`| MaxTile pointer #2
+`$40:01B0`|`$40:01BF`| MaxTile pointer #3
+`$40:01C0`|`$40:01FF`| Empty. Cleared at reset and title screen load. Originally reserved for S-CPU's stack, which stayed at W-RAM and was moved to`$7E:1F00-$7E:1FFF`. **Reserved by SA-1 Pack for future expansion.**
 
 `$40:0200`|`$40:1FFF`| SMW's`$7E:0200-$7E:1FFF`.
 ##### Page 1
@@ -50,7 +55,9 @@ Start     | End      | Description
 
 Start     | End      | Description
 :--------:|:--------:|-------------
-`$40:4000`|`$40:C7FF`| Empty. Not cleared.
+`$40:4000`|`$40:AFFF`| Empty. Not cleared.
+`$40:B000`|`$40:BFFF`| **Reserved by SA-1 MaxTile**
+`$40:C000`|`$40:C7FF`| Empty. Not cleared.
 `$40:C800`|`$40:FFFF`| SMW's`$7E:C800-$7E:FFFF`.
 
 ##### Pages 8-11
