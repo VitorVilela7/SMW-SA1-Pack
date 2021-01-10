@@ -1,27 +1,25 @@
-!a1                         = $00
-!a2                         = $01
-!a3                         = $02
-!a4                         = $03
-!a5                         = $04
-!a6                         = $05
-!a7                         = $06
-!a8                         = $07
-!a9                         = $08
-!a10                        = $09
-!a11                        = $0A
-!a12                        = $0B
+!a1                     = $00
+!a2                     = $01
+!a3                     = $02
+!a4                     = $03
+!a5                     = $04
+!a6                     = $05
+!a7                     = $06
+!a8                     = $07
+!a9                     = $08
+!a10                    = $09
+!a11                    = $0A
+!a12                    = $0B
 
-!a15                        = $0E
+!a15                    = $0E
 
-!RAM_SpriteYHi              = $3258
-!RAM_SpriteXHi              = $326E
-!RAM_ScreenBndryXLo         = $1A
-!RAM_ScreenBndryXHi         = $1B
-!RAM_ScreenBndryYLo         = $1C
-!RAM_ScreenBndryYHi         = $1D
-!RAM_SpriteYLo              = $3216 
-!RAM_SpriteXLo              = $322C 
-!RAM_SprProcessIndex        = $75E9
+!RAM_SpriteYHi          = $3258
+!RAM_SpriteXHi          = $326E
+!RAM_ScreenBndryXLo     = $1A
+!RAM_ScreenBndryYLo     = $1C
+!RAM_SpriteYLo          = $3216 
+!RAM_SpriteXLo          = $322C 
+!RAM_SprProcessIndex    = $75E9
 
 call_finish_oam_write:
 
