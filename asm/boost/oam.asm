@@ -16,15 +16,15 @@ pushpc
 
 ; During the tile copy procedure, both tile buffer and prop pointers turn into length.
 
-!maxtile_pointer_max		= $4001C0		; 16 bytes
-!maxtile_pointer_high		= $4001D0		; 16 bytes
-!maxtile_pointer_normal		= $4001E0		; 16 bytes
-!maxtile_pointer_low		= $4001F0		; 16 bytes
+!maxtile_pointer_max		= $400180		; 16 bytes
+!maxtile_pointer_high		= $400190		; 16 bytes
+!maxtile_pointer_normal		= $4001A0		; 16 bytes
+!maxtile_pointer_low		= $4001B0		; 16 bytes
 
-!maxtile_mirror_max			= $61C0			; 16 bytes
-!maxtile_mirror_high		= $61D0			; 16 bytes
-!maxtile_mirror_normal		= $61E0			; 16 bytes
-!maxtile_mirror_low			= $61F0			; 16 bytes
+!maxtile_mirror_max			= $6180			; 16 bytes
+!maxtile_mirror_high		= $6190			; 16 bytes
+!maxtile_mirror_normal		= $61A0			; 16 bytes
+!maxtile_mirror_low			= $61B0			; 16 bytes
 
 ; If no hook is defined, the following pointers are used:
 ; $40:B600 -> priority #1 prop buffer
