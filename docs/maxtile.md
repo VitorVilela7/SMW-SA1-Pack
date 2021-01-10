@@ -1,7 +1,9 @@
 MaxTile
 =======
 
-MaxTile is a new feature developed for SA-1 Pack v1.40 designed to effectively use all available OAM slots on Super Mario World regardless of the sprite type or game mode and keeping the maximum possible compatibility with the vanilla sprites and custom sprites designed before the system.
+MaxTile is a new feature developed for SA-1 Pack v1.40 designed to effectively use all available
+OAM slots on Super Mario World regardless of the sprite type or game mode and keeping the maximum
+possible compatibility with the vanilla sprites and custom sprites designed before the system.
 
 ## Features
 * Provides four OAM tables for different sprite<->sprite priorities;
@@ -14,21 +16,32 @@ MaxTile is a new feature developed for SA-1 Pack v1.40 designed to effectively u
 
 ## The priority structure
 
-MaxTile provides four different priorities, from #0 to #3, where #0 is the highest priority (appears in front of all other OAM tiles) and #3 is the lowest priority (appears behind all OAM tiles).
+MaxTile provides four different priorities, from #0 to #3, where #0 is the highest priority
+(appears in front of all other OAM tiles) and #3 is the lowest priority (appears behind all OAM
+tiles).
 
-The buffers also have names. #0 is called max buffer, #1 is called high buffer, #2 normal buffer and #3 low buffer.
+The buffers also have names. #0 is called max buffer, #1 is called high buffer, #2 normal buffer
+and #3 low buffer.
 
-You write to each buffer in backwards order, which means that your first tile will have the lowest priority and your last tile will have the highest priority. This means that *if you always use the same maxtile buffer*, tiles drawn at the beginning of the frame will have lowest priority and tiles drawn at end of the frame will have the highest priority.
-If preferred, you can take one of the maxtile pointers, subtract by the amount of tiles you will draw and run your graphics routine normally incrementing Y without having to reorder your drawing priority.
+You write to each buffer in backwards order, which means that your first tile will have the lowest
+priority and your last tile will have the highest priority. This means that *if you always use the
+same maxtile buffer*, tiles drawn at the beginning of the frame will have lowest priority and
+tiles drawn at end of the frame will have the highest priority.
 
-When the four priority buffers are assembled into a single buffer, the OAM table ($0200-$03FF) will be built in the following way:
+If preferred, you can take one of the maxtile pointers, subtract by the amount of tiles you will
+draw and run your graphics routine normally incrementing Y without having to reorder your drawing
+priority.
+
+When the four priority buffers are assembled into a single buffer, the OAM table ($0200-$03FF) will
+be built in the following way:
 
 * maxtile buffer #0 (highest priority)
 * maxtile buffer #1
 * maxtile buffer #2
 * maxtile buffer #3 (lowest priority)
 
-They are copied to $0200-$03FF backwards, the copy will start at $03FC, then $03F8, $03F4, etc., until it reaches $0200.
+They are copied to $0200-$03FF backwards, the copy will start at $03FC, then $03F8, $03F4, etc.,
+until it reaches $0200.
 
 > :warning: **IMPORTANT**
 > * Although the four buffers combined allows up to 512 sprite tiles, the SNES PPU has the limit of 128 sprite tiles. If MaxTile notices that the 128 tile limit was exceeded, it will stop copying further tiles.
@@ -36,7 +49,10 @@ They are copied to $0200-$03FF backwards, the copy will start at $03FC, then $03
 
 ## SMW and NMSTL compatibility
 
-Of course if nobody uses the MaxTile API directly, no tile from the original game nor from old sprites will ever appear because the buffers are completely empty. Because of that, MaxTile will automatically move OAM tiles from $0200-$03FF to the MaxTile buffers though the frame to keep compatibility with all existing resources. The copy works as the following:
+Of course if nobody uses the MaxTile API directly, no tile from the original game nor from old
+sprites will ever appear because the buffers are completely empty. Because of that, MaxTile will
+automatically move OAM tiles from $0200-$03FF to the MaxTile buffers though the frame to keep
+compatibility with all existing resources. The copy works as the following:
 
 1. at the beginning of the frame, all maxtile buffers are invalidated (cleared);
 2. $0200-$03FF is cleared;
@@ -81,10 +97,10 @@ In practice, we end up with the following priorities (from highest to lowest):
 
 | BW-RAM address | VBW-RAM mirror  | Size      | Description              |
 |----------------|-----------------|-----------|--------------------------|
-| $40:01C0       | $61C0 (default) | 16 bytes  | OAM structure #0         |
-| $40:01D0       | $61D0 (default) | 16 bytes  | OAM structure #1         |
-| $40:01E0       | $61E0 (default) | 16 bytes  | OAM structure #2         |
-| $40:01F0       | $61F0 (default) | 16 bytes  | OAM structure #3         |
+| $40:0180       | $6180 (default) | 16 bytes  | OAM structure #0         |
+| $40:0190       | $6190 (default) | 16 bytes  | OAM structure #1         |
+| $40:01A0       | $61A0 (default) | 16 bytes  | OAM structure #2         |
+| $40:01B0       | $61B0 (default) | 16 bytes  | OAM structure #3         |
 | $40:B600       | $7600 (#$05)    | 128 bytes | OAM properties buffer #0 |
 | $40:B680       | $7680 (#$05)    | 128 bytes | OAM properties buffer #1 |
 | $40:B700       | $7700 (#$05)    | 128 bytes | OAM properties buffer #2 |
@@ -94,7 +110,13 @@ In practice, we end up with the following priorities (from highest to lowest):
 | $40:BC00       | $7C00 (#$05)    | 512 bytes | OAM buffer #2            |
 | $40:BE00       | $7E00 (#$05)    | 512 bytes | OAM buffer #3            |
 
-VBW-RAM is the BW-RAM mirror basically combo'ed with $318F and $2225, an alternative for accessing the buffer using the Direct Page or RAM data banks.
+VBW-RAM is the BW-RAM mirror basically combo'ed with $318F and $2225, an alternative for accessing
+the buffer using the Direct Page or RAM data banks.
+
+> :warning: **IMPORTANT**
+> Always use the pointers values from $6180+.
+> The buffers located at $40:B600+ may change on newer SA-1 Pack versions.
+> However, the $2225/$318F value will always be #$05 ($40:A000-$40:BFFF)
 
 ## API
 
@@ -135,11 +157,11 @@ Input params:
 > * A = priority (0: highest, 3: lowest)
 
 Output params:
-> * Carry set if the OAM allocation was success, carry clear otherwise.
+> * Carry set if the OAM allocation was success, carry clear otherwise. If you receive carry clear, drawing should be aborted for memory safety.
 > * $3100-$3101 will contain the pointer to the OAM general buffer.
 > * $3102-$3103 will contain the pointer to the OAM attribute buffer.
 > * The pointer returned is intended to be incremented, just like normal OAM drawing routines.
-> * $3100-$3103 will be used by FinishOAMWrite routine version MaxTile.
+> * $3100-$3103 will be used by FinishOAMWrite routine version MaxTile. Don't modify the values unless you don't plan to use FinishOAMWrite routine.
 
 ### maxtile_finish_oam
 JSL $0084B4
@@ -159,9 +181,16 @@ There are three basic ways of working with MaxTile:
 2. Direct mode
 3. Allocation mode
 
-Each way provides advantagens and disadvantages and you should pick the one that is the most comfortable for you.
+Each way provides advantagens and disadvantages and you should pick the one that is the most
+comfortable for you.
 
-When using the modes, MaxTile provides you a few shared routines that you can use. For details, see the API section.
+When using the modes, MaxTile provides you a few shared routines that you can use. For details,
+see the API section.
+
+> :warning: **IMPORTANT**
+> Direct mode and Allocation mode requires XY registers to be 16-bit.
+> Caution when doing indexes calculation using the A register, specially in A 8-bit mode
+> Remember that the high byte is passed to XY registers regardless if A is 8-bit or 16-bit mode.
 
 ### Legacy mode
 
@@ -200,16 +229,18 @@ Disadvantages:
 * The buffer must be written backwards (DEX/DEY #4), which can screw up individual tile priority if not paid attention. It also makes harder to port routines that used to increment the buffer (INY #4) instead.
 * You must check every time the pointer to see if you can continue writing to the buffer or if you ran out of slots.
 * You must manipulate all the MaxTile pointers yourself. If you miss something, undefined behavior will happen.
+* 16-bit X/Y mode (storing via STA $400000,x or STA $0000,y + DB) or indirect mode (STA ($0C) + DB) is required.
 
 Example:
 
-First you must pick which buffer you want to work with. It's preferred to work on a single buffer per time, since the 65c816 architecture only has three registers.
+First you must pick which buffer you want to work with. It's preferred to work on a single buffer
+per time, since the 65c816 architecture only has three registers.
 
 ```
-!maxtile_pointer_max        = $61C0       ; 16 bytes
-!maxtile_pointer_high       = $61D0       ; 16 bytes
-!maxtile_pointer_normal     = $61E0       ; 16 bytes
-!maxtile_pointer_low        = $61F0       ; 16 bytes
+!maxtile_pointer_max        = $6180       ; 16 bytes
+!maxtile_pointer_high       = $6190       ; 16 bytes
+!maxtile_pointer_normal     = $61A0       ; 16 bytes
+!maxtile_pointer_low        = $61B0       ; 16 bytes
 ```
 
 Recommended AXY flags: 16-bit A/X/Y or 8-bit A, 16-bit X/Y.
@@ -224,17 +255,26 @@ Each buffer pointer provides four 16-bit values which are the following:
 
 All pointers belongs to bank $40. All pointers are in range $40:A000-$40:BFFF.
 
-The tile buffer pointer points to the main OAM table for the buffer priority. The table has four tables: X positions, Y position, tile and tile properties. In binary format, it's: ``xxxx xxxx yyyy yyyy TTTT TTTT YXPPCCCt`` where xxxxxxxx is the x-position, yyyyyyyy is the y-position, tTTTTTTTT is the tile to be used, Y is y-flip flag, X is the x-flip flag, PP is priority bits against layers and CCC is the palette based index 8. Four bytes per OAM slot.
+The tile buffer pointer points to the main OAM table for the buffer priority. The table has four
+tables: X positions, Y position, tile and tile properties. In binary format, it's:
+``xxxx xxxx yyyy yyyy TTTT TTTT YXPPCCCt`` where xxxxxxxx is the x-position, yyyyyyyy is the
+y-position, tTTTTTTTT is the tile to be used, Y is y-flip flag, X is the x-flip flag, PP is
+priority bits against layers and CCC is the palette based index 8. Four bytes per OAM slot.
 
-The tile prop pointer points to the attribute OAM table for setting the size and the X-position high byte. Format: ``---- --sx``. If s is set, your tile will be 16x16, otherwise 8x8. If x is set, your x-position will be negative in 2's complement format. One byte per OAM slot.
+The tile prop pointer points to the attribute OAM table for setting the size and the X-position
+high byte. Format: ``---- --sx``. If s is set, your tile will be 16x16, otherwise 8x8. If x is set,
+your x-position will be negative in 2's complement format. One byte per OAM slot.
 
-When drawing, you load !pointer+0 value. Compared if !pointer+0 is equals to !pointer+4. If it is, it means the buffer ran out of slots and you **must** stop the drawing.
-If the slot is available, then you draw your tile and decrement the slot by 4. Do the same for the !pointer+2 and !pointer+6.
+When drawing, you load !pointer+0 value. Compared if !pointer+0 is equals to !pointer+4. If it is,
+it means the buffer ran out of slots and you **must** stop the drawing.
+
+If the slot is available, then you draw your tile and decrement the slot by 4. Do the same for the
+!pointer+2 and !pointer+6.
 
 Example UberASM file:
 
 ```
-!maxtile_pointer_max = $61C0
+!maxtile_pointer_max = $6180
 
 main:
     REP #$10
@@ -297,6 +337,7 @@ Advantages:
 
 Disadvantages:
 * You need to allocate a bunch of tiles at once, so you have to count how many tiles you will draw from the beginning.
+* 16-bit X/Y mode (storing via STA $400000,x or STA $0000,y + DB) or indirect mode (STA ($0C) + DB) is required.
 
 Example:
 
@@ -317,7 +358,8 @@ Example:
 ```
 
 Alternatively, you can set the databank to #$40 and you can use the Y index for writing.
-Keeping in mind that $3100 and $3102 are absolute addresses and requires the databank to be 00-3f/80-bf.
+Keeping in mind that $3100 and $3102 are absolute addresses and requires the databank to be
+$00-$3F/$80-$BF.
 
-It's recommended to copy them to $0C and $0E (Direct Page) since you can access them regardless of the
-Data Bank current value.
+It's recommended to copy them to $0C and $0E (Direct Page) since you can access them regardless of
+the current value of the data bank register.
