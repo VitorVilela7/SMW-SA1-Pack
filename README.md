@@ -147,7 +147,7 @@ In order to get started, grab a new clean ROM. Japanese or European versions
 will not work. If you already edited your ROM with Lunar Magic it won't work
 either.
 
-Apply the sa1.asm patxh using [Asar](https://github.com/RPGHacker/asar).
+Apply the sa1.asm patch using [Asar](https://github.com/RPGHacker/asar).
 You don't need to expand your ROM manually, the tool automatically
 does that for you.
 
@@ -168,7 +168,7 @@ To enable the double (22 sprites) system, don't forget to change your sprite
 header memory to 0x08, except in vanilla boss battles, they won't work
 correctly because of the new sprite memory system.
 
-**IMPORTANT:** Since version 1.31 the sprite header index for activing the
+**IMPORTANT:** Since version 1.31 the sprite header index for activating the
 22 sprites mode is now **0x08** and not 0x10 as it used to be.
 
 In addition, if you change the **GFX decompression option** on Lunar Magic, you must
