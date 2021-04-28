@@ -115,6 +115,20 @@ warnpc $00804A
 org $0086DA
 	JSL oam_clear_invoke
 
+; Ludwig's fireballs no longer set their OAM slot based on sprite's index.
+org $01D496
+	BRA +
+org $01D49D
++
+
+; Bowser calls an OAM flush routine now
+org $03B43F
+	JML call_bowser_oam_flush
+
+; Made floor drawing routine in Bowser's fight end in a RTL
+org $03B56B
+	RTL
+
 ; Ignore the $3F behavior on OAM upload.
 org $00846A
     RTS
@@ -396,10 +410,28 @@ oam_compress:
 	PLB
     %oam_flush_rotation_priority(!maxtile_pointer_max)
     
+    LDA $0D9B
+	CMP #$C0
+	BEQ .ludwig_roy_morton
+
+	; standard flush rule
+.standard_flush
 	JSR oam_flush_south
 	JSR oam_flush_player
     JSR oam_flush_lakitu
 	JSR oam_flush_north
+	BRA .end_flush
+
+	; bosses' flush rule
+.ludwig_roy_morton
+	LDA $13FC
+	CMP #$04				; run standard flush if Reznor is being fought
+	BEQ .standard_flush
+	JSR oam_flush_north_boss
+	JSR oam_flush_player_boss
+	JSR oam_flush_background_boss
+
+.end_flush
 	PLB
 	
 	STZ $318F ; Map $40:0000-$40:1FFF to $6000-$7FFF
@@ -548,23 +580,33 @@ call_nmstl_mockup_flush:
 	PHX
     
     ; Bank is $40
+
+    LDA $0D9B
+	CMP #$C0				; require to be checked before $13F9 because these battles set $13F9 to $03
+	BEQ .ludwig_roy_morton
+
     LDA $13F9
     BNE .behind_scenery
     
     LDA $0D9B
-    CMP #$80
-    BEQ .bosses
-    CMP #$C1
-    BEQ .bosses
+    BMI .bowser_iggy_larry
     
+.standard
 	JSR oam_flush_north
     BRA .skip
     
 .behind_scenery
     JSR oam_flush_north_except_behind
     BRA .skip
+
+.ludwig_roy_morton
+	LDA $13FC
+	CMP #$04				; detect if Reznor is being fought
+	BEQ .standard
+	JSR oam_flush_north_boss
+	BRA .skip
     
-.bosses
+.bowser_iggy_larry
     JSR oam_flush_north_except_bosses_background
     
 .skip
@@ -576,13 +618,45 @@ call_nmstl_mockup_flush:
 	STZ $2225
 	RTL
 
+
+; special flush call for part of bowser's castle floor
+call_bowser_oam_flush:
+	JSL $03B4AC	; restore original code
+
+	LDA #$05 ; Map $40:A000-$40:BFFF to $6000-$7FFF
+	STA $318F
+	STA $2225
+	
+	PHB
+	LDA #$40
+	PHA
+	PLB
+	PHX
+
+	LDA $190D
+	BNE .bowser_defeated
+	JSR oam_flush_bowser
+	BRA .end_flush
+.bowser_defeated
+	JSR oam_flush_bowser_defeated
+.end_flush
+
+	PLX 
+	PLB
+
+	STZ $318F ; Restore normal mapping
+	STZ $2225
+
+	JML $03B48B	; jump back to an RTS
+
+
 ; Priority: maximum.
 ; Flush $0200-$02FC
 oam_flush_south:
 	%oam_flush_buffer(!maxtile_pointer_high, 0, 63)
 	RTS
 
-; Priority: high.
+; Priority: normal.
 ; Flush $0300-$0324 (player) + $0328-$032C (yoshi)
 ; $0330-$0334 are likelly trashed (yoshi clone tiles).
 oam_flush_player:
@@ -590,31 +664,67 @@ oam_flush_player:
 	RTS
     
 ; Priority: standard.
-; Flush $0328 is 74th OAM tile (0 based).
+; Flush $0330 is 76th OAM tile (0 based).
 ; $03F8 and $03FC are lakitu cloud tiles.
 oam_flush_north:
 	%oam_flush_buffer(!maxtile_pointer_low, 76, 127-2)
 	RTS
     
 ; Priority: standard.
-; Flush $0328 is 74th OAM tile (0 based).
+; Flush $0330 is 76th OAM tile (0 based).
 ; $03F8 and $03FC are lakitu cloud tiles.
 ; $03D0 - $03F4 are behind scenery special tiles.
 oam_flush_north_except_behind:
 	%oam_flush_buffer(!maxtile_pointer_low, 76, 127-10-2)
 	RTS
     
+; Priority: standard.
+; Flush $0330 is 76th OAM tile (0 based).
+; $03BC - $03FC are behind scenery special tiles and part of Bowser's castle roof
 oam_flush_north_except_bosses_background:
-	%oam_flush_buffer(!maxtile_pointer_low, 76, 127-8-10-2)
+	%oam_flush_buffer(!maxtile_pointer_low, 76, 110)
 	RTS
     
-; Priority: normal.
-; Flush $03F8 and $03FC
+; Priority: standard.
+; Flush $03F8 and $03FC.
 oam_flush_lakitu:
     %oam_flush_buffer(!maxtile_pointer_low, 126, 127)
     RTS
 
+; Priority: normal.
+; Flushes $0330 - $03CC.
+; $03DC - $03FC are behind scenery special tiles & powerup items
+; Those tiles are given higher priority than the background tiles.
+oam_flush_north_boss:
+	%oam_flush_buffer(!maxtile_pointer_normal, 76, 127-9)
+	rts
+
+; Priority: standard.
+; Special case for $0200-$032C in boss rooms (background tiles)
+oam_flush_background_boss:
+	%oam_flush_buffer(!maxtile_pointer_low, 0, 75)
+	rts
+
+; Priority: standard.
+; Special case for $03DC-$03FC in boss rooms (behind scenery tiles)
+; Those tiles are given higher priority than the background tiles.
+oam_flush_player_boss:
+	%oam_flush_buffer(!maxtile_pointer_normal, 127-9, 127)
+	rts
+
+; Priority: high.
+; Flushes $03DC - $03FC
+; Those tiles are used in Bowser's floor.
+; Probably $3F was involved here and SA-1 deactivates it.
+oam_flush_bowser:
+	%oam_flush_buffer(!maxtile_pointer_high, 111, 127)
+	%oam_flush_buffer(!maxtile_pointer_high, 5, 20)
+	rts
+
+oam_flush_bowser_defeated:
+	%oam_flush_buffer(!maxtile_pointer_high, 111, 127)
+	%oam_flush_buffer(!maxtile_pointer_high, 84, 100)
+	rts
 
 incsrc "maxtile/get_slot.asm"
 incsrc "maxtile/finish_write.asm"
-
