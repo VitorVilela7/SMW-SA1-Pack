@@ -837,7 +837,7 @@ Address $0084C0 will contain $5A123 (or $05A123) if SA-1 Pack v1.40 or newer is 
 Address $0084C3 will contain the currently installed version.
 
 > **Note**:
-> 5A123 references the 5F5A123 name marking of the chip.
+> 5A123 references the RF5A123 name marking of the chip.
 
 This is useful for ensuring your patch can only be installed on specific SA-1 Pack versions.
 
