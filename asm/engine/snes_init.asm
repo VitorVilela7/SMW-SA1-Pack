@@ -39,11 +39,7 @@ snes_init:					; SNES reset vector
 	STA $2200				; /
 						;
 	LDA #Reset				; \ Set up SA-1 Vectors
-	STA $2203				;  |
-	LDA #NMI				;  |
-	STA $2205				;  |
-	LDA #IRQ				;  |
-	STA $2207				; /
+	STA $2203				; /
 						;
 	SEP #$20				; A = 8-bit
 						;
@@ -105,6 +101,11 @@ snes_init:					; SNES reset vector
 						;
 	JSR $1E85				; Wait for SA-1.
 						;
+	REP #$20
+	LDA #CallReset				; \ Set up SA-1 execute vector
+	STA $2203				; /
+	SEP #$20
+						
 	JML $008000				; Don't re-enable emulation mode to don't reset Stack and Direct Page.
 	
 	
@@ -113,13 +114,15 @@ wram_copy:
 base $1E80					; Base to WRAM address
 
 ram_sa1_call:					; SA-1 call
-	LDA #$80				; \ Send IRQ to SA-1
+	LDA #$00				; \ Wake up SA-1
 	STA $2200				; / with message 00h
 						;
 -	LDA $3189				; \ Wait until SA-1 finishes processing.
 	BEQ -					; /
 						;
-	STZ $3189				; \ Clear finish flag from SA-1 and
+	STZ $3189				; \ Clear finish flag
+	LDA #$20				;  | and put SA-1 to sleep
+	STA $2200				;  |
 	RTS					; / return.
 .end:
 

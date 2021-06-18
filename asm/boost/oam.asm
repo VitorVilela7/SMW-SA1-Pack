@@ -310,13 +310,16 @@ oam_clear_invoke:
 	LDA.b #oam_start_frame>>16
 	STA $3182
 	
-	LDA #$80
+	LDA #$00
 	STA $2200
 	
 -	LDA $3189
 	BEQ -
 	
 	STZ $3189
+	
+	LDA #$20
+	STA $2200
 	RTL
 .end
 

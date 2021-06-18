@@ -70,18 +70,14 @@ org $8A64
 Reset:						; \ Use the "unused" space
 !c	JML SA1_Reset				;  | to store some vectors.
 						;  |
-IRQ:						;  |
-!c	JML SA1_IRQ				;  |
+CallReset:					;  |
+!c	JML SA1_CallReset			;  |
 						;  |
 NMI:						;  |
-!c	JML SA1_NMI				;  |
+	JML $000000				;  |
 						;  |
 Reset2:						;  |
 !c	JML snes_init				; /
-
-
-	JML SA1_Loop				; This points to SA-1 main loop.
-						; Needed so the Dual ROM system can locate SA-1 main loop easier.
 
 warnpc $8A78
 
@@ -269,76 +265,36 @@ SA1_Reset:					;
 	SEP #$30				;  |
 	PLB					; /
 						;
-	CLI					; Enable Interrupts
-						;
 						; \ A = 0xFFFF
 	STA $0189				; / Tell S-CPU to continue processing
 						;
-	PEA $0100				; \ Set DP to $0100
-	PLD					; /
-						;
-SA1_Loop:					;				
-	LDA $8B					; \ Loop until a Background Mode is enabled
-	BEQ SA1_Loop				; / (or wait for a IRQ for SNES call)
-						;
-BackgroundMode:					;
-	PHK					; \ Jump to Background Mode Address
-	PEA.w .End-1				;  |
-	JML [$3186]				; /
-.End						;
-	STZ $8B					; \ Clear Background Flag and Return to Main Loop.
-	BRA SA1_Loop				; /
+-	BRA -					; Stop!
 							
-SA1_IRQ:					; SA-1 CPU IRQ
-	;PHP					; \ Preserve P/A/X/Y/D/B
-	REP #$30				;  |
-	PHA					;  |
-	PHX					;  |
-	PHY					;  |
-	PHD					;  |
-	PHB					;  |
-	PHK					;  |
-	PLB					;  |
-	LDA #$0000				;  |
-	TCD					; /
-	SEP #$30				; 8-bit A/X/Y
-						;
-	LDA $318F				; \ Preserve BW-RAM Mapping and
-	STZ $318F				;  | reset to default value.
-	STZ $2225				;  |
-	PHA					; /
-						;
+SA1_CallReset:					; SA-1 Reset Call
+	SEI
+	CLC
+	XCE
+	REP #$38
+	LDA #$0000
+	TCD
+	LDA #$37FF
+	TCS
+	PHK
+	PLB
+	SEP #$30
+
+	STZ $318F
+	STZ $2225
+	
 	LDA $2301				; Read status register
-	BIT #$40				; \ If $40 is set, go to Timer IRQ
-	BNE SA1_IRQEnding			; / 
-	BIT #$20				; \ If $20 is set, go to DMA end code
-	BNE DMA_End				; /
 						;
 	AND #$0F				; \ Get S-CPU Message
 	ASL A					;  | x2
 	TAX					;  | A->X
 	JMP (SA1IRQ_Ptr,x)			; / Go to Messages Code
-						;
-DMA_End:					;
-	LDA #$01				; \ Set DMA Flag and Return
-	STA $018C				; /
+
 SA1_IRQEnding:
-	LDA #$F0				; \ Clear IRQ from S-CPU
-	STA $220B				; /
-						;
-	PLA					; \ Restore BW-RAM Mapping
-	STA $2225				;  |
-	STA $318F				; /
-						;
-	REP #$30				; \ Restore B/D/Y/X/A/P
-	PLB					;  |
-	PLD					;  |
-	PLY					;  |
-	PLX					;  |
-	PLA					;  |
-	;PLP					; /
-SA1_NMI:					; SA-1 NMI - not used on this patch. Also, only a few emulators even handle this.
-	RTI					; Return
+-	BRA -					; Stop!
 
 SA1IRQ_Ptr:					; SA-1 IRQ Message List
 dw ProcessRequest				; #$00 - Process Request (aka Jump to Code)
