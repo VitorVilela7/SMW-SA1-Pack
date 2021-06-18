@@ -282,58 +282,40 @@ SA1_CallReset:					; SA-1 Reset Call
 	PHK
 	PLB
 	SEP #$30
-
-	STZ $318F
-	STZ $2225
 	
-	LDA $2301				; Read status register
+	STZ $2230				; Reset SA-1 DMA settings.
 						;
-	AND #$0F				; \ Get S-CPU Message
-	ASL A					;  | x2
-	TAX					;  | A->X
-	JMP (SA1IRQ_Ptr,x)			; / Go to Messages Code
+	LDA #$80				; \ Enable I-RAM and BW-RAM write
+	STA $2227				;  |
+	STZ $2225				;  |
+	STZ $318F
+	LDA #$FF				;  |
+	STA $222A				; /
+						;
+	LDA #$B0				; \ Enable IRQ from S-CPU
+	STA $220A				;  | Enable IRQ from DMA
+	STA $220B				; / Enable NMI from S-CPU
+						;
+	STZ $223F				; This is new from previous patches
+						; This will set up a 4bpp Virtual RAM at $60:0000-$63:FFFF
+						; Settings this to #$01 will make a 2bpp Virtual RAM at $60:0000-$67:FFFF.
+	REP #$20				;
+	LDA $00FFEE				; \ Set SNES IRQ and NMI vectors
+	STA $220E				;  | Same from the cart ROM.
+	LDA $00FFEA				;  |
+	STA $220C				; /
+	SEP #$20				;
+						;
+	LDA #$50				; \ Enable dynamic NMI/IRQ vector.
+	STA $2209				; /						
 
-SA1_IRQEnding:
--	BRA -					; Stop!
-
-SA1IRQ_Ptr:					; SA-1 IRQ Message List
-dw ProcessRequest				; #$00 - Process Request (aka Jump to Code)
-dw EnableChvDMA					; #$01 - Enable Character Conversion DMA #1
-dw DisableDMA					; #$02 - Disable DMA / Character Conversion DMA
-dw ProcessIRQRequest				; #$03 - IRQ Compatible Process Request
-
-ProcessRequest:
-	LDA #$B0				; \ Clear IRQ from S-CPU
-	STA $220B				; /
-	CLI					; Enable IRQ
 	PHK					; \
 	PEA.w .return-1				;  | JSL [$3180]
 	JML.w [$3180]				;  |
 .return						; /
-	SEI					; Disable IRQ
 	INC $0189				; Set Ready Flag
-	BRA SA1_IRQEnding			; Return
-	
-EnableChvDMA:
-	LDA #$B0				; \ Enable Character Conversion DMA CC1 (BW-RAM->I-RAM)
-	STA $318D				;  |
-	STA $2230				; /
-	BRA SA1_IRQEnding			; Return
-	
-DisableDMA:					; \ Disable SA-1 DMA (of any type)
-	STZ $2230				;  |
-	BRA SA1_IRQEnding			; /
-	
-ProcessIRQRequest:				; \ Same as Process Request, but
-	LDA #$B0				;  | it's to use in a S-CPU IRQ/NMI
-	STA $220B				;  | and this doesn't accept any
-	PHK					;  | interrupt.
-	PEA.w .return-1				;  |
-	JML.w [$318F]				;  |
-.return						;  |
-	INC $0192				;  |
-NoMessage:					;  |
-	BRA SA1_IRQEnding			; /
+
+-	BRA -
 
 incsrc "more_sprites/more_sprites.asm"
 	
