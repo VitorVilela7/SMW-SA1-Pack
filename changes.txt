@@ -1,3 +1,6 @@
+SA-1 Pack v1.41-LP:
+	- This version puts the SA-1 chip to sleep when it's not being used, useful to saving battery and processor power.
+
 SA-1 Pack v1.40:
 	- Adds MaxTile, a system responsible for managing OAM slots across the entire game. Via dynamic allocation, the system allows to you use ALL OAM slots for anything, including standard sprites with pretty high compatibility with previous resources. See MaxTile documentation for more information.
 	- The addition of MaxTile also fixes a few priority issues caused by NoMoreSpriteTileLimits.

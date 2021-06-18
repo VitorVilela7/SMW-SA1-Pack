@@ -5,12 +5,18 @@
   \___ \ / /\ \______| |   |  ___/ _` |/ __| |/ /
   ____) / ____ \     | |   | |  | (_| | (__|   <
  |_____/_/    \_\    |_|   |_|   \__,_|\___|_|\_\
-   by Vitor Vilela                 Version 1.40
+   by Vitor Vilela                 Version 1.41-LP
 ```
 
 The SA-1 Pack is a package of patches for activating and optimizing the SA-1
 system for the SMW ROM, with emphasis on eliminating slowdown, game limitations
 and accelerating the engine to the maximum possible.
+
+Low Power Edition
+=================
+
+This version puts the SA-1 chip to sleep when it's not being used, useful to
+saving battery and processor power.
 
 What is it?
 ===========
