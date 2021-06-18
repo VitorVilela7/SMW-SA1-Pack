@@ -39,7 +39,9 @@ snes_init:					; SNES reset vector
 	STA $2200				; /
 						;
 	LDA #Reset				; \ Set up SA-1 Vectors
-	STA $2203				; /
+	STA $2203				;  |
+	LDA #IRQ				;  |
+	STA $2207				; /
 						;
 	SEP #$20				; A = 8-bit
 						;
@@ -99,7 +101,7 @@ snes_init:					; SNES reset vector
 	
 	SEP #$30				;
 						;
-	JSR $1E85				; Wait for SA-1.
+	JSR.w wait_standard			; Wait for SA-1.
 						;
 	REP #$20
 	LDA #CallReset				; \ Set up SA-1 execute vector
@@ -114,17 +116,42 @@ wram_copy:
 base $1E80					; Base to WRAM address
 
 ram_sa1_call:					; SA-1 call
-	LDA #$00				; \ Wake up SA-1
-	STA $2200				; / with message 00h
+	LDA $318B
+	BNE .recursive
+	INC
+	STA $318B
+	STZ $2200				; Wake SA-1
 						;
 -	LDA $3189				; \ Wait until SA-1 finishes processing.
 	BEQ -					; /
 						;
+	STZ $318B
 	STZ $3189				; \ Clear finish flag
 	LDA #$20				;  | and put SA-1 to sleep
 	STA $2200				;  |
 	RTS					; / return.
 .end:
+
+.recursive
+	LDA #$80
+	STA $2200
+	
+-
+	LDA $3189
+	BEQ -
+	
+	STZ $3189
+	RTS
+
+
+wait_standard:
+	LDA $3189
+	BEQ wait_standard
+	
+	STZ $3189
+	LDA #$20
+	STA $2200
+	RTS
 
 ram_main_loop:					; Main loop wait.
 	WAI					; Wait for an interrupt.

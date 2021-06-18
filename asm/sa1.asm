@@ -73,8 +73,8 @@ Reset:						; \ Use the "unused" space
 CallReset:					;  |
 !c	JML SA1_CallReset			;  |
 						;  |
-NMI:						;  |
-	JML $000000				;  |
+IRQ:						;  |
+	JML SA1_IRQ				;  |
 						;  |
 Reset2:						;  |
 !c	JML snes_init				; /
@@ -309,13 +309,108 @@ SA1_CallReset:					; SA-1 Reset Call
 	LDA #$50				; \ Enable dynamic NMI/IRQ vector.
 	STA $2209				; /						
 
+	CLI
+
 	PHK					; \
 	PEA.w .return-1				;  | JSL [$3180]
 	JML.w [$3180]				;  |
 .return						; /
+
+	SEI
 	INC $0189				; Set Ready Flag
 
 -	BRA -
+
+SA1_IRQ:					; SA-1 CPU IRQ
+	;PHP					; \ Preserve P/A/X/Y/D/B
+	REP #$30				;  |
+	PHA					;  |
+	PHX					;  |
+	PHY					;  |
+	PHD					;  |
+	PHB					;  |
+	PHK					;  |
+	PLB					;  |
+	LDA #$0000				;  |
+	TCD					; /
+	SEP #$30				; 8-bit A/X/Y
+						;
+	LDA $318F				; \ Preserve BW-RAM Mapping and
+	STZ $318F				;  | reset to default value.
+	STZ $2225				;  |
+	PHA					; /
+						;
+	LDA $2301				; Read status register
+	BIT #$40				; \ If $40 is set, go to Timer IRQ
+	BNE SA1_IRQEnding			; / 
+	BIT #$20				; \ If $20 is set, go to DMA end code
+	BNE DMA_End				; /
+						;
+	AND #$0F				; \ Get S-CPU Message
+	ASL A					;  | x2
+	TAX					;  | A->X
+	JMP (SA1IRQ_Ptr,x)			; / Go to Messages Code
+						;
+DMA_End:					;
+	LDA #$01				; \ Set DMA Flag and Return
+	STA $018C				; /
+SA1_IRQEnding:
+	LDA #$F0				; \ Clear IRQ from S-CPU
+	STA $220B				; /
+						;
+	PLA					; \ Restore BW-RAM Mapping
+	STA $2225				;  |
+	STA $318F				; /
+						;
+	REP #$30				; \ Restore B/D/Y/X/A/P
+	PLB					;  |
+	PLD					;  |
+	PLY					;  |
+	PLX					;  |
+	PLA					;  |
+	;PLP					; /
+SA1_NMI:					; SA-1 NMI - not used on this patch. Also, only a few emulators even handle this.
+	RTI					; Return
+
+SA1IRQ_Ptr:					; SA-1 IRQ Message List
+dw ProcessRequest				; #$00 - Process Request (aka Jump to Code)
+dw EnableChvDMA					; #$01 - Enable Character Conversion DMA #1
+dw DisableDMA					; #$02 - Disable DMA / Character Conversion DMA
+dw ProcessIRQRequest				; #$03 - IRQ Compatible Process Request
+
+ProcessRequest:
+	LDA #$B0				; \ Clear IRQ from S-CPU
+	STA $220B				; /
+	CLI					; Enable IRQ
+	PHK					; \
+	PEA.w .return-1				;  | JSL [$3180]
+	JML.w [$3180]				;  |
+.return						; /
+	SEI					; Disable IRQ
+	INC $0189				; Set Ready Flag
+	BRA SA1_IRQEnding			; Return
+	
+EnableChvDMA:
+	LDA #$B0				; \ Enable Character Conversion DMA CC1 (BW-RAM->I-RAM)
+	STA $318D				;  |
+	STA $2230				; /
+	BRA SA1_IRQEnding			; Return
+	
+DisableDMA:					; \ Disable SA-1 DMA (of any type)
+	STZ $2230				;  |
+	BRA SA1_IRQEnding			; /
+	
+ProcessIRQRequest:				; \ Same as Process Request, but
+	LDA #$B0				;  | it's to use in a S-CPU IRQ/NMI
+	STA $220B				;  | and this doesn't accept any
+	PHK					;  | interrupt.
+	PEA.w .return-1				;  |
+	JML.w [$318F]				;  |
+.return						;  |
+	INC $0192				;  |
+NoMessage:					;  |
+	BRA SA1_IRQEnding			; /
+
 
 incsrc "more_sprites/more_sprites.asm"
 	
