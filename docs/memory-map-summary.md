@@ -79,7 +79,7 @@ From               | To                | Comment
 `$7E:1938-$7E:19B7`|`$41:8A00-$41:8AFE`| Used to be 16-bit (absolute) addressed, now 24-bit (absolute long) to accommodate more sprite entries per level (from 128 to 255).
 `$7E:C800-$7E:FFFF`|`$40:C800-$40:FFFF`| Map16 low byte plus Overworld related data.
 `$7F:9A7B-$7F:9C7A`|`$41:8800-$41:89FF`| Wiggler's segment buffer.
-`$7F:C700-$7F:FFFF`|`$41:C800-$41:FFFF`| Map16 high byte.
+`$7F:C800-$7F:FFFF`|`$41:C800-$41:FFFF`| Map16 high byte.
 
 ### S-RAM
 The S-RAM (static memory) banks used to be banks`$70-$71`, but the SAS Memory Map replaces it with BW-RAM, which is also used as work RAM and has is allocated though banks`$40-$43`. The remapped addresses are stated below.
