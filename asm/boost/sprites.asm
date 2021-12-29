@@ -360,7 +360,7 @@ ReznorFix_SNES:
 	LDA.W #$C05A              
 	BRA .Shared
 .RegularLevel
-	LDY.W #$38FC
+	LDY.W #$38F8
 	LDA.W #$C022     
 .Shared
 	ADC $00                   
