@@ -213,7 +213,7 @@ SA1_Reset:					;
 						;
 	SEP #$20				; A 8-bit
 	LDA #$FF				; \ Enable I-RAM write
-	STA.l $222A				; /
+	STA $222A				; /
 	REP #$38				; A/X/Y 16-bit, Disable Decimal Mode
 						;
 	LDA #$0000				; \ Set Direct Page to $0000,
