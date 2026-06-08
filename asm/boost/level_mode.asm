@@ -1,4 +1,4 @@
-@includefrom sa1.asm
+includefrom sa1.asm
 namespace level_mode
 pushpc
 org $00A2E6

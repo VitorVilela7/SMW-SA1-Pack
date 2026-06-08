@@ -1,4 +1,4 @@
-@includefrom sa1.asm
+includefrom sa1.asm
 ; LC_LZ3 from Lunar Magic
 
 .case_c0

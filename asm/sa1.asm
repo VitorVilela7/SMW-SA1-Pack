@@ -1,11 +1,11 @@
-@asar 1.31
 ;===============================================;
 ; SA-1 Pack					;
 ;  by Vitor Vilela				;
 ;===============================================;
 
+asar 1.90
 
-!ZSNES		= 1				; Put 0 if you don't want to SA-1 Pack automatically deal with ZSNES limitations.
+!ZSNES		= 0				; Put 0 if you don't want to SA-1 Pack automatically deal with ZSNES limitations.
 						; (in other words, put 0 if you don't want ZSNES 1.51 or older support)
 						
 !DSX		= 1				; Put 0 if you want to turn off legacy (Dynamic Sprites) patch support.
@@ -83,7 +83,7 @@ Reset2:						;  |
 	JML SA1_Loop				; This points to SA-1 main loop.
 						; Needed so the Dual ROM system can locate SA-1 main loop easier.
 
-warnpc $8A78
+assert pc() <= $8A78
 
 ORG $8069					; \ Restore old code
 	INC $10					; /

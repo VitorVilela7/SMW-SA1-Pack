@@ -1,4 +1,4 @@
-@includefrom sa1.asm
+includefrom sa1.asm
 !sa1 = 2        ; Set to 0 if you are not using SA-1, 1 if you are using normal (old) SA-1 Pack and 2 if you are using SA-1 with more sprites enabled (1.10+)
 
 macro define_sprite_table(name, addr, addr_sa1, addr_more_sprites)

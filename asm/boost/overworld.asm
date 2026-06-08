@@ -1,4 +1,4 @@
-@includefrom sa1.asm
+includefrom sa1.asm
 namespace overworld
 
 !SwitchBlocks = $418800 ; seems to use 480 bytes.
@@ -27,7 +27,7 @@ org $0494B2
 	NOP #38
 mulfixv2_back:
 
-warnpc $0494DC
+assert pc() <= $0494DC
 
 org $048576
 	JSL events
@@ -85,7 +85,7 @@ org $0482ED
 	NOP #22
 mulfix2v2_back:
 
-warnpc $048307
+assert pc() <= $048307
 
 pullpc
 

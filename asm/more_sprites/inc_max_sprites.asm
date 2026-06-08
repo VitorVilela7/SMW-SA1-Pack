@@ -1,4 +1,4 @@
-@includefrom sa1.asm
+includefrom sa1.asm
 org $00FA90
     db !num_sprites-1
 org $00FCED

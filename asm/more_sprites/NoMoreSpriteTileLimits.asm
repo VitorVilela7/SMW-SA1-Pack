@@ -1,4 +1,4 @@
-@includefrom sa1.asm
+includefrom sa1.asm
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; No More Sprite Tile Limits v2.0.0
 ;; coded by edit1754, macro'd by MathOnNapkins,
@@ -7,9 +7,6 @@
 ;; This is a mockup edition that uses the MaxTile API to clean up the slots,
 ;; with the consequence of slots no longer being searched but instead hardcoded.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-header
-sa1rom
 
 org $0180D2
 
@@ -63,7 +60,7 @@ org $039890
 ; Powerups sometimes use their own hard-coded OAM index, we don't want this so fix it.
 ;org $01C61F
 ;BRA SkipStuff
-;rep 21 : NOP
+;for i = 0..21 : NOP : endfor
 ;SkipStuff:
 
 ;Vitor Vilela: this screws up Roy/Morton/Ludwig, undo that. The hard-coded OAM index
