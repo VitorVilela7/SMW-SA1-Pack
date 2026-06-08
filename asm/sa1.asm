@@ -211,6 +211,9 @@ SA1_Reset:					;
 	CLC					;  |
 	XCE					; /
 						;
+	SEP #$20				; A 8-bit
+	LDA #$FF				; \ Enable I-RAM write
+	STA.l $222A				; /
 	REP #$38				; A/X/Y 16-bit, Disable Decimal Mode
 						;
 	LDA #$0000				; \ Set Direct Page to $0000,
@@ -224,11 +227,9 @@ SA1_Reset:					;
 						;
 	STZ $2230				; Reset SA-1 DMA settings.
 						;
-	LDA #$80				; \ Enable I-RAM and BW-RAM write
+	LDA #$80				; \ Enable BW-RAM write
 	STA $2227				;  |
-	STZ $2225				;  |
-	LDA #$FF				;  |
-	STA $222A				; /
+	STZ $2225				; /
 						;
 	LDA #$B0				; \ Enable IRQ from S-CPU
 	STA $220A				;  | Enable IRQ from DMA
