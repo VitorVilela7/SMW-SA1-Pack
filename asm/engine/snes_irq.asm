@@ -132,7 +132,7 @@ snes_irq:					; IRQ Start
 	PLA					;  |
 	RTI					; /
 	
-warnpc $001E00					; WRAM Memory Limit
+assert pc() <= $001E00					; WRAM Memory Limit
 base off
 
 irq_wram_copy_end:

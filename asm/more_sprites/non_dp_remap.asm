@@ -1,4 +1,4 @@
-@includefrom sa1.asm
+includefrom sa1.asm
 org $01A799
 	STZ !sprite_misc_163e,X
 org $01B22B

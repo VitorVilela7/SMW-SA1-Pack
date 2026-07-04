@@ -1,4 +1,4 @@
-@includefrom sa1.asm
+includefrom sa1.asm
 ; LC_LZ2
 
 .case_e0_or_end

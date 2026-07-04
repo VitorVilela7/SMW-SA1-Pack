@@ -1,4 +1,4 @@
-@includefrom sa1.asm
+includefrom sa1.asm
 
 pushpc
 ORG $0586DD

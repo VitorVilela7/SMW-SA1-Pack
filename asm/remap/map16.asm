@@ -1,4 +1,4 @@
-@includefrom sa1.asm
+includefrom sa1.asm
 ; Remap:
 ; $7E:C800-$7E:FFFF to $40:C800-$40:FFFF,
 ; $7F:C800-$7F:FFFF to $41:C800-$41:FFFF.

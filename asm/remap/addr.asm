@@ -1,4 +1,4 @@
-@includefrom sa1.asm
+includefrom sa1.asm
 
 ; SA-1 Pack v1.20 fixes
 org $00C5D8

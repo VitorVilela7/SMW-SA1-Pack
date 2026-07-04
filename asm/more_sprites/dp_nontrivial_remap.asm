@@ -1,4 +1,4 @@
-@includefrom sa1.asm
+includefrom sa1.asm
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; SPECIAL CASES (manually fixed)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -188,7 +188,7 @@ NOP
 ; CODE_02994F:        A5 A5         LDA $A5                   ; \  Branch if Reznor is on screen
 org $02994F
 ; The Reznor flag is checked immediately after this just remove this.
-rep 6 : NOP
+NOP #6
 ; CODE_02A02C:        A5 A5         LDA $A5                   ; \  Branch if Reznor is on screen
 org $02A02C
 LDA $740F

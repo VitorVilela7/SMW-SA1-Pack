@@ -1,4 +1,4 @@
-@includefrom sa1.asm
+includefrom sa1.asm
 ; Remap SRAM to $41:C000-$41:C7FF.
 
 if read1($009B58+3) == $70
