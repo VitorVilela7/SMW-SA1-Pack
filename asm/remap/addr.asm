@@ -13211,6 +13211,8 @@ org $05C5C7
 	dw $7464
 org $05C66C
 	dw $7464
+org $05C671
+	dw $7464
 ;============== REMAPPER FOR $1465
 ;============== REMAPPER FOR $1466
 org $00F6FC
