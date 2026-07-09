@@ -354,7 +354,15 @@ ReznorFix_SNES:
 	REP #$31
 	LDA.L $7F837B             
 	TAX                       
+	LDA $6D9A
+	BPL .RegularLevel
+	LDY.W #$38FC
 	LDA.W #$C05A              
+	BRA .Shared
+.RegularLevel
+	LDY.W #$38F8
+	LDA.W #$C022     
+.Shared
 	ADC $00                   
 	STA.L $7F837D,X           
 	ORA.W #$2000              
@@ -362,7 +370,7 @@ ReznorFix_SNES:
 	LDA.W #$0240              
 	STA.L $7F837F,X           
 	STA.L $7F8385,X           
-	LDA.W #$38FC              
+	TYA
 	STA.L $7F8381,X           
 	STA.L $7F8387,X           
 	LDA.W #$00FF              
