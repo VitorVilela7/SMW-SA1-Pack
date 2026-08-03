@@ -3,17 +3,16 @@ It's pretty simple really, but the readme may be a little confusing at start, so
 who is starting to work with SA-1 Pack.
 
 Requirements:
-	- Asar 1.31 or newer; and
+	- Asar 1.50 or newer; and
 	- Lunar Magic 2.20 or newer.
 
 Guide:
 	1. Grab a CLEAN UNMODIFIED ROM. If your ROM is not clean, there's a 99.99% chance that this guide will fail.
-	2. Open your ROM with Lunar Magic and go to File -> Expand ROM -> Expand ROM to 2MB and confirm.
-	3. Place asar.exe and your ROM on same folder as you extracted SA-1 Pack.
-	4. Double click asar.exe
-	5. Type sa1.asm on "Enter patch name" and press enter.
-	6. Type your ROM name on "Enter ROM name" and press enter. Your ROM should be patched with SA-1.
-	7. Open your ROM with Lunar Magic and save any level.
+	2. Place asar.exe and your ROM on same folder as you extracted SA-1 Pack.
+	3. Double click asar.exe
+	4. Type sa1.asm on "Enter patch name" and press enter.
+	5. Type your ROM name on "Enter ROM name" and press enter. Your ROM should be patched with SA-1.
+	6. Open your ROM with Lunar Magic and save any level.
 
 That's all. Your ROM should be ready to be on "SA-1 adventure"!
 

@@ -265,7 +265,7 @@ The tile prop pointer points to the attribute OAM table for setting the size and
 high byte. Format: ``---- --sx``. If s is set, your tile will be 16x16, otherwise 8x8. If x is set,
 your x-position will be negative in 2's complement format. One byte per OAM slot.
 
-When drawing, you load !pointer+0 value. Compared if !pointer+0 is equals to !pointer+4. If it is,
+When drawing, you load !pointer+0 value. Compared if !pointer+0 is equals to !pointer+8. If it is,
 it means the buffer ran out of slots and you **must** stop the drawing.
 
 If the slot is available, then you draw your tile and decrement the slot by 4. Do the same for the

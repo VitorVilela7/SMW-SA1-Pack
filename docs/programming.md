@@ -69,7 +69,7 @@ LDA $0100
 Additionally, we have the following remaps:
 
 `$7E:C800`-`$7E:FFFF` to `$40:C800`-`$40:FFFF`.<br/>
-`$7F:C800`-`$7E:FFFF` to `$41:C800`-`$41:FFFF`.
+`$7F:C800`-`$7F:FFFF` to `$41:C800`-`$41:FFFF`.
 
 `$7F:9A7B`-`$7F:9C7A` to `$41:8800`-`$41:89FF`.
 

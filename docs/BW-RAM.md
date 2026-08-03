@@ -44,8 +44,8 @@ Start     | End      | Description
 `$40:01A0`|`$40:01AF`| MaxTile pointer #2
 `$40:01B0`|`$40:01BF`| MaxTile pointer #3
 `$40:01C0`|`$40:01FF`| Empty. Cleared at reset and title screen load. Originally reserved for S-CPU's stack, which stayed at W-RAM and was moved to`$7E:1F00-$7E:1FFF`. **Reserved by SA-1 Pack for future expansion.**
-
 `$40:0200`|`$40:1FFF`| SMW's`$7E:0200-$7E:1FFF`.
+
 ##### Page 1
 Start     | End      | Description
 :--------:|:--------:|-------------

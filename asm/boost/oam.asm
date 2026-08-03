@@ -1,4 +1,4 @@
-@includefrom sa1.asm
+includefrom sa1.asm
 pushpc
 
 ; MaxTile work memory:
@@ -75,7 +75,7 @@ ORG $008494
     ; $0084C4 - Unused
     NOP #4
 
-warnpc $0084C8
+assert pc() <= $0084C8
 
 ; This is one of favorite hijacks that many patches
 ; likes editing. Because of that, I'll NOP the entire
@@ -100,7 +100,7 @@ oam_transfer_clear_invoker:
 	PLB
 	
 	; PC is now $00:804A, aligned with the original code.
-warnpc $00804A
+assert pc() <= $00804A
 
 ; Some routines uses the "RTL" byte as JSL->RTS support byte,
 ; we can't modify it for safety reasons.
@@ -187,7 +187,7 @@ candles:
 ++  ASL #4
     TSB $788C
 
-warnpc $0283C4
+assert pc() <= $0283C4
 
 org $028307
     NOP
@@ -200,29 +200,29 @@ org $028307
     BEQ candles
 candles_back:
 
-warnpc $02831A
+assert pc() <= $02831A
 
 pullpc
 
 macro oam_check_slot(slot, callback)
     <callback>
     
-	CMP.w $0201+(<slot>*4)
+	CMP.w $0201+((<slot>)*4)
 	BEQ ?skip
     	
-	LDY.w $0200+(<slot>*4)
+	LDY.w $0200+((<slot>)*4)
 	STY.b $00,x
-	LDY.w $0202+(<slot>*4)
+	LDY.w $0202+((<slot>)*4)
 	STY.b $02,x
 	
-	LDA.w $0420+<slot>
+	LDA.w $0420+(<slot>)
 	STA.b ($00)
 	
 	DEC.b $00
 	DEX #4
 	
 	LDA.b #$F0
-	STA.w $0201+(<slot>*4)
+	STA.w $0201+((<slot>)*4)
 ?skip:
 endmacro
 
@@ -233,7 +233,7 @@ macro oam_check_range(first, last, callback)
 	while !x >= <first>
 		%oam_check_slot(!x, "<callback>")
 		!x #= !x-1
-	endif
+	endwhile
 endmacro
 
 ;; first and last slot are included
@@ -404,9 +404,9 @@ oam_clear:
 	LDA.b #$F0
 .block
 	!x = 0
-	rep 36 : %oam_reset_y()
+	for i = 0..36 : %oam_reset_y() : endfor
 .boss
-	rep 28 : %oam_reset_y()
+	for i = 0..28 : %oam_reset_y() : endfor
 	PLD
 	RTS
 	

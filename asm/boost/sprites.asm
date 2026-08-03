@@ -1,4 +1,4 @@
-@includefrom sa1.asm
+includefrom sa1.asm
 
 !Wiggers = $418800			; Don't touch!
 
@@ -35,7 +35,7 @@ org $03CA39
 fireworks_fix_back:
 	NOP
 	LDA $2307
-warnpc $03CA64+3
+assert pc() <= $03CA64+3
 
 org $03CB08
 	STZ $2250
@@ -59,7 +59,7 @@ org $03CB08
 fireworks_fix2_back:
 	NOP
 	LDA $2307
-warnpc $03CB33+3
+assert pc() <= $03CB33+3
 
 ORG $03D7AB
 	JML ReznorFix
@@ -120,7 +120,7 @@ ORG $01CC28
 		
 	fillbyte $00
 	fill $08
-	warnpc $01CC94
+	assert pc() <= $01CC94
 
 ORG $01C804
 	PHA
@@ -155,7 +155,7 @@ ORG $01C804
 	STA $2253
 	STZ $2254
 	JSL Continue_01C804
-	warnpc $01C84D
+	assert pc() <= $01C84D
 	
 ORG $03DEDF
 	JML Mode7Stuff
@@ -202,7 +202,7 @@ Return_03995E:
 	EOR #$FF
 	INC A
 +	STA $06
-	warnpc $0399A4
+	assert pc() <= $0399A4
 	
 ORG $02D870
 	PHP
@@ -230,7 +230,7 @@ Tralalal:
 	EOR #$FF
 	INC A
 +	RTS
-	warnpc $02D8A1
+	assert pc() <= $02D8A1
 
 ORG $02F015
 	LDA.B #!Wiggers
@@ -274,7 +274,7 @@ CODE_02D6AA:
 	JML MultiplyFix
 	db $00
 CODE_02D6C6:
-	warnpc $02D6C6
+	assert pc() <= $02D6C6
 	
 ORG $02FB33
 	STZ $2250
@@ -310,7 +310,7 @@ Return_MultiplyFix3:
 	INC A
 +	STA $06
 
-warnpc $02FB77+2
+assert pc() <= $02FB77+2
 
 ORG $01F43E
 	LDA #$01
@@ -327,7 +327,7 @@ ORG $01F43E
 	STA $07
 	LSR
 	LDA $2307
-warnpc $01F45A+3
+assert pc() <= $01F45A+3
 	
 ;=======================================;
 ; Macros				;
