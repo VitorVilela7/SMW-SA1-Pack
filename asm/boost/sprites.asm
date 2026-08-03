@@ -240,6 +240,9 @@ ORG $02F024
 	LDA.B #!Wiggers/65536
 ORG $02F0F0
 	MVP !Wiggers/65536,!Wiggers/65536
+
+org $02F011
+	JSL wiggler_get_ptr
 	
 ORG $02D689
 	LDA $04
@@ -340,6 +343,50 @@ macro Switch()
 endmacro
 	
 pullpc
+
+wiggler_get_ptr:
+	LDA $74F4,x
+	BNE .already_set
+	INC 
+	STA $00
+	INC 
+	STA $01
+	INC 
+	STA $02
+	INC 
+	STA $03
+	LDY.b #22-1
+.loop
+	CPY $75E9
+	BEQ .next
+	LDA $3242,y
+	CMP #$02
+	BCC .next
+	LDA $3200,y
+	CMP #$86
+	BNE .next
+	LDA $74F4,y
+	DEC 
+	AND #$03
+	TAX 
+	STZ $00,x
+.next
+	DEY 
+	BPL .loop
+	LDX #$03
+.not_free
+	LDA $00,x
+	BNE .free
+	DEX 
+	BPL .not_free
+.free
+	LDX $75E9
+	STA $74F4,x
+.already_set
+	DEC 
+	AND #$03
+	TAY
+	RTL
 
 ReznorFix:
 	%Switch()
